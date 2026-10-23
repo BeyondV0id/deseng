@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.playwright-mcp/
+dist-ssr/
+*.local
+.vite/
+.DS_Store
+Thumbs.db
+*.log
