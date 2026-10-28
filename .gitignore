@@ -7,3 +7,10 @@ dist-ssr/
 .DS_Store
 Thumbs.db
 *.log
+
+# Secrets. server/.env.example is the committed template.
+.env
+.env.*
+!.env.example
+
+*.tsbuildinfo

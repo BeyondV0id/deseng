@@ -1,0 +1,44 @@
+/* The brand mark: a circle, not a cube, and a flat one.
+
+   This file draws the disc and nothing more: one radial gradient on a 27px
+   circle. There is no specular cap, no rim, no inset highlight and no drawn
+   detail. The only treatment on top is the ASCII field in `brand-mark.tsx`,
+   which is clipped to this circle.
+
+   `background-size` and the blend modes that used to screen `bg/logo.png` over
+   the gradient are gone with the plate: the dither is now generated at paint
+   time, so no 1.58 MB bitmap ships for a 27px mark. */
+.mark {
+  position: relative;
+  display: block;
+  width: 27px;
+  height: 27px;
+  flex: none;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #0a0a08;
+  background-image: radial-gradient(
+    circle at 34% 28%,
+    #fffbd6 0%,
+    #f4ef09 30%,
+    #cdb900 52%,
+    #5f5200 78%,
+    #120f07 100%
+  );
+  /* A hairline keeps the disc from bleeding into a pale page. */
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / .14);
+}
+
+/* The ASCII field is rendered at twice the disc's size and halved, so its
+   glyph grid has cells to fill: at 27px with a 6px minimum cell the grid would
+   be four characters wide and the shape would not survive. Halved, the
+   character edges land as a dither instead of as legible letters, which is the
+   point.
+   `inset` is negative by half the disc, so the doubled box stays centred. */
+.mark .ascii {
+  position: absolute;
+  inset: -13.5px;
+  transform: scale(0.5);
+  transform-origin: center;
+  pointer-events: none;
+}

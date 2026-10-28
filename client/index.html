@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <meta name="theme-color" content="#fafafa" />
+  <meta name="description" content="A hand-kept index of interface craft. Component libraries, motion tools, typefaces and the people behind them." />
+  <title>desgnix — your design library</title>
+  <script>
+    // The theme is known before the first paint, so the page never renders in
+    // the light tokens first. Without this the stored preference lands after
+    // React mounts, and every surface that transitions its fill fades from
+    // the light value into the dark one: a near-white pill on a dark bar.
+    try {
+      var stored = localStorage.getItem('desgnix-theme-v2')
+      var theme = stored === 'light' || stored === 'dark'
+        ? stored
+        : stored === 'system'
+          ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : 'dark'
+      document.documentElement.classList.toggle('dark', theme === 'dark')
+      document.documentElement.dataset.theme = theme
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#020202' : '#fafafa')
+    } catch (error) { }
+  </script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

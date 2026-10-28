@@ -1,0 +1,2841 @@
+{
+  "resources": [
+    {
+      "name": "Recent",
+      "url": "https://recent.design",
+      "description": "Motion-heavy web design, recorded as video so you see the interaction, not a still.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Minimal Gallery",
+      "url": "https://minimal.gallery",
+      "description": "Sites that do more with less: whitespace, type and one idea.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "SiteInspire",
+      "url": "https://www.siteinspire.com",
+      "description": "Long-running, hand-picked showcase of restrained, typographic sites.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Httpster",
+      "url": "https://httpster.net",
+      "description": "Opinionated picks of sites with a point of view.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "loadmo.re",
+      "url": "https://loadmo.re",
+      "description": "Archive of unusual mobile websites and mobile-first experiments.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Inspora",
+      "url": "https://inspora.design",
+      "description": "Design inspiration refreshed hourly across web, branding, product, motion and print.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Curated Design",
+      "url": "https://www.curated.design",
+      "description": "Web design filtered by style and category.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Land-book",
+      "url": "https://land-book.com",
+      "description": "Landing pages sorted by industry, style and color.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Lapa Ninja",
+      "url": "https://www.lapa.ninja",
+      "description": "Large landing page archive with a free design book section.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Saaspo",
+      "url": "https://saaspo.com",
+      "description": "Software landing pages, tagged by section and layout.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "SaaS Landing Page",
+      "url": "https://saaslandingpage.com",
+      "description": "Marketing pages split into hero, pricing and proof sections.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "SEESAW",
+      "url": "https://www.seesaw.website",
+      "description": "Inspiration sorted by page section rather than whole site.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Supahero",
+      "url": "https://www.supahero.io",
+      "description": "Nothing but hero sections, for when the first screen is the problem.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "One Page Love",
+      "url": "https://onepagelove.com",
+      "description": "Single-page sites and portfolios, curated since 2008.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Dark Mode Design",
+      "url": "https://www.darkmodedesign.com",
+      "description": "Sites built dark-first, for when dark has to feel intentional.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Layers",
+      "url": "https://layers.to",
+      "description": "Community where designers post work in progress and finished pieces.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Awwwards",
+      "url": "https://www.awwwards.com",
+      "description": "Juried awards for experimental web work. Read it for technique.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Godly",
+      "url": "https://godly.website",
+      "description": "Websites with remarkable typography and layout.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Minimum",
+      "url": "https://mnmm.xyz",
+      "description": "A gallery of carefully reduced interfaces.",
+      "category": "Web galleries"
+    },
+    {
+      "name": "Mobbin",
+      "url": "https://mobbin.com",
+      "description": "Full flows from shipping iOS, Android and web apps, searchable by pattern.",
+      "category": "App & flow libraries"
+    },
+    {
+      "name": "Refero",
+      "url": "https://refero.design",
+      "description": "Product UI reference with deep filtering by component and page type.",
+      "category": "App & flow libraries"
+    },
+    {
+      "name": "Page Flows",
+      "url": "https://pageflows.com",
+      "description": "Recorded journeys: onboarding, checkout, upgrade prompts, empty states.",
+      "category": "App & flow libraries"
+    },
+    {
+      "name": "Screenlane",
+      "url": "https://screenlane.com",
+      "description": "Mobile and web screens tagged by pattern, sent weekly.",
+      "category": "App & flow libraries"
+    },
+    {
+      "name": "60fps",
+      "url": "https://60fps.design",
+      "description": "Screen recordings of app interactions that move well.",
+      "category": "Interaction references"
+    },
+    {
+      "name": "Design Spells",
+      "url": "https://www.designspells.com",
+      "description": "Small details in software that feel like magic, broken down.",
+      "category": "Interaction references"
+    },
+    {
+      "name": "Game UI Database",
+      "url": "https://www.gameuidatabase.com",
+      "description": "Thousands of game screens, filterable by screen type and genre.",
+      "category": "Game & HUD UI"
+    },
+    {
+      "name": "HUDS+GUIS",
+      "url": "https://www.hudsandguis.com",
+      "description": "Fictional and film interfaces: HUDs, FUI and sci-fi screens.",
+      "category": "Game & HUD UI"
+    },
+    {
+      "name": "Interface In Game",
+      "url": "https://interfaceingame.com",
+      "description": "Game interfaces collected by game and element, with video.",
+      "category": "Game & HUD UI"
+    },
+    {
+      "name": "Rebrand",
+      "url": "https://www.rebrand.gallery",
+      "description": "Before-and-after identity refreshes from studios worldwide.",
+      "category": "Brand & visual systems"
+    },
+    {
+      "name": "SearchSystem",
+      "url": "https://searchsystem.co",
+      "description": "Long-running archive of graphic design and visual systems.",
+      "category": "Brand & visual systems"
+    },
+    {
+      "name": "Cosmos",
+      "url": "https://www.cosmos.so",
+      "description": "Visual bookmarking with clean clustering.",
+      "category": "Moodboards & visual search"
+    },
+    {
+      "name": "Same Energy",
+      "url": "https://same.energy",
+      "description": "Search images by vibe instead of keywords.",
+      "category": "Moodboards & visual search"
+    },
+    {
+      "name": "SOOT Spiral",
+      "url": "https://spiral.soot.com/spiral",
+      "description": "Endless visual exploration from SOOT, one image leading to the next.",
+      "category": "Moodboards & visual search"
+    },
+    {
+      "name": "Savee",
+      "url": "https://savee.it",
+      "description": "Moodboards with a strong editorial and brand-design community.",
+      "category": "Moodboards & visual search"
+    },
+    {
+      "name": "Pinterest",
+      "url": "https://pinterest.com",
+      "description": "The widest net for visual reference, if you filter hard.",
+      "category": "Moodboards & visual search"
+    },
+    {
+      "name": "Dribbble",
+      "url": "https://dribbble.com",
+      "description": "Shots from independent designers. A sketchbook, not a spec.",
+      "category": "Moodboards & visual search"
+    },
+    {
+      "name": "Invisible Details of Interaction Design",
+      "url": "https://rauno.me/craft/interaction-design",
+      "description": "Why good interactions feel inevitable, with live demos.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Josh W. Comeau",
+      "url": "https://www.joshwcomeau.com",
+      "description": "Interactive CSS and React explainers. The spring and shadow posts are essential.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Emil Kowalski",
+      "url": "https://emilkowal.ski",
+      "description": "Writing on animation and component craft.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Ahmad Shadeed",
+      "url": "https://ishadeed.com",
+      "description": "Deep CSS layout write-ups with interactive figures.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Codrops",
+      "url": "https://tympanus.net/codrops",
+      "description": "Experimental front-end tutorials: WebGL, scroll, transitions.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "web.dev",
+      "url": "https://web.dev",
+      "description": "Guides on performance, Core Web Vitals and platform features.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Smashing Magazine",
+      "url": "https://www.smashingmagazine.com",
+      "description": "Long-form articles on front-end, UX and accessibility.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "CSS-Tricks",
+      "url": "https://css-tricks.com",
+      "description": "Archive of CSS techniques and almanac entries.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Nielsen Norman Group",
+      "url": "https://www.nngroup.com/articles",
+      "description": "Research-backed usability articles.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "You Don't Need Animations",
+      "url": "https://emilkowal.ski/ui/you-dont-need-animations",
+      "description": "The case against animating what people see a hundred times a day.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Developing Taste",
+      "url": "https://emilkowal.ski/ui/developing-taste",
+      "description": "Taste as a trained instinct, and how to train it.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Details That Make Interfaces Feel Better",
+      "url": "https://jakub.kr/writing/details-that-make-interfaces-feel-better",
+      "description": "Small decisions that separate a good interface from a right one.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Family Values",
+      "url": "https://benji.org/family-values",
+      "description": "How Family decided what its app should feel like.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Limit the number of details",
+      "url": "https://design.lightspark.com/limit-the-number-of-details",
+      "description": "Every detail spends attention. Cutting some is what funds the rest.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "HTML Can Do That",
+      "url": "https://chrisburnell.com/html-can-do-that",
+      "description": "Behavior that used to need JavaScript and now ships in HTML.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Front-of-the-front-end",
+      "url": "https://bradfrost.com/blog/post/front-of-the-front-end-and-back-of-the-front-end-web-development",
+      "description": "The split inside front-end work, finally named clearly.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "Anatomy of AI Input",
+      "url": "https://ibelick.com/anatomy-ai-input",
+      "description": "What an agent input is actually made of, part by part.",
+      "category": "Essays & craft"
+    },
+    {
+      "name": "animations.dev",
+      "url": "https://animations.dev",
+      "description": "Course on web animation: easing, timing, springs and restraint.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "Refactoring UI",
+      "url": "https://www.refactoringui.com",
+      "description": "Tactical visual design advice written for developers.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "Practical Typography",
+      "url": "https://practicaltypography.com",
+      "description": "Matthew Butterick's online book on type for screens.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "The Shape of Design",
+      "url": "https://shapeofdesignbook.com",
+      "description": "Frank Chimero's short book on why and how we make things.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "Stripe Press",
+      "url": "https://press.stripe.com",
+      "description": "Beautifully made books on technology and craft.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "InnerPing",
+      "url": "https://www.innerping.com",
+      "description": "Field manual on how consumer products earn attention, habits and word of mouth.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "Design Books",
+      "url": "https://designbooks.org",
+      "description": "A reading list sorted by what you want to get better at.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "Interactive SVG Animations",
+      "url": "https://www.svg.guide",
+      "description": "A short interactive course on animating SVG properly.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "A Five-Minute Guide to Better Typography",
+      "url": "https://www.pierrickcalvez.com/journal/a-five-minute-guide-to-better-typography",
+      "description": "The short version of what most type mistakes have in common.",
+      "category": "Courses & books"
+    },
+    {
+      "name": "Vercel Web Interface Guidelines",
+      "url": "https://vercel.com/design/guidelines",
+      "description": "Concrete rules for interaction, forms, motion and layout.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "The Component Gallery",
+      "url": "https://component.gallery",
+      "description": "Components compared across public design systems.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Laws of UX",
+      "url": "https://lawsofux.com",
+      "description": "Psychology behind interface decisions, each with an example.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Apple Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines",
+      "description": "Platform conventions for touch, motion and type.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Material Design 3",
+      "url": "https://m3.material.io",
+      "description": "Google's system, with detailed motion and state specs.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Inclusive Components",
+      "url": "https://inclusive-components.design",
+      "description": "Accessible patterns, one component at a time.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Every Layout",
+      "url": "https://every-layout.dev",
+      "description": "Intrinsic CSS layout primitives that respond without breakpoints.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "UI Patterns",
+      "url": "https://ui-patterns.com",
+      "description": "Classic interaction patterns and the problems they solve.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Checklist Design",
+      "url": "https://www.checklist.design",
+      "description": "What each page or component needs before it ships.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Linear Method",
+      "url": "https://linear.app/method",
+      "description": "Short principles on building product with focus.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Adele",
+      "url": "https://adele.uxpin.com",
+      "description": "Comparison table of public design systems.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Interface Cheat Sheet",
+      "url": "https://interfaces.dev/cheat-sheet",
+      "description": "Quick fixes that lift an interface, in one scannable list.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Devouring Details",
+      "url": "https://devouringdetails.com",
+      "description": "Interactive manual on the details inside interactions.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Design Principles",
+      "url": "https://principles.design",
+      "description": "Decision frameworks teams actually published, collected.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Design Systems Surf",
+      "url": "https://designsystems.surf",
+      "description": "Public design systems with components and foundations indexed.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "Design System Checklist",
+      "url": "https://www.designsystemchecklist.com",
+      "description": "What a design system needs before you can call it one.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "UI Playbook",
+      "url": "https://uiplaybook.dev",
+      "description": "Each common component documented with its states and edge cases.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "userinterface.wiki",
+      "url": "https://userinterface.wiki",
+      "description": "A living manual on interface principles, motion and type.",
+      "category": "Patterns & guidelines"
+    },
+    {
+      "name": "emil-design-eng",
+      "url": "https://skills.sh/emilkowalski/skills/emil-design-eng",
+      "description": "Emil Kowalski's design-engineering skill: taste, polish and when not to animate.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "pstack",
+      "url": "https://github.com/backnotprop/pstack",
+      "description": "Lauren Tan's rigorous engineering skills: reproduce, keep the change small, verify, review.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "review",
+      "url": "https://stealth.pm/skills/review",
+      "description": "A strict interface audit with a file, a line and a fix for every finding.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "space",
+      "url": "https://stealth.pm/skills/space",
+      "description": "Spacing scale, density, alignment, widths and rhythm.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "type",
+      "url": "https://stealth.pm/skills/type",
+      "description": "Two scales, hierarchy without size, tabular numbers, loading.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "surface",
+      "url": "https://stealth.pm/skills/surface",
+      "description": "Neutrals, tokens, borders versus shadows, one accent, both themes.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "ux-copy",
+      "url": "https://stealth.pm/skills/ux-copy",
+      "description": "Buttons that are verbs, errors that say what to do, no exclamation marks.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "a11y",
+      "url": "https://stealth.pm/skills/a11y",
+      "description": "HTML first, names, keyboard, focus, contrast, and a five-minute test.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "interaction",
+      "url": "https://stealth.pm/skills/interaction",
+      "description": "Press, hover, focus, drag, latency, undo over confirm.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "motion",
+      "url": "https://stealth.pm/skills/motion",
+      "description": "Whether to animate, then tool, property, curve, duration, exit.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "states",
+      "url": "https://stealth.pm/skills/states",
+      "description": "Loading, empty, error, partial, stale and success, all designed.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "components",
+      "url": "https://stealth.pm/skills/components",
+      "description": "Primitive or hand-rolled, the state matrix, APIs by composition.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "agent-ui",
+      "url": "https://stealth.pm/skills/agent-ui",
+      "description": "Streaming, thinking, tool calls, approvals, citations, the composer.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "mobile-feel",
+      "url": "https://stealth.pm/skills/mobile-feel",
+      "description": "Targets, dvh, safe areas, sheets, the keyboard, a real phone.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "scroll-and-webgl",
+      "url": "https://stealth.pm/skills/scroll-and-webgl",
+      "description": "Spectacle on a budget: scroll scenes, Lenis, canvas, shaders.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "polish",
+      "url": "https://stealth.pm/skills/polish",
+      "description": "The last ten percent as a checklist you run before shipping.",
+      "category": "Agent skills"
+    },
+    {
+      "name": "Figma",
+      "url": "https://www.figma.com",
+      "description": "The default for interface design, prototyping and handoff.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "Framer",
+      "url": "https://www.framer.com",
+      "description": "Design and publish sites with real components and motion.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "Paper",
+      "url": "https://paper.design",
+      "description": "Design canvas that works in real HTML and CSS.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "Stitch",
+      "url": "https://stitch.withgoogle.com",
+      "description": "Google Labs tool that turns prompts and sketches into UI and code.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "pen.dev",
+      "url": "https://pen.dev",
+      "description": "Agentic design canvas: import any app, design with models on it, export HTML back to code.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "Penpot",
+      "url": "https://penpot.app",
+      "description": "Open-source design tool built on web standards.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "Origami Studio",
+      "url": "https://origami.design",
+      "description": "Meta's tool for high-fidelity interaction prototypes.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "Webflow",
+      "url": "https://webflow.com",
+      "description": "Visual development with a real CMS and interactions.",
+      "category": "Interface canvases"
+    },
+    {
+      "name": "Rive",
+      "url": "https://rive.app",
+      "description": "Interactive, state-machine vector animation with tiny runtimes.",
+      "category": "Motion design"
+    },
+    {
+      "name": "Jitter",
+      "url": "https://jitter.video",
+      "description": "Motion design for UI, exported as video or Lottie.",
+      "category": "Motion design"
+    },
+    {
+      "name": "Cavalry",
+      "url": "https://cavalry.scenegroup.co",
+      "description": "Procedural 2D animation for data, type and generative motion.",
+      "category": "Motion design"
+    },
+    {
+      "name": "Lottie Creator",
+      "url": "https://lottiefiles.com/lottie-creator",
+      "description": "Browser-based editor for making and tweaking Lottie files.",
+      "category": "Motion design"
+    },
+    {
+      "name": "Lottielab",
+      "url": "https://www.lottielab.com",
+      "description": "Animate in the browser and export Lottie for product UI.",
+      "category": "Motion design"
+    },
+    {
+      "name": "Theatre.js",
+      "url": "https://www.theatrejs.com",
+      "description": "Visual timeline editor for code-driven animation.",
+      "category": "Motion design"
+    },
+    {
+      "name": "Spline",
+      "url": "https://spline.design",
+      "description": "Collaborative 3D design in the browser with web export.",
+      "category": "3D & spatial"
+    },
+    {
+      "name": "Blender",
+      "url": "https://www.blender.org",
+      "description": "Open-source 3D suite for modeling, rendering and animation.",
+      "category": "3D & spatial"
+    },
+    {
+      "name": "Houdini",
+      "url": "https://www.sidefx.com",
+      "description": "Procedural 3D and VFX. Steep, and unmatched for simulation.",
+      "category": "3D & spatial"
+    },
+    {
+      "name": "Womp",
+      "url": "https://womp.com",
+      "description": "Friendly browser 3D modeling built on soft, blobby shapes.",
+      "category": "3D & spatial"
+    },
+    {
+      "name": "Bezi",
+      "url": "https://www.bezi.com",
+      "description": "AI assistant inside the Unity Editor for code, shaders and debugging.",
+      "category": "3D & spatial"
+    },
+    {
+      "name": "Luma AI",
+      "url": "https://lumalabs.ai/interactive-scenes",
+      "description": "Turn phone video into interactive 3D scenes.",
+      "category": "Scanning & splats"
+    },
+    {
+      "name": "Polycam",
+      "url": "https://poly.cam",
+      "description": "Photogrammetry, LiDAR and splat capture on phone or web.",
+      "category": "Scanning & splats"
+    },
+    {
+      "name": "KIRI Engine",
+      "url": "https://www.kiriengine.app",
+      "description": "3D scanning app with photogrammetry and Gaussian splatting.",
+      "category": "Scanning & splats"
+    },
+    {
+      "name": "RealityScan",
+      "url": "https://www.unrealengine.com/en-US/realityscan",
+      "description": "Epic's free app for turning photos into 3D models.",
+      "category": "Scanning & splats"
+    },
+    {
+      "name": "SuperSplat",
+      "url": "https://superspl.at/editor",
+      "description": "Open-source browser editor for cleaning and publishing splats.",
+      "category": "Scanning & splats"
+    },
+    {
+      "name": "Depthkit",
+      "url": "https://www.depthkit.tv",
+      "description": "Volumetric video capture for people and performances.",
+      "category": "Scanning & splats"
+    },
+    {
+      "name": "SuperSplat Editor",
+      "url": "https://superspl.at",
+      "description": "Opens and edits Gaussian splat captures.",
+      "category": "Scanning & splats"
+    },
+    {
+      "name": "TouchDesigner",
+      "url": "https://derivative.ca",
+      "description": "Node-based real-time visuals for installations and live shows.",
+      "category": "Node & generative"
+    },
+    {
+      "name": "cables.gl",
+      "url": "https://cables.gl",
+      "description": "Browser-based node editor for WebGL, exportable to the web.",
+      "category": "Node & generative"
+    },
+    {
+      "name": "Nodes",
+      "url": "https://nodes.io",
+      "description": "Visual programming that composes reusable code blocks into programs.",
+      "category": "Node & generative"
+    },
+    {
+      "name": "Bitspace",
+      "url": "https://bitspace.sh",
+      "description": "Node-based creative canvas for generative experiments.",
+      "category": "Node & generative"
+    },
+    {
+      "name": "NodeToy",
+      "url": "https://nodetoy.co",
+      "description": "A browser playground for shader and canvas work.",
+      "category": "Node & generative"
+    },
+    {
+      "name": "CLO",
+      "url": "https://www.clo3d.com",
+      "description": "Industry-standard 3D garment design and fitting.",
+      "category": "Digital fashion"
+    },
+    {
+      "name": "Marvelous Designer",
+      "url": "https://www.marvelousdesigner.com",
+      "description": "Cloth simulation for characters, games and film.",
+      "category": "Digital fashion"
+    },
+    {
+      "name": "Style3D",
+      "url": "https://www.linctex.com",
+      "description": "3D fashion design and digital sampling platform.",
+      "category": "Digital fashion"
+    },
+    {
+      "name": "tldraw",
+      "url": "https://www.tldraw.com",
+      "description": "Infinite canvas, and an SDK for building your own.",
+      "category": "Whiteboards"
+    },
+    {
+      "name": "Excalidraw",
+      "url": "https://excalidraw.com",
+      "description": "Hand-drawn diagrams with encrypted sharing.",
+      "category": "Whiteboards"
+    },
+    {
+      "name": "FigJam",
+      "url": "https://www.figma.com/figjam",
+      "description": "Figma's whiteboard for workshops and flows.",
+      "category": "Whiteboards"
+    },
+    {
+      "name": "Muse",
+      "url": "https://museapp.com",
+      "description": "Spatial canvas for thinking with notes, PDFs and images.",
+      "category": "Whiteboards"
+    },
+    {
+      "name": "Whimsical",
+      "url": "https://whimsical.com",
+      "description": "Fast flowcharts, wireframes and mind maps.",
+      "category": "Whiteboards"
+    },
+    {
+      "name": "Eraser",
+      "url": "https://www.eraser.io",
+      "description": "Diagrams as code for architecture docs.",
+      "category": "Whiteboards"
+    },
+    {
+      "name": "Miro",
+      "url": "https://miro.com",
+      "description": "Large collaborative canvas with templates.",
+      "category": "Whiteboards"
+    },
+    {
+      "name": "React",
+      "url": "https://react.dev",
+      "description": "The component model most of this list assumes.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Next.js",
+      "url": "https://nextjs.org",
+      "description": "React framework with server rendering, routing and metadata.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Astro",
+      "url": "https://astro.build",
+      "description": "Content-first framework that ships zero JS by default.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Vite",
+      "url": "https://vite.dev",
+      "description": "Fast dev server and build tool for any front end.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Svelte",
+      "url": "https://svelte.dev",
+      "description": "Compiler-first framework with built-in transitions.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Tailwind CSS",
+      "url": "https://tailwindcss.com",
+      "description": "Utility-first CSS with a token-driven theme.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Bun",
+      "url": "https://bun.sh",
+      "description": "JavaScript runtime, bundler and package manager in one.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Storybook",
+      "url": "https://storybook.js.org",
+      "description": "Build and test components in isolation.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Biome",
+      "url": "https://biomejs.dev",
+      "description": "One fast tool for formatting and linting.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Turborepo",
+      "url": "https://turborepo.com",
+      "description": "Monorepo builds with remote caching.",
+      "category": "Frameworks & runtimes"
+    },
+    {
+      "name": "Zed",
+      "url": "https://zed.dev",
+      "description": "Fast, multiplayer editor with agent editing built in.",
+      "category": "Editors & terminals"
+    },
+    {
+      "name": "VS Code",
+      "url": "https://code.visualstudio.com",
+      "description": "The editor most extensions and agents target first.",
+      "category": "Editors & terminals"
+    },
+    {
+      "name": "Ghostty",
+      "url": "https://ghostty.org",
+      "description": "Native, GPU-accelerated terminal.",
+      "category": "Editors & terminals"
+    },
+    {
+      "name": "Warp",
+      "url": "https://www.warp.dev",
+      "description": "Terminal with blocks, search and built-in agents.",
+      "category": "Editors & terminals"
+    },
+    {
+      "name": "Claude Code",
+      "url": "https://www.claude.com/product/claude-code",
+      "description": "Agentic coding from the terminal, IDE or browser.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Cursor",
+      "url": "https://cursor.com",
+      "description": "AI editor with codebase-aware completions and agents.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "OpenAI Codex",
+      "url": "https://openai.com/codex",
+      "description": "OpenAI's coding agent for the terminal, IDE and cloud.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Gemini CLI",
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "description": "Google's open-source coding agent for the terminal.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "GitHub Copilot",
+      "url": "https://github.com/features/copilot",
+      "description": "Completions, chat and a cloud coding agent across GitHub and your editor.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Amp",
+      "url": "https://ampcode.com",
+      "description": "Sourcegraph's coding agent for the terminal and editor.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "OpenCode",
+      "url": "https://opencode.ai",
+      "description": "Open-source terminal coding agent that works with any model.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Aider",
+      "url": "https://aider.chat",
+      "description": "Pair programming in the terminal, committing as it goes.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Cline",
+      "url": "https://cline.bot",
+      "description": "Open-source coding agent that runs in your editor.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Devin",
+      "url": "https://devin.ai",
+      "description": "Cognition's autonomous engineer that takes tickets and opens PRs.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Jules",
+      "url": "https://jules.google",
+      "description": "Google's async coding agent that works on your repo in the cloud.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Factory",
+      "url": "https://factory.ai",
+      "description": "Droids that take on coding, review and migration work across your stack.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Windsurf",
+      "url": "https://windsurf.com",
+      "description": "AI editor with a collaborative agent mode.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "v0",
+      "url": "https://v0.app",
+      "description": "Generate React and Tailwind UI from prompts and screenshots.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Lovable",
+      "url": "https://lovable.dev",
+      "description": "Describe an app and get a working full-stack build.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Bolt",
+      "url": "https://bolt.new",
+      "description": "Prompt, run and deploy full-stack apps in the browser.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Replit",
+      "url": "https://replit.com",
+      "description": "Browser IDE with an agent that builds and hosts apps.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Skills",
+      "url": "https://skills.sh",
+      "description": "Reusable Agent Skills that teach an agent how to do a job.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "v0 by Vercel",
+      "url": "https://v0.dev",
+      "description": "Turns a prompt into a working React interface.",
+      "category": "Coding agents"
+    },
+    {
+      "name": "Model Context Protocol",
+      "url": "https://modelcontextprotocol.io",
+      "description": "The open spec for connecting agents to tools and data.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "Smithery",
+      "url": "https://smithery.ai",
+      "description": "Registry for finding and installing MCP servers.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "Context7",
+      "url": "https://context7.com",
+      "description": "Up-to-date library docs served to coding agents.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "Playwright MCP",
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "description": "Lets an agent drive a real browser through accessibility snapshots.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "AGENTS.md",
+      "url": "https://agents.md",
+      "description": "A README convention that tells coding agents how a repo works.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "Impeccable",
+      "url": "https://impeccable.style",
+      "description": "One skill and twenty commands that hold an agent to a design floor.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "Taste Skill",
+      "url": "https://www.tasteskill.dev",
+      "description": "Skill files that stop coding agents shipping generic frontends.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "UI Skills",
+      "url": "https://www.ui-skills.com",
+      "description": "Skills for polishing an interface an agent built.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "emilkowalski/skills",
+      "url": "https://github.com/emilkowalski/skills",
+      "description": "Emil Kowalski's design-engineering skills for agents.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "jakubkrehel/skills",
+      "url": "https://github.com/jakubkrehel/skills",
+      "description": "Agent skills for animation, typography, layout and color.",
+      "category": "MCP & agent context"
+    },
+    {
+      "name": "GSAP",
+      "url": "https://gsap.com",
+      "description": "Timelines with ScrollTrigger, SplitText and Flip. All plugins free.",
+      "category": "Animation engines"
+    },
+    {
+      "name": "Motion",
+      "url": "https://motion.dev",
+      "description": "Springs, layout animation and presence for React and vanilla JS.",
+      "category": "Animation engines"
+    },
+    {
+      "name": "Lenis",
+      "url": "https://lenis.darkroom.engineering",
+      "description": "Smooth scroll that keeps native behavior and syncs with GSAP.",
+      "category": "Animation engines"
+    },
+    {
+      "name": "React Spring",
+      "url": "https://www.react-spring.dev",
+      "description": "Physics-based animation hooks.",
+      "category": "Animation engines"
+    },
+    {
+      "name": "Anime.js",
+      "url": "https://animejs.com",
+      "description": "Lightweight animation engine with a timeline API.",
+      "category": "Animation engines"
+    },
+    {
+      "name": "AutoAnimate",
+      "url": "https://auto-animate.formkit.com",
+      "description": "One line to animate list additions, removals and moves.",
+      "category": "Animation engines"
+    },
+    {
+      "name": "Lottie",
+      "url": "https://airbnb.io/lottie",
+      "description": "Play After Effects and Lottie animations natively.",
+      "category": "Animation engines"
+    },
+    {
+      "name": "Three.js",
+      "url": "https://threejs.org",
+      "description": "The standard 3D library for the web.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "React Three Fiber",
+      "url": "https://r3f.docs.pmnd.rs",
+      "description": "React renderer for Three.js from Poimandres.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "OGL",
+      "url": "https://github.com/oframe/ogl",
+      "description": "Minimal WebGL library for shader planes and light scenes.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "Paper Shaders",
+      "url": "https://shaders.paper.design",
+      "description": "Zero-dependency shaders: mesh gradients, grain, dithering.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "ShaderGradient",
+      "url": "https://www.shadergradient.co",
+      "description": "Animated 3D gradients as a React component.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "Unicorn Studio",
+      "url": "https://www.unicorn.studio",
+      "description": "No-code WebGL effects exported as embeds.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "Shadertoy",
+      "url": "https://www.shadertoy.com",
+      "description": "Community fragment shaders to read and fork.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "The Book of Shaders",
+      "url": "https://thebookofshaders.com",
+      "description": "Step-by-step guide to fragment shaders.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "gltfjsx",
+      "url": "https://github.com/pmndrs/gltfjsx",
+      "description": "Turns glTF models into reusable React Three Fiber components.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "gltfpack",
+      "url": "https://github.com/zeux/meshoptimizer/blob/master/gltf/README.md",
+      "description": "Compresses and optimizes glTF files for fast web delivery.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "Needle Viewer",
+      "url": "https://viewer.needle.tools",
+      "description": "Drop in a glTF to inspect it and check what it will cost.",
+      "category": "WebGL & shaders"
+    },
+    {
+      "name": "Vercel",
+      "url": "https://vercel.com",
+      "description": "Framework-aware hosting with a preview URL per branch.",
+      "category": "Deploy"
+    },
+    {
+      "name": "Netlify",
+      "url": "https://www.netlify.com",
+      "description": "Git deploys with forms, functions and edge handlers.",
+      "category": "Deploy"
+    },
+    {
+      "name": "Cloudflare Pages",
+      "url": "https://pages.cloudflare.com",
+      "description": "Static and full-stack deploys on Cloudflare's network.",
+      "category": "Deploy"
+    },
+    {
+      "name": "Railway",
+      "url": "https://railway.com",
+      "description": "Deploy services, databases and cron from a canvas.",
+      "category": "Deploy"
+    },
+    {
+      "name": "Fly.io",
+      "url": "https://fly.io",
+      "description": "Run containers close to users in many regions.",
+      "category": "Deploy"
+    },
+    {
+      "name": "Render",
+      "url": "https://render.com",
+      "description": "Managed web services, workers and Postgres.",
+      "category": "Deploy"
+    },
+    {
+      "name": "Supabase",
+      "url": "https://supabase.com",
+      "description": "Postgres with auth, storage and realtime.",
+      "category": "Deploy"
+    },
+    {
+      "name": "Radix Primitives",
+      "url": "https://www.radix-ui.com/primitives",
+      "description": "Unstyled, accessible React parts under much of the ecosystem.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "Base UI",
+      "url": "https://base-ui.com",
+      "description": "Unstyled components from the Radix, Floating UI and MUI teams.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "React Aria",
+      "url": "https://react-aria.adobe.com",
+      "description": "Adobe's hooks with the deepest a11y and i18n coverage.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "Ark UI",
+      "url": "https://ark-ui.com",
+      "description": "Headless components driven by state machines.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "Headless UI",
+      "url": "https://headlessui.com",
+      "description": "Small set of unstyled components built for Tailwind.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "Floating UI",
+      "url": "https://floating-ui.com",
+      "description": "Positioning engine for tooltips, popovers and menus.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "cmdk",
+      "url": "https://cmdk.paco.me",
+      "description": "Fast, composable command menu for React.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "Vaul",
+      "url": "https://vaul.emilkowal.ski",
+      "description": "Drawer with native-feeling drag and snap points.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "Sonner",
+      "url": "https://sonner.emilkowal.ski",
+      "description": "Opinionated toasts with stacking and swipe to dismiss.",
+      "category": "Headless primitives"
+    },
+    {
+      "name": "shadcn/ui",
+      "url": "https://ui.shadcn.com",
+      "description": "Components you copy into your repo and own.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "21st.dev",
+      "url": "https://21st.dev",
+      "description": "Community registry of shadcn-style components, installable by command.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Origin UI",
+      "url": "https://originui.com",
+      "description": "Hundreds of shadcn-compatible variants for inputs and tables.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "HeroUI",
+      "url": "https://www.heroui.com",
+      "description": "Themeable React library with polished defaults.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Mantine",
+      "url": "https://mantine.dev",
+      "description": "Full-featured library with hooks, forms and dates.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Park UI",
+      "url": "https://park-ui.com",
+      "description": "Styled layer on top of Ark UI.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Chakra UI",
+      "url": "https://chakra-ui.com",
+      "description": "Accessible, prop-driven components with theming.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Tailwind Plus",
+      "url": "https://tailwindcss.com/plus",
+      "description": "Official Tailwind components, templates and blocks.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Tremor",
+      "url": "https://www.tremor.so",
+      "description": "Dashboard components and charts on Tailwind.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Bencho",
+      "url": "https://bencho.dev",
+      "description": "Interactive UI blocks you can tweak in place before taking the code.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "devl.dev",
+      "url": "https://devl.dev",
+      "description": "Two years of UI experiments, 159 components on the shadcn registry.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Shoogle",
+      "url": "https://shoogle.dev",
+      "description": "Search components and blocks across every shadcn registry at once.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "crd-ui",
+      "url": "https://crd-ui.juanda.co",
+      "description": "Payment card field with live brand detection and a 3D flip.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Clover UI",
+      "url": "https://clover-ui.vercel.app",
+      "description": "A small React component set with a distinct, soft visual style.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "Kobra",
+      "url": "https://kobra.systems",
+      "description": "Copy-paste React components, each with its own motion detail.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "affectUI",
+      "url": "https://www.affectui.com",
+      "description": "Agent-ready React UI for AI products.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "The Design Stack",
+      "url": "https://thedesignstack.co.in",
+      "description": "Figma components, prototypes and prompts, stacked for reuse.",
+      "category": "Component libraries"
+    },
+    {
+      "name": "interior.dev",
+      "url": "https://www.interior.dev",
+      "description": "React micro-interactions tuned frame by frame.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "React Bits",
+      "url": "https://www.reactbits.dev",
+      "description": "Animated text, backgrounds and components with prop playgrounds.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "React Bits Pro",
+      "url": "https://pro.reactbits.dev",
+      "description": "Paid React Bits tier: marketing and app blocks, templates, and an agent kit that installs them.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Motion Primitives",
+      "url": "https://motion-primitives.com",
+      "description": "Copy-paste Motion components: text effects, morphing dialogs.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Fancy Components",
+      "url": "https://www.fancycomponents.dev",
+      "description": "Playful, experimental React components with motion.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Cult UI",
+      "url": "https://www.cult-ui.com",
+      "description": "Distinctive shadcn-compatible components with texture.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Magic UI",
+      "url": "https://magicui.design",
+      "description": "Animated components for landing pages.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Aceternity UI",
+      "url": "https://ui.aceternity.com",
+      "description": "Showy Tailwind and Motion effects for heroes.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Cursify",
+      "url": "https://cursify.vercel.app",
+      "description": "Custom cursor effects as drop-in React components.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "NumberFlow",
+      "url": "https://number-flow.barvian.me",
+      "description": "Animated number transitions with correct digit rolling.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Animata",
+      "url": "https://animata.design",
+      "description": "Hand-crafted interaction and animation snippets.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Kokonut UI",
+      "url": "https://kokonutui.com",
+      "description": "Modern components with subtle motion.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Framer University Resources",
+      "url": "https://framer.university/resources",
+      "description": "Free Framer components, effects and templates.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Rare UI",
+      "url": "https://www.rareui.com",
+      "description": "Animated React components, one file each, installed with the shadcn CLI.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Transitions.dev",
+      "url": "https://transitions.dev",
+      "description": "The handful of transitions web apps actually need, ready to paste in.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "morphicons",
+      "url": "https://www.morphicons.com",
+      "description": "Morph any SVG icon into another with spring physics.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Calligraph",
+      "url": "https://calligraph.raphaelsalaja.com",
+      "description": "Fluid text transitions built on Motion.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Torph",
+      "url": "https://torph.lochie.me",
+      "description": "Animated text component with no dependencies.",
+      "category": "Micro-interactions"
+    },
+    {
+      "name": "Beautiful UI",
+      "url": "https://www.beautifului.dev",
+      "description": "Primitives for agent products: traces, tool chips, approvals.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "AI Elements",
+      "url": "https://ai-sdk.dev/elements",
+      "description": "Vercel's components for chat, reasoning and sources.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "assistant-ui",
+      "url": "https://www.assistant-ui.com",
+      "description": "Composable React primitives for chat interfaces.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "prompt-kit",
+      "url": "https://www.prompt-kit.com",
+      "description": "Prompt inputs, message lists and markdown blocks.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "CopilotKit",
+      "url": "https://www.copilotkit.ai",
+      "description": "In-app copilots and generative UI wired to app state.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "AICSS",
+      "url": "https://aicss.dev",
+      "description": "Thinking states, tool calls and citations for agent chat, in React, Vue and Svelte.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "Thinking orbs",
+      "url": "https://orbs.jakubantalik.com",
+      "description": "Dotted thought-orbs for the wait between prompt and answer.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "Dot Matrix",
+      "url": "https://dotmatrix.zzzzshawn.cloud",
+      "description": "Dot-matrix loaders you install from the shadcn registry and own.",
+      "category": "Agent interfaces"
+    },
+    {
+      "name": "TanStack Table",
+      "url": "https://tanstack.com/table",
+      "description": "Headless table logic: sorting, grouping, virtualisation.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "React Flow",
+      "url": "https://reactflow.dev",
+      "description": "Node-based editors and diagrams in React.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "visx",
+      "url": "https://airbnb.io/visx",
+      "description": "Low-level visualization primitives built on D3.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Recharts",
+      "url": "https://recharts.org",
+      "description": "Declarative charts with sensible defaults.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Embla Carousel",
+      "url": "https://www.embla-carousel.com",
+      "description": "Lightweight carousel with precise swiping.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Sandpack",
+      "url": "https://sandpack.codesandbox.io",
+      "description": "Live, editable code playgrounds for docs.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Liveline",
+      "url": "https://github.com/benjitaylor/liveline",
+      "description": "Real-time line chart for React that stays smooth under a live feed.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "dither-kit",
+      "url": "https://www.tripwire.sh/dither-kit",
+      "description": "Dithered charts with a Recharts-style children-as-config API.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Chart.js",
+      "url": "https://www.chartjs.org",
+      "description": "The familiar canvas chart library.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Nivo",
+      "url": "https://nivo.rocks",
+      "description": "A rich chart set with a live theme editor.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Observable Plot",
+      "url": "https://observablehq.com/plot",
+      "description": "A concise grammar of graphics for the browser.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "uPlot",
+      "url": "https://github.com/leeoniya/uPlot",
+      "description": "Tiny, fast charts for time-series data.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "D3",
+      "url": "https://d3js.org",
+      "description": "The data library everything else builds on.",
+      "category": "Charts, tables & canvases"
+    },
+    {
+      "name": "Fontshare",
+      "url": "https://www.fontshare.com",
+      "description": "Quality free fonts from Indian Type Foundry.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Free Faces",
+      "url": "https://www.freefaces.gallery",
+      "description": "Curated free typefaces with real specimens.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "UNCUT",
+      "url": "https://uncut.wtf",
+      "description": "Free and open-source display faces with a contemporary edge.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Best Free Fonts",
+      "url": "https://bestfreefonts.com",
+      "description": "Hand-sorted list of free fonts worth using.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Google Fonts",
+      "url": "https://fonts.google.com",
+      "description": "Open-source variable fonts with a pairing view.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Fontsource",
+      "url": "https://fontsource.org",
+      "description": "Self-host open-source fonts as npm packages.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Pangram Pangram",
+      "url": "https://pangrampangram.com",
+      "description": "Contemporary foundry with free trials.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Klim Type Foundry",
+      "url": "https://klim.co.nz",
+      "description": "Carefully made typefaces with essays on each.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Typewolf",
+      "url": "https://www.typewolf.com",
+      "description": "Which fonts real sites use, and what pairs with them.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Fonts In Use",
+      "url": "https://fontsinuse.com",
+      "description": "Typography in the wild, indexed by typeface.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Inter alternatives",
+      "url": "https://yeptype.com/article/inter-alternatives",
+      "description": "Two real criteria for picking a UI font, plus ten that are not Inter.",
+      "category": "Typefaces"
+    },
+    {
+      "name": "Lucide",
+      "url": "https://lucide.dev",
+      "description": "Clean, consistent open-source icons with React bindings.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Phosphor",
+      "url": "https://phosphoricons.com",
+      "description": "Flexible family in six weights, thin to duotone.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Heroicons",
+      "url": "https://heroicons.com",
+      "description": "Hand-drawn SVG icons from the Tailwind team.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Tabler Icons",
+      "url": "https://tabler.io/icons",
+      "description": "Thousands of 24px stroke icons, MIT licensed.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Radix Icons",
+      "url": "https://www.radix-ui.com/icons",
+      "description": "Crisp 15px icons for dense UI.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Iconoir",
+      "url": "https://iconoir.com",
+      "description": "Clean, geometric open-source icons.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Remix Icon",
+      "url": "https://remixicon.com",
+      "description": "Neutral line and fill pairs for every glyph.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Hugeicons",
+      "url": "https://hugeicons.com",
+      "description": "Very large set in multiple styles.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Iconify",
+      "url": "https://icon-sets.iconify.design",
+      "description": "Search across 200k icons from every major set.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Streamline",
+      "url": "https://www.streamlinehq.com",
+      "description": "Huge icon and illustration library with a Figma plugin.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "SVGL",
+      "url": "https://svgl.app",
+      "description": "Brand logos as clean SVGs.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "MakeEmoji",
+      "url": "https://makeemoji.com",
+      "description": "Generate custom emoji from a prompt, sized for Slack and Discord.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Simple Icons",
+      "url": "https://simpleicons.org",
+      "description": "Brand marks as single-colour SVG paths.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "Material Symbols",
+      "url": "https://fonts.google.com/icons",
+      "description": "Google’s variable icon font, in three weights.",
+      "category": "Icons & emoji"
+    },
+    {
+      "name": "unDraw",
+      "url": "https://undraw.co",
+      "description": "Open-source illustrations with a recolor control.",
+      "category": "Illustration"
+    },
+    {
+      "name": "Blush",
+      "url": "https://blush.design",
+      "description": "Mix-and-match illustration systems from many artists.",
+      "category": "Illustration"
+    },
+    {
+      "name": "Open Peeps",
+      "url": "https://www.openpeeps.com",
+      "description": "Hand-drawn character library you can recombine.",
+      "category": "Illustration"
+    },
+    {
+      "name": "Humaaans",
+      "url": "https://www.humaaans.com",
+      "description": "Modular people illustrations.",
+      "category": "Illustration"
+    },
+    {
+      "name": "Hashvatar",
+      "url": "https://www.hashvatar.com",
+      "description": "Deterministic avatars from any string, in gradient or dither.",
+      "category": "Illustration"
+    },
+    {
+      "name": "Radix Colors",
+      "url": "https://www.radix-ui.com/colors",
+      "description": "12-step scales designed for UI states, with dark mode.",
+      "category": "Color systems"
+    },
+    {
+      "name": "Realtime Colors",
+      "url": "https://www.realtimecolors.com",
+      "description": "Preview a palette and type pairing on a real page.",
+      "category": "Color systems"
+    },
+    {
+      "name": "Leonardo",
+      "url": "https://leonardocolor.io",
+      "description": "Contrast-based color scale generator from Adobe.",
+      "category": "Color systems"
+    },
+    {
+      "name": "Huetone",
+      "url": "https://huetone.ardov.me",
+      "description": "Accessible palettes with perceptual lightness.",
+      "category": "Color systems"
+    },
+    {
+      "name": "Coolors",
+      "url": "https://coolors.co",
+      "description": "Generate and lock palettes with the spacebar.",
+      "category": "Color systems"
+    },
+    {
+      "name": "fffuel",
+      "url": "https://www.fffuel.co",
+      "description": "SVG generators for noise, blobs, gradients and patterns.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Haikei",
+      "url": "https://haikei.app",
+      "description": "Generative SVG shapes and backgrounds.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Poly Haven",
+      "url": "https://polyhaven.com",
+      "description": "HDRIs, textures and models, all CC0.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Sketchfab",
+      "url": "https://sketchfab.com",
+      "description": "3D model marketplace with an embeddable viewer.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Unsplash",
+      "url": "https://unsplash.com",
+      "description": "Free high-resolution photography.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Images in motion",
+      "url": "https://iim.smartsquad.io",
+      "description": "Continuous animated image columns running in opposite directions.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Hero Patterns",
+      "url": "https://heropatterns.com",
+      "description": "Repeatable SVG patterns with editable colours.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "MagicPattern",
+      "url": "https://www.magicpattern.design",
+      "description": "Generates gradients, patterns and meshes as CSS or SVG.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "SVG Backgrounds",
+      "url": "https://www.svgbackgrounds.com",
+      "description": "A gallery of backgrounds you can tint and export.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "CSS Background Patterns",
+      "url": "https://css-pattern.com",
+      "description": "Patterns written in pure CSS, one snippet each.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Patternpad",
+      "url": "https://patternpad.com",
+      "description": "Builds a seamless pattern from a seed shape.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "BGJar",
+      "url": "https://bgjar.com",
+      "description": "A quick generator for textured backgrounds.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "Cool Backgrounds",
+      "url": "https://coolbackgrounds.io",
+      "description": "Gradients, particles and low-poly backdrops.",
+      "category": "Textures, models & photo"
+    },
+    {
+      "name": "ElevenLabs",
+      "url": "https://elevenlabs.io",
+      "description": "AI voices, sound effects and music generation.",
+      "category": "Audio"
+    },
+    {
+      "name": "Splice",
+      "url": "https://splice.com/features/sounds",
+      "description": "Royalty-free sample library for sound design.",
+      "category": "Audio"
+    },
+    {
+      "name": "FMOD",
+      "url": "https://www.fmod.com",
+      "description": "Adaptive audio middleware for games and interactive work.",
+      "category": "Audio"
+    },
+    {
+      "name": "soundcn",
+      "url": "https://soundcn.xyz",
+      "description": "700+ UI sound effects curated for web apps.",
+      "category": "Audio"
+    },
+    {
+      "name": "Cuelume",
+      "url": "https://cuelume.dev",
+      "description": "Interaction sounds synthesised live with Web Audio, no files to ship.",
+      "category": "Audio"
+    },
+    {
+      "name": "@web-kits/audio",
+      "url": "https://audio.raphaelsalaja.com",
+      "description": "Declarative audio synthesis for the web.",
+      "category": "Audio"
+    },
+    {
+      "name": "Easing Wizard",
+      "url": "https://easingwizard.com",
+      "description": "Design cubic-bezier, spring and bounce curves visually.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "Anime.js Easing Editor",
+      "url": "https://animejs.com/easing-editor",
+      "description": "Tune easing curves and springs with a live preview.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "Easing Gradients",
+      "url": "https://larsenwork.com/easing-gradients",
+      "description": "Gradients with eased stops, so fades lose their hard edge.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "cubic-bezier.com",
+      "url": "https://cubic-bezier.com",
+      "description": "Compare two curves side by side.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "Easings.net",
+      "url": "https://easings.net",
+      "description": "Reference of standard easing functions.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "Clippy",
+      "url": "https://bennettfeely.com/clippy",
+      "description": "Visual clip-path builder.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "Easing Graphs",
+      "url": "https://www.easing.dev",
+      "description": "Curated easing curves, graphed side by side.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "shadowLab",
+      "url": "https://shadowlab.mocarski.design",
+      "description": "Build box shadows for web and React Native in one place.",
+      "category": "Motion & easing"
+    },
+    {
+      "name": "OKLCH Picker",
+      "url": "https://oklch.com",
+      "description": "Pick and convert colors in OKLCH.",
+      "category": "Color & contrast"
+    },
+    {
+      "name": "Color.review",
+      "url": "https://color.review",
+      "description": "Contrast checker that previews your pair as real text.",
+      "category": "Color & contrast"
+    },
+    {
+      "name": "WebAIM Contrast Checker",
+      "url": "https://webaim.org/resources/contrastchecker",
+      "description": "Quick WCAG contrast check for any pair.",
+      "category": "Color & contrast"
+    },
+    {
+      "name": "OKLCH.fyi",
+      "url": "https://oklch.fyi",
+      "description": "Generate and explore uniform OKLCH palettes.",
+      "category": "Color & contrast"
+    },
+    {
+      "name": "Utopia",
+      "url": "https://utopia.fyi",
+      "description": "Fluid type and space scales with clamp() output.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Type Scale",
+      "url": "https://typescale.com",
+      "description": "Preview modular type scales.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Wakamai Fondue",
+      "url": "https://wakamaifondue.com",
+      "description": "See a font's OpenType features and axes.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Open Props",
+      "url": "https://open-props.style",
+      "description": "CSS custom properties for type, space and easing.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Modern CSS Solutions",
+      "url": "https://moderncss.dev",
+      "description": "Modern fixes for old CSS problems.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Can I use",
+      "url": "https://caniuse.com",
+      "description": "Browser support tables for every web feature.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Corner Radii",
+      "url": "https://corner-radii.xyz",
+      "description": "Work out the inner radius so nested corners stay concentric.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Design Tokens Generator",
+      "url": "https://design.dev/ai/design-tokens-generator",
+      "description": "Brand colors in, semantic CSS variables and a Tailwind theme out.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "Gradient Border Plugin",
+      "url": "https://gradient-border.floriankiem.com",
+      "description": "Tailwind plugin for gradient borders via mask-composite.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "kugiri",
+      "url": "https://edoardolunardi.github.io/kugiri",
+      "description": "Splits text into lines, words and characters where the browser already broke it.",
+      "category": "CSS & type"
+    },
+    {
+      "name": "SVGOMG",
+      "url": "https://jakearchibald.github.io/svgomg",
+      "description": "Optimize SVGs with a live preview.",
+      "category": "SVG & images"
+    },
+    {
+      "name": "SVG Path Editor",
+      "url": "https://yqnn.github.io/svg-path-editor",
+      "description": "Edit path commands point by point.",
+      "category": "SVG & images"
+    },
+    {
+      "name": "Squoosh",
+      "url": "https://squoosh.app",
+      "description": "Compare image codecs and compress in the browser.",
+      "category": "SVG & images"
+    },
+    {
+      "name": "RealFaviconGenerator",
+      "url": "https://realfavicongenerator.net",
+      "description": "Every favicon and touch icon from one source.",
+      "category": "SVG & images"
+    },
+    {
+      "name": "Transform",
+      "url": "https://transform.tools",
+      "description": "Convert SVG to JSX, JSON to TypeScript and more.",
+      "category": "SVG & images"
+    },
+    {
+      "name": "OG Playground",
+      "url": "https://og-playground.vercel.app",
+      "description": "Prototype OG images with Satori.",
+      "category": "SVG & images"
+    },
+    {
+      "name": "ray.so",
+      "url": "https://ray.so",
+      "description": "Beautiful images of code snippets.",
+      "category": "Code & product shots"
+    },
+    {
+      "name": "ui.camera",
+      "url": "https://ui.camera",
+      "description": "Product photography and video of interfaces, made in the browser.",
+      "category": "Code & product shots"
+    },
+    {
+      "name": "RegExr",
+      "url": "https://regexr.com",
+      "description": "Build and test regular expressions with live highlighting.",
+      "category": "Code & product shots"
+    },
+    {
+      "name": "PageSpeed Insights",
+      "url": "https://pagespeed.web.dev",
+      "description": "Lab and field Core Web Vitals for any URL.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "axe DevTools",
+      "url": "https://www.deque.com/axe",
+      "description": "Automated accessibility testing in the browser.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "WAVE",
+      "url": "https://wave.webaim.org",
+      "description": "Visual accessibility report on the page.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "Bundlephobia",
+      "url": "https://bundlephobia.com",
+      "description": "Cost of an npm package before you install it.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "Polypane",
+      "url": "https://polypane.app",
+      "description": "Browser for building responsive, accessible sites.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "Responsively",
+      "url": "https://responsively.app",
+      "description": "Open-source multi-viewport dev browser.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "rams",
+      "url": "https://www.rams.ai",
+      "description": "Automated design review for generated code: accessibility and visual bugs.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "Agentation",
+      "url": "https://www.agentation.com",
+      "description": "Gives an agent visual feedback on what it just built.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "Remediate",
+      "url": "https://www.remediate.ski",
+      "description": "In-app feedback with screenshots and annotations, routed to your tracker.",
+      "category": "Performance & accessibility"
+    },
+    {
+      "name": "Raycast",
+      "url": "https://www.raycast.com",
+      "description": "Launcher with extensions, snippets, window management and AI.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Claude Cowork",
+      "url": "https://claude.com/product/cowork",
+      "description": "Claude working across your files and apps from the desktop.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Granola",
+      "url": "https://www.granola.ai",
+      "description": "AI meeting notes that build on what you jot down.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Wispr Flow",
+      "url": "https://wisprflow.ai",
+      "description": "Voice dictation that writes cleanly in any app.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "LocalSend",
+      "url": "https://localsend.org",
+      "description": "Send files between nearby devices, no cloud needed.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Deskflow",
+      "url": "https://deskflow.org",
+      "description": "Share one keyboard and mouse across computers.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "xScope",
+      "url": "https://xscopeapp.com",
+      "description": "Rulers, loupes and guides for measuring the screen.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Sip",
+      "url": "https://sipapp.io",
+      "description": "Menu bar color picker that keeps palettes.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Rectangle",
+      "url": "https://rectangleapp.com",
+      "description": "Keyboard window snapping for macOS.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Maccy",
+      "url": "https://maccy.app",
+      "description": "Lightweight clipboard history for macOS.",
+      "category": "Launchers & productivity"
+    },
+    {
+      "name": "Screen Studio",
+      "url": "https://screen.studio",
+      "description": "Screen recordings with automatic zoom and smooth cursor.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Recordly",
+      "url": "https://recordly.dev",
+      "description": "Open-source recorder with auto-zoom, animated cursor and webcam.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "CleanShot X",
+      "url": "https://cleanshot.com",
+      "description": "Screenshots, scrolling capture and recording.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Cap",
+      "url": "https://cap.so",
+      "description": "Open-source recorder with shareable links.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "OBS Studio",
+      "url": "https://obsproject.com",
+      "description": "Free, open-source recording and live streaming.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "ShareX",
+      "url": "https://getsharex.com",
+      "description": "Open-source capture and upload tool for Windows.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Shottr",
+      "url": "https://shottr.cc",
+      "description": "Fast screenshots with pixel measurement and OCR.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Kap",
+      "url": "https://getkap.co",
+      "description": "Open-source recorder that exports GIF and MP4.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Rotato",
+      "url": "https://rotato.app",
+      "description": "Animated 3D device mockups from recordings.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Loom",
+      "url": "https://www.loom.com",
+      "description": "Async video messages with transcripts.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "LosslessCut",
+      "url": "https://mifi.no/losslesscut",
+      "description": "Trim and cut video instantly without re-encoding.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "OpenCut",
+      "url": "https://opencut.app",
+      "description": "Open-source video editor that runs anywhere.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "DaVinci Resolve",
+      "url": "https://www.blackmagicdesign.com/products/davinciresolve",
+      "description": "Pro editing, color and audio, with a generous free tier.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "NVIDIA ShadowPlay",
+      "url": "https://www.nvidia.com/en-us/software/nvidia-app/#shadowplay",
+      "description": "Low-overhead capture and instant replay on NVIDIA GPUs.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Parsec",
+      "url": "https://parsec.app",
+      "description": "Low-latency remote desktop, good enough for design and games.",
+      "category": "Recording & video"
+    },
+    {
+      "name": "Are.na",
+      "url": "https://www.are.na",
+      "description": "Slow, connected research boards.",
+      "category": "Notes & organization"
+    },
+    {
+      "name": "Obsidian",
+      "url": "https://obsidian.md",
+      "description": "Local-first markdown notes with links and plugins.",
+      "category": "Notes & organization"
+    },
+    {
+      "name": "Eagle",
+      "url": "https://en.eagle.cool",
+      "description": "Local library for images, fonts and design references.",
+      "category": "Notes & organization"
+    },
+    {
+      "name": "AFFiNE",
+      "url": "https://affine.pro",
+      "description": "Open-source docs, whiteboards and databases in one workspace.",
+      "category": "Notes & organization"
+    },
+    {
+      "name": "Linear",
+      "url": "https://linear.app",
+      "description": "Fast issue tracking for product teams.",
+      "category": "Notes & organization"
+    },
+    {
+      "name": "Trello",
+      "url": "https://trello.com",
+      "description": "Simple boards for lightweight planning.",
+      "category": "Notes & organization"
+    },
+    {
+      "name": "Claude",
+      "url": "https://claude.ai",
+      "description": "Anthropic's assistant for writing, research and code.",
+      "category": "AI assistants"
+    },
+    {
+      "name": "ChatGPT",
+      "url": "https://chatgpt.com",
+      "description": "OpenAI's general assistant for research and drafting.",
+      "category": "AI assistants"
+    },
+    {
+      "name": "Grok",
+      "url": "https://grok.com",
+      "description": "xAI's assistant with live access to X and the web.",
+      "category": "AI assistants"
+    },
+    {
+      "name": "Gemini",
+      "url": "https://gemini.google.com",
+      "description": "Google's assistant, tied into Workspace and search.",
+      "category": "AI assistants"
+    },
+    {
+      "name": "NotebookLM",
+      "url": "https://notebooklm.google",
+      "description": "Ground an assistant in your own sources, with audio overviews.",
+      "category": "AI assistants"
+    },
+    {
+      "name": "Buzz",
+      "url": "https://buzz.xyz",
+      "description": "Your people and your agents working in one shared project.",
+      "category": "AI assistants"
+    },
+    {
+      "name": "Arc",
+      "url": "https://arc.net",
+      "description": "Browser with spaces, split view and a command bar.",
+      "category": "Browsers"
+    },
+    {
+      "name": "Zen",
+      "url": "https://zen-browser.app",
+      "description": "Open-source Firefox-based browser with vertical tabs.",
+      "category": "Browsers"
+    },
+    {
+      "name": "Firefox",
+      "url": "https://www.mozilla.org/firefox/new",
+      "description": "Independent engine and excellent CSS devtools.",
+      "category": "Browsers"
+    },
+    {
+      "name": "Brave",
+      "url": "https://brave.com",
+      "description": "Chromium browser with built-in blocking.",
+      "category": "Browsers"
+    }
+  ],
+  "popularityOrder": [
+    "https://pinterest.com",
+    "https://www.mozilla.org/firefox/new",
+    "https://chatgpt.com",
+    "https://openai.com/codex",
+    "https://brave.com",
+    "https://www.nvidia.com/en-us/software/nvidia-app/#shadowplay",
+    "https://claude.ai",
+    "https://unsplash.com",
+    "https://www.figma.com",
+    "https://www.figma.com/figjam",
+    "https://github.com/google-gemini/gemini-cli",
+    "https://dribbble.com",
+    "https://trello.com",
+    "https://github.com/emilkowalski/skills",
+    "https://skills.sh/emilkowalski/skills/emil-design-eng",
+    "https://miro.com",
+    "https://www.claude.com/product/claude-code",
+    "https://claude.com/product/cowork",
+    "https://web.dev",
+    "https://grok.com",
+    "https://github.com/microsoft/playwright-mcp",
+    "https://sketchfab.com",
+    "https://webflow.com",
+    "https://www.loom.com",
+    "https://vercel.com/design/guidelines",
+    "https://vercel.com",
+    "https://www.unrealengine.com/en-US/realityscan",
+    "https://caniuse.com",
+    "https://cursor.com",
+    "https://elevenlabs.io",
+    "https://lovable.dev",
+    "https://www.netlify.com",
+    "https://replit.com",
+    "https://www.blender.org",
+    "https://supabase.com",
+    "https://github.com/features/copilot",
+    "https://fonts.google.com",
+    "https://fonts.google.com/icons",
+    "https://gemini.google.com",
+    "https://pages.cloudflare.com",
+    "https://developer.apple.com/design/human-interface-guidelines",
+    "https://obsidian.md",
+    "https://www.framer.com",
+    "https://opencode.ai",
+    "https://tailwindcss.com",
+    "https://tailwindcss.com/plus",
+    "https://react-aria.adobe.com",
+    "https://www.smashingmagazine.com",
+    "https://obsproject.com",
+    "https://edoardolunardi.github.io/kugiri",
+    "https://jakearchibald.github.io/svgomg",
+    "https://yqnn.github.io/svg-path-editor",
+    "https://www.nngroup.com/articles",
+    "https://www.granola.ai",
+    "https://press.stripe.com",
+    "https://webaim.org/resources/contrastchecker",
+    "https://react.dev",
+    "https://www.blackmagicdesign.com/products/davinciresolve",
+    "https://linear.app/method",
+    "https://linear.app",
+    "https://github.com/leeoniya/uPlot",
+    "https://modelcontextprotocol.io",
+    "https://css-tricks.com",
+    "https://code.visualstudio.com",
+    "https://nextjs.org",
+    "https://parsec.app",
+    "https://clover-ui.vercel.app",
+    "https://cursify.vercel.app",
+    "https://og-playground.vercel.app",
+    "https://cline.bot",
+    "https://github.com/zeux/meshoptimizer/blob/master/gltf/README.md",
+    "https://github.com/jakubkrehel/skills",
+    "https://www.awwwards.com",
+    "https://stitch.withgoogle.com",
+    "https://devin.ai",
+    "https://coolors.co",
+    "https://splice.com/features/sounds",
+    "https://windsurf.com",
+    "https://wisprflow.ai",
+    "https://render.com",
+    "https://railway.com",
+    "https://github.com/pmndrs/gltfjsx",
+    "https://zed.dev",
+    "https://d3js.org",
+    "https://www.raycast.com",
+    "https://www.warp.dev",
+    "https://astro.build",
+    "https://lottiefiles.com/lottie-creator",
+    "https://github.com/oframe/ogl",
+    "https://context7.com",
+    "https://lumalabs.ai/interactive-scenes",
+    "https://notebooklm.google",
+    "https://vite.dev",
+    "https://fly.io",
+    "https://bolt.new",
+    "https://www.cosmos.so",
+    "https://pagespeed.web.dev",
+    "https://excalidraw.com",
+    "https://threejs.org",
+    "https://www.fontshare.com",
+    "https://www.are.na",
+    "https://v0.app",
+    "https://squoosh.app",
+    "https://tympanus.net/codrops",
+    "https://www.sidefx.com",
+    "https://svelte.dev",
+    "https://arc.net",
+    "https://www.chartjs.org",
+    "https://observablehq.com/plot",
+    "https://whimsical.com",
+    "https://spline.design",
+    "https://storybook.js.org",
+    "https://v0.dev",
+    "https://www.deque.com/axe",
+    "https://www.tldraw.com",
+    "https://www.shadertoy.com",
+    "https://factory.ai",
+    "https://zen-browser.app",
+    "https://fontsinuse.com",
+    "https://21st.dev",
+    "https://simpleicons.org",
+    "https://rive.app",
+    "https://mobbin.com",
+    "https://undraw.co",
+    "https://land-book.com",
+    "https://skills.sh",
+    "https://paper.design",
+    "https://regexr.com",
+    "https://bun.sh",
+    "https://buzz.xyz",
+    "https://getsharex.com",
+    "https://gsap.com",
+    "https://ampcode.com",
+    "https://tanstack.com/table",
+    "https://wave.webaim.org",
+    "https://penpot.app",
+    "https://polyhaven.com",
+    "https://lucide.dev",
+    "https://icon-sets.iconify.design",
+    "https://aider.chat",
+    "https://ghostty.org",
+    "https://jitter.video",
+    "https://www.gameuidatabase.com",
+    "https://localsend.org",
+    "https://github.com/benjitaylor/liveline",
+    "https://www.streamlinehq.com",
+    "https://bradfrost.com/blog/post/front-of-the-front-end-and-back-of-the-front-end-web-development",
+    "https://onepagelove.com",
+    "https://ai-sdk.dev/elements",
+    "https://www.clo3d.com",
+    "https://motion.dev",
+    "https://agents.md",
+    "https://www.lottielab.com",
+    "https://derivative.ca",
+    "https://affine.pro",
+    "https://realfavicongenerator.net",
+    "https://www.copilotkit.ai",
+    "https://www.joshwcomeau.com",
+    "https://ray.so",
+    "https://www.siteinspire.com",
+    "https://m3.material.io",
+    "https://practicaltypography.com",
+    "https://smithery.ai",
+    "https://hugeicons.com",
+    "https://tabler.io/icons",
+    "https://poly.cam",
+    "https://cleanshot.com",
+    "https://bundlephobia.com",
+    "https://refero.design",
+    "https://pageflows.com",
+    "https://lawsofux.com",
+    "https://savee.it",
+    "https://www.radix-ui.com/primitives",
+    "https://www.radix-ui.com/icons",
+    "https://www.radix-ui.com/colors",
+    "https://www.typewolf.com",
+    "https://easings.net",
+    "https://www.fmod.com",
+    "https://remixicon.com",
+    "https://animejs.com",
+    "https://animejs.com/easing-editor",
+    "https://heroicons.com",
+    "https://phosphoricons.com",
+    "https://rectangleapp.com",
+    "https://airbnb.io/lottie",
+    "https://airbnb.io/visx",
+    "https://shottr.cc",
+    "https://www.lapa.ninja",
+    "https://www.reactbits.dev",
+    "https://www.eraser.io",
+    "https://sandpack.codesandbox.io",
+    "https://impeccable.style",
+    "https://jules.google",
+    "https://cubic-bezier.com",
+    "https://pangrampangram.com",
+    "https://www.ui-skills.com",
+    "https://blush.design",
+    "https://ishadeed.com",
+    "https://chakra-ui.com",
+    "https://bennettfeely.com/clippy",
+    "https://www.marvelousdesigner.com",
+    "https://screen.studio",
+    "https://biomejs.dev",
+    "https://www.heroui.com",
+    "https://reactflow.dev",
+    "https://fontsource.org",
+    "https://www.unicorn.studio",
+    "https://ui-patterns.com",
+    "https://www.humaaans.com",
+    "https://recent.design",
+    "https://thebookofshaders.com",
+    "https://klim.co.nz",
+    "https://same.energy",
+    "https://polypane.app",
+    "https://opencut.app",
+    "https://cap.so",
+    "https://heropatterns.com",
+    "https://superspl.at/editor",
+    "https://superspl.at",
+    "https://minimal.gallery",
+    "https://www.assistant-ui.com",
+    "https://www.freefaces.gallery",
+    "https://rotato.app",
+    "https://saaspo.com",
+    "https://www.kiriengine.app",
+    "https://www.openpeeps.com",
+    "https://emilkowal.ski",
+    "https://emilkowal.ski/ui/you-dont-need-animations",
+    "https://emilkowal.ski/ui/developing-taste",
+    "https://headlessui.com",
+    "https://www.refactoringui.com",
+    "https://coolbackgrounds.io",
+    "https://origami.design",
+    "https://www.svgbackgrounds.com",
+    "https://cables.gl",
+    "https://magicui.design",
+    "https://recharts.org",
+    "https://mantine.dev",
+    "https://shaders.paper.design",
+    "https://sipapp.io",
+    "https://haikei.app",
+    "https://adele.uxpin.com",
+    "https://typescale.com",
+    "https://ui.shadcn.com",
+    "https://www.fffuel.co",
+    "https://iconoir.com",
+    "https://inclusive-components.design",
+    "https://en.eagle.cool",
+    "https://saaslandingpage.com",
+    "https://component.gallery",
+    "https://maccy.app",
+    "https://transform.tools",
+    "https://getkap.co",
+    "https://chrisburnell.com/html-can-do-that",
+    "https://design.lightspark.com/limit-the-number-of-details",
+    "https://pro.reactbits.dev",
+    "https://r3f.docs.pmnd.rs",
+    "https://ui.aceternity.com",
+    "https://vaul.emilkowal.ski",
+    "https://sonner.emilkowal.ski",
+    "https://viewer.needle.tools",
+    "https://httpster.net",
+    "https://loadmo.re",
+    "https://inspora.design",
+    "https://www.curated.design",
+    "https://www.seesaw.website",
+    "https://www.supahero.io",
+    "https://www.darkmodedesign.com",
+    "https://layers.to",
+    "https://godly.website",
+    "https://mnmm.xyz",
+    "https://screenlane.com",
+    "https://60fps.design",
+    "https://www.designspells.com",
+    "https://www.hudsandguis.com",
+    "https://interfaceingame.com",
+    "https://www.rebrand.gallery",
+    "https://searchsystem.co",
+    "https://spiral.soot.com/spiral",
+    "https://rauno.me/craft/interaction-design",
+    "https://jakub.kr/writing/details-that-make-interfaces-feel-better",
+    "https://benji.org/family-values",
+    "https://ibelick.com/anatomy-ai-input",
+    "https://animations.dev",
+    "https://shapeofdesignbook.com",
+    "https://www.innerping.com",
+    "https://designbooks.org",
+    "https://www.svg.guide",
+    "https://www.pierrickcalvez.com/journal/a-five-minute-guide-to-better-typography",
+    "https://every-layout.dev",
+    "https://www.checklist.design",
+    "https://interfaces.dev/cheat-sheet",
+    "https://devouringdetails.com",
+    "https://principles.design",
+    "https://designsystems.surf",
+    "https://www.designsystemchecklist.com",
+    "https://uiplaybook.dev",
+    "https://userinterface.wiki",
+    "https://github.com/backnotprop/pstack",
+    "https://stealth.pm/skills/review",
+    "https://stealth.pm/skills/space",
+    "https://stealth.pm/skills/type",
+    "https://stealth.pm/skills/surface",
+    "https://stealth.pm/skills/ux-copy",
+    "https://stealth.pm/skills/a11y",
+    "https://stealth.pm/skills/interaction",
+    "https://stealth.pm/skills/motion",
+    "https://stealth.pm/skills/states",
+    "https://stealth.pm/skills/components",
+    "https://stealth.pm/skills/agent-ui",
+    "https://stealth.pm/skills/mobile-feel",
+    "https://stealth.pm/skills/scroll-and-webgl",
+    "https://stealth.pm/skills/polish",
+    "https://pen.dev",
+    "https://cavalry.scenegroup.co",
+    "https://www.theatrejs.com",
+    "https://womp.com",
+    "https://www.bezi.com",
+    "https://www.depthkit.tv",
+    "https://nodes.io",
+    "https://bitspace.sh",
+    "https://nodetoy.co",
+    "https://www.linctex.com",
+    "https://museapp.com",
+    "https://turborepo.com",
+    "https://www.tasteskill.dev",
+    "https://lenis.darkroom.engineering",
+    "https://www.react-spring.dev",
+    "https://auto-animate.formkit.com",
+    "https://www.shadergradient.co",
+    "https://base-ui.com",
+    "https://ark-ui.com",
+    "https://floating-ui.com",
+    "https://cmdk.paco.me",
+    "https://originui.com",
+    "https://park-ui.com",
+    "https://www.tremor.so",
+    "https://bencho.dev",
+    "https://devl.dev",
+    "https://shoogle.dev",
+    "https://crd-ui.juanda.co",
+    "https://kobra.systems",
+    "https://www.affectui.com",
+    "https://thedesignstack.co.in",
+    "https://www.interior.dev",
+    "https://motion-primitives.com",
+    "https://www.fancycomponents.dev",
+    "https://www.cult-ui.com",
+    "https://number-flow.barvian.me",
+    "https://animata.design",
+    "https://kokonutui.com",
+    "https://framer.university/resources",
+    "https://www.rareui.com",
+    "https://transitions.dev",
+    "https://www.morphicons.com",
+    "https://calligraph.raphaelsalaja.com",
+    "https://torph.lochie.me",
+    "https://www.beautifului.dev",
+    "https://www.prompt-kit.com",
+    "https://aicss.dev",
+    "https://orbs.jakubantalik.com",
+    "https://dotmatrix.zzzzshawn.cloud",
+    "https://www.embla-carousel.com",
+    "https://www.tripwire.sh/dither-kit",
+    "https://nivo.rocks",
+    "https://uncut.wtf",
+    "https://bestfreefonts.com",
+    "https://yeptype.com/article/inter-alternatives",
+    "https://svgl.app",
+    "https://makeemoji.com",
+    "https://www.hashvatar.com",
+    "https://www.realtimecolors.com",
+    "https://leonardocolor.io",
+    "https://huetone.ardov.me",
+    "https://iim.smartsquad.io",
+    "https://www.magicpattern.design",
+    "https://css-pattern.com",
+    "https://patternpad.com",
+    "https://bgjar.com",
+    "https://soundcn.xyz",
+    "https://cuelume.dev",
+    "https://audio.raphaelsalaja.com",
+    "https://easingwizard.com",
+    "https://larsenwork.com/easing-gradients",
+    "https://www.easing.dev",
+    "https://shadowlab.mocarski.design",
+    "https://oklch.com",
+    "https://color.review",
+    "https://oklch.fyi",
+    "https://utopia.fyi",
+    "https://wakamaifondue.com",
+    "https://open-props.style",
+    "https://moderncss.dev",
+    "https://corner-radii.xyz",
+    "https://design.dev/ai/design-tokens-generator",
+    "https://gradient-border.floriankiem.com",
+    "https://ui.camera",
+    "https://responsively.app",
+    "https://www.rams.ai",
+    "https://www.agentation.com",
+    "https://www.remediate.ski",
+    "https://deskflow.org",
+    "https://xscopeapp.com",
+    "https://recordly.dev",
+    "https://mifi.no/losslesscut"
+  ]
+}
