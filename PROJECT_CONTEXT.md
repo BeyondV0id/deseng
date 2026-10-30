@@ -4,7 +4,7 @@ One-file summary. Read this instead of re-reading AGENTS.md + exploring the code
 
 ## Stack
 - React 19 + TypeScript 5.8, Vite 7 (`@vitejs/plugin-react`), Tailwind CSS v4 (`@tailwindcss/vite`) + CSS Modules for components.
-- Arc UI (vendored `src/components/arc/`), motion (Motion for React), `@web-kits/audio`, `torph` (text morph), `cn` (class merge), Fluid Functionalism `Elevated`/`SurfaceProvider`, `microlink` API (OG data, `localStorage` cached), Geist Sans via `@fontsource`.
+- Arc UI (vendored `src/components/arc/`), motion (Motion for React), `@web-kits/audio`, `torph` (text morph), `cn` (class merge), Fluid Functionalism `Elevated`/`SurfaceProvider`, server-resolved preview URLs (Postgres), Geist Sans via `@fontsource`.
 - Alias `@` -> `src`. `components.json` registries: `@uiarc`, `@kobra`.
 - Build: `npm run build` = `tsc -b && vite build`.
 
@@ -62,13 +62,13 @@ Nav rows, search field, favourites link are pills (`--radius-pill`). Filter tabs
 - Resources, moodboards, theme persist in `localStorage` under `desgnix-*` keys; read via `store.read` helper in `src/pages/page.tsx`.
 - `src/components/card.tsx` renders `.ui-card` (owns border, radius, fill, shadow in both themes). Pass `href` to `Card` -> renders a link.
 - Concept = **moodboard** (`LibraryMoodboard`, `moodboardId`). Not "folder".
-- Seed catalogue: `src/catalog.ts`. Sections from stealth.pm; `collections` array groups them into the eight shelves the sidebar shows (Observe, Read, Create, Build, Components, Assets, Tools, Desk). Shelf may hold several categories -> tag strip under heading. No People shelf or people list.
+- Seed catalogue: `src/catalog.ts`. Tags are plain tool nouns and no longer mirror stealth.pm; `collections` groups them into the eight shelves the sidebar shows (Observe, Read, Create, Build, Components, Assets, Tools, Desk). A shelf may hold several tags -> tag strip under heading. No People shelf or people list.
 - Catalogue versioned: bump `catalogVersion` in `src/pages/page.tsx` when shape changes (stale `localStorage` replaced, not mixed).
 - Catalogue entry: `{ name, url, description }`. Search matches name, url, description, category.
 - Explore page (`src/components/application/dashboard/explore-page.tsx`) = landing surface; big search hero, shelves under it as rows of six. Only view with big search (top bar field steps aside while open).
 - Submitted resource tagged `submitted`; there is no Submissions view. The sidebar's second group is the account's moodboards: a hoverable `Moodboards` heading row (chevron) that opens the all-moodboards shelf, each moodboard by name, then a `Create moodboard` row.
 - Agents directory: removed. There is no Agents view or nav row.
-- `src/lib/link-metadata.ts`: fetches OG data from microlink, caches `localStorage`, dedupes in-flight requests.
+- Previews: `server/src/lib/metadata.ts` resolves the Open Graph image and favicon on submit and stores URLs only. The card renders image -> favicon -> CSS initial, never retrying. Backfill with `npm run db:backfill-images`.
 
 ## Motion / press states
 - Every pressable thing: hover state, press state, transition between them. Use `--duration-fast` (160ms) + `--ease-standard`.
@@ -92,5 +92,5 @@ Nav rows, search field, favourites link are pills (`--radius-pill`). Filter tabs
 `src/main.tsx` — SurfaceProvider, foundation.css, fonts.
 `src/lib/springs.ts` — fluid-hover list springs.
 `src/lib/utils.ts` — `cn`.
-`src/lib/link-metadata.ts` — microlink OG cache.
+`server/src/lib/metadata.ts` — SSRF-safe preview resolver.
 `src/components/arc/motion-tokens.ts` — motion springs.

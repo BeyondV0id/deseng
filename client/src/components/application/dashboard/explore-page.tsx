@@ -4,6 +4,7 @@ import { EmptyState } from '@/components/arc/empty-state/empty-state'
 import { categories } from '@/catalog'
 import type { Resource } from '@/catalog'
 import type { LibraryMoodboard } from '@/lib/library-types'
+import { LIBRARY_HEADING, LIBRARY_SUBHEADING, libraryMeta } from './library-copy'
 import { ResourceRail } from './resource-rail'
 import { ResourceSectionHeader } from './resource-section-header'
 
@@ -24,11 +25,9 @@ type ExplorePageProps = {
 
 /** The landing line: what the catalogue is, what it holds, and how it is ordered. */
 function describeLibrary(total: number, shown: number, query: string) {
-  const entries = total === 1 ? 'entry' : 'entries'
-  const count = query.trim() ? `${shown} of ${total} ${entries}` : `${total} ${entries}`
   return {
-    subheading: 'A hand-kept index of interface craft. Component libraries, motion tools, typefaces and the people behind them.',
-    meta: `${count}, grouped by tag and in the catalogue's order.`,
+    subheading: LIBRARY_SUBHEADING,
+    meta: libraryMeta(total, shown, query),
   }
 }
 
@@ -43,7 +42,7 @@ export function ExplorePage({ resources, total, query, moodboards, signedIn, onR
   // The rows follow the taxonomy's own order. A category the catalogue has not
   // named yet still gets a row, at the end, so a new tag is never invisible.
   const groups = useMemo(() => {
-    const known = categories.map(category => category.name)
+    const known = categories
     const extra = [...new Set(resources.map(resource => resource.category))].filter(category => !known.includes(category))
     return [...known, ...extra]
       .map(category => ({ category, resources: resources.filter(resource => resource.category === category) }))
@@ -52,7 +51,7 @@ export function ExplorePage({ resources, total, query, moodboards, signedIn, onR
 
   return <section className="resource-library" aria-label="Resources">
     <ResourceSectionHeader
-      heading="Resources for design engineers"
+      heading={LIBRARY_HEADING}
       subheading={intro.subheading}
       meta={intro.meta}
     />

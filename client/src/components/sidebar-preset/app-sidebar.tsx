@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { ChevronRight } from "@/components/icons";
 import { BrandMark } from "@/components/brand/brand-mark";
 import {
@@ -23,6 +24,7 @@ import { fontWeights } from "@/lib/font-weight";
 import { useIcons } from "@/lib/icon-context";
 import type { LibraryMoodboard } from "@/lib/library-types";
 import { cn } from "@/lib/utils";
+import { pathForView } from "@/lib/view-path";
 import { NAV_SECTIONS } from "@/components/sidebar-preset/nav-data";
 
 /** A count is metadata, so it keeps one weight on every row; the colour marks
@@ -54,6 +56,21 @@ export function AppSidebar({
   /** A tag page marks the shelf it lives on rather than a row of its own. */
   const activeView = navViewFor(selected);
 
+  /**
+   * Every row is a link to the address its view lives at, so a shelf can be
+   * opened in a second tab, copied or reloaded. A plain click stays in the app,
+   * where the page can ask for an account before it opens a gated view; a
+   * modified click is left to the browser.
+   */
+  const linkTo = (view: string) => <Link
+    to={pathForView(view)}
+    onClick={(event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      onSelect(view);
+    }}
+  />;
+
   // The count beside a row is the size of the set it opens, never what the
   // current search leaves of it: a shelf should read the same whether or not
   // the field above is full.
@@ -69,7 +86,7 @@ export function AppSidebar({
         <div className="app-sidebar-brand-row">
           <a
             className="brand app-sidebar-brand"
-            href="#home"
+            href="/"
             aria-label="desgnix home"
             onClick={(event) => {
               event.preventDefault();
@@ -77,7 +94,7 @@ export function AppSidebar({
             }}
           >
             <BrandMark />
-            <span className="app-sidebar-wordmark">desgnix<span className="brand-period">.</span></span>
+            <span className="app-sidebar-wordmark">desgnix</span>
           </a>
         </div>
       </SidebarHeader>
@@ -94,7 +111,7 @@ export function AppSidebar({
                     <SidebarMenuButton
                       icon={icons[item.icon]}
                       isActive={item.view === activeView}
-                      onClick={() => onSelect(item.view)}
+                      render={linkTo(item.view)}
                     >
                       {item.label}
                       <span className="sr-only">{`, ${countLabel(count)}`}</span>
@@ -119,7 +136,7 @@ export function AppSidebar({
               <SidebarMenuButton
                 icon={icons["folder-open"]}
                 isActive={selected === "Moodboard"}
-                onClick={() => onSelect("Moodboard")}
+                render={linkTo("Moodboard")}
               >
                 <span className="app-sidebar-heading">Moodboards</span>
                 <ChevronRight
@@ -141,7 +158,7 @@ export function AppSidebar({
                   <SidebarMenuButton
                     icon={icons.folder}
                     isActive={moodboard.id === selected}
-                    onClick={() => onSelect(moodboard.id)}
+                    render={linkTo(moodboard.id)}
                   >
                     {moodboard.name}
                     <span className="sr-only">{`, ${countLabel(count)}`}</span>
@@ -164,7 +181,7 @@ export function AppSidebar({
       <SidebarFooter className="app-sidebar-footer">
         <div className="app-sidebar-footer-row">
           <span className="app-sidebar-copyright">© 2026</span>
-          <span className="app-sidebar-info">Info</span>
+          <Link to="/info" className="app-sidebar-info">Info</Link>
         </div>
       </SidebarFooter>
     </Sidebar>

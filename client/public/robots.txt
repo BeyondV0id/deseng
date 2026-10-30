@@ -1,0 +1,14 @@
+# desgnix — a hand-kept index of interface craft.
+# The catalogue, its shelves and the info page are public.
+
+User-agent: *
+Allow: /
+Disallow: /favorites
+Disallow: /moodboards
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /api/
+
+Sitemap: https://desgnix.app/sitemap.xml

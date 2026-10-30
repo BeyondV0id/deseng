@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState, type FormEvent } from 'react'
 import { flushSync } from 'react-dom'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Plus } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
 import { Dialog, DialogContent } from '@/components/arc/dialog/dialog'
@@ -11,7 +11,10 @@ import { ColorPicker } from '@/components/arc/color-picker/color-picker'
 import { AppNavbar } from '@/components/application/dashboard/app-navbar'
 import { CatalogStatus } from '@/components/application/dashboard/catalog-status'
 import { Dashboard } from '@/components/application/dashboard/dashboard'
+import { LIBRARY_SUBHEADING } from '@/components/application/dashboard/library-copy'
+import { infoDescription } from '@/components/application/dashboard/info-content'
 import { useAuth } from '@/components/auth/auth-provider'
+import type { AuthMode } from '@/components/auth/auth-form'
 import { AppSidebar } from '@/components/sidebar-preset/app-sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { StripedPattern } from '@/components/ui/striped-pattern'
@@ -21,10 +24,22 @@ import { prefersDark, readStoredTheme, themeStorageKey, type ThemePreference } f
 import type { LibraryMoodboard } from '@/lib/library-types'
 import { api, ApiError } from '@/lib/api'
 import { clearAuthIntent, setAuthIntent, takeAuthIntent, type AuthIntent } from '@/lib/auth-intent'
+import { usePageSeo } from '@/lib/seo'
 import { signOut, updateUser } from '@/lib/auth-client'
 import { categories, categoryFromView, categoryView, comparePopularity, collectionById, type Resource } from '@/catalog'
+import { allResources, favorites, infoView, moodboardShelf, pathForView, viewForPath } from '@/lib/view-path'
 
-type View = string
+/** The view strings the app reasons in; their addresses live in `view-path`. */
+const views = { allResources, favorites, moodboardShelf, infoView }
+
+/** Favourites and moodboards live on an account; a shelf, a tag and info do not. */
+function needsAccount(view: string) {
+  if (view === views.favorites || view === views.moodboardShelf) return true
+  if (view === views.infoView) return false
+  return view !== views.allResources
+    && collectionById(view) === undefined
+    && categoryFromView(view) === null
+}
 
 /** The swatches offered for a moodboard, in the order the reference shows them. */
 const moodboardColors = [
@@ -77,7 +92,7 @@ function AddResourceDialog({ open, onClose, onAdd }: {
 }) {
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
-  const [category, setCategory] = useState('Web galleries')
+  const [category, setCategory] = useState(categories[0])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -113,16 +128,16 @@ function AddResourceDialog({ open, onClose, onAdd }: {
     }
 
     form.reset()
-    setCategory('Web galleries')
+    setCategory(categories[0])
     onClose()
   }
 
   return <Dialog open={open} onOpenChange={next => { if (!next) onClose() }}>
-    <DialogContent title="Add a resource" description="Save a useful link to the shared catalogue.">
+    <DialogContent title="Add a resource" description="Save a useful link to the shared library.">
       <form onSubmit={submit} className="dialog-form">
         <Input label="Name" name="name" placeholder="e.g. Awwwards" autoFocus required />
         <Input label="Link" name="url" type="text" inputMode="url" placeholder="example.com" required />
-        <Select label="Category" value={category} onValueChange={setCategory} options={categories.map(item => ({ value: item.name, label: item.name }))} />
+        <Select label="Category" value={category} onValueChange={setCategory} options={categories.map(name => ({ value: name, label: name }))} />
         <Textarea label="Note" description="Optional" name="description" placeholder="What makes it worth saving?" rows={3} />
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="dialog-actions">
@@ -201,7 +216,7 @@ const accountPrompts = {
   },
   submit: {
     title: 'Submit a resource',
-    description: 'A submission joins the shared catalogue under your account, ready to file like any other entry.',
+    description: 'A submission joins the shared library under your account, ready to file like any other entry.',
   },
 } as const
 
@@ -290,14 +305,21 @@ export default function Page() {
   const [resources, setResources] = useState<Resource[]>([])
   const [moodboards, setMoodboards] = useState<LibraryMoodboard[]>([])
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
-  const [view, setView] = useState<View>('All resources')
   const [addOpen, setAddOpen] = useState(false)
   const [moodboardOpen, setMoodboardOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [prompt, setPrompt] = useState<AccountPromptReason | null>(null)
+  const [authMode, setAuthMode] = useState<AuthMode | null>(null)
   const [themePreference, setThemePreference] = useState<ThemePreference>(readStoredTheme)
   const [systemTheme, setSystemTheme] = useState<Theme>(getSystemTheme)
   const [searchQuery, setSearchQuery] = useState('')
+
+  // The address is the view: a shelf, a tag, favourites and a moodboard each
+  // have their own path, so a row can be linked, reloaded and opened twice.
+  // A tag rides on its shelf's path as the `tag` query.
+  const addressView = viewForPath(location.pathname, location.search)
+  const view = addressView ?? views.allResources
+  const setView = useCallback((next: string) => { navigate(pathForView(next)) }, [navigate])
 
   const theme: Theme = themePreference === 'system' ? systemTheme : themePreference
   const signedIn = user !== null
@@ -305,7 +327,10 @@ export default function Page() {
 
   /** The catalogue is shared and public; the state on it belongs to an account. */
   const loadLibrary = useCallback(async () => {
-    setStatus('loading')
+    // Signing in happens over the page now, so it refetches the catalogue in
+    // place: the grid that is already on screen stays there instead of falling
+    // back to its skeleton behind the panel.
+    setStatus(current => current === 'ready' ? current : 'loading')
     try {
       const catalog = await api.catalog()
       const boards = signedIn ? (await api.moodboards()).moodboards : []
@@ -320,6 +345,22 @@ export default function Page() {
   // Wait for the session before the first read, so a signed-in account never
   // sees its own favourites arrive a moment late.
   useEffect(() => { if (!isPending) void loadLibrary() }, [isPending, loadLibrary])
+
+  // An address with nothing filed at it goes back to the catalogue, rather than
+  // showing the whole grid under a name it does not hold.
+  useEffect(() => {
+    if (addressView === null) navigate('/', { replace: true })
+  }, [addressView, navigate])
+
+  // Favourites and moodboards belong to an account. An address for one opens
+  // the sign-in prompt instead of an empty grid, and keeps the view as the
+  // intent, so signing in finishes what the address asked for.
+  useEffect(() => {
+    if (signedIn || !needsAccount(view)) return
+    setAuthIntent({ kind: 'view', view })
+    setPrompt('view')
+    navigate('/', { replace: true })
+  }, [view, signedIn, navigate])
 
   // The action that sent the visitor to sign in is finished here, once, after
   // the catalogue is on screen. A cancelled sign-in clears it instead.
@@ -392,20 +433,28 @@ export default function Page() {
     return matches.sort(comparePopularity)
   }, [resources, view, currentMoodboard, collection, tag, searchQuery])
 
-  const heading = currentMoodboard?.name ?? (view === 'Favorites' ? 'Favourites' : tag ?? view)
+  const heading = view === 'Info' ? 'Info' : currentMoodboard?.name ?? (view === 'Favorites' ? 'Favourites' : tag ?? view)
   const subheading = view === 'All resources' ? 'A curated collection of interfaces, interactions and details that caught our eye.'
-    : view === 'Favorites' ? 'A personal shortlist of ideas you want to revisit.'
-      : tag ? `Every entry filed under this tag, in the catalogue's order.`
-        : collection ? collection.description
-          : currentMoodboard ? currentMoodboard.description || 'Links saved in this moodboard.'
-            : ''
+    : view === 'Info' ? infoDescription
+      : view === 'Favorites' ? 'A personal shortlist of ideas you want to revisit.'
+        : tag ? `Every entry filed under this tag, in the library's order.`
+          : collection ? collection.description
+            : currentMoodboard ? currentMoodboard.description || 'Links saved in this moodboard.'
+              : ''
 
-  const from = `${location.pathname}${location.search}`
+  // The document names the view, so a shelf or a tag can be bookmarked and
+  // shared under its own title instead of the catalogue's.
+  const pageName = view === 'Favorites' ? 'Favourites' : view === 'Moodboard' ? 'Moodboards' : heading
+  usePageSeo({
+    title: view === 'All resources' ? 'desgnix · your design library' : `${pageName} · desgnix`,
+    description: view === 'Info' ? infoDescription : subheading || LIBRARY_SUBHEADING,
+    path: `${location.pathname}${location.search}`,
+  })
 
-  /** Sends the visitor to the auth pages; the intent is already in sessionStorage. */
-  function goToAuth(path: '/sign-in' | '/sign-up') {
+  /** Opens the sign-in panel over the page; the intent is already in sessionStorage. */
+  function openAuth(mode: AuthMode) {
     setPrompt(null)
-    navigate(path, { state: { from } })
+    setAuthMode(mode)
   }
 
   function requestAccount(reason: AccountPromptReason, intent?: AuthIntent) {
@@ -421,7 +470,7 @@ export default function Page() {
 
   /** Favourites and moodboards belong to an account; the shelves do not. */
   function selectView(next: string) {
-    if (!signedIn && (next === 'Favorites' || next === 'Moodboard')) {
+    if (!signedIn && (next === views.favorites || next === views.moodboardShelf)) {
       requestAccount('view', { kind: 'view', view: next })
       return
     }
@@ -513,7 +562,6 @@ export default function Page() {
       await signOut()
     } finally {
       // Signing out leaves the visitor on the catalogue, not at the door.
-      setView('All resources')
       navigate('/', { replace: true })
     }
   }
@@ -538,6 +586,7 @@ export default function Page() {
           <AppNavbar
             query={searchQuery}
             onQueryChange={setSearchQuery}
+            onOpenTag={category => selectView(categoryView(category))}
             resources={resources}
             onSubmitResource={openSubmit}
             selected={view}
@@ -545,7 +594,8 @@ export default function Page() {
             moodboards={moodboards}
             onNewMoodboard={openNewMoodboard}
             account={signedIn ? account : null}
-            onSignIn={() => navigate('/sign-in', { state: { from } })}
+            authMode={authMode}
+            onAuthModeChange={setAuthMode}
             theme={themePreference}
             onThemeChange={next => changeTheme(next, 'rise')}
             onSelectSettings={() => setSettingsOpen(true)}
@@ -560,7 +610,6 @@ export default function Page() {
             resources={filtered}
             allResources={resources}
             moodboards={moodboards}
-            theme={theme}
             query={searchQuery}
             signedIn={signedIn}
             onRequireAccount={requestMoodboardAccess}
@@ -568,6 +617,7 @@ export default function Page() {
             onFile={moveToMoodboard}
             onOpenMoodboard={selectView}
             onOpenCategory={category => selectView(categoryView(category))}
+            onOpenShelf={selectView}
             onNewMoodboard={openNewMoodboard}
             onAddResource={openSubmit}
           />
@@ -579,8 +629,8 @@ export default function Page() {
       <SignInPrompt
         reason={prompt}
         onClose={cancelPrompt}
-        onSignIn={() => goToAuth('/sign-in')}
-        onSignUp={() => goToAuth('/sign-up')}
+        onSignIn={() => openAuth('sign-in')}
+        onSignUp={() => openAuth('sign-up')}
       />
     </SidebarProvider>
   </div>

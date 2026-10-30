@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Heart, Plus, Search } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
 import { EmptyState } from '@/components/arc/empty-state/empty-state'
-import { collectionById } from '@/catalog'
+import { categoryFromView, collectionById, collectionForCategory } from '@/catalog'
 import type { Resource } from '@/catalog'
 import type { LibraryMoodboard } from '@/lib/library-types'
 import { ResourceGrid } from './resource-grid'
@@ -20,9 +20,11 @@ type ResourceListProps = {
   onFile: (id: string, moodboardId: string) => void
   onNewMoodboard: () => void
   onAddResource: () => void
+  /** Walks up from a tag page to the shelf that holds it. */
+  onOpenShelf: (view: string) => void
 }
 
-export function ResourceList({ heading, subheading, resources, view, moodboards, signedIn, onRequireAccount, onFavorite, onFile, onNewMoodboard, onAddResource }: ResourceListProps) {
+export function ResourceList({ heading, subheading, resources, view, moodboards, signedIn, onRequireAccount, onFavorite, onFile, onNewMoodboard, onAddResource, onOpenShelf }: ResourceListProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const handlers = { moodboards, signedIn, onRequireAccount, onFavorite, onFile, onNewMoodboard }
 
@@ -32,6 +34,11 @@ export function ResourceList({ heading, subheading, resources, view, moodboards,
     () => collection ? collection.categories.filter(category => resources.some(resource => resource.category === category)) : [],
     [collection, resources],
   )
+
+  // A tag page is one category of a shelf, so it carries the way back up to it.
+  const tag = categoryFromView(view)
+  const shelf = tag !== null ? collectionForCategory(tag) : undefined
+  const back = shelf ? { label: shelf.label, onClick: () => onOpenShelf(shelf.id) } : undefined
 
   // A shelf change starts on the whole shelf, never on the last tag read.
   useEffect(() => { setActiveCategory(null) }, [view])
@@ -46,6 +53,7 @@ export function ResourceList({ heading, subheading, resources, view, moodboards,
       <ResourceSectionHeader
         heading={heading}
         subheading={subheading}
+        back={back}
         categories={categories}
         activeCategory={active}
         onCategoryChange={setActiveCategory}
@@ -56,7 +64,7 @@ export function ResourceList({ heading, subheading, resources, view, moodboards,
 
   const isFavorites = view === 'Favorites'
   return <section className="resource-library" aria-label="Resources">
-    <ResourceSectionHeader heading={heading} subheading={subheading} />
+    <ResourceSectionHeader heading={heading} subheading={subheading} back={back} />
     <EmptyState
       title={isFavorites ? 'Nothing saved as a favorite' : 'This shelf is ready for something'}
       description={isFavorites ? 'Tap the heart on anything you want to find quickly.' : 'Add a resource or save one from the directory.'}

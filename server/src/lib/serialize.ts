@@ -15,6 +15,12 @@ export type ApiResource = {
   description: string
   category: string
   rank: number
+  /** Remote preview image, or `null` when the site has none. */
+  imageUrl: string | null
+  /** The site's own mark, the step after the preview fails. */
+  faviconUrl: string | null
+  imageWidth: number | null
+  imageHeight: number | null
   savedAt: string
   favorite: boolean
   moodboardId?: string
@@ -29,6 +35,10 @@ export function serializeResource(row: ResourceRow, state?: UserResourceRow): Ap
     description: row.description,
     category: row.category,
     rank: row.rank,
+    imageUrl: row.imageUrl,
+    faviconUrl: row.faviconUrl,
+    imageWidth: row.imageWidth,
+    imageHeight: row.imageHeight,
     savedAt: (state?.savedAt ?? row.createdAt).toISOString().slice(0, 10),
     favorite: state?.favorite ?? false,
     ...(state?.moodboardId ? { moodboardId: state.moodboardId } : {}),

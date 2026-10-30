@@ -18,6 +18,18 @@ export const resource = pgTable('resource', {
   description: text('description').notNull().default(''),
   category: text('category').notNull(),
   rank: integer('rank').notNull().default(0),
+  /**
+   * The entry's preview, resolved once on the server and kept as URLs only.
+   * `imageUrl` is the site's Open Graph image; `faviconUrl` is its mark, used
+   * when the larger picture is missing or fails to load. `imageCheckedAt`
+   * records the last resolution so a backfill never re-fetches a row it has
+   * already visited.
+   */
+  imageUrl: text('image_url'),
+  faviconUrl: text('favicon_url'),
+  imageWidth: integer('image_width'),
+  imageHeight: integer('image_height'),
+  imageCheckedAt: timestamp('image_checked_at'),
   submittedById: text('submitted_by_id').references(() => user.id, { onDelete: 'set null' }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })

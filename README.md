@@ -13,14 +13,19 @@ cp server/.env.example server/.env   # fill DATABASE_URL, DIRECT_URL and BETTER_
 
 npm run db:migrate                   # create the tables
 npm run db:seed                      # load the catalogue
-
-npm run dev                          # API on :3001, Vite on :5180
 ```
 
-`npm run dev` starts both workspaces. Vite proxies `/api` to the API server, so
-the app, the API and the session cookie share one origin. The first account is
-created at `/sign-up`; Google and GitHub appear there once their client ids and
-secrets are in `server/.env`.
+Then one terminal per side, each in its own folder:
+
+```sh
+cd server && npm run dev             # API on :3001
+cd client && npm run dev             # Vite on :5180
+```
+
+The API and the client are separate processes. Vite proxies `/api` to the API
+server, so the app, the API and the session cookie share one origin. The first
+account is created at `/sign-up`; Google and GitHub appear there once their
+client ids and secrets are in `server/.env`.
 
 ## Workspaces
 
@@ -33,14 +38,14 @@ Commands run from the root:
 
 | Command | Does |
 | --- | --- |
-| `npm run dev` | API and client together |
-| `npm run dev:client` / `npm run dev:server` | One side only |
+| `npm run dev:client` / `npm run dev:server` | One side only, from the root (the same as `npm run dev` inside `client/` or `server/`) |
 | `npm run build` | Client build, then the server's TypeScript |
 | `npm start` | Serve the built client and the API from one process |
 | `npm run typecheck` | Both workspaces |
 | `npm run auth:generate` | Rewrite the Better Auth tables after a plugin change |
 | `npm run db:generate` / `db:migrate` | Write and apply a migration |
 | `npm run db:seed` | Load `server/src/db/catalog.json` into Postgres |
+| `npm run db:backfill-images` | Resolve `imageUrl` / `faviconUrl` for entries not yet checked |
 
 ## What's here
 
@@ -56,7 +61,8 @@ Commands run from the root:
 - Folder-card animation adapted from [Rare UI](https://www.rareui.com/components/foldercomponent).
 
 The seed directory was collected from stealth.pm on 25 October 2026. Account
-data lives in Postgres; the browser keeps only the theme, the sound switch and
-the Open Graph cache.
+data lives in Postgres; the browser keeps only the theme and the sound switch.
+Preview images are resolved from each site by the API on submit and stored as
+remote URLs, so no image file ships with the app.
 
 Conventions for working in this repo live in [AGENTS.md](./AGENTS.md).

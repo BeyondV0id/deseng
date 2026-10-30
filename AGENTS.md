@@ -24,7 +24,7 @@ system, and the two reference sites the product is modelled on.
 | Text morph | `torph` | `client/src/components/application/dashboard/resource-section-header.tsx` |
 | Class merge | `cn` | `client/src/lib/utils.ts` |
 | Surfaces | Fluid Functionalism `Elevated` / `SurfaceProvider` | `client/src/lib/elevated.tsx`, `client/src/lib/surface-context.tsx` |
-| Data | `microlink` API for Open Graph, cached in `localStorage` | `client/src/lib/link-metadata.ts` |
+| Images | Preview URLs resolved by the server on submit and stored in Postgres; the browser loads them from their own hosts | `server/src/lib/metadata.ts` |
 | API | Express 5, mounted under `/api` | `server/src/index.ts` |
 | Auth | **Better Auth** 1.7, session cookie | `server/src/auth.ts`, `client/src/lib/auth-client.ts` |
 | Database | Postgres (Supabase) through **Drizzle ORM** | `server/src/db/`, `server/drizzle/` |
@@ -173,6 +173,10 @@ first initial in white. Every circle rests on `--surface-muted` and moves to
 `--hover` under the pointer; Favourites marks the view it opens with the
 foreground fill, the way an active tag does. Below `lg` only the account stays:
 Favourites and Submit become rows of the menu.
+
+Without an account the cluster's third slot is the `Sign in` pill, on
+`--surface-muted` at the same 40px. Pressing it draws the auth window over the
+page, outlined by a scrim, instead of leaving the catalogue.
 
 The account menu holds Sign out, the account's Settings row, and the app's only
 two preferences: theme and sound. There is no gear in the sidebar header and
@@ -356,9 +360,17 @@ pill radius, so the rounded shape comes from the token, not from a rule.
   moodboards live in Postgres and arrive through `client/src/lib/api.ts`. There
   is no `desgnix-resources`, `desgnix-moodboards` or `desgnix-account` key any
   more; do not reintroduce one.
-- `localStorage` keeps only preferences: the theme (`desgnix-theme-v2`), the
-  sound switch through `@web-kits/audio`, and microlink's Open Graph cache in
-  `client/src/lib/link-metadata.ts`.
+- `localStorage` keeps only preferences: the theme (`desgnix-theme-v2`) and the
+  sound switch through `@web-kits/audio`.
+- **Previews are remote URLs, not files.** `resource.imageUrl` and
+  `resource.faviconUrl` are resolved from the site itself (`server/src/lib/metadata.ts`)
+  when an entry is submitted, and stored on the row. No image is downloaded or
+  committed, and the client never resolves metadata. The card renders
+  `imageUrl`, then `faviconUrl`, then a CSS initial; a failed image moves down
+  the chain and is not retried. `imageCheckedAt` marks a visited row, and
+  `npm run db:backfill-images` resolves the rows that predate the columns
+  (`--refresh` revisits them all). The resolver is SSRF-safe: public hosts
+  only, three checked redirects, timeouts, a shared budget, and a capped body.
 - Cards share one surface. `client/src/components/card.tsx` renders `.ui-card`,
   and `.ui-card` owns the border, radius, fill and shadow in both themes. A card
   anywhere in the app uses it, so the dark border is the same everywhere.
@@ -375,14 +387,26 @@ pill radius, so the rounded shape comes from the token, not from a rule.
   one row per entry for everyone. `user_resource` holds only what an account has
   done to an entry: `favorite`, `moodboardId`, `savedAt`. `GET /api/catalog`
   folds the two together and a card never knows the difference.
-- The taxonomy stays in `client/src/catalog.ts`: the category names and glyphs,
-  and the eight shelves the sidebar shows (Observe, Read, Create, Build,
-  Components, Assets, Tools, Desk). A shelf may hold several categories, and
-  each one becomes its own row on the page. There is no People shelf: the
-  catalogue lists tools, not people.
+- The taxonomy stays in `client/src/catalog.ts`: the tag list, and the eight
+  shelves the sidebar shows (Observe, Read, Create, Build, Components, Assets,
+  Tools, Desk). A shelf may hold several tags, and each one becomes its own row
+  on the page. There is no People shelf: the catalogue lists tools, not people.
+- **A tag is a plain tool noun**, one or two words, naming the thing on the
+  other end of the link rather than the mood of browsing it: `Shaders`, not
+  `WebGL & shaders`; `Fonts`, not `Typefaces`; `Hosting`, not `Deploy`. No
+  ampersand pairs, no eyebrow phrasing, and never a tag that only restates its
+  shelf. A tag belongs to exactly one shelf, so a count and its tag page cannot
+  disagree.
+- Images split by what they act on, not by what they are called: `Image tools`
+  is every raster and pixel pass (compression, ASCII and dither art, favicons,
+  OG images, and the background and pattern generators in `fffuel`, `Haikei` or
+  `Hero Patterns`), while `SVG tools` is only path and markup work. A new
+  generator or converter goes to the tag that matches its output, not the shelf
+  it was found on.
 - The entries themselves are in `server/src/db/catalog.json`, seeded into
   Postgres by `npm run db:seed`. It is safe to re-run: a URL already in the
-  table is left alone, so a corrected description in the database survives.
+  table keeps its row and a corrected description, and only its tag is
+  re-synced, because a tag outside the list would fall out of its shelf.
 - `rank` is the catalogue's one fixed order, captured once from GitHub stars
   and the Tranco top-1M rank. Nothing recalculates it; a resource added later
   takes the next rank and falls to the end. The API returns rows by rank, and
@@ -417,11 +441,40 @@ read it from there.
   the app. `RequireAuth` sends a request without a session to `/sign-in` with
   the address it asked for; `GuestOnly` sends a signed-in account back to the
   app. Both wait for `isPending`, so neither flashes.
+- **Signing in opens over the page, not on one of its own.** The top bar's
+  `Sign in` pill opens `client/src/components/auth/auth-overlay.tsx`: a dialog
+  that draws the same window the `/sign-in` route draws, over the catalogue, so
+  the shelf, the search and the cards stay behind it and the route never
+  changes. There is no second form and no second layout. `auth-shell.tsx` takes
+  `overlay` (drop its ground so the page shows through) and `close` (a dismiss
+  control only the dialog wants); the `/sign-in` page passes neither. The form
+  itself is `auth-form.tsx`, shared with both routes, so the window and the pages
+  cannot drift. Switching between sign-in and sign-up changes the window in place
+  (`AuthMode`) rather than navigating. Escape, the scrim and the close control
+  all return the visitor to the page where they were. A card's prompt dialog
+  hands off to the same window, and the intent the visitor arrived with (a
+  favourite, a moodboard, submit) is still completed by the effect in `page.tsx`
+  once the session is live. Because no navigation happens, the catalogue
+  refetches behind the grid instead of dropping back to its skeleton.
+- `/sign-in` and `/sign-up` are one component,
+  `client/src/pages/auth/auth-page.tsx`, named by both routes, so a mode switch
+  keeps the same window instead of remounting one. The URL is updated with
+  `replace`, so switching modes is not a history entry. The window is **exactly
+  as tall as the form**: `auth-shell.tsx` measures the form stack and writes
+  `--auth-window-height`, so sign-up's extra field and an error line grow the
+  window rather than opening a scroll area inside the column, and the two sizes
+  are eased at `--duration-standard`. The form column only takes a scrollbar
+  when the viewport is shorter than the form (`data-clamped`).
 - The client is `client/src/lib/auth-client.ts`: `baseURL` is the page's own
   origin and `basePath` is `/api/auth`. Vite proxies `/api` to the Express
   server (`API_URL`, default `http://localhost:3001`), so the session cookie is
   first-party in development and production alike. Never call the auth server's
-  origin directly from the client.
+  origin directly from the client. The proxy sets `xfwd: true`, so
+  `x-forwarded-for` carries the client's address to the API: Better Auth buckets
+  rate limits per address and reads only that header, so a proxy that drops it
+  leaves every caller in one bucket and logs that the address is unresolved.
+  A deploy whose proxy appends to a chain of hops names them in
+  `TRUSTED_PROXIES`, and only then is a multi-hop header accepted.
 - The server config is `server/src/auth.ts`: email and password enabled, Google
   and GitHub enabled only when both halves of a credential pair are set,
   30-day sessions, rate limiting, and secure cookies in production.
@@ -455,6 +508,7 @@ Schema work:
 npm run auth:generate   # after adding a Better Auth plugin
 npm run db:generate     # write a migration from the schema diff
 npm run db:migrate      # apply it through DIRECT_URL
+npm run db:backfill-images  # resolve imageUrl / faviconUrl for rows not yet checked
 ```
 
 - `server/src/db/auth-schema.ts` is generated by Better Auth. Edit `auth.ts`

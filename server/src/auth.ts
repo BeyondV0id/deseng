@@ -18,6 +18,20 @@ export const trustedOrigins = [
   process.env.BETTER_AUTH_URL,
 ].filter((origin): origin is string => Boolean(origin))
 
+/**
+ * Hops that may appear in `x-forwarded-for` ahead of the client. Vite forwards
+ * one hop in development and needs none of this; a deploy behind a chain of
+ * proxies names them here (`TRUSTED_PROXIES=10.0.0.0/8,172.16.0.0/12`), which
+ * is what lets Better Auth strip the chain from the right and stop at the
+ * first address it did not see a proxy write. Left empty, only a single-hop
+ * header is trusted, which is the safe default: a caller cannot pick its own
+ * rate-limit bucket by sending a header of its own.
+ */
+const trustedProxies = (process.env.TRUSTED_PROXIES ?? '')
+  .split(',')
+  .map((entry) => entry.trim())
+  .filter(Boolean)
+
 /** A provider is only enabled when both halves of its pair are configured. */
 const socialProviders = {
   ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
@@ -53,9 +67,18 @@ export const auth = betterAuth({
     enabled: true,
     minPasswordLength: 8,
     maxPasswordLength: 128,
+    // An account is usable the moment it is created. There is no verification
+    // mail and no gate on sign-in; password reset is the only message we send.
+    requireEmailVerification: false,
     sendResetPassword: async ({ user: account, url }) => {
       await sendPasswordResetEmail({ to: account.email, name: account.name, url })
     },
+  },
+  emailVerification: {
+    // Off on purpose: no message is sent at sign-up or on demand, so no
+    // verification link can land in an inbox and no flow can depend on one.
+    sendOnSignUp: false,
+    autoSignInAfterVerification: false,
   },
   socialProviders,
   session: {
@@ -70,10 +93,12 @@ export const auth = betterAuth({
   advanced: {
     useSecureCookies: isProduction,
     // Rate limiting is per address, and the address arrives in a proxy header.
-    // Direct internet traffic must never reach this process, or a caller could
-    // choose its own bucket; the production deploy sits behind one proxy.
+    // Vite's dev proxy forwards it; so must whatever sits in front of the
+    // deploy. Direct internet traffic must never reach this process, or a
+    // caller could choose its own bucket.
     ipAddress: {
       ipAddressHeaders: ['x-forwarded-for', 'x-real-ip'],
+      ...(trustedProxies.length > 0 ? { trustedProxies } : {}),
     },
   },
 })

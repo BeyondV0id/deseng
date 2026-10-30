@@ -32,8 +32,13 @@ export default defineConfig(() => {
       // The API, and Better Auth under it, is a second process. Proxying keeps
       // every request same-origin, so the session cookie is first-party and no
       // CORS rule is needed in development.
+      //
+      // `xfwd` writes `x-forwarded-for` with the address the proxy saw. Better
+      // Auth buckets rate limits per client address and reads it from that
+      // header only, so without it every caller shares one bucket and the
+      // server logs that the address could not be resolved.
       proxy: {
-        '/api': { target: API_TARGET, changeOrigin: true },
+        '/api': { target: API_TARGET, changeOrigin: true, xfwd: true },
       },
       // Never move to another port silently. Vite injects the configured port
       // into the HMR client, so a server that quietly moves leaves the client
@@ -50,7 +55,7 @@ export default defineConfig(() => {
     },
     preview: {
       proxy: {
-        '/api': { target: API_TARGET, changeOrigin: true },
+        '/api': { target: API_TARGET, changeOrigin: true, xfwd: true },
       },
     },
   }

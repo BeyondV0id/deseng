@@ -3,6 +3,7 @@ import { asc, eq, sql } from 'drizzle-orm'
 import { db } from '../db/index.js'
 import { resource, userResource } from '../db/schema.js'
 import { serializeResource } from '../lib/serialize.js'
+import { resolveImages } from '../lib/metadata.js'
 import { readOptionalString, readString, readUrl } from '../lib/parse.js'
 import { loadSession, requireSession, sessionUser } from '../middleware/session.js'
 
@@ -69,7 +70,7 @@ catalogRouter.post('/catalog', loadSession, requireSession, async (request, resp
     .select({ nextRank: sql<number>`coalesce(max(${resource.rank}), 0) + 1` })
     .from(resource)
 
-  const [row] = await db
+  const [created] = await db
     .insert(resource)
     .values({
       id: crypto.randomUUID(),
@@ -82,5 +83,15 @@ catalogRouter.post('/catalog', loadSession, requireSession, async (request, resp
     })
     .returning()
 
-  response.status(201).json({ resource: serializeResource(row!) })
+  // The row exists before its picture is resolved, so a slow or unreachable
+  // site still leaves a usable entry. The resolver is time-boxed and only
+  // ever returns URLs; the browser loads the image from its own host.
+  const images = await resolveImages(url)
+  const [row] = await db
+    .update(resource)
+    .set({ ...images, imageCheckedAt: new Date() })
+    .where(eq(resource.id, created!.id))
+    .returning()
+
+  response.status(201).json({ resource: serializeResource(row ?? created!) })
 })

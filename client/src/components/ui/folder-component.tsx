@@ -52,8 +52,84 @@ const sizeScales = {
   lg: 1.35,
 } as const;
 
+type FolderTheme = {
+  backFill: string;
+  backInsetColor: string;
+  backInsetShadow: string;
+  flapFill: string;
+  flapFillOpacity: number;
+  flapStroke: string;
+  flapInsetColor: string;
+  cardFill: string;
+  cardStroke: string;
+  cardLineFill: string;
+  cardInsetColor: string;
+};
+
+/** An accent is any CSS colour, but the presets keep their hand-tuned tints. */
+type FolderColor = keyof typeof themes | (string & {});
+
+function parseHexColor(value: string): [number, number, number] | null {
+  const match = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(value.trim());
+  if (!match) return null;
+  const hex =
+    match[1].length === 3
+      ? match[1]
+          .split("")
+          .map((char) => char + char)
+          .join("")
+      : match[1];
+  return [
+    parseInt(hex.slice(0, 2), 16),
+    parseInt(hex.slice(2, 4), 16),
+    parseInt(hex.slice(4, 6), 16),
+  ];
+}
+
+function mixColor(
+  [r, g, b]: [number, number, number],
+  target: [number, number, number],
+  amount: number,
+): [number, number, number] {
+  const blend = (channel: number, towards: number) =>
+    Math.max(0, Math.min(255, Math.round(channel + (towards - channel) * amount)));
+  return [blend(r, target[0]), blend(g, target[1]), blend(b, target[2])];
+}
+
+function rgbColor([r, g, b]: [number, number, number]) {
+  return `rgb(${r} ${g} ${b})`;
+}
+
+function luminance([r, g, b]: [number, number, number]) {
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+
+/** The illustrated folder takes the colour the moodboard was given: the body
+ *  is the swatch itself, the flap a step darker and its hairline a step
+ *  lighter, so every swatch keeps the same depth as the presets. */
+function themeFromColor(color: string): FolderTheme {
+  const rgb = parseHexColor(color) ?? [139, 139, 146];
+  const light = luminance(rgb) > 0.72;
+
+  return {
+    backFill: rgbColor(rgb),
+    backInsetColor: "0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.35 0",
+    backInsetShadow: light
+      ? "inset 0 0 6px 2px rgba(0,0,0,0.16)"
+      : "inset 0 0 6px 2px rgba(255,255,255,0.35)",
+    flapFill: rgbColor(mixColor(rgb, [0, 0, 0], 0.18)),
+    flapFillOpacity: 0.45,
+    flapStroke: rgbColor(mixColor(rgb, [255, 255, 255], 0.35)),
+    flapInsetColor: "0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0",
+    cardFill: "#F1F1F1",
+    cardStroke: "#E0E0E0",
+    cardLineFill: "#D4D4D4",
+    cardInsetColor: "0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0",
+  };
+}
+
 type FolderComponentProps = Omit<React.ComponentProps<"div">, "color"> & {
-  color?: "black" | "white" | "blue";
+  color?: FolderColor;
   size?: "sm" | "md" | "lg";
 };
 
@@ -69,7 +145,8 @@ const FolderComponent = ({
   className,
   ...props
 }: FolderComponentProps) => {
-  const theme = themes[color] ?? themes.black;
+  const preset = themes[color as keyof typeof themes];
+  const theme: FolderTheme = preset ?? themeFromColor(color);
   const scale = sizeScales[size];
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -265,7 +342,7 @@ export default FolderComponent;
 export { FolderComponent as Folder };
 export type { FolderComponentProps };
 
-type Theme = (typeof themes)[keyof typeof themes];
+type Theme = FolderTheme;
 
 const Card = ({ id, theme }: { id: number; theme: Theme }) => {
   const filterId = `filter0_i_card_${id}`;

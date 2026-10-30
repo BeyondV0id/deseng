@@ -2,6 +2,8 @@ import { Bookmark, Plus, Setting4 } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
 import { Tooltip } from '@/components/arc/tooltip/tooltip'
 import { UserMenu } from '@/components/arc/user-menu/user-menu'
+import { AuthOverlay } from '@/components/auth/auth-overlay'
+import type { AuthMode } from '@/components/auth/auth-form'
 import { setSoundMuted, useSoundMuted } from '@/components/ui/sound'
 import type { LibraryMoodboard } from '@/lib/library-types'
 import type { ThemePreference } from '@/lib/theme'
@@ -70,6 +72,7 @@ function NavbarAccount({
 export function AppNavbar({
   query,
   onQueryChange,
+  onOpenTag,
   resources,
   onSubmitResource,
   selected,
@@ -77,7 +80,8 @@ export function AppNavbar({
   moodboards,
   onNewMoodboard,
   account,
-  onSignIn,
+  authMode,
+  onAuthModeChange,
   theme,
   onThemeChange,
   onSelectSettings,
@@ -86,6 +90,8 @@ export function AppNavbar({
 }: {
   query: string
   onQueryChange: (query: string) => void
+  /** Opens the page holding every entry filed under a tag the search names. */
+  onOpenTag: (category: string) => void
   /** The whole catalogue, so the search reaches past the view on screen. */
   resources: Resource[]
   /** Opens the submit dialog. */
@@ -99,8 +105,9 @@ export function AppNavbar({
   onNewMoodboard: () => void
   /** The signed-in name and email, or null while browsing without an account. */
   account: { name: string; email: string } | null
-  /** Sends a visitor to the sign-in page, keeping the page they were on. */
-  onSignIn: () => void
+  /** The sign-in panel's state: null while it is closed. */
+  authMode: AuthMode | null
+  onAuthModeChange: (mode: AuthMode | null) => void
   theme: ThemePreference
   onThemeChange: (theme: ThemePreference) => void
   onSelectSettings: () => void
@@ -122,6 +129,7 @@ export function AppNavbar({
         resources={resources}
         query={query}
         onQueryChange={onQueryChange}
+        onOpenTag={onOpenTag}
       />
     </div>}
     {/* Favourites, submit and the account close the bar as three circles, so
@@ -157,12 +165,17 @@ export function AppNavbar({
           onSelectSettings={onSelectSettings}
           onSignOut={onSignOut}
         />
-        : <Button
-          variant="secondary"
-          size="sm"
-          className="app-navbar-signin"
-          onClick={onSignIn}
-        >Sign in</Button>}
+        : <>
+          <Button
+            variant="secondary"
+            size="sm"
+            className="app-navbar-signin"
+            aria-haspopup="dialog"
+            aria-expanded={authMode !== null}
+            onClick={() => onAuthModeChange('sign-in')}
+          >Sign in</Button>
+          <AuthOverlay mode={authMode} onModeChange={onAuthModeChange} />
+        </>}
     </div>
   </div>
 }

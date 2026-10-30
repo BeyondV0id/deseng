@@ -13,10 +13,9 @@ type ResourceGridProps = {
 }
 
 export function ResourceGrid({ resources, moodboards, signedIn, onRequireAccount, onFavorite, onFile, onNewMoodboard }: ResourceGridProps) {
-  return <div className="resource-grid">{resources.map((resource, index) => <ResourceCard
+  return <div className="resource-grid">{resources.map(resource => <ResourceCard
     key={resource.id}
     resource={resource}
-    index={index}
     moodboards={moodboards}
     signedIn={signedIn}
     onRequireAccount={onRequireAccount}

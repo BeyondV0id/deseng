@@ -46,10 +46,9 @@ export function ResourceRail({ label, heading, onSeeMore, resources, ...handlers
       >See more <ArrowRight size={14} /></Button>}
     </div>
     <div className="rail-track">
-      {resources.map((resource, index) => <ResourceCard
+      {resources.map(resource => <ResourceCard
         key={resource.id}
         resource={resource}
-        index={index}
         {...handlers}
       />)}
     </div>

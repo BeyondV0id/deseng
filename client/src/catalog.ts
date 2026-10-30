@@ -2,61 +2,76 @@
  * The catalogue's taxonomy and the shape the API returns.
  *
  * The entries themselves live in Postgres and arrive from `GET /api/catalog`;
- * what stays here is the part the interface owns: the category list (name and
- * glyph), the eight shelves that group those categories, and the comparator
- * that reads the order the server sends.
+ * what stays here is the part the interface owns: the tag list, the eight
+ * shelves that group those tags, and the comparator that reads the order the
+ * server sends.
+ *
+ * A tag is a plain tool noun, one or two words, and it names the thing on the
+ * other end of the link rather than the feeling of browsing it: `Shaders`, not
+ * `WebGL & shaders`; `Fonts`, not `Typefaces`. Each shelf gathers the tags that
+ * answer the same question, and a tag belongs to exactly one shelf, so the
+ * sidebar count and the tag page can never disagree.
  */
 
-export type Category = { name: string; icon: string }
 export type Collection = { id: string; label: string; description: string; categories: string[] }
 
-export const categories: Category[] = [
-  { name: 'Web galleries', icon: 'sparkles' },
-  { name: 'App & flow libraries', icon: 'layout' },
-  { name: 'Interaction references', icon: 'motion' },
-  { name: 'Game & HUD UI', icon: 'board' },
-  { name: 'Brand & visual systems', icon: 'palette' },
-  { name: 'Moodboards & visual search', icon: 'images' },
-  { name: 'Essays & craft', icon: 'file-text' },
-  { name: 'Courses & books', icon: 'book' },
-  { name: 'Patterns & guidelines', icon: 'check' },
-  { name: 'Agent skills', icon: 'brain' },
-  { name: 'Interface canvases', icon: 'panels' },
-  { name: 'Motion design', icon: 'motion' },
-  { name: '3D & spatial', icon: 'cube' },
-  { name: 'Scanning & splats', icon: 'camera' },
-  { name: 'Node & generative', icon: 'nodes' },
-  { name: 'Digital fashion', icon: 'shirt' },
-  { name: 'Whiteboards', icon: 'board' },
-  { name: 'Frameworks & runtimes', icon: 'code' },
-  { name: 'Editors & terminals', icon: 'terminal' },
-  { name: 'Coding agents', icon: 'cpu' },
-  { name: 'MCP & agent context', icon: 'link' },
-  { name: 'Animation engines', icon: 'motion' },
-  { name: 'WebGL & shaders', icon: 'cube' },
-  { name: 'Deploy', icon: 'cloud' },
-  { name: 'Headless primitives', icon: 'blocks' },
-  { name: 'Component libraries', icon: 'blocks' },
-  { name: 'Micro-interactions', icon: 'sparkles' },
-  { name: 'Agent interfaces', icon: 'message' },
-  { name: 'Charts, tables & canvases', icon: 'chart' },
-  { name: 'Typefaces', icon: 'type' },
-  { name: 'Icons & emoji', icon: 'shapes' },
-  { name: 'Illustration', icon: 'paintbrush' },
-  { name: 'Color systems', icon: 'palette' },
-  { name: 'Textures, models & photo', icon: 'image' },
-  { name: 'Audio', icon: 'audio' },
-  { name: 'Motion & easing', icon: 'motion' },
-  { name: 'Color & contrast', icon: 'pipette' },
-  { name: 'CSS & type', icon: 'code' },
-  { name: 'SVG & images', icon: 'image' },
-  { name: 'Code & product shots', icon: 'camera' },
-  { name: 'Performance & accessibility', icon: 'gauge' },
-  { name: 'Launchers & productivity', icon: 'rocket' },
-  { name: 'Recording & video', icon: 'video' },
-  { name: 'Notes & organization', icon: 'folder' },
-  { name: 'AI assistants', icon: 'sparkles' },
-  { name: 'Browsers', icon: 'globe' },
+/** Every tag, in the order the shelves present them. */
+export const categories: string[] = [
+  // Observe: what shipped, recorded and archived.
+  'Site showcases',
+  'Product flows',
+  'Interaction demos',
+  'Identity systems',
+  'Visual search',
+  // Read: what changes how you build.
+  'Essays',
+  'Reading list',
+  'Guidelines',
+  // Create: where the work gets shaped.
+  'Design canvases',
+  'Motion editors',
+  '3D modeling',
+  '3D scanning',
+  'Node graphs',
+  'Garment design',
+  'Infinite canvas',
+  // Build: the stack underneath.
+  'Frameworks',
+  'Editors',
+  'Code agents',
+  'Agent context',
+  'Animation libraries',
+  'Shaders',
+  'Hosting',
+  // Components: behaviour and the moment after the click.
+  'Primitives',
+  'UI kits',
+  'Micro-motion',
+  'Agent UI',
+  'Data display',
+  // Assets: what you drop into the file.
+  'Fonts',
+  'Icons',
+  'Illustrations',
+  'Palettes',
+  '3D assets',
+  'Imagery',
+  'Sound',
+  // Tools: the small instruments.
+  'Easing',
+  'Color tools',
+  'CSS',
+  'SVG tools',
+  'Image tools',
+  'Code tools',
+  'Performance',
+  'Accessibility',
+  // Desk: the apps that stay open all day.
+  'Launchers',
+  'Screen recording',
+  'Notes',
+  'Assistants',
+  'Browsers',
 ]
 
 export const collections: Collection[] = [
@@ -64,49 +79,49 @@ export const collections: Collection[] = [
     id: 'Observe',
     label: 'Observe',
     description: 'Shipped sites, recorded flows and references to study before you open an editor.',
-    categories: ['Web galleries', 'App & flow libraries', 'Interaction references', 'Game & HUD UI', 'Brand & visual systems', 'Moodboards & visual search'],
+    categories: ['Site showcases', 'Product flows', 'Interaction demos', 'Identity systems', 'Visual search'],
   },
   {
     id: 'Read',
     label: 'Read',
     description: 'Essays, books and guidelines that change how you build.',
-    categories: ['Essays & craft', 'Courses & books', 'Patterns & guidelines', 'Agent skills'],
+    categories: ['Essays', 'Reading list', 'Guidelines'],
   },
   {
     id: 'Create',
     label: 'Create',
     description: 'Where the interface gets shaped, animated and captured.',
-    categories: ['Interface canvases', 'Motion design', '3D & spatial', 'Scanning & splats', 'Node & generative', 'Digital fashion', 'Whiteboards'],
+    categories: ['Design canvases', 'Motion editors', '3D modeling', '3D scanning', 'Node graphs', 'Garment design', 'Infinite canvas'],
   },
   {
     id: 'Build',
     label: 'Build',
     description: 'The stack that ships it, from the first component to the last deploy.',
-    categories: ['Frameworks & runtimes', 'Editors & terminals', 'Coding agents', 'MCP & agent context', 'Animation engines', 'WebGL & shaders', 'Deploy'],
+    categories: ['Frameworks', 'Editors', 'Code agents', 'Agent context', 'Animation libraries', 'Shaders', 'Hosting'],
   },
   {
     id: 'Components',
     label: 'Components',
     description: 'Behaviour, looks and the moment after the click.',
-    categories: ['Headless primitives', 'Component libraries', 'Micro-interactions', 'Agent interfaces', 'Charts, tables & canvases'],
+    categories: ['Primitives', 'UI kits', 'Micro-motion', 'Agent UI', 'Data display'],
   },
   {
     id: 'Assets',
     label: 'Assets',
     description: 'Type, icons, colour, imagery and sound.',
-    categories: ['Typefaces', 'Icons & emoji', 'Illustration', 'Color systems', 'Textures, models & photo', 'Audio'],
+    categories: ['Fonts', 'Icons', 'Illustrations', 'Palettes', '3D assets', 'Imagery', 'Sound'],
   },
   {
     id: 'Tools',
     label: 'Tools',
-    description: 'Small instruments for curves, contrast, CSS, SVG and speed.',
-    categories: ['Motion & easing', 'Color & contrast', 'CSS & type', 'SVG & images', 'Code & product shots', 'Performance & accessibility'],
+    description: 'Small instruments for easing, contrast, CSS, SVG, images and speed.',
+    categories: ['Easing', 'Color tools', 'CSS', 'SVG tools', 'Image tools', 'Code tools', 'Performance', 'Accessibility'],
   },
   {
     id: 'Desk',
     label: 'Desk',
     description: 'The native apps that stay open all day.',
-    categories: ['Launchers & productivity', 'Recording & video', 'Notes & organization', 'AI assistants', 'Browsers'],
+    categories: ['Launchers', 'Screen recording', 'Notes', 'Assistants', 'Browsers'],
   },
 ]
 
@@ -149,6 +164,12 @@ export type Resource = {
   category: string
   /** The catalogue's fixed position. The server sends it already sorted. */
   rank: number
+  /** The site's Open Graph image, resolved on the server; `null` when it has none. */
+  imageUrl: string | null
+  /** The site's favicon, the step between the preview and the initial. */
+  faviconUrl: string | null
+  imageWidth: number | null
+  imageHeight: number | null
   savedAt: string
   favorite: boolean
   moodboardId?: string

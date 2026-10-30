@@ -1,0 +1,206 @@
+/* The info view lives inside the shell's content column, so it has no ground,
+   masthead or footer of its own. The reading column is capped so the prose
+   keeps a line length, and every other surface is the page itself. */
+
+.info {
+  max-width: 920px;
+  min-width: 0;
+}
+
+/* -- At a glance ----------------------------------------------------------
+   One line, not a card: a large numeral with its label set small beside it.
+   8 shelves, 47 tags and 414 entries. The line wraps as a sentence on a
+   narrow screen, and the numbers keep the same step so the row stays even. */
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 26px;
+  margin: 14px 0 0;
+  color: var(--text-secondary);
+  font-size: clamp(13px, 1.1vw, 14.5px);
+  letter-spacing: -.01em;
+}
+
+.stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.statValue {
+  color: var(--text-primary);
+  font-size: clamp(28px, 3vw, 34px);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+/* -- Body ----------------------------------------------------------------- */
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 7vw, 76px);
+  padding-top: clamp(36px, 5vw, 56px);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.info h2,
+.principle h3 {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -.03em;
+}
+
+.info h2 {
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.15;
+}
+
+.introText {
+  display: grid;
+  gap: 16px;
+  max-width: 68ch;
+}
+
+.introText p,
+.principle p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: clamp(14px, 1.1vw, 15.5px);
+  line-height: 1.65;
+}
+
+/* -- The rules ------------------------------------------------------------ */
+
+.principleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 22px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--border);
+}
+
+.principle {
+  padding: 24px;
+  background: var(--card-surface);
+}
+
+.principleNumber {
+  display: block;
+  margin-bottom: 34px;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+
+.principle h3 {
+  margin-bottom: 8px;
+  font-size: 15px;
+  letter-spacing: -.015em;
+}
+
+/* -- Footer ---------------------------------------------------------------
+   The view closes on the same hairline the rest of the app uses. The mark and
+   the wordmark lead back to the library, one short line says what it is, and
+   the account's two shelves sit at the far edge with the year. */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 28px;
+  margin-top: clamp(56px, 8vw, 88px);
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.footerBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  text-decoration: none;
+}
+
+.footerBrand span {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footerBrand:hover span {
+  text-decoration: underline;
+  text-decoration-color: var(--text-tertiary);
+}
+
+.footerNote {
+  flex: 1 1 220px;
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.footerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-tertiary);
+  font-size: 12.5px;
+}
+
+.footerLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footerLink:hover {
+  color: var(--hover-foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--text-tertiary);
+}
+
+/* -- Narrow --------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .principleGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .principleNumber {
+    margin-bottom: 16px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footerNote {
+    flex: 0 0 auto;
+  }
+}

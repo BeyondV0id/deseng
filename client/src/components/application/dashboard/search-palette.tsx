@@ -4,7 +4,6 @@ import { AnimatePresence, animate, motion, useMotionValue, useReducedMotion } fr
 import { Search, X } from '@/components/icons'
 import { motionTokens } from '@/components/arc/lib/motion-tokens'
 import { useMediaQuery } from '@/hooks/use-media-query'
-import { resourceImages } from '@/lib/resource-images'
 import type { Resource } from '@/catalog'
 
 type SearchPaletteProps = {
@@ -12,6 +11,18 @@ type SearchPaletteProps = {
   resources: Resource[]
   query: string
   onQueryChange: (query: string) => void
+  /** Opens the page holding every entry filed under one tag. */
+  onOpenTag: (category: string) => void
+}
+
+/** What Enter does next: open a tag page, or open an entry's site. */
+type Hit = { kind: 'tag'; name: string; count: number } | { kind: 'resource'; resource: Resource }
+
+/** An exact tag name beats a tag that starts with the words, which beats one that merely contains them. */
+function tagRank(name: string, query: string) {
+  const value = name.toLocaleLowerCase()
+  if (value === query) return 0
+  return value.startsWith(query) ? 1 : 2
 }
 
 const PANEL_WIDTH = 600
@@ -34,22 +45,16 @@ function searchResources(resources: Resource[], query: string) {
     .map(entry => entry.resource)
 }
 
-/** The site's own mark, for the catalogue entries without a captured preview. */
-function faviconFor(url: string) {
-  try {
-    const host = new URL(url).hostname.replace(/^www\./, '')
-    return `https://www.google.com/s2/favicons?domain=${host}&sz=128`
-  } catch {
-    return ''
-  }
-}
-
+/** The entry's preview, then its mark, then its initial. Never a retry loop. */
 function ResultThumb({ resource }: { resource: Resource }) {
-  const [failed, setFailed] = useState(false)
-  const baked = resourceImages[resource.url]
-  const image = failed ? null : baked?.image ?? faviconFor(resource.url)
-  const isMark = baked?.source === 'favicon'
+  const [stage, setStage] = useState<'image' | 'favicon' | 'letter'>(() =>
+    resource.imageUrl ? 'image' : resource.faviconUrl ? 'favicon' : 'letter')
+  const image = stage === 'image' ? resource.imageUrl : stage === 'favicon' ? resource.faviconUrl : null
+  const isMark = stage === 'favicon'
   const initial = resource.name.replace(/[^a-z0-9]/gi, '').slice(0, 1).toUpperCase() || '•'
+
+  const fail = () => setStage(current =>
+    current === 'image' ? (resource.faviconUrl ? 'favicon' : 'letter') : 'letter')
 
   return <span className={['app-search-thumb', isMark ? 'is-mark' : ''].filter(Boolean).join(' ')}>
     {image ? <img
@@ -58,7 +63,7 @@ function ResultThumb({ resource }: { resource: Resource }) {
       loading="lazy"
       decoding="async"
       referrerPolicy="no-referrer"
-      onError={() => setFailed(true)}
+      onError={fail}
     /> : <span className="app-search-thumb-letter" aria-hidden="true">{initial}</span>}
   </span>
 }
@@ -109,7 +114,7 @@ function Panel({ width, reduced, children }: { width: number; reduced: boolean; 
   </motion.div>
 }
 
-export function SearchPalette({ resources, query, onQueryChange }: SearchPaletteProps) {
+export function SearchPalette({ resources, query, onQueryChange, onOpenTag }: SearchPaletteProps) {
   const reduced = useReducedMotion() ?? false
   // Below `lg` the bar gives the search the lane between the menu and the
   // account, and the pill is that lane. Above it the pill rests at its compact
@@ -160,15 +165,40 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
     return ranked.slice(0, 6)
   }, [resources])
 
-  const categories = useMemo(() => {
+  /** Every tag the catalogue files something under, with how much it holds. */
+  const tags = useMemo(() => {
     const counts = new Map<string, number>()
     resources.forEach(resource => counts.set(resource.category, (counts.get(resource.category) ?? 0) + 1))
     return [...counts.entries()]
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-      .slice(0, 14)
   }, [resources])
 
-  const visible = showingResults ? matches.slice(0, 16) : suggestions
+  const categories = useMemo(() => tags.slice(0, 14), [tags])
+
+  /**
+   * A tag the query names, with the size of the page behind it. A tag is a
+   * destination, not a filter: Enter opens the page that holds every entry
+   * filed under it, rather than the first entry that happens to match.
+   */
+  const tagMatches = useMemo(() => {
+    if (!normalized) return []
+    return tags
+      .filter(([category]) => category.toLocaleLowerCase().includes(normalized))
+      .sort(([a], [b]) => tagRank(a, normalized) - tagRank(b, normalized))
+      .slice(0, 3)
+      .map(([category, count]) => ({ name: category, count }))
+  }, [tags, normalized])
+
+  // Tags lead, then the entries. One list, so the arrow keys walk what the eye does.
+  const visible = useMemo<Hit[]>(() => {
+    if (!showingResults) return suggestions.map(resource => ({ kind: 'resource', resource }))
+    return [
+      ...tagMatches.map(tag => ({ kind: 'tag' as const, ...tag })),
+      ...matches.slice(0, 16).map(resource => ({ kind: 'resource' as const, resource })),
+    ]
+  }, [showingResults, suggestions, tagMatches, matches])
+
+  const totalHits = tagMatches.length + matches.length
   const active = activeIndex >= 0 && activeIndex < visible.length ? activeIndex : -1
 
   // A new query starts on its first result; an empty field has nothing highlighted.
@@ -195,8 +225,8 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
 
   const expand = useCallback(() => {
     setOpen(true)
-    setActiveIndex(normalized && matches.length > 0 ? 0 : -1)
-  }, [normalized, matches.length])
+    setActiveIndex(normalized && visible.length > 0 ? 0 : -1)
+  }, [normalized, visible.length])
 
   const close = useCallback((focusTrigger = true) => {
     setOpen(false)
@@ -223,6 +253,17 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
     window.open(resource.url, '_blank', 'noopener,noreferrer')
   }
 
+  /** A tag is the page of everything filed under it, so Enter travels inside the app. */
+  function openTag(category: string) {
+    close(false)
+    onOpenTag(category)
+  }
+
+  function chooseHit(hit: Hit) {
+    if (hit.kind === 'tag') openTag(hit.name)
+    else choose(hit.resource)
+  }
+
   function onKeyDown(event: ReactKeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Escape') {
       event.preventDefault()
@@ -239,10 +280,10 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
       return
     }
     if (event.key === 'Enter') {
-      const target = visible[active] ?? (showingResults ? visible[0] : undefined)
-      if (!target) return
+      const hit = visible[active] ?? (showingResults ? visible[0] : undefined)
+      if (!hit) return
       event.preventDefault()
-      choose(target)
+      chooseHit(hit)
     }
   }
 
@@ -311,7 +352,7 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
         aria-autocomplete="list"
         aria-expanded={open}
         aria-controls={open ? listId : undefined}
-        aria-activedescendant={active >= 0 ? `${listId}-${visible[active]?.id}` : undefined}
+        aria-activedescendant={active >= 0 ? `${listId}-${active}` : undefined}
         autoComplete="off"
         autoCorrect="off"
         spellCheck={false}
@@ -359,30 +400,50 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
             {showingResults
               ? <section className="app-search-section" aria-label="Search results">
                 <h2 className="app-search-heading">
-                  {matches.length === 0
+                  {totalHits === 0
                     ? `No matches for “${trimmed}”`
-                    : `${matches.length} ${matches.length === 1 ? 'match' : 'matches'}`}
+                    : `${totalHits} ${totalHits === 1 ? 'match' : 'matches'}`}
                 </h2>
                 {visible.length > 0
-                  ? <div ref={listRef} id={listId} className="app-search-strip app-search-cards" role="listbox" aria-label={`Results for ${trimmed}`} onPointerDown={holdFocus}>
-                    {visible.map((resource, index) => <button
-                      key={resource.id}
-                      type="button"
-                      role="option"
-                      aria-selected={index === active}
-                      data-search-card
-                      data-active={index === active || undefined}
-                      className="app-search-card"
-                      title={`${resource.name}, ${resource.category}`}
-                      onClick={() => choose(resource)}
-                    >
-                      <ResultThumb resource={resource} />
-                      <span className="app-search-card-name">{resource.name}</span>
-                      <span className="app-search-card-meta">{resource.category}</span>
-                    </button>)}
+                  ? <div ref={listRef} id={listId} className="app-search-hits" role="listbox" aria-label={`Results for ${trimmed}`} onPointerDown={holdFocus}>
+                    {tagMatches.length > 0 && <div className="app-search-tag-list">
+                      {tagMatches.map((tag, index) => <button
+                        key={tag.name}
+                        id={`${listId}-${index}`}
+                        type="button"
+                        role="option"
+                        aria-selected={index === active}
+                        aria-label={`${tag.name}, ${tag.count} ${tag.count === 1 ? 'entry' : 'entries'}`}
+                        data-search-card
+                        data-active={index === active || undefined}
+                        className="app-search-tag"
+                        onClick={() => openTag(tag.name)}
+                      >
+                        <span className="app-search-tag-name">{tag.name}</span>
+                        <span className="app-search-tag-meta">{`${tag.count} ${tag.count === 1 ? 'entry' : 'entries'}`}</span>
+                      </button>)}
+                    </div>}
+                    {matches.length > 0 && <div className="app-search-strip app-search-cards">
+                      {matches.slice(0, 16).map((resource, index) => <button
+                        key={resource.id}
+                        id={`${listId}-${tagMatches.length + index}`}
+                        type="button"
+                        role="option"
+                        aria-selected={tagMatches.length + index === active}
+                        data-search-card
+                        data-active={tagMatches.length + index === active || undefined}
+                        className="app-search-card"
+                        title={`${resource.name}, ${resource.category}`}
+                        onClick={() => choose(resource)}
+                      >
+                        <ResultThumb resource={resource} />
+                        <span className="app-search-card-name">{resource.name}</span>
+                        <span className="app-search-card-meta">{resource.category}</span>
+                      </button>)}
+                    </div>}
                   </div>
                   : <div className="app-search-empty">
-                    <p className="app-search-empty-title">Nothing in the catalogue matches that.</p>
+                    <p className="app-search-empty-title">Nothing in the library matches that.</p>
                     <p className="app-search-empty-hint">Try a tool, an interaction, a category or a colour.</p>
                   </div>}
               </section>
@@ -394,7 +455,8 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
                       key={category}
                       type="button"
                       className="app-search-pill"
-                      onClick={() => { onQueryChange(category); inputRef.current?.focus({ preventScroll: true }) }}
+                      title={`Every entry filed under ${category}`}
+                      onClick={() => chooseHit({ kind: 'tag', name: category, count })}
                     >{category}<span className="app-search-pill-count">{count}</span></button>)}
                   </div>
                 </>}
@@ -403,6 +465,7 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
                   <div ref={listRef} id={listId} className="app-search-strip app-search-cards" role="listbox" aria-label="Suggestions" onPointerDown={holdFocus}>
                     {suggestions.map((resource, index) => <button
                       key={resource.id}
+                      id={`${listId}-${index}`}
                       type="button"
                       role="option"
                       aria-selected={index === active}
@@ -422,7 +485,7 @@ export function SearchPalette({ resources, query, onQueryChange }: SearchPalette
           </motion.div>
         </AnimatePresence>
         <span className="sr-only" role="status" aria-live="polite">
-          {showingResults ? `${matches.length} ${matches.length === 1 ? 'result' : 'results'}` : ''}
+          {showingResults ? `${totalHits} ${totalHits === 1 ? 'result' : 'results'}` : ''}
         </span>
       </Panel>}
     </AnimatePresence>

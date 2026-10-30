@@ -2,6 +2,7 @@
 
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { useMemo, useState, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Bookmark, ChevronRight, Plus, X } from '@/components/icons'
 import { BrandMark } from '@/components/brand/brand-mark'
@@ -12,6 +13,7 @@ import { countLabel, countResources } from '@/lib/library-counts'
 import { useIcons, type IconComponent } from '@/lib/icon-context'
 import type { LibraryMoodboard } from '@/lib/library-types'
 import { navViewFor, type Resource } from '@/catalog'
+import { favorites, moodboardShelf, pathForView } from '@/lib/view-path'
 
 /**
  * The navigation below the column's breakpoint.
@@ -56,18 +58,9 @@ export function MobileMenu({
     label: string,
     Icon: IconComponent,
     options: { count?: number; trailing?: ReactNode; active?: boolean; onSelect?: () => void } = {},
-  ) => (
-    <button
-      key={view}
-      type="button"
-      className="app-menu-row"
-      data-active={(options.active ?? view === selected) || undefined}
-      onClick={() => {
-        if (options.onSelect) options.onSelect()
-        else onSelect(view)
-        setOpen(false)
-      }}
-    >
+  ) => {
+    const active = (options.active ?? view === selected) || undefined
+    const content = <>
       <Icon size={18} />
       <span className="app-menu-name">{label}</span>
       {options.count !== undefined && (
@@ -77,8 +70,34 @@ export function MobileMenu({
         <span className="sr-only">{`, ${countLabel(options.count)}`}</span>
       )}
       {options.trailing}
-    </button>
-  )
+    </>
+
+    // An action closes over the sheet; a destination is a link to the address
+    // its view lives at, so the row can be opened in a second tab.
+    const action = options.onSelect
+    if (action) {
+      return <button
+        key={view}
+        type="button"
+        className="app-menu-row"
+        data-active={active}
+        onClick={() => { action(); setOpen(false) }}
+      >{content}</button>
+    }
+
+    return <a
+      key={view}
+      className="app-menu-row"
+      href={pathForView(view)}
+      data-active={active}
+      onClick={(event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
+        event.preventDefault()
+        onSelect(view)
+        setOpen(false)
+      }}
+    >{content}</a>
+  }
 
   return <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
     <DialogPrimitive.Trigger asChild>
@@ -102,7 +121,7 @@ export function MobileMenu({
             <div className="app-menu-head">
               <span className="brand app-menu-brand">
                 <BrandMark />
-                <span className="app-sidebar-wordmark">desgnix<span className="brand-period">.</span></span>
+                <span className="app-sidebar-wordmark">desgnix</span>
               </span>
               <DialogPrimitive.Close className="app-menu-close" aria-label="Close menu">
                 <X size={18} />
@@ -123,7 +142,7 @@ export function MobileMenu({
               <div className="app-menu-group">
                 {/* The heading row opens the shelf, so its trailing slot is the
                     chevron rather than a count, the way the column does it. */}
-                {row('Moodboard', 'Moodboards', icons['folder-open'], {
+                {row(moodboardShelf, 'Moodboards', icons['folder-open'], {
                   trailing: <ChevronRight size={16} aria-hidden="true" className="app-menu-chevron" />,
                 })}
                 {moodboards.map(moodboard =>
@@ -133,14 +152,17 @@ export function MobileMenu({
               </div>
 
               <div className="app-menu-group">
-                {row('Favorites', 'Favourites', Bookmark, { onSelect: () => onSelect('Favorites') })}
+                {row(favorites, 'Favourites', Bookmark)}
                 {row('submit', 'Submit a resource', Plus, { onSelect: onSubmitResource })}
               </div>
             </nav>
 
             <div className="app-menu-foot">
-              <span>© 2026 desgnix</span>
-              <span>Resources for design engineers</span>
+              <span className="app-menu-foot-meta">
+                <span>© 2026 desgnix</span>
+                <Link to="/info" className="app-menu-foot-link" onClick={() => setOpen(false)}>Info</Link>
+              </span>
+              <span>Interface references, kept in one order</span>
             </div>
           </motion.div>
         </DialogPrimitive.Content>

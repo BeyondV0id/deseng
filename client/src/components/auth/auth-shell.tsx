@@ -1,55 +1,140 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/arc/button/button'
 import { BrandMark } from '@/components/brand/brand-mark'
-import GradientASCII from '@/components/ui/gradient-ascii/gradient-ascii'
+import cosmosArtwork from '@/bg/Found on Cosmos.jpg'
 import { ThemeSync } from '@/components/ui/theme-sync'
 import { api, type SocialProvider } from '@/lib/api'
+import { Elevated } from '@/lib/elevated'
 import { GitHubMark, GoogleMark } from './provider-mark'
 
 /**
- * The frame every auth page shares: a full-height panel of artwork beside the
- * form, the wordmark at the head of the form's column, and the alternate route
- * under it. The artwork is decoration, so it is hidden from a screen reader and
- * the form column is the only thing that has to work at phone width.
+ * The window is exactly as tall as the form it holds. The height is measured
+ * from the form stack and written back as a custom property, because a window
+ * that keeps one fixed height has to open a scroll area inside the form column
+ * the moment a mode adds a field or an error adds a line. Measuring means
+ * sign-up simply gets the taller window it needs, and the two heights can be
+ * eased between instead of snapped.
+ *
+ * It is measured before paint, so the first frame is already the right height;
+ * the transition only switches on one frame later, once the window has settled,
+ * and the column only takes a scrollbar when the viewport cap has been hit and
+ * the form genuinely cannot fit.
  */
-export function AuthShell({ title, description, children, footer }: {
+function useWindowHeight() {
+  const windowRef = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const bodyRef = useRef<HTMLDivElement>(null)
+  const measureRef = useRef<() => void>(() => {})
+  const [sized, setSized] = useState(false)
+
+  useLayoutEffect(() => {
+    const authWindow = windowRef.current
+    const panel = panelRef.current
+    const body = bodyRef.current
+    const page = authWindow?.parentElement
+    if (!authWindow || !panel || !body || !page) return
+
+    function measure() {
+      const panelStyle = getComputedStyle(panel!)
+      const frame = parseFloat(panelStyle.paddingTop) + parseFloat(panelStyle.paddingBottom)
+      // `ceil` stops a fractional line height from leaving a sliver of overflow.
+      const height = Math.ceil(body!.getBoundingClientRect().height + frame)
+      authWindow!.style.setProperty('--auth-window-height', `${height}px`)
+
+      const pageStyle = getComputedStyle(page!)
+      const gutter = parseFloat(pageStyle.paddingTop) + parseFloat(pageStyle.paddingBottom)
+      const available = page!.clientHeight - gutter
+      authWindow!.toggleAttribute('data-clamped', height > available + 0.5)
+    }
+
+    measureRef.current = measure
+    measure()
+
+    const observer = new ResizeObserver(measure)
+    observer.observe(body)
+    // The column's padding changes at the narrow breakpoints, and a window
+    // resize does not necessarily resize the stack inside it.
+    window.addEventListener('resize', measure)
+    // A frame callback is the clean way to wait until the first paint has
+    // happened. A tab that is never painted (backgrounded, or an occluded
+    // window) never runs one, and the transition is only a nicety, so a timer
+    // stands in for it.
+    const settle = requestAnimationFrame(() => setSized(true))
+    const timer = setTimeout(() => setSized(true), 300)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', measure)
+      cancelAnimationFrame(settle)
+      clearTimeout(timer)
+    }
+  }, [])
+
+  // A new mode swaps the form without the observer necessarily delivering in
+  // the same frame, so the window is measured again after every render.
+  useLayoutEffect(() => {
+    measureRef.current()
+  })
+
+  return { windowRef, panelRef, bodyRef, sized }
+}
+
+/**
+ * The frame every auth surface shares: the artwork, and the form in one rounded
+ * window carrying the same weight as a dialog. The artwork is decoration, so it
+ * is hidden from a screen reader and the window is the only thing that has to
+ * work at phone width.
+ *
+ * The same window is drawn two ways. On its own route it *is* the page, so it
+ * paints the ground and centres itself in the viewport. Opened from the top bar
+ * it is laid over the catalogue instead: `overlay` drops the ground, and the
+ * `close` control turns it into something a visitor can dismiss and come back
+ * from. The brand stops being a link there, because the page it would lead to is
+ * already behind the window.
+ */
+export function AuthShell({ title, description, children, footer, overlay = false, close }: {
   title: string
   /** One line under the heading. Omitted where the heading says enough. */
   description?: string
   children: ReactNode
   footer?: ReactNode
+  /** Laid over the page rather than being it. */
+  overlay?: boolean
+  /** The dismiss control, supplied by whoever opened the window. */
+  close?: ReactNode
 }) {
-  return <div className="auth-page">
+  const { windowRef, panelRef, bodyRef, sized } = useWindowHeight()
+  const brand = <>
+    <BrandMark />
+    <span className="auth-brand-name">desgnix</span>
+  </>
+
+  return <div className={overlay ? 'auth-page auth-page-overlay' : 'auth-page'}>
     <ThemeSync />
-    <aside className="auth-visual" aria-hidden="true">
-      <GradientASCII
-        colors={['#120a2e', '#5b21b6', '#a78bfa', '#efeaff']}
-        shape="pinch"
-        cellSize={20}
-        density={0.88}
-        glow={0.55}
-        softness={0.6}
-        scale={1.5}
-        speed={0.4}
-      />
-    </aside>
-    <div className="auth-panel">
-      <Link to="/" className="auth-brand" aria-label="desgnix home">
-        <BrandMark />
-        <span className="auth-brand-name">desgnix<span className="brand-period">.</span></span>
-      </Link>
-      <div className="auth-stage">
-        <main className="auth-card">
-          <header className="auth-intro">
-            <h1>{title}</h1>
-            {description ? <p>{description}</p> : null}
-          </header>
-          {children}
-        </main>
-        {footer ? <p className="auth-alternate">{footer}</p> : null}
+    <Elevated offset={4} className="auth-window" ref={windowRef} data-sized={sized ? 'true' : undefined}>
+      {close}
+      <aside className="auth-visual" aria-hidden="true">
+        <img className="auth-visual-image" src={cosmosArtwork} alt="" />
+      </aside>
+      <div className="auth-panel" ref={panelRef}>
+        <div className="auth-panel-body" ref={bodyRef}>
+          {overlay
+            ? <span className="auth-brand">{brand}</span>
+            : <Link to="/" className="auth-brand" aria-label="desgnix home">{brand}</Link>}
+          <div className="auth-stage">
+            <main className="auth-card">
+              <header className="auth-intro">
+                <h1>{title}</h1>
+                {description ? <p>{description}</p> : null}
+              </header>
+              {children}
+            </main>
+            {footer ? <p className="auth-alternate">{footer}</p> : null}
+          </div>
+        </div>
       </div>
-    </div>
+    </Elevated>
   </div>
 }
 

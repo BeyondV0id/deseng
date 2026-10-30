@@ -322,7 +322,7 @@ html {
 }
 
 /* The brand is a label, not a control: it does not answer the pointer with a
-   fill, a lift or a zoom. Only the wordmark's period keeps its colour. */
+   fill, a lift or a zoom. The orb turns by itself; the link stays inert. */
 
 .dark .app-sidebar-brand {
   color: var(--card-foreground);
@@ -339,20 +339,6 @@ html {
   font-weight: 500;
   letter-spacing: -0.35px;
   text-decoration: none;
-}
-
-.brand-mark {
-  display: grid;
-  width: 27px;
-  height: 27px;
-  place-items: center;
-  border-radius: 8px;
-  background: #242424;
-  color: white;
-}
-
-.brand-period {
-  color: inherit;
 }
 
 /* The foot of the column: one muted line, the year and what the library is. */
@@ -373,6 +359,25 @@ html {
   color: var(--text-tertiary);
   font-size: 12px;
   letter-spacing: -.01em;
+}
+
+/* Info is the column's one link out of the library. It is a label at rest and
+   takes a line under the text under the pointer, so it answers without
+   carrying a chip or a fill of its own. */
+.app-sidebar-info {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.app-sidebar-info:hover {
+  color: var(--hover-foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--text-tertiary);
 }
 
 /* A keycap reads as a small chip on whatever surface holds it, so it takes the
@@ -531,14 +536,22 @@ h2 {
 }
 
 .moodboard-collection-entry {
+  display: flex;
   width: 100%;
   height: 232px;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: flex-end;
-  gap: 0;
+  gap: 10px;
   color: var(--card-foreground);
   cursor: pointer;
   text-align: left;
+}
+
+.moodboard-collection-folder {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
 }
 
 .moodboard-collection-entry:focus-visible {
@@ -559,6 +572,13 @@ h2 {
 
 .moodboard-collection-name svg {
   flex: 0 0 auto;
+}
+
+.moodboard-collection-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .moodboard-collection-more {
@@ -607,257 +627,6 @@ h2 {
   overflow: hidden;
   border-radius: var(--radius-card-inset);
   background: #f4f3f1;
-}
-
-.preview-paper {
-  background: #f4f4f1;
-}
-
-.preview-ink {
-  background: #eceff0;
-}
-
-.preview-sand {
-  background: #f2eee9;
-}
-
-.preview-blue {
-  background: #eeeeee;
-}
-
-.preview-toolbar {
-  position: absolute;
-  top: 12px;
-  right: 13px;
-  left: 13px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.preview-mark {
-  display: grid;
-  width: 20px;
-  height: 20px;
-  place-items: center;
-  border: 1px solid rgb(30 30 30 / .12);
-  border-radius: 6px;
-  background: rgb(255 255 255 / .82);
-  color: #555a5e;
-  font-family: var(--font-mono);
-  font-size: 10px;
-}
-
-.preview-lines {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.preview-lines i {
-  width: 50px;
-  height: 3px;
-  border-radius: 5px;
-  background: rgb(55 57 59 / .14);
-}
-
-.preview-lines i:last-child {
-  width: 30px;
-  opacity: .7;
-}
-
-.preview-open {
-  display: grid;
-  width: 22px;
-  height: 22px;
-  place-items: center;
-  border: 1px solid rgb(30 30 30 / .1);
-  border-radius: 50%;
-  background: rgb(255 255 255 / .65);
-  color: #777;
-}
-
-.preview-editorial {
-  position: absolute;
-  inset: 49px 22px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.preview-editorial span {
-  width: 46%;
-  height: 8px;
-  border-radius: 2px;
-  background: #626769;
-}
-
-.preview-editorial i {
-  width: 72%;
-  height: 3px;
-  border-radius: 2px;
-  background: #b5b7b4;
-}
-
-.preview-editorial i:last-of-type {
-  width: 54%;
-}
-
-.preview-editorial b {
-  width: 24%;
-  height: 16px;
-  border-radius: 3px;
-  margin-top: 3px;
-  background: #dfe2df;
-}
-
-.preview-ui {
-  position: absolute;
-  inset: 46px 22px 0;
-  display: flex;
-  gap: 11px;
-  padding: 10px;
-  border: 1px solid rgb(37 42 45 / .1);
-  border-bottom: 0;
-  border-radius: 6px 6px 0 0;
-  background: rgb(255 255 255 / .72);
-}
-
-.preview-ui-nav {
-  width: 21%;
-  border-radius: 3px;
-  background: #e6e8e9;
-}
-
-.preview-ui-main {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 5px;
-  padding-top: 2px;
-}
-
-.preview-ui-main i {
-  height: 10px;
-  border-radius: 3px;
-  background: #eceeef;
-}
-
-.preview-ui-main i:first-child {
-  height: 17px;
-  background: #d8dcdf;
-}
-
-.preview-ui-button {
-  position: absolute;
-  right: 11px;
-  bottom: 10px;
-  width: 35px;
-  height: 11px;
-  border-radius: 3px;
-  background: #aab5be;
-}
-
-.preview-shape {
-  position: absolute;
-  inset: 45px 0 0;
-}
-
-.preview-shape span,
-.preview-shape i,
-.preview-shape b {
-  position: absolute;
-  display: block;
-  border: 1px solid rgb(55 63 72 / .25);
-  background: rgb(255 255 255 / .35);
-}
-
-.preview-shape span {
-  top: 2px;
-  left: calc(50% - 20px);
-  width: 42px;
-  height: 42px;
-  border-radius: 13px;
-  transform: rotate(30deg);
-}
-
-.preview-shape i {
-  top: 13px;
-  left: calc(50% - 9px);
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgb(177 188 192 / .32);
-}
-
-.preview-shape b {
-  top: 6px;
-  left: calc(50% + 11px);
-  width: 27px;
-  height: 27px;
-  border-radius: 8px;
-  transform: rotate(-16deg);
-}
-
-.preview-code {
-  position: absolute;
-  top: 49px;
-  left: 24px;
-  display: flex;
-  width: 70%;
-  flex-direction: column;
-  gap: 7px;
-  padding: 9px 12px;
-  border: 1px solid rgb(0 0 0 / .06);
-  border-radius: 5px;
-  background: rgb(255 255 255 / .58);
-  font-family: var(--font-mono);
-  font-size: 8px;
-}
-
-.preview-code i {
-  color: #83898d;
-  font-style: normal;
-}
-
-.preview-code span {
-  color: #4e5458;
-}
-
-.preview-code b {
-  width: 77%;
-  height: 3px;
-  border-radius: 2px;
-  background: #c6cacc;
-}
-
-.preview-code b:last-child {
-  width: 48%;
-}
-
-.preview-type {
-  position: absolute;
-  top: 44px;
-  left: 23px;
-  color: #44484a;
-  font-size: 34px;
-  font-weight: 450;
-  letter-spacing: -1px;
-}
-
-.preview-type span {
-  margin-left: 7px;
-  color: #8d9190;
-  font-size: 19px;
-}
-
-.preview-type i {
-  display: block;
-  color: #999c9c;
-  font-size: 8px;
-  font-style: normal;
-  letter-spacing: 0;
 }
 
 .card-content {
@@ -1533,12 +1302,6 @@ h2 {
   --text-tertiary: #858a93;
 }
 
-.dark .brand-mark {
-  background: #f2f2f2;
-  color: #151515;
-}
-
-.dark .brand-period,
 .dark h1 span {
   color: inherit;
 }
@@ -1590,10 +1353,6 @@ h2 {
 .dark .moodboard-library-empty {
   border-color: var(--card-border);
   background: var(--card-surface);
-}
-
-.dark .preview-blue {
-  background: #131313;
 }
 
 @layer base {
@@ -1711,6 +1470,23 @@ h2 {
   text-align: left;
 }
 
+/* The way up from a tag page: one arrow on the title's own left edge, so the
+   column reads as one page rather than a new level of chrome. The label lives
+   on the control's name, not on the page. */
+.resource-back {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: -4px 0 12px -9px;
+}
+
+@media (pointer: coarse) {
+  .resource-back {
+    width: 44px;
+    height: 44px;
+  }
+}
+
 /* The shelf's split, as Arc buttons. The strip sets the pill radius on Arc's
    own control token, so the chips keep the library's hover, press and focus
    behaviour instead of a local rule. It scrolls sideways on a phone rather
@@ -1747,13 +1523,6 @@ h2 {
   background: #f1f1f1;
 }
 
-.preview-paper,
-.preview-ink,
-.preview-sand,
-.preview-blue {
-  background: #f1f1f1;
-}
-
 .resource-card-content {
   gap: 8px;
   padding: 13px 16px 17px;
@@ -1780,11 +1549,7 @@ h2 {
 }
 
 .dark .resource-og-image,
-.dark .resource-preview,
-.dark .preview-paper,
-.dark .preview-ink,
-.dark .preview-sand,
-.dark .preview-blue {
+.dark .resource-preview {
   background: #131313;
 }
 
@@ -2181,6 +1946,7 @@ h2 {
   font-size: 15px;
   letter-spacing: -.01em;
   text-align: left;
+  text-decoration: none;
   transition:
     background-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard);
@@ -2249,6 +2015,26 @@ h2 {
   color: var(--text-tertiary);
   font-size: 11.5px;
   letter-spacing: -.01em;
+}
+
+.app-menu-foot-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-menu-foot-link {
+  color: inherit;
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.app-menu-foot-link:hover {
+  color: var(--hover-foreground);
+  text-decoration: underline;
+  text-decoration-color: currentColor;
 }
 
 /* The search is a lane through the middle of the bar. Its root is the width
@@ -2553,6 +2339,79 @@ h2 {
 
 .app-search-pill:hover .app-search-pill-count {
   color: var(--hover-foreground);
+}
+
+/* The hits are one column: the tags the query names, then the entries that
+   match it. A tag row is a destination, so it reads as a row rather than a
+   card and Enter takes it to the page holding everything filed under it. */
+.app-search-hits {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.app-search-tag-list {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-search-tag {
+  display: flex;
+  width: 100%;
+  min-height: 38px;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  border: 0;
+  border-radius: var(--radius-control);
+  padding: 0 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 13.5px;
+  letter-spacing: -.01em;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-search-tag-name {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.app-search-tag-meta {
+  flex: 0 0 auto;
+  color: var(--text-tertiary);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .app-search-tag:hover,
+  .app-search-tag:hover .app-search-tag-meta {
+    color: var(--hover-foreground);
+  }
+}
+
+/* The row under the arrow keys lifts its label, not its fill; the count stays
+   one step quieter than the name it belongs to. */
+.app-search-tag[data-active],
+.app-search-tag:focus-visible {
+  color: var(--text-primary);
+}
+
+.app-search-tag[data-active] .app-search-tag-meta,
+.app-search-tag:focus-visible .app-search-tag-meta {
+  color: var(--text-secondary);
 }
 
 .app-search-cards {
@@ -3068,12 +2927,6 @@ html.transitioning *::after {
   letter-spacing: -.03em;
 }
 
-.brand-mark {
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-}
-
 /* -- The top bar ---------------------------------------------------------- */
 .app-topbar {
   position: sticky;
@@ -3488,47 +3341,109 @@ html.transitioning *::after {
 }
 
 /* ------------------------------------------------------------------ auth --
-   The auth pages are a split room: the artwork fills one side and the form
-   owns the other, with the wordmark at the head of its column. The form column
-   is the only surface, so it takes the page ground and draws no card of its
-   own; the artwork is decoration and never carries a control. */
+   A sign-in is a window, not a page. The artwork keeps one half of it and the
+   form the other, both inside the same elevated panel, so the pair reads as one
+   object resting on the page ground. The artwork is decoration and never
+   carries a control; the form column is the only part that has to work at
+   phone width. */
 
 .auth-page {
+  /* The gutter is wider across than down: a card may come closer to the top
+     and bottom of the screen than to its sides, which gives a short window the
+     room the form needs without pushing the card off it. */
+  --auth-gutter: clamp(16px, 3vw, 32px);
+  --auth-gutter-y: clamp(14px, 2.4vh, 28px);
+
+  display: grid;
+  place-items: center;
   min-height: 100dvh;
+  padding: var(--auth-gutter-y) var(--auth-gutter);
+  background: var(--page-background);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* The window: a compact panel floating on the page, never the whole screen. It
+   is exactly as tall as the form it holds, so a mode that adds a field gets the
+   taller window it needs instead of a scroll area inside the form column. Both
+   halves are clipped to its corners, and the viewport cap is the only thing that
+   can make the column scroll. */
+.auth-window {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  background: var(--page-background);
+  width: min(100%, 860px);
+  height: min(var(--auth-window-height, 652px), calc(100dvh - 2 * var(--auth-gutter-y)));
+  overflow: hidden;
+  border-radius: var(--radius-surface);
   color: var(--text-primary);
 }
 
-/* The artwork is a live field of characters, so the panel only supplies the
-   ground it is drawn on. It is pure decoration: no copy and no control sits on
-   it. */
-.auth-visual {
-  position: relative;
-  min-height: 0;
-  overflow: hidden;
-  background: #08040f;
+/* The height changes twice in a sign-in's life: a mode switch adds or drops the
+   name field, and an error opens a line. Both are eased, so the window grows
+   into its new size rather than jumping. The transition starts a frame after the
+   first measurement, so the first paint is already the measured height. */
+.auth-window[data-sized] {
+  transition: height var(--duration-standard) var(--ease-standard);
 }
 
-/* The form column: wordmark at the head, then the form centred in what is
-   left, so a tall screen still reads as one column and nothing floats. */
+/* The artwork pane is flush: it fills its half of the window to every edge, and
+   the window's own radius and clipping give it its corners. */
+.auth-visual {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  /* The image's own field, so the pane never flashes a different blue while the
+     artwork decodes. */
+  background: #1432c6;
+}
+
+.auth-visual-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The form column: the wordmark at its head, then the form, centred in what is
+   left. The window owns the height, so the column never scrolls itself; it only
+   takes a scrollbar when the viewport cap has been hit. */
 .auth-panel {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
-  padding: 24px clamp(24px, 4.5vw, 64px) 32px;
-  background: var(--page-background);
+  align-items: center;
+  justify-content: safe center;
+  min-width: 0;
+  padding: var(--space-6);
+  overflow: hidden;
+}
+
+/* The one case the window cannot grow into: a screen too short for the form. */
+.auth-window[data-clamped] .auth-panel {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* The stack the window is measured from: the wordmark, the form, and the route
+   away, in one column with the window's own gap. It never shrinks to the window,
+   or the measurement would be the clipped height rather than the height the
+   form actually needs. */
+.auth-panel-body {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  width: 100%;
 }
 
 .auth-brand {
   display: inline-flex;
   flex: none;
   align-items: center;
-  align-self: flex-start;
+  align-self: center;
   gap: 8px;
   padding: 6px 8px;
-  margin: -6px -8px;
   border-radius: var(--radius-control);
   color: var(--text-primary);
   text-decoration: none;
@@ -3545,13 +3460,9 @@ html.transitioning *::after {
 
 .auth-stage {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  justify-content: center;
-  gap: 22px;
-  width: min(400px, 100%);
-  margin-inline: auto;
-  padding-block: 48px;
+  gap: 20px;
+  width: min(360px, 100%);
 }
 
 .auth-card {
@@ -3615,7 +3526,7 @@ html.transitioning *::after {
 
 .auth-intro h1 {
   margin: 0;
-  font-size: clamp(28px, 2.6vw, 34px);
+  font-size: var(--fs-display);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -3719,6 +3630,91 @@ html.transitioning *::after {
   text-underline-offset: 3px;
 }
 
+/* -- Signing in over the page ------------------------------------------------
+   The top bar opens the same window the /sign-in route draws, laid over the
+   catalogue instead of replacing it. The ground is dropped so the page stays
+   behind, a scrim separates the two, and the window is the only thing the
+   dialog holds focus on. */
+.auth-page-overlay {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: transparent;
+}
+
+.auth-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgb(0 0 0 / 0.24);
+  animation: auth-scrim-in var(--duration-fast) var(--ease-standard) both;
+}
+
+.dark .auth-scrim {
+  background: rgb(0 0 0 / 0.56);
+}
+
+@keyframes auth-scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The content is the whole screen; the window centres itself inside it exactly
+   as it does on its own route. */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 91;
+}
+
+.auth-overlay:focus {
+  outline: none;
+}
+
+/* The dismiss control is the one part of the window that belongs to the
+   overlay rather than the auth surface, so the /sign-in page keeps none. */
+.auth-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .auth-close:hover:not(:disabled) {
+    background: var(--hover);
+    color: var(--hover-foreground);
+  }
+}
+
+/* The mode switch is a button, not a link: it changes the window in place
+   instead of moving the page the visitor is on. It reads as a link. */
+.auth-switch-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .auth-switch-link:hover {
+    color: var(--text-primary);
+  }
+}
+
+
 .auth-note {
   display: flex;
   flex-direction: column;
@@ -3733,21 +3729,37 @@ html.transitioning *::after {
   line-height: 1.55;
 }
 
-/* Below the split the artwork becomes a band at the head of the page and the
-   form takes the rest, so the column never narrows past a usable field. */
+/* Below the split there is no artwork and no second column: the window is the
+   form alone, in one column, still sized to its content. */
 @media (max-width: 900px) {
-  .auth-page {
+  .auth-window {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 168px minmax(0, 1fr);
+    width: min(100%, 420px);
+  }
+
+  .auth-visual {
+    display: none;
   }
 
   .auth-panel {
-    min-height: 0;
-    padding: 20px clamp(20px, 5vw, 40px) 32px;
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
+/* On a phone the window keeps a margin and its corners, and trades the largest
+   radius for one that still reads as a window on a narrow screen. */
+@media (max-width: 420px) {
+  .auth-page {
+    --auth-gutter: 12px;
+    --auth-gutter-y: 12px;
   }
 
-  .auth-stage {
-    padding-block: 36px;
+  .auth-window {
+    border-radius: var(--radius-card);
+  }
+
+  .auth-panel {
+    padding: var(--space-4);
   }
 }
 
@@ -3762,8 +3774,7 @@ html.transitioning *::after {
   font-size: 14px;
 }
 
-.auth-boot svg,
-.catalog-loading-line svg {
+.auth-boot svg {
   animation: app-spin 900ms linear infinite;
 }
 
@@ -3771,56 +3782,71 @@ html.transitioning *::after {
   to { transform: rotate(360deg); }
 }
 
-/* The catalogue skeleton is the shape of a rail, so the first paint does not
-   jump when the cards arrive. */
-.catalog-loading {
-  padding-top: 8px;
-}
-
-.catalog-loading-line {
+/* -- The catalogue skeleton ------------------------------------------------
+   The loading page is the loaded page with the words left out. It wears the
+   same header, the same band and the same card, so every measurement here is
+   borrowed rather than guessed: `resource-rail` gives the band its gap,
+   `rail-track` gives the card its width, `resource-preview` gives the picture
+   its 3:2 box and `resource-card-caption` keeps its two lines. The page does
+   not move when the catalogue arrives, it only fills in. */
+/* The count's line is a skeleton too, so the page has one kind of placeholder
+   and no second line of copy to unlearn. It keeps the loaded line's box: the
+   paragraph's own type sets the height, and the bar is shorter than that, so
+   the description above and the bands below never move. The line still says
+   what it is doing, to a screen reader. */
+.resource-section-header .page-description-meta.is-loading {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 13px;
+  min-height: 1.5em;
 }
 
-.catalog-skeleton {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  margin-top: 20px;
+.catalog-skeleton-meta-line {
+  width: clamp(180px, 30vw, 440px);
+  height: .8em;
+  border-radius: var(--radius-pill);
+  background: var(--surface-muted);
 }
 
-.catalog-skeleton-rail {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* The band's header is as tall as the one control it holds, `See more`. The
+   skeleton has no button to hold, so it reserves the control's own height from
+   the token Arc sizes it with, and the 44px lane the band gives it on a
+   phone. */
+.catalog-skeleton-rail .rail-header {
+  min-height: var(--control-height-sm);
 }
 
 .catalog-skeleton-title {
-  width: 140px;
+  width: 132px;
   height: 14px;
   border-radius: var(--radius-pill);
   background: var(--surface-muted);
 }
 
-.catalog-skeleton-cards {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+/* The row is a preview of the band, not a second place to scroll. */
+.catalog-skeleton-track {
+  overflow: hidden;
 }
 
-.catalog-skeleton-card {
-  height: 168px;
-  border-radius: var(--radius-card);
+/* The picture borrows the real `.resource-preview` box: 3:2, and on a phone
+   the taller fallback mark. A band is as tall as its tallest card, and that
+   card is the fallback, so taking the same box keeps the band's own height
+   and the bands below it in place. */
+.catalog-skeleton-preview {
+  display: block;
+}
+
+/* The name keeps the loaded caption's 2.6em box; only its fill is drawn. The
+   card's own rule paints this element transparent, so the fill needs to be one
+   step more specific than `.resource-card .resource-name`. */
+.resource-card .resource-name.catalog-skeleton-name {
+  width: 72%;
+  border-radius: var(--radius-control);
   background: var(--surface-muted);
 }
 
 @media (max-width: 760px) {
-  .catalog-skeleton-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .catalog-skeleton-rail .rail-header {
+    min-height: 44px;
   }
 }
 
@@ -3844,8 +3870,12 @@ html.transitioning *::after {
     animation: auth-fade 160ms ease backwards;
   }
 
-  .auth-boot svg,
-  .catalog-loading-line svg {
+  /* The window still takes its measured height; it just arrives at it at once. */
+  .auth-window[data-sized] {
+    transition: none;
+  }
+
+  .auth-boot svg {
     animation: none;
   }
 }
@@ -3861,6 +3891,7 @@ html.transitioning *::after {
   .app-search-bar,
   .app-search-clear,
   .app-search-pill,
+  .app-search-tag,
   .app-search-card-name,
   .app-search-icon,
   .app-search-key {
