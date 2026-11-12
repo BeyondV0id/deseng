@@ -26,6 +26,7 @@ import type { LibraryMoodboard } from "@/lib/library-types";
 import { cn } from "@/lib/utils";
 import { pathForView } from "@/lib/view-path";
 import { NAV_SECTIONS } from "@/components/sidebar-preset/nav-data";
+import { SidebarAd } from "@/components/ads/sidebar-ad";
 
 /** A count is metadata, so it keeps one weight on every row; the colour marks
  *  the selected row and the pointer, and the numbers never outweigh a name. */
@@ -87,14 +88,14 @@ export function AppSidebar({
           <a
             className="brand app-sidebar-brand"
             href="/"
-            aria-label="desgnix home"
+            aria-label="Reference home"
             onClick={(event) => {
               event.preventDefault();
               onSelect("All resources");
             }}
           >
             <BrandMark />
-            <span className="app-sidebar-wordmark">desgnix</span>
+            <span className="app-sidebar-wordmark">Reference</span>
           </a>
         </div>
       </SidebarHeader>
@@ -179,6 +180,8 @@ export function AppSidebar({
       </SidebarContent>
 
       <SidebarFooter className="app-sidebar-footer">
+        {/* The column's ad. It sits above the copyright, on the rows' width. */}
+        <SidebarAd />
         <div className="app-sidebar-footer-row">
           <span className="app-sidebar-copyright">© 2026</span>
           <Link to="/info" className="app-sidebar-info">Info</Link>

@@ -48,7 +48,7 @@ Rule: every hover fill resolves to `--hover`; everything on it resolves to `--ho
 
 ## Layout
 - One page container. Sidebar fixed 240px column; content in `.main-shell`.
-- Resource grid: even CSS grid (`.resource-grid`, `grid-template-columns`). Every card same size (fixed 3:2 preview, caption clamped to 2 lines). Cards use the fixed `popularityOrder` in `src/catalog.ts` (a one-time October 2026 snapshot of GitHub stars + Tranco top-1M rank) through `comparePopularity`; name breaks ties. No runtime score, fetch or view tracking.
+- Resource grid: even CSS grid (`.resource-grid`, `grid-template-columns`). Every card same size (fixed 3:2 preview, caption clamped to 2 lines). Cards follow `rank`, which is a row's position in `server/src/db/catalog.json` (a one-time October 2026 snapshot of GitHub stars + Tranco top-1M rank) and reaches the client as server data; `comparePopularity` reads it, name breaks ties. No runtime score, fetch or view tracking.
 - Check 390, 768, 1024, 1440px. No sideways scroll. Touch targets ≥44px.
 - Dotted frame `--dotted-rule` on `.app-shell`: runs down sidebar column's right edge and along foot of top bar; they cross at the corner (logo sits in the cell they cut out). Top bar starts at `--sidebar-width`. Top bar sits on page ground (`--page-background`). On mobile, column is a drawer over content (no corner; rule runs full bar width).
 - Sidebar is flat: no radius, no shadow, no inset. Each row that opens a set (All resources, a shelf, a moodboard) counts its size at the right edge in the micro step; the Moodboards heading and Create moodboard do not.

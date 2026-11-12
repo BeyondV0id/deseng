@@ -1,4 +1,4 @@
-# desgnix — a hand-kept index of interface craft.
+# Reference, a hand-kept index of interface craft.
 # The catalogue, its shelves and the info page are public.
 
 User-agent: *

@@ -1,11 +1,14 @@
-import { Folder, Images, MoreHorizontal, Plus } from '@/components/icons'
+import { Folder, Images, Plus } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
 import { Folder as FolderIllustration } from '@/components/ui/folder-component'
 import type { LibraryMoodboard } from '@/lib/library-types'
+import { allResources as allResourcesView } from '@/lib/view-path'
 import type { Resource } from '@/catalog'
 import { ResourceList } from './resource-list'
 import { ExplorePage } from './explore-page'
 import { InfoContent } from './info-content'
+import { LegalContent, legalDocuments } from './legal-content'
+import { SponsorContent } from './sponsor-content'
 
 type DashboardProps = {
   view: string
@@ -25,6 +28,8 @@ type DashboardProps = {
   onOpenShelf: (view: string) => void
   onNewMoodboard: () => void
   onAddResource: () => void
+  onEditMoodboard: (moodboard: LibraryMoodboard) => void
+  onDeleteMoodboard: (moodboardId: string) => void
 }
 
 function MoodboardCollection({ moodboard, resources, onOpen }: {
@@ -56,7 +61,6 @@ function MoodboardCollection({ moodboard, resources, onOpen }: {
     <span className="moodboard-collection-name">
       <Folder size={17} style={{ color: moodboard.color }} aria-hidden="true" />
       <span className="moodboard-collection-label">{moodboard.name}</span>
-      <MoreHorizontal size={18} className="moodboard-collection-more" aria-hidden="true" />
     </span>
   </div>
 }
@@ -73,7 +77,7 @@ function MoodboardLibrary({ moodboards, resources, onOpenMoodboard, onNewMoodboa
 export function Dashboard(props: DashboardProps) {
   const {
     view, heading, subheading, resources, allResources, moodboards, query,
-    signedIn, onRequireAccount, onFavorite, onFile, onOpenMoodboard, onOpenCategory, onOpenShelf, onNewMoodboard, onAddResource,
+    signedIn, onRequireAccount, onFavorite, onFile, onOpenMoodboard, onOpenCategory, onOpenShelf, onNewMoodboard, onAddResource, onEditMoodboard, onDeleteMoodboard,
   } = props
 
   return <div className="dashboard-main">
@@ -82,10 +86,13 @@ export function Dashboard(props: DashboardProps) {
         ? <MoodboardLibrary moodboards={moodboards} resources={allResources} onOpenMoodboard={onOpenMoodboard} onNewMoodboard={onNewMoodboard} />
         : view === 'Info'
           ? <InfoContent total={allResources.length} />
+          : view === 'Sponsor'
+            ? <SponsorContent />
+            : legalDocuments[view]
+            ? <LegalContent page={legalDocuments[view]} />
           : view === 'All resources'
           ? <ExplorePage
             resources={resources}
-            total={allResources.length}
             query={query}
             moodboards={moodboards}
             signedIn={signedIn}
@@ -96,7 +103,7 @@ export function Dashboard(props: DashboardProps) {
             onOpenCategory={onOpenCategory}
           />
           : <>
-            <ResourceList heading={heading === 'All resources' ? 'The good side of the internet.' : heading} subheading={subheading} resources={resources} view={view} moodboards={moodboards} signedIn={signedIn} onRequireAccount={onRequireAccount} onFavorite={onFavorite} onFile={onFile} onNewMoodboard={onNewMoodboard} onAddResource={onAddResource} onOpenShelf={onOpenShelf} />
+            <ResourceList heading={heading === 'All resources' ? 'The good side of the internet.' : heading} subheading={subheading} resources={resources} view={view} moodboards={moodboards} signedIn={signedIn} onRequireAccount={onRequireAccount} onFavorite={onFavorite} onFile={onFile} onNewMoodboard={onNewMoodboard} onAddResource={onAddResource} onOpenShelf={onOpenShelf} onExplore={() => onOpenShelf(allResourcesView)} onEditMoodboard={moodboards.some(moodboard => moodboard.id === view) ? onEditMoodboard : undefined} onDeleteMoodboard={moodboards.some(moodboard => moodboard.id === view) ? () => onDeleteMoodboard(view) : undefined} />
           </>}
     </div>
   </div>

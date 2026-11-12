@@ -5,10 +5,15 @@ import { resource } from './schema.js'
 import { db, sql } from './index.js'
 
 /**
- * Seeds the shared catalogue from `catalog.json`, which was exported once from
- * the client's old `catalog.ts`. Re-running it is safe: an address already in
- * the table keeps its row and an edited description, and only its category is
- * re-synced from the file, because the tags are the app's own taxonomy.
+ * Seeds the shared catalogue from `catalog.json`, which is in rank order.
+ * Re-running is safe: a URL already in the table keeps its row, its rank and
+ * its edited description, and only its category is re-synced from the file,
+ * because the tags are the app's own taxonomy.
+ *
+ * A row's rank is its position in the file. A new entry is appended to the end
+ * of `resources`, but the table may already use ranks past that position, so a
+ * row that has to be inserted takes the first free rank instead and the file's
+ * order is kept among the rows added in the same run.
  *
  *   npm run db:seed
  */
@@ -22,10 +27,9 @@ type SeedEntry = {
 
 type SeedFile = {
   resources: SeedEntry[]
-  popularityOrder: string[]
 }
 
-/** The same normalisation the client uses, so ranks line up with old links. */
+/** The same normalisation the client uses. */
 function normaliseUrl(value: string) {
   return value.trim().replace(/\/+$/, '')
 }
@@ -33,37 +37,26 @@ function normaliseUrl(value: string) {
 const raw = await readFile(new URL('./catalog.json', import.meta.url), 'utf8')
 const seed = JSON.parse(raw) as SeedFile
 
-const rankByUrl = new Map(seed.popularityOrder.map((url, index) => [normaliseUrl(url), index]))
-const lastRank = seed.popularityOrder.length
-
 /**
- * A re-seed must not hand a new entry a rank the table already uses: the rows
- * seeded before it took fallback ranks past the captured order, so the first
+ * A re-seed must not hand a new entry a rank the table already uses. Rows
+ * seeded before this file took their ranks from an older order, so the first
  * free rank is one past the highest one live.
  */
 const [highest] = await db.select({ rank: max(resource.rank) }).from(resource)
-const firstFreeRank = Math.max(lastRank, Number(highest?.rank ?? -1) + 1)
+const firstFreeRank = Number(highest?.rank ?? -1) + 1
 
-/** After the captured order, entries keep the catalogue's own sequence. */
-const fallbackRank = new Map<string, number>()
-let nextFallback = firstFreeRank
-
-const rows = seed.resources.map((entry) => {
-  const url = normaliseUrl(entry.url)
-  const ranked = rankByUrl.get(url)
-  const rank = ranked ?? fallbackRank.get(url) ?? nextFallback++
-
-  return {
-    // Stable ids keep a re-seed from minting new rows for the same address.
-    id: `seed-${createHash('sha256').update(url).digest('hex').slice(0, 24)}`,
-    name: entry.name,
-    url,
-    description: entry.description,
-    category: entry.category,
-    rank,
-    submittedById: null,
-  }
-})
+const rows = seed.resources.map((entry, index) => ({
+  // Stable ids keep a re-seed from minting new rows for the same address.
+  id: `seed-${createHash('sha256').update(normaliseUrl(entry.url)).digest('hex').slice(0, 24)}`,
+  name: entry.name,
+  url: normaliseUrl(entry.url),
+  description: entry.description,
+  category: entry.category,
+  // On an empty table this is the file's own order; on a live one, an inserted
+  // row lands past every rank in use and keeps its place among its batch.
+  rank: firstFreeRank + index,
+  submittedById: null,
+}))
 
 const chunk = 100
 let written = 0
@@ -73,9 +66,8 @@ for (let index = 0; index < rows.length; index += chunk) {
   const result = await db
     .insert(resource)
     .values(batch)
-    // An address already in the table keeps its id and any edited description;
-    // only the category is re-synced, because the tag list is the app's own
-    // taxonomy and a stale tag would fall out of its shelf.
+    // An address already in the table keeps its id and rank; only the category
+    // is re-synced because the tag list is the app's own taxonomy.
     .onConflictDoUpdate({
       target: resource.url,
       set: { category: rawSql`excluded.category` },

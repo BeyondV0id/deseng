@@ -58,5 +58,5 @@ app.use(onError)
 
 const port = Number(process.env.PORT ?? 3001)
 app.listen(port, () => {
-  console.log(`desgnix api listening on http://localhost:${port}`)
+  console.log(`Reference API listening on http://localhost:${port}`)
 })

@@ -4,6 +4,7 @@ import { AnimatePresence, animate, motion, useMotionValue, useReducedMotion } fr
 import { Search, X } from '@/components/icons'
 import { motionTokens } from '@/components/arc/lib/motion-tokens'
 import { useMediaQuery } from '@/hooks/use-media-query'
+import { useScrollFade } from '@/hooks/use-scroll-fade'
 import type { Resource } from '@/catalog'
 
 type SearchPaletteProps = {
@@ -126,6 +127,16 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag }: Se
   const laneRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
   const returnFocus = useRef(false)
+  const resultsStrip = useScrollFade<HTMLDivElement>()
+  const pillStrip = useScrollFade<HTMLDivElement>()
+  const suggestionStrip = useScrollFade<HTMLDivElement>()
+
+  // The suggestions strip is also the keyboard list, so it answers to two refs.
+  const attachSuggestions = useCallback((node: HTMLDivElement | null) => {
+    listRef.current = node
+    return suggestionStrip.ref(node)
+  }, [suggestionStrip.ref])
+
   const [open, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
   const [laneWidth, setLaneWidth] = useState(PANEL_WIDTH)
@@ -423,7 +434,7 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag }: Se
                         <span className="app-search-tag-meta">{`${tag.count} ${tag.count === 1 ? 'entry' : 'entries'}`}</span>
                       </button>)}
                     </div>}
-                    {matches.length > 0 && <div className="app-search-strip app-search-cards">
+                    {matches.length > 0 && <div className="app-search-strip app-search-cards" ref={resultsStrip.ref} data-fade={resultsStrip.fade}>
                       {matches.slice(0, 16).map((resource, index) => <button
                         key={resource.id}
                         id={`${listId}-${tagMatches.length + index}`}
@@ -450,7 +461,7 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag }: Se
               : <section className="app-search-section" aria-label="Suggestions">
                 {categories.length > 0 && <>
                   <h2 className="app-search-heading">Browse</h2>
-                  <div className="app-search-strip app-search-pills" onPointerDown={holdFocus}>
+                  <div className="app-search-strip app-search-pills" ref={pillStrip.ref} data-fade={pillStrip.fade} onPointerDown={holdFocus}>
                     {categories.map(([category, count]) => <button
                       key={category}
                       type="button"
@@ -462,7 +473,7 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag }: Se
                 </>}
                 {suggestions.length > 0 && <>
                   <h2 className="app-search-heading">Suggestions</h2>
-                  <div ref={listRef} id={listId} className="app-search-strip app-search-cards" role="listbox" aria-label="Suggestions" onPointerDown={holdFocus}>
+                  <div ref={attachSuggestions} id={listId} className="app-search-strip app-search-cards" data-fade={suggestionStrip.fade} role="listbox" aria-label="Suggestions" onPointerDown={holdFocus}>
                     {suggestions.map((resource, index) => <button
                       key={resource.id}
                       id={`${listId}-${index}`}

@@ -11,4 +11,4 @@ export const authClient = createAuthClient({
   basePath: '/api/auth',
 })
 
-export const { signIn, signUp, signOut, useSession, requestPasswordReset, resetPassword, updateUser } = authClient
+export const { signIn, signUp, signOut, useSession, requestPasswordReset, resetPassword, updateUser, deleteUser, listAccounts } = authClient

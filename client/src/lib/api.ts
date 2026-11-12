@@ -1,5 +1,5 @@
 import type { Resource } from '@/catalog'
-import type { LibraryMoodboard } from '@/lib/library-types'
+import type { LibraryMoodboard, LibrarySubmission } from '@/lib/library-types'
 
 /**
  * The client's whole view of the API. One fetch helper, one error type, and
@@ -50,6 +50,9 @@ export const api = {
     }),
 
   moodboards: () => request<{ moodboards: LibraryMoodboard[] }>('/api/moodboards'),
+
+  /** This account's own submissions, newest first. */
+  submissions: () => request<{ submissions: LibrarySubmission[] }>('/api/submissions'),
 
   createMoodboard: (input: { name: string; color: string; description: string }) =>
     request<{ moodboard: LibraryMoodboard }>('/api/moodboards', {

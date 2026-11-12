@@ -1,24 +1,46 @@
-import { Link } from 'react-router-dom'
-import { BrandMark } from '@/components/brand/brand-mark'
+import { AccordionContent, AccordionGroup, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { categories, collections } from '@/catalog'
-import { favorites, moodboardShelf, pathForView } from '@/lib/view-path'
+import { LibraryFooter } from './library-footer'
+
 import styles from './info-content.module.css'
 
-export const infoDescription = 'What desgnix is, and how the entries are kept: a working shelf of interface references for design engineers.'
+export const infoDescription = 'Design resources, tools, and references, all in one place.'
 
-/** The three rules the library is actually edited by. */
-const principles = [
+const faqItems = [
   {
-    title: 'Chosen by hand',
-    body: 'Every entry is read before it is filed. There is no crawler and no leaderboard: a link earns its place because someone looked at the work and thought it was worth keeping.',
+    value: 'what-is-reference',
+    title: 'What is Reference?',
+    content: 'Reference is a small, hand-kept library of tools, references, and examples for making interfaces. It is for the moment when you know what you need to do, but do not know the name of the thing that can help. Open a card to go straight to the source.',
   },
   {
-    title: 'One fixed order',
-    body: 'Rank is captured once, from GitHub stars for repositories and traffic rank for sites. Saving a card, filing it or searching does not move the grid, so the library reads the same on every visit.',
+    value: 'how-to-use',
+    title: 'How do I use it?',
+    content: 'Search by name, tag, or purpose when you have a specific job in mind. You can also browse a shelf and open cards one by one. When you find something worth keeping, save it to your favourites or file it in a moodboard.',
   },
   {
-    title: 'Filed by purpose',
-    body: 'Tags say what a resource is for, not who made it. That is what makes the library findable by the job in front of you, rather than by a name you already had to know.',
+    value: 'need-an-account',
+    title: 'Do I need an account?',
+    content: 'No. You can browse every shelf, search the catalogue, and open any source without signing in. An account is only needed for favourites, moodboards, and submitting a resource.',
+  },
+  {
+    value: 'how-entries-are-chosen',
+    title: 'How are entries chosen?',
+    content: 'Every link is looked at before it is added. We keep things that are useful, clear, or unusually good at solving a particular problem. Paid placements are labelled and kept separate from the catalogue order.',
+  },
+  {
+    value: 'saving-and-order',
+    title: 'Does saving change the order?',
+    content: 'No. Each entry has a fixed position when it enters the catalogue. Saving, filing, and searching do not move the grid, so the same resource stays in the same place when you come back.',
+  },
+  {
+    value: 'how-tags-work',
+    title: 'How do tags work?',
+    content: 'Tags describe the job a resource helps with, such as fonts, image tools, or hosting. They are meant to help you find something by purpose instead of needing to know its name first.',
+  },
+  {
+    value: 'submit-a-resource',
+    title: 'How do I submit a resource?',
+    content: 'Sign in and choose Submit a resource from the top bar. Add the link, name, description, and tag that best explain what it does. We review every submission before it can appear in the shared catalogue, and a submission is not guaranteed to be accepted.',
   },
 ]
 
@@ -35,7 +57,7 @@ export function InfoContent({ total }: { total: number }) {
   return <section className={styles.info} aria-labelledby="info-title">
     <header className="resource-section-header">
       <div className="resource-section-title">
-        <h1 id="info-title">A library for the details that make an interface feel right.</h1>
+        <h1 id="info-title">Find What You Need.</h1>
         <p className="page-description">{infoDescription}</p>
       </div>
     </header>
@@ -54,43 +76,34 @@ export function InfoContent({ total }: { total: number }) {
 
     <div className={styles.body}>
       <section className={styles.intro} aria-labelledby="what-title">
-        <h2 id="what-title">What desgnix is</h2>
+        <h2 id="what-title">About Reference</h2>
         <div className={styles.introText}>
           <p>
-            It is a working shelf, not a feed. The library is made for the moment you know the
-            kind of thing you need but not its name: an empty state, a chart that has to read at a
-            glance, a typeface with a very particular voice, a shader that behaves under a thumb.
+            Reference is a small library of tools, references, and examples for making interfaces.
+            Search by the job you need to do, or browse a shelf when you do not know the name yet.
           </p>
           <p>
-            Each card opens the source. There is no article between you and the work, no score, and
-            no sponsored slot. If an entry stops being useful, it leaves.
+            Open a card to visit the source. Save a useful find or put it in a moodboard. Entries
+            are checked by hand. Paid placements are labelled and do not change the catalogue order.
+            If a link stops being useful, we take it out.
           </p>
         </div>
       </section>
 
-      <section className={styles.principles} aria-labelledby="kept-title">
-        <h2 id="kept-title">How the library is kept</h2>
-        <div className={styles.principleGrid}>
-          {principles.map((principle, index) => <article key={principle.title} className={styles.principle}>
-            <span className={styles.principleNumber} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <h3>{principle.title}</h3>
-            <p>{principle.body}</p>
-          </article>)}
-        </div>
+      <section className={styles.faq} aria-labelledby="faq-title">
+        <h2 id="faq-title">Questions</h2>
+        <AccordionGroup type="single" collapsible defaultValue="what-is-reference" className="mx-auto w-full max-w-4xl">
+          {faqItems.map((item, index) => (
+            <AccordionItem key={item.value} value={item.value} index={index}>
+              <AccordionTrigger>{item.title}</AccordionTrigger>
+              <AccordionContent>{item.content}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </AccordionGroup>
       </section>
+
     </div>
 
-    <footer className={styles.footer}>
-      <Link to={pathForView('All resources')} className={styles.footerBrand}>
-        <BrandMark />
-        <span>desgnix</span>
-      </Link>
-      <p className={styles.footerNote}>Links chosen by hand, filed by purpose.</p>
-      <div className={styles.footerMeta}>
-        <Link to={pathForView(favorites)} className={styles.footerLink}>Favourites</Link>
-        <Link to={pathForView(moodboardShelf)} className={styles.footerLink}>Moodboards</Link>
-        <span>© 2026</span>
-      </div>
-    </footer>
+    <LibraryFooter />
   </section>
 }

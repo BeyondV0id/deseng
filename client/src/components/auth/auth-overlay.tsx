@@ -16,15 +16,19 @@ import { AuthShell } from './auth-shell'
  * intent the visitor arrived with (a favourite, a moodboard, submit) is still
  * completed by the page once the session is live.
  */
-export function AuthOverlay({ mode, onModeChange }: {
+export function AuthOverlay({ mode, onModeChange, onDismiss }: {
   mode: AuthMode | null
   onModeChange: (mode: AuthMode | null) => void
+  onDismiss: () => void
 }) {
   const title = mode === 'sign-up' ? 'Create an account' : 'Sign in'
 
   return <DialogPrimitive.Root
     open={mode !== null}
-    onOpenChange={next => onModeChange(next ? (mode ?? 'sign-in') : null)}
+    onOpenChange={next => {
+      if (next) onModeChange(mode ?? 'sign-in')
+      else onDismiss()
+    }}
   >
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="auth-scrim" />
@@ -36,7 +40,7 @@ export function AuthOverlay({ mode, onModeChange }: {
         // not the window dismisses, which is the same gesture.
         onPointerDown={event => {
           if ((event.target as HTMLElement).closest('.auth-window')) return
-          onModeChange(null)
+          onDismiss()
         }}
       >
         {/* The window draws its own heading in the artwork's reading order; this
@@ -45,8 +49,9 @@ export function AuthOverlay({ mode, onModeChange }: {
         {mode !== null && <AuthShell
           overlay
           title={title}
+          description="Save and bookmark references, build moodboards, and submit resources. Your library stays with your account."
           close={<DialogPrimitive.Close asChild>
-            <Button variant="ghost" size="sm" className="auth-close" aria-label="Close sign in">
+            <Button variant="ghost" size="sm" className="auth-close" aria-label="Close sign in" onClick={onDismiss}>
               <X size={16} />
             </Button>
           </DialogPrimitive.Close>}

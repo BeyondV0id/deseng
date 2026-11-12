@@ -121,7 +121,7 @@ export function MobileMenu({
             <div className="app-menu-head">
               <span className="brand app-menu-brand">
                 <BrandMark />
-                <span className="app-sidebar-wordmark">desgnix</span>
+                <span className="app-sidebar-wordmark">Reference</span>
               </span>
               <DialogPrimitive.Close className="app-menu-close" aria-label="Close menu">
                 <X size={18} />
@@ -159,7 +159,7 @@ export function MobileMenu({
 
             <div className="app-menu-foot">
               <span className="app-menu-foot-meta">
-                <span>© 2026 desgnix</span>
+                <span>© 2026 Reference</span>
                 <Link to="/info" className="app-menu-foot-link" onClick={() => setOpen(false)}>Info</Link>
               </span>
               <span>Interface references, kept in one order</span>

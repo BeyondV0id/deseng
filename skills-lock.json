@@ -1,11 +1,155 @@
 {
   "version": 1,
   "skills": {
+    "alignment": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/alignment/SKILL.md",
+      "computedHash": "99cbcb05904f6aae413b63c84527471b186aa72de53b372377f584823654e977"
+    },
+    "audit": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/audit/SKILL.md",
+      "computedHash": "b0d1568cc6515dddf3c91fa2a19b9bdf3476dc4a6d2d6519e0e40bb7ba0950c0"
+    },
+    "avatar": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/avatar/SKILL.md",
+      "computedHash": "992a161e1a9c74e8a1c882028d4528c50a7376abe426eaa7a473c6fe4234902d"
+    },
     "baseline-ui": {
       "source": "ibelick/ui-skills",
       "sourceType": "github",
       "skillPath": "skills/baseline-ui/SKILL.md",
       "computedHash": "016ad266e4e3bfd058096bb032ae890b09973267a547048414a371f5b1b266de"
+    },
+    "bots": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/bots/SKILL.md",
+      "computedHash": "c81759e7b04054a66873f06a8a19c9f7164c2502965fa3b04f65e0cd4ff622da"
+    },
+    "color": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/color/SKILL.md",
+      "computedHash": "99e89e6a7c0fa86635271454bde8995c41b002e94ef0cb9415df217eed70be92"
+    },
+    "copy": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/copy/SKILL.md",
+      "computedHash": "7f8d55d4328de65a035df659ae98b08e0d396de3cf180fa43c71750364da511e"
+    },
+    "deconstruct": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/deconstruct/SKILL.md",
+      "computedHash": "2e7f92e8951f1df11a647a523bcdea8ea05f031d7dbd178b6e11c059642e807f"
+    },
+    "defaults": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/defaults/SKILL.md",
+      "computedHash": "3cccff946f01e7ae22aee95a999b2cfa4b133fde450874e1413c457b22d2f65c"
+    },
+    "fluid-functionalism": {
+      "source": "mickadesign/fluid-functionalism",
+      "sourceType": "github",
+      "skillPath": "skills/fluid-functionalism/SKILL.md",
+      "computedHash": "eb1017f82e6034d8163ceca7c0324be5534659919e576805a8312418f23af273"
+    },
+    "frames": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frames/SKILL.md",
+      "computedHash": "5db760fa4e2c369fee5b1dbe5abb2ca7f41da9360746aab02630f510ce8ab7ab"
+    },
+    "gather": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/gather/SKILL.md",
+      "computedHash": "207f09593a6a5c82386408fef744a941123016fb2137a7f984cf4d102b9cc64e"
+    },
+    "keyboard": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/keyboard/SKILL.md",
+      "computedHash": "74b299b6ed609ee14cb7081804cd2ee960d819bbb42a02bbe2b4f0f44d26d8b8"
+    },
+    "lab": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/lab/SKILL.md",
+      "computedHash": "f9f66097d5df0c0dddc2250eacf78d77df995b1c3184e85fd8b1051e30b18186"
+    },
+    "match": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/match/SKILL.md",
+      "computedHash": "90b0f5afa7eed0073a94319a926be18442d98c6e2159bb8edbb6428fb758905b"
+    },
+    "motion": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/motion/SKILL.md",
+      "computedHash": "bcad939be174811d5fcd8e2da8c2405a615457912628385ffb90abcf9cec60f0"
+    },
+    "prose": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/prose/SKILL.md",
+      "computedHash": "560e13cd450ba04320842dbcdb67306c487de6e4d0a688000f15f6ba3ac5d01c"
+    },
+    "prototype": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/prototype/SKILL.md",
+      "computedHash": "c8acf2953fdf675befb301d04028255293f142efa0f16cf802c8f0c7b278d643"
+    },
+    "restraint": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/restraint/SKILL.md",
+      "computedHash": "8f40334673406c70701d3a4e11ead840f87a9e7bc0237a6809a5ab6debb940e6"
+    },
+    "reuse": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/reuse/SKILL.md",
+      "computedHash": "3cc1150d214e1ab161d931e687188bc872ad3002b17deeafd14c3aa3665aa90c"
+    },
+    "rule": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/rule/SKILL.md",
+      "computedHash": "bc2dc21c93a31ef24259286bf32fa8675ff14237ebdf92464f2aef029410ca4f"
+    },
+    "scope": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/scope/SKILL.md",
+      "computedHash": "a8a01f1cbede88d3766362e120038c5a0f3045eb4787d87283d031632547c7f6"
+    },
+    "ship": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ship/SKILL.md",
+      "computedHash": "308dbd2f31490f12191e69cd56b02395d6da0b8252ab0d7ce18c7c13a68a475c"
+    },
+    "verify": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/verify/SKILL.md",
+      "computedHash": "3be330b5c345c3f5cdb3b2411cbc193c33833c46c5a1e66ba8a6364cb747ba98"
+    },
+    "viewports": {
+      "source": "raphaelsalaja/skills",
+      "sourceType": "github",
+      "skillPath": "skills/viewports/SKILL.md",
+      "computedHash": "eedc9a488d1a9b59f8fe4e0b8a307b727d8045c7e390c50d6792b044ad5daeec"
     }
   }
 }

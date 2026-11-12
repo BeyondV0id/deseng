@@ -287,7 +287,7 @@ Two deliberate exceptions:
   `.rail-track` walks sideways in rank order when nudged by a trackpad or a
   finger, but the band is only a preview: its one button, `See more`, opens the
   tag page, a `Category:<name>` view that `resource-list.tsx` renders as a plain
-  grid. The count lives in the page meta line, not in the band.
+  grid. The band carries no count; the Info page holds the library's totals.
   A tag page marks its parent shelf in the sidebar through `navViewFor`.
 - **A shelf is the grid, split by tags.** `resource-list.tsx` renders
   `ResourceSectionHeader` with the shelf's category pills (Arc `Button`, plus an
@@ -299,12 +299,31 @@ Two deliberate exceptions:
 - Every card is the same size: a fixed 3:2 preview and a caption box held to
   two lines, so no card is taller than its neighbour. The preview is
   `object-fit: cover`, so a wide screenshot is cropped at both sides.
-- Cards are ordered by one fixed list (`popularityOrder` in `client/src/catalog.ts`),
-  captured once from GitHub stars for repository entries and the Tranco
-  top-1M traffic rank for sites. It is data, not a score, and nothing
-  recalculates it at runtime. `comparePopularity` sorts by the list, then by
-  name, so saving, filing or submitting a card never makes a row jump. A
-  resource added later falls to the end.
+- Cards are ordered by one fixed list: the order of `resources` in
+  `server/src/db/catalog.json`, which is the rank the table holds. It was
+  captured once from GitHub stars for repository entries and the Tranco top-1M
+  traffic rank for sites, and it is data, not a score. Nothing recalculates it
+  at runtime. The API returns rows by rank and `comparePopularity` reads it, so
+  saving, filing or submitting a card never makes a row jump. A resource added
+  later is appended to the end of the file and falls to the end of the grid.
+- **A sideways track fades the edge that still hides something.**
+  `useScrollFade` (`client/src/hooks/use-scroll-fade.ts`) measures the track,
+  listens to its scroll, resize and content, and writes `data-fade`
+  (`none` / `start` / `end` / `both`); `client/src/index.css` turns that into
+  the mask for `.rail-track`, `.resource-tags` and `.app-search-strip`. A track
+  that fits keeps a clean left edge, and the hook's callback ref re-attaches
+  when a different strip mounts in the same slot.
+- **The Info page closes on Arc's footer.** `library-footer.tsx` renders the
+  `SiteFooter` block (`variant="columns"`) and hands its plain anchors to the
+  router from a capture handler, so an internal link does not reload the app
+  while a modified click still opens a tab. The footer is the library's own
+  line, `Interface references, kept in one order`, then three columns:
+  Browse (the shelves), Reference (Info, Submit, Sponsor, Contact, X) and Legal
+  (Privacy, Terms, Licence, Refunds, Cookies). The block's brand row and its
+  closing legal row are not drawn: the wordmark under the footer already says
+  the name, and the legal pages are a column. There is no Account column,
+  because the footer is the same page for a visitor without one. The oversized
+  wordmark under it is the page's closing edge, masked toward the bottom.
 - Check 390, 768, 1024, 1440px. No sideways scroll. Touch targets at least
   44px.
 
@@ -351,6 +370,22 @@ pick `variant="secondary"` for an inactive tab and `variant="primary"` for the
 active one, and let Arc own the hover, press, and focus behaviour. Do not add
 a `.resource-tag` style back. The tab strip sets `--radius-control` to the
 pill radius, so the rounded shape comes from the token, not from a rule.
+
+---
+
+### Sponsor placeholders
+
+House sponsor placeholders use a compact `+` mark and `Your Brand Here`, not
+decorative artwork. Corner sponsor notices stay compact and secondary to the
+catalogue.
+
+The house slot carries no `imageUrl` and no `logoUrl`, so the card has no
+artwork at all: the band and the foot's disc both draw the app's `+`, and the
+only words on it are `Your Brand Here`. A booked sponsor is the only thing that
+puts a picture on a sponsored card.
+
+Broken: `imageUrl: cosmosArtwork` or `logoUrl: sponsorLogo` on the house slot.
+Replacement: the `+` icon, at both the media band and the foot's mark.
 
 ---
 
@@ -407,17 +442,19 @@ pill radius, so the rounded shape comes from the token, not from a rule.
   Postgres by `npm run db:seed`. It is safe to re-run: a URL already in the
   table keeps its row and a corrected description, and only its tag is
   re-synced, because a tag outside the list would fall out of its shelf.
-- `rank` is the catalogue's one fixed order, captured once from GitHub stars
-  and the Tranco top-1M rank. Nothing recalculates it; a resource added later
-  takes the next rank and falls to the end. The API returns rows by rank, and
+- `rank` is the catalogue's one fixed order: a row's position in
+  `catalog.json`, captured once from GitHub stars and the Tranco top-1M rank.
+  Nothing recalculates it; a resource added later is appended to the file, takes
+  the next free rank and falls to the end. The API returns rows by rank, and
   `comparePopularity` reads it.
 - A catalogue entry carries a one-line description:
   `{ name, url, description }`. Search matches name, url, description and
   category, so the description is what makes an entry findable by purpose
   rather than by name.
 - The Explore page (`client/src/components/application/dashboard/explore-page.tsx`)
-  is the landing surface: a page heading and its count, then the catalogue as
-  one band per category, each band walking sideways and ending in `See more`.
+  is the landing surface: a page heading and one line about the shelf, then the
+  catalogue as one band per category, each band walking sideways and ending in
+  `See more`.
   The bands follow the taxonomy's order and a category with no entries has no
   band. The shelf pages are the ones that carry the category pills, and those
   filter in place; a tag page is the same grid with one tag already chosen.

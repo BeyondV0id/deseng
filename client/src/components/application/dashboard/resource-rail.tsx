@@ -1,6 +1,7 @@
 import { useId } from 'react'
-import { ArrowRight } from '@/components/icons'
+import { ArrowUpRight } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
+import { useScrollFade } from '@/hooks/use-scroll-fade'
 import type { Resource } from '@/catalog'
 import type { LibraryMoodboard } from '@/lib/library-types'
 import { ResourceCard } from './resource-card'
@@ -27,25 +28,32 @@ type ResourceRailProps = {
  *
  * The track is a row, not a grid, so a card keeps its size and the band never
  * wraps: a trackpad or a finger can nudge it sideways, and any card a keyboard
- * reaches scrolls into view. The row's one control is `See more`, which opens
- * the tag page holding every entry filed under it; the band itself is a
- * preview, not a second place to browse the whole category.
+ * reaches scrolls into view.
+ *
+ * The row's one destination is `See All`, which opens the tag page holding
+ * every entry filed under it; the band itself is a preview, not a second place
+ * to browse the whole category.
  */
 export function ResourceRail({ label, heading, onSeeMore, resources, ...handlers }: ResourceRailProps) {
   const headingId = useId()
+  const track = useScrollFade<HTMLDivElement>()
 
   return <section className="resource-rail" aria-labelledby={headingId}>
     <div className="rail-header">
-      <h2 className="rail-title" id={headingId}>{heading ?? label}</h2>
-      {onSeeMore && <Button
-        variant="ghost"
-        size="sm"
-        className="rail-see-more"
-        onClick={onSeeMore}
-        aria-label={`See every resource in ${label}`}
-      >See more <ArrowRight size={14} /></Button>}
+      <h3 className="rail-title" id={headingId}>
+        {heading ?? label}
+      </h3>
+      <div className="rail-actions">
+        {onSeeMore && <Button
+          variant="ghost"
+          size="sm"
+          className="rail-see-more"
+          onClick={onSeeMore}
+          aria-label={`See all resources in ${label}`}
+        >See All<ArrowUpRight size={14} aria-hidden="true" /></Button>}
+      </div>
     </div>
-    <div className="rail-track">
+    <div className="rail-track" ref={track.ref} data-fade={track.fade}>
       {resources.map(resource => <ResourceCard
         key={resource.id}
         resource={resource}

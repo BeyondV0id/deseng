@@ -1,20 +1,24 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState, type FormEvent } from 'react'
 import { flushSync } from 'react-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Plus } from '@/components/icons'
+import { Pen } from '@/components/icons'
+import { Avatar } from '@/components/arc/avatar/avatar'
 import { Button } from '@/components/arc/button/button'
 import { Dialog, DialogContent } from '@/components/arc/dialog/dialog'
 import { Input } from '@/components/arc/input/input'
 import { Textarea } from '@/components/arc/textarea/textarea'
-import { Select } from '@/components/arc/select/select'
 import { ColorPicker } from '@/components/arc/color-picker/color-picker'
+import { SubmitDialog } from '@/components/application/dashboard/submit-dialog'
 import { AppNavbar } from '@/components/application/dashboard/app-navbar'
 import { CatalogStatus } from '@/components/application/dashboard/catalog-status'
 import { Dashboard } from '@/components/application/dashboard/dashboard'
 import { LIBRARY_SUBHEADING } from '@/components/application/dashboard/library-copy'
 import { infoDescription } from '@/components/application/dashboard/info-content'
+import { sponsorDescription } from '@/components/application/dashboard/sponsor-content'
+import { legalDocuments } from '@/components/application/dashboard/legal-content'
 import { useAuth } from '@/components/auth/auth-provider'
 import type { AuthMode } from '@/components/auth/auth-form'
+import { GitHubMark, GoogleMark } from '@/components/auth/provider-mark'
 import { AppSidebar } from '@/components/sidebar-preset/app-sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { StripedPattern } from '@/components/ui/striped-pattern'
@@ -22,12 +26,12 @@ import { SidebarInsetTopbar } from '@/components/sidebar-app/inset-topbar'
 import type { Theme, ThemeSwitchVariant } from '@/components/arc/theme-switch/theme-switch'
 import { prefersDark, readStoredTheme, themeStorageKey, type ThemePreference } from '@/lib/theme'
 import type { LibraryMoodboard } from '@/lib/library-types'
-import { api, ApiError } from '@/lib/api'
+import { api, ApiError, type SocialProvider } from '@/lib/api'
 import { clearAuthIntent, setAuthIntent, takeAuthIntent, type AuthIntent } from '@/lib/auth-intent'
-import { usePageSeo } from '@/lib/seo'
-import { signOut, updateUser } from '@/lib/auth-client'
-import { categories, categoryFromView, categoryView, comparePopularity, collectionById, type Resource } from '@/catalog'
-import { allResources, favorites, infoView, moodboardShelf, pathForView, viewForPath } from '@/lib/view-path'
+import { usePageMeta } from '@/hooks/use-page-meta'
+import { deleteUser, listAccounts, signOut, updateUser } from '@/lib/auth-client'
+import { categoryFromView, categoryView, comparePopularity, collectionById, type Resource } from '@/catalog'
+import { allResources, favorites, infoView, legalViews, moodboardShelf, pathForView, sponsorView, viewForPath } from '@/lib/view-path'
 
 /** The view strings the app reasons in; their addresses live in `view-path`. */
 const views = { allResources, favorites, moodboardShelf, infoView }
@@ -35,7 +39,7 @@ const views = { allResources, favorites, moodboardShelf, infoView }
 /** Favourites and moodboards live on an account; a shelf, a tag and info do not. */
 function needsAccount(view: string) {
   if (view === views.favorites || view === views.moodboardShelf) return true
-  if (view === views.infoView) return false
+  if (view === views.infoView || view === sponsorView || legalViews.includes(view as typeof legalViews[number])) return false
   return view !== views.allResources
     && collectionById(view) === undefined
     && categoryFromView(view) === null
@@ -85,70 +89,6 @@ function failureMessage(error: unknown, fallback: string) {
   return error instanceof ApiError ? error.message : fallback
 }
 
-function AddResourceDialog({ open, onClose, onAdd }: {
-  open: boolean
-  onClose: () => void
-  onAdd: (item: Pick<Resource, 'name' | 'url' | 'description' | 'category'>) => Promise<string | null>
-}) {
-  const [error, setError] = useState('')
-  const [pending, setPending] = useState(false)
-  const [category, setCategory] = useState(categories[0])
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const form = event.currentTarget
-    setError('')
-    const data = new FormData(event.currentTarget)
-    const urlRaw = String(data.get('url') ?? '').trim()
-    let url: URL
-    try {
-      url = new URL(urlRaw.includes('://') ? urlRaw : `https://${urlRaw}`)
-    } catch {
-      setError('Enter a valid web address.')
-      return
-    }
-    const name = String(data.get('name') ?? '').trim()
-    if (!name) {
-      setError('Give this resource a name.')
-      return
-    }
-
-    setPending(true)
-    const failure = await onAdd({
-      name,
-      url: url.toString().replace(/\/$/, ''),
-      description: String(data.get('description') ?? '').trim() || 'A resource worth keeping close.',
-      category,
-    })
-    setPending(false)
-
-    if (failure) {
-      setError(failure)
-      return
-    }
-
-    form.reset()
-    setCategory(categories[0])
-    onClose()
-  }
-
-  return <Dialog open={open} onOpenChange={next => { if (!next) onClose() }}>
-    <DialogContent title="Add a resource" description="Save a useful link to the shared library.">
-      <form onSubmit={submit} className="dialog-form">
-        <Input label="Name" name="name" placeholder="e.g. Awwwards" autoFocus required />
-        <Input label="Link" name="url" type="text" inputMode="url" placeholder="example.com" required />
-        <Select label="Category" value={category} onValueChange={setCategory} options={categories.map(name => ({ value: name, label: name }))} />
-        <Textarea label="Note" description="Optional" name="description" placeholder="What makes it worth saving?" rows={3} />
-        {error && <p className="form-error" role="alert">{error}</p>}
-        <div className="dialog-actions">
-          <Button type="button" variant="secondary" size="sm" onClick={onClose} disabled={pending}>Cancel</Button>
-          <Button type="submit" variant="primary" size="sm" loading={pending}><Plus size={15} /> Add resource</Button>
-        </div>
-      </form>
-    </DialogContent>
-  </Dialog>
-}
-
 function MoodboardDialog({ open, onClose, onCreate }: {
   open: boolean
   onClose: () => void
@@ -196,49 +136,63 @@ function MoodboardDialog({ open, onClose, onCreate }: {
   </Dialog>
 }
 
-/**
- * What the visitor clicked, phrased as the account's benefit. The prompt is a
- * step on the page rather than a bounce: browsing stays where it was, and the
- * intent is finished when they come back signed in.
- */
-const accountPrompts = {
-  favorite: {
-    title: 'Keep this reference',
-    description: 'Favourites live on your account, so your shortlist follows you to every device. Browsing stays free.',
-  },
-  view: {
-    title: 'Your favourites and moodboards',
-    description: 'Create an account to keep a shortlist of references and group them into moodboards.',
-  },
-  moodboard: {
-    title: 'Build a moodboard',
-    description: 'A moodboard keeps the references for one project together, under your account.',
-  },
-  submit: {
-    title: 'Submit a resource',
-    description: 'A submission joins the shared library under your account, ready to file like any other entry.',
-  },
-} as const
-
-type AccountPromptReason = keyof typeof accountPrompts
-
-function SignInPrompt({ reason, onClose, onSignIn, onSignUp }: {
-  reason: AccountPromptReason | null
+function EditMoodboardDialog({ moodboard, onClose, onSave }: {
+  moodboard: LibraryMoodboard | null
   onClose: () => void
-  onSignIn: () => void
-  onSignUp: () => void
+  onSave: (id: string, input: { name: string; color: string; description: string }) => Promise<string | null>
 }) {
-  const copy = reason ? accountPrompts[reason] : accountPrompts.view
+  const [color, setColor] = useState(moodboard?.color ?? moodboardColors[0]!.color)
+  const [error, setError] = useState('')
+  const [pending, setPending] = useState(false)
 
-  return <Dialog open={reason !== null} onOpenChange={next => { if (!next) onClose() }}>
-    <DialogContent title={copy.title} description={copy.description}>
-      <div className="dialog-actions">
-        <Button variant="secondary" size="sm" onClick={onSignUp}>Create an account</Button>
-        <Button variant="primary" size="sm" onClick={onSignIn}>Sign in</Button>
-      </div>
+  useEffect(() => {
+    if (!moodboard) return
+    setColor(moodboard.color)
+    setError('')
+    setPending(false)
+  }, [moodboard])
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!moodboard) return
+    const data = new FormData(event.currentTarget)
+    const name = String(data.get('name') ?? '').trim()
+    if (!name) return
+
+    setError('')
+    setPending(true)
+    const failure = await onSave(moodboard.id, {
+      name,
+      color,
+      description: String(data.get('description') ?? '').trim(),
+    })
+    setPending(false)
+
+    if (failure) {
+      setError(failure)
+      return
+    }
+
+    onClose()
+  }
+
+  return <Dialog open={moodboard !== null} onOpenChange={next => { if (!next) onClose() }}>
+    <DialogContent title="Edit moodboard" description="Rename it, recolour it, or change what it collects.">
+      <form key={moodboard?.id} onSubmit={submit} className="dialog-form">
+        <Input label="Moodboard name" name="name" defaultValue={moodboard?.name} placeholder="Brand research" maxLength={40} autoFocus required />
+        <ColorPicker label="Moodboard colour" value={color} onValueChange={setColor} swatches={moodboardColors} />
+        <Textarea label="Description" description="Optional" name="description" defaultValue={moodboard?.description} placeholder="What are you collecting?" rows={3} />
+        {error && <p className="form-error" role="alert">{error}</p>}
+        <div className="dialog-actions">
+          <Button type="button" variant="secondary" size="sm" onClick={onClose} disabled={pending}>Cancel</Button>
+          <Button type="submit" variant="primary" size="sm" loading={pending}>Save changes</Button>
+        </div>
+      </form>
     </DialogContent>
   </Dialog>
 }
+
+const providerNames: Record<SocialProvider, string> = { google: 'Google', github: 'GitHub' }
 
 function SettingsDialog({ open, account, onClose }: {
   open: boolean
@@ -247,12 +201,49 @@ function SettingsDialog({ open, account, onClose }: {
 }) {
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
+  const [editingName, setEditingName] = useState(false)
+  const [name, setName] = useState(account.name)
+  const [deleteArmed, setDeleteArmed] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [providers, setProviders] = useState<SocialProvider[]>([])
+  const [connected, setConnected] = useState<SocialProvider[]>([])
   const { user } = useAuth()
+
+  useEffect(() => {
+    if (!open) return
+    setName(user?.name ?? account.name)
+    setEditingName(false)
+    setDeleteArmed(false)
+    setDeleting(false)
+    setError('')
+  }, [account.name, open, user?.name])
+
+  // The connections list is the account's own: a provider that is enabled on
+  // the server is only "Connected" when this account has actually linked it.
+  useEffect(() => {
+    if (!open) return
+    let live = true
+    Promise.all([api.config(), listAccounts()])
+      .then(([config, result]) => {
+        if (!live) return
+        setProviders(config.socialProviders)
+        setConnected((result.data ?? [])
+          .map(item => item.providerId)
+          .filter((id): id is SocialProvider => id === 'google' || id === 'github'))
+      })
+      .catch(() => {
+        if (!live) return
+        setProviders([])
+        setConnected([])
+      })
+    return () => { live = false }
+  }, [open])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const name = String(new FormData(event.currentTarget).get('name') ?? '').trim()
-    if (!name) {
+    if (!editingName) return
+    const nextName = name.trim()
+    if (!nextName) {
       setError('Your name cannot be empty.')
       return
     }
@@ -261,39 +252,127 @@ function SettingsDialog({ open, account, onClose }: {
     setPending(true)
 
     try {
-      const result = await updateUser({ name })
+      const result = await updateUser({ name: nextName })
       if (result.error) {
         setError(result.error.message || 'Could not save the change.')
         setPending(false)
         return
       }
       setPending(false)
-      onClose()
+      setEditingName(false)
     } catch {
       setError('The server could not be reached. Try again.')
       setPending(false)
     }
   }
 
+  async function removeAccount() {
+    setError('')
+    setDeleting(true)
+    try {
+      const result = await deleteUser()
+      if (result.error) {
+        setError(result.error.message || 'The account could not be deleted.')
+        setDeleting(false)
+        return
+      }
+      // The session is gone with the account, so start the app from a clean page.
+      window.location.assign('/')
+    } catch {
+      setError('The server could not be reached. Try again.')
+      setDeleting(false)
+    }
+  }
+
   return <Dialog open={open} onOpenChange={next => { if (!next) onClose() }}>
-    <DialogContent title="Settings" description="How your account appears across desgnix.">
-      <form onSubmit={submit} className="dialog-form">
-        <Input label="Name" name="name" defaultValue={user?.name ?? account.name} maxLength={60} autoFocus required />
-        <Input
-          label="Email"
-          name="email"
-          type="email"
-          defaultValue={account.email}
-          readOnly
-          disabled
-          description="The address you sign in with."
-        />
+    <DialogContent className="account-settings-dialog" title="Account settings" description="Your profile and sign-in methods.">
+      <form onSubmit={submit} className="account-settings-form">
+        <div className="account-settings-identity">
+          <Avatar name={account.name} size="lg" className="account-settings-avatar" />
+          <div>
+            <strong>{account.name}</strong>
+            <span>{account.email}</span>
+          </div>
+        </div>
+
+        <section className="account-settings-section" aria-labelledby="profile-settings-heading">
+          <h2 id="profile-settings-heading">Profile</h2>
+          <div className="account-settings-row">
+            <span className="account-settings-label">Name</span>
+            {editingName
+              ? <div className="account-settings-name-field"><Input label="Name" name="name" value={name} onChange={event => setName(event.currentTarget.value)} maxLength={60} autoFocus required /></div>
+              : <strong>{account.name}</strong>}
+            {editingName
+              ? <div className="account-settings-actions"><Button type="button" variant="secondary" size="sm" onClick={() => { setName(account.name); setEditingName(false) }} disabled={pending}>Cancel</Button><Button type="submit" variant="primary" size="sm" loading={pending}>Save</Button></div>
+              : <Button type="button" variant="secondary" size="sm" onClick={() => setEditingName(true)}><Pen size={15} /> Edit</Button>}
+          </div>
+          <div className="account-settings-row">
+            <span className="account-settings-label">Email</span>
+            <strong>{account.email}</strong>
+          </div>
+          <div className="account-settings-row">
+            <span className="account-settings-label">Delete account</span>
+            <span aria-hidden="true" />
+            {deleteArmed
+              ? <div className="account-settings-actions">
+                <Button type="button" variant="secondary" size="sm" onClick={() => setDeleteArmed(false)} disabled={deleting}>Cancel</Button>
+                <Button type="button" variant="danger" size="sm" onClick={() => { void removeAccount() }} loading={deleting}>Delete account</Button>
+              </div>
+              : <Button type="button" variant="secondary" size="sm" onClick={() => setDeleteArmed(true)}>Delete</Button>}
+          </div>
+          {deleteArmed && <p className="account-settings-warning" role="alert">This permanently deletes your account, favourites and moodboards.</p>}
+        </section>
+
+        <section className="account-settings-section" aria-labelledby="connections-settings-heading">
+          <h2 id="connections-settings-heading">Connections</h2>
+          <p>Manage how you log in to your account.</p>
+          {providers.length > 0
+            ? providers.map(provider => <div key={provider} className="account-settings-row account-settings-provider">
+              <span className="account-settings-provider-name">
+                {provider === 'google' ? <GoogleMark /> : <GitHubMark />}
+                {providerNames[provider]}
+              </span>
+              <span className="account-settings-status">{connected.includes(provider) ? 'Connected' : 'Not connected'}</span>
+            </div>)
+            : <div className="account-settings-row account-settings-provider">
+              <span className="account-settings-provider-name">Email and password</span>
+              <span className="account-settings-status">Connected</span>
+            </div>}
+        </section>
+
+        {error && <p className="form-error" role="alert">{error}</p>}
+      </form>
+    </DialogContent>
+  </Dialog>
+}
+
+function DeleteMoodboardDialog({ moodboard, onClose, onDelete }: {
+  moodboard: LibraryMoodboard | null
+  onClose: () => void
+  onDelete: (id: string) => Promise<string | null>
+}) {
+  const [error, setError] = useState('')
+  const [pending, setPending] = useState(false)
+
+  async function confirm() {
+    if (!moodboard) return
+    setError('')
+    setPending(true)
+    const failure = await onDelete(moodboard.id)
+    setPending(false)
+    if (failure) { setError(failure); return }
+    onClose()
+  }
+
+  return <Dialog open={moodboard !== null} onOpenChange={next => { if (!next && !pending) onClose() }}>
+    <DialogContent title="Delete moodboard?" description={moodboard ? `“${moodboard.name}” will be removed. Saved resources will stay in your library.` : undefined}>
+      <div className="dialog-form">
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="dialog-actions">
           <Button type="button" variant="secondary" size="sm" onClick={onClose} disabled={pending}>Cancel</Button>
-          <Button type="submit" variant="primary" size="sm" loading={pending}>Save changes</Button>
+          <Button type="button" variant="danger" size="sm" onClick={() => { void confirm() }} loading={pending}>Delete moodboard</Button>
         </div>
-      </form>
+      </div>
     </DialogContent>
   </Dialog>
 }
@@ -308,7 +387,8 @@ export default function Page() {
   const [addOpen, setAddOpen] = useState(false)
   const [moodboardOpen, setMoodboardOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
-  const [prompt, setPrompt] = useState<AccountPromptReason | null>(null)
+  const [moodboardToEdit, setMoodboardToEdit] = useState<LibraryMoodboard | null>(null)
+  const [moodboardForDeletion, setMoodboardForDeletion] = useState<LibraryMoodboard | null>(null)
   const [authMode, setAuthMode] = useState<AuthMode | null>(null)
   const [themePreference, setThemePreference] = useState<ThemePreference>(readStoredTheme)
   const [systemTheme, setSystemTheme] = useState<Theme>(getSystemTheme)
@@ -352,13 +432,12 @@ export default function Page() {
     if (addressView === null) navigate('/', { replace: true })
   }, [addressView, navigate])
 
-  // Favourites and moodboards belong to an account. An address for one opens
-  // the sign-in prompt instead of an empty grid, and keeps the view as the
-  // intent, so signing in finishes what the address asked for.
+  // Favourites and moodboards belong to an account. Open sign-up directly and
+  // keep the requested view as the intent, so auth returns to the right place.
   useEffect(() => {
     if (signedIn || !needsAccount(view)) return
     setAuthIntent({ kind: 'view', view })
-    setPrompt('view')
+    setAuthMode('sign-up')
     navigate('/', { replace: true })
   }, [view, signedIn, navigate])
 
@@ -399,6 +478,24 @@ export default function Page() {
     localStorage.setItem(themeStorageKey, themePreference)
   }, [theme, themePreference])
 
+  // A new address starts at the top of the page. Without this, a link at the
+  // foot of one page lands on the foot of the next, and the only thing the
+  // visitor sees after pressing it is the footer they pressed it in. An address
+  // that names a section still jumps to it, once the page holding it is drawn.
+  useEffect(() => {
+    const id = decodeURIComponent(location.hash.slice(1))
+    const frame = requestAnimationFrame(() => {
+      const target = id ? document.getElementById(id) : null
+      if (target) {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        target.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' })
+        return
+      }
+      window.scrollTo(0, 0)
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [location.pathname, location.search, location.hash, status])
+
   const changeTheme = (next: ThemePreference, variant: ThemeSwitchVariant) => {
     const applyTheme = () => flushSync(() => setThemePreference(next))
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !document.startViewTransition) {
@@ -433,9 +530,12 @@ export default function Page() {
     return matches.sort(comparePopularity)
   }, [resources, view, currentMoodboard, collection, tag, searchQuery])
 
-  const heading = view === 'Info' ? 'Info' : currentMoodboard?.name ?? (view === 'Favorites' ? 'Favourites' : tag ?? view)
+  const legalPage = legalDocuments[view]
+  const heading = legalPage?.title ?? (view === 'Info' ? 'Info' : view === 'Sponsor' ? 'Sponsor' : currentMoodboard?.name ?? (view === 'Favorites' ? 'Favourites' : tag ?? view))
   const subheading = view === 'All resources' ? 'A curated collection of interfaces, interactions and details that caught our eye.'
-    : view === 'Info' ? infoDescription
+      : view === 'Info' ? infoDescription
+        : view === 'Sponsor' ? sponsorDescription
+        : legalPage ? legalPage.summary
       : view === 'Favorites' ? 'A personal shortlist of ideas you want to revisit.'
         : tag ? `Every entry filed under this tag, in the library's order.`
           : collection ? collection.description
@@ -443,35 +543,30 @@ export default function Page() {
               : ''
 
   // The document names the view, so a shelf or a tag can be bookmarked and
-  // shared under its own title instead of the catalogue's.
+  // shared under its own title instead of the catalogue's. Account-only views
+  // stay out of the index; the shelves and the info page do not.
   const pageName = view === 'Favorites' ? 'Favourites' : view === 'Moodboard' ? 'Moodboards' : heading
-  usePageSeo({
-    title: view === 'All resources' ? 'desgnix · your design library' : `${pageName} · desgnix`,
-    description: view === 'Info' ? infoDescription : subheading || LIBRARY_SUBHEADING,
+  usePageMeta({
+    title: view === 'All resources' ? 'Reference · your design library' : `${pageName} · Reference`,
+    description: view === 'Info' ? infoDescription : view === 'Sponsor' ? sponsorDescription : subheading || LIBRARY_SUBHEADING,
     path: `${location.pathname}${location.search}`,
+    noindex: needsAccount(view),
   })
 
   /** Opens the sign-in panel over the page; the intent is already in sessionStorage. */
   function openAuth(mode: AuthMode) {
-    setPrompt(null)
     setAuthMode(mode)
   }
 
-  function requestAccount(reason: AccountPromptReason, intent?: AuthIntent) {
+  function requestAccount(intent?: AuthIntent) {
     if (intent) setAuthIntent(intent)
-    setPrompt(reason)
-  }
-
-  /** A prompt dismissed without signing in drops what it was collecting. */
-  function cancelPrompt() {
-    clearAuthIntent()
-    setPrompt(null)
+    openAuth('sign-up')
   }
 
   /** Favourites and moodboards belong to an account; the shelves do not. */
   function selectView(next: string) {
     if (!signedIn && (next === views.favorites || next === views.moodboardShelf)) {
-      requestAccount('view', { kind: 'view', view: next })
+      requestAccount({ kind: 'view', view: next })
       return
     }
     setView(next)
@@ -479,7 +574,7 @@ export default function Page() {
 
   function openNewMoodboard() {
     if (!signedIn) {
-      requestAccount('moodboard', { kind: 'new-moodboard' })
+      requestAccount({ kind: 'new-moodboard' })
       return
     }
     setMoodboardOpen(true)
@@ -487,7 +582,7 @@ export default function Page() {
 
   function openSubmit() {
     if (!signedIn) {
-      requestAccount('submit', { kind: 'submit' })
+      requestAccount({ kind: 'submit' })
       return
     }
     setAddOpen(true)
@@ -495,7 +590,7 @@ export default function Page() {
 
   /** A card's moodboard menu, reached before the visitor has an account. */
   function requestMoodboardAccess() {
-    requestAccount('moodboard')
+    requestAccount()
   }
 
   async function addResource(item: Pick<Resource, 'name' | 'url' | 'description' | 'category'>) {
@@ -519,13 +614,35 @@ export default function Page() {
     }
   }
 
+  async function editMoodboard(id: string, input: { name: string; color: string; description: string }) {
+    try {
+      const { moodboard } = await api.updateMoodboard(id, input)
+      setMoodboards(items => items.map(item => item.id === id ? moodboard : item))
+      return null
+    } catch (error) {
+      return failureMessage(error, 'Could not update the moodboard. Try again.')
+    }
+  }
+
+  async function deleteMoodboard(id: string) {
+    try {
+      await api.deleteMoodboard(id)
+      setMoodboards(items => items.filter(moodboard => moodboard.id !== id))
+      setResources(items => items.map(resource => resource.moodboardId === id ? { ...resource, moodboardId: undefined } : resource))
+      setView(views.moodboardShelf)
+      return null
+    } catch (error) {
+      return failureMessage(error, 'Could not delete the moodboard. Try again.')
+    }
+  }
+
   function patchResource(id: string, patch: Partial<Resource>) {
     setResources(items => items.map(item => item.id === id ? { ...item, ...patch } : item))
   }
 
   async function toggleFavorite(id: string) {
     if (!signedIn) {
-      requestAccount('favorite', { kind: 'favorite', resourceId: id })
+      requestAccount({ kind: 'favorite', resourceId: id })
       return
     }
     const current = resources.find(item => item.id === id)
@@ -596,6 +713,7 @@ export default function Page() {
             account={signedIn ? account : null}
             authMode={authMode}
             onAuthModeChange={setAuthMode}
+            onAuthDismiss={() => { clearAuthIntent(); setAuthMode(null) }}
             theme={themePreference}
             onThemeChange={next => changeTheme(next, 'rise')}
             onSelectSettings={() => setSettingsOpen(true)}
@@ -620,18 +738,21 @@ export default function Page() {
             onOpenShelf={selectView}
             onNewMoodboard={openNewMoodboard}
             onAddResource={openSubmit}
+            onEditMoodboard={setMoodboardToEdit}
+            onDeleteMoodboard={id => setMoodboardForDeletion(moodboards.find(moodboard => moodboard.id === id) ?? null)}
           />
           : <CatalogStatus status={status} onRetry={() => { void loadLibrary() }} />}
       </SidebarInset>
-      <AddResourceDialog open={addOpen} onClose={() => setAddOpen(false)} onAdd={addResource} />
-      <MoodboardDialog open={moodboardOpen} onClose={() => setMoodboardOpen(false)} onCreate={addMoodboard} />
-      <SettingsDialog open={settingsOpen} account={account} onClose={() => setSettingsOpen(false)} />
-      <SignInPrompt
-        reason={prompt}
-        onClose={cancelPrompt}
-        onSignIn={() => openAuth('sign-in')}
-        onSignUp={() => openAuth('sign-up')}
+      <SubmitDialog
+        open={addOpen}
+        onClose={() => setAddOpen(false)}
+        onSubmit={addResource}
+        onFeatured={() => selectView(sponsorView)}
       />
+      <MoodboardDialog open={moodboardOpen} onClose={() => setMoodboardOpen(false)} onCreate={addMoodboard} />
+      <EditMoodboardDialog moodboard={moodboardToEdit} onClose={() => setMoodboardToEdit(null)} onSave={editMoodboard} />
+      <SettingsDialog open={settingsOpen} account={account} onClose={() => setSettingsOpen(false)} />
+      <DeleteMoodboardDialog moodboard={moodboardForDeletion} onClose={() => setMoodboardForDeletion(null)} onDelete={deleteMoodboard} />
     </SidebarProvider>
   </div>
 }

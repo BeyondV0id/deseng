@@ -5,7 +5,6 @@
 @theme {
   --color-ink: #151515;
   --color-muted: #74777d;
-  --color-border: #e9e9e9;
   --color-subtle: #f7f7f7;
   --color-blue: #5b5b5b;
   --text-body-medium: 0.75rem;
@@ -137,6 +136,7 @@
   --lh-micro: 14px;
   --fs-micro-compact: 10px;
   --lh-micro-compact: 12px;
+  --fluid-accent: #6B97FF;
 }
 
 * {
@@ -169,10 +169,14 @@ button {
 
   ::selection {
     background: #dddddd;
+    background-color: color-mix(in oklab, var(--fluid-accent, #6B97FF) 25%, transparent);
   }
 
   a:focus-visible {
     border-radius: 2px;
+  }
+  .dark ::selection {
+    background-color: color-mix(in oklab, var(--fluid-accent, #6B97FF) 40%, transparent);
   }
 }
 
@@ -341,9 +345,12 @@ html {
   text-decoration: none;
 }
 
-/* The foot of the column: one muted line, the year and what the library is. */
+/* The foot of the column: one muted line, the year and what the library is.
+   The bottom inset is a hair, not a full step, so the ad and the copyright sit
+   on the column's bottom edge instead of floating above a strip of empty
+   column. The row's own 28px height already keeps the text off the edge. */
 .app-sidebar-footer {
-  padding: 8px 12px 12px;
+  padding: 8px 12px 4px;
   border: 0;
 }
 
@@ -565,6 +572,7 @@ h2 {
   width: 100%;
   min-width: 0;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -581,9 +589,145 @@ h2 {
   white-space: nowrap;
 }
 
-.moodboard-collection-more {
-  margin-left: auto;
-  color: var(--text-tertiary);
+.account-settings-dialog {
+  width: min(100% - 32px, 520px);
+}
+
+.account-settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.account-settings-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-muted);
+}
+
+.account-settings-avatar {
+  background: var(--avatar-fill);
+  color: white;
+}
+
+.account-settings-identity div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.account-settings-identity strong,
+.account-settings-row strong {
+  overflow: hidden;
+  color: var(--card-foreground);
+  font-size: 14px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-settings-identity span {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-settings-section {
+  display: flex;
+  flex-direction: column;
+  padding-top: 18px;
+  border-top: 1px solid var(--separator);
+}
+
+.account-settings-section h2 {
+  margin: 0 0 8px;
+  color: var(--card-foreground);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.account-settings-section > p {
+  margin: 0 0 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.account-settings-row {
+  display: grid;
+  min-height: 54px;
+  grid-template-columns: minmax(90px, 1fr) minmax(0, 1.4fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-settings-row + .account-settings-row {
+  border-top: 1px solid var(--separator);
+}
+
+.account-settings-label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.account-settings-row > strong {
+  text-align: right;
+}
+
+.account-settings-row .arc-input {
+  min-width: 0;
+}
+
+/* The row's label already names the field, so the input's own label is only
+   for assistive tech and the control keeps the value column. */
+.account-settings-name-field label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.account-settings-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.account-settings-warning {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.account-settings-provider {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.account-settings-provider-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--card-foreground);
+  font-size: 14px;
+}
+
+.account-settings-status {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  .account-settings-row { grid-template-columns: minmax(74px, 1fr) minmax(0, 1.25fr) auto; gap: 8px; }
+  .account-settings-row > strong { font-size: 13px; }
+  .account-settings-actions { gap: 4px; }
 }
 
 .moodboard-library-empty {
@@ -757,7 +901,6 @@ h2 {
   border-radius: 0;
   background: transparent;
 }
-
 
 @media (min-width: 1550px) {
   .resource-grid {
@@ -1056,6 +1199,30 @@ h2 {
   font-size: 10px;
 }
 
+.moodboard-menu {
+  width: 200px;
+  min-width: 200px;
+}
+
+.moodboard-menu button {
+  min-height: 38px;
+  font-size: 13px;
+}
+
+.moodboard-menu button.is-danger {
+  color: var(--danger);
+}
+
+.moodboard-menu button.is-danger svg {
+  color: var(--danger);
+}
+
+.moodboard-menu button.is-danger:hover,
+.moodboard-menu button.is-danger:focus-visible {
+  background: color-mix(in oklab, var(--danger) 9%, var(--surface));
+  color: var(--danger);
+}
+
 .dark .resource-card .resource-name {
   color: var(--card-foreground);
 }
@@ -1120,6 +1287,7 @@ h2 {
   --color-sidebar-accent: var(--surface-muted);
   --color-sidebar-accent-foreground: var(--card-foreground);
   --color-ring: var(--focus-ring);
+  --color-border: var(--border);
   --overlay: var(--overlay);
   --color-shell-fg-muted: var(--shell-fg-muted);
   --color-shell-fg-faint: var(--shell-fg-faint);
@@ -1203,6 +1371,8 @@ h2 {
   --fs-display-compact: var(--fs-display-compact);
   --lh-display: var(--lh-display);
   --fs-display: var(--fs-display);
+  --focus-ring: var(--focus-ring);
+  --color-fluid-accent: var(--fluid-accent);
   @keyframes sf-reveal-start {
   from {
     --sf-start: 1;
@@ -1418,6 +1588,57 @@ h2 {
   align-items: flex-start;
   margin: 0 0 28px;
   text-align: left;
+}
+
+.resource-section-heading-row {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.resource-section-title {
+  min-width: 0;
+}
+
+.resource-section-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.resource-section-actions .moodboard-menu-trigger {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+}
+
+.resource-section-actions .moodboard-menu-trigger:hover,
+.resource-section-actions .moodboard-menu-trigger[data-state="open"] {
+  background: var(--hover);
+  color: var(--hover-foreground);
+}
+
+.resource-section-actions .moodboard-menu-trigger:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .resource-section-actions .moodboard-menu-trigger {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 .resource-section-header h1 {
@@ -2765,6 +2986,13 @@ html[data-theme-motion="rise"]::view-transition-new(root) {
   --shadow-6: inset 0 1px 0 0 var(--dm-hi-high), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(0, 0, 0, 0.18), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop);
   --shadow-7: inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(0, 0, 0, 0.20), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(--dm-drop);
   --shadow-8: inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(0, 0, 0, 0.22), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(--dm-drop), 0 96px 96px -48px var(--dm-drop);
+  --hover: rgb(255 255 255 / 0.06);
+  --active: rgb(255 255 255 / 0.1);
+  --selected: #525252;
+  --destructive-light: #450A0A;
+  --overlay: 255 255 255;
+  --tint: rgb(255 255 255 / 0.25);
+  --tint-hover: rgb(255 255 255 / 0.2);
 }
 
 html.transitioning *,
@@ -3122,7 +3350,7 @@ html.transitioning *::after {
   place-items: center;
   padding: 0;
   border: 0;
-  border-radius: 50%;
+  border-radius: 0;
   background: transparent;
   color: var(--text-tertiary);
   cursor: pointer;
@@ -3133,8 +3361,8 @@ html.transitioning *::after {
 
 .resource-card-tool:hover,
 .resource-card-tool[data-state="open"] {
-  background: var(--hover);
-  color: var(--hover-foreground);
+  background: transparent;
+  color: var(--text-primary);
 }
 
 /* A finger has no hover, so the controls are simply there. */
@@ -3268,7 +3496,158 @@ html.transitioning *::after {
 .resource-rows {
   display: flex;
   flex-direction: column;
-  gap: 44px;
+  gap: 36px;
+}
+
+.latest-additions {
+  min-width: 0;
+  margin-bottom: 36px;
+}
+
+/* A phone reads the stack one band at a time, so the same gap that separates
+   two bands on a desktop would read as a hole between them here. The bands come
+   closer together than the blocks above them (`New Additions`, the paid band),
+   because a band already carries its own header line. */
+@media (max-width: 760px) {
+  .resource-rows {
+    gap: 24px;
+  }
+
+  .latest-additions {
+    margin-bottom: 24px;
+  }
+
+  .resource-section-header {
+    margin-bottom: 20px;
+  }
+}
+
+.discovery-section-header {
+  margin: 0 0 14px;
+}
+
+.discovery-section-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.latest-additions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+}
+
+.latest-additions-actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.latest-additions-control {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+}
+
+.latest-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 12px;
+}
+
+.latest-row {
+  display: flex;
+  min-width: 0;
+  min-height: 72px;
+  align-items: center;
+  gap: 14px;
+  padding: 8px;
+  border-radius: var(--radius-control);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.latest-mark {
+  display: grid;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  font-size: var(--text-lg);
+  font-weight: 500;
+}
+
+.latest-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.latest-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.latest-name,
+.latest-tag {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.latest-name {
+  font-size: var(--text-base);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.latest-tag {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .latest-row:hover {
+    background: var(--hover);
+    color: var(--hover-foreground);
+  }
+
+  .latest-row:hover .latest-tag {
+    color: var(--hover-foreground);
+  }
+}
+
+.latest-row:active {
+  transform: scale(.98);
+}
+
+@media (max-width: 560px) {
+  .latest-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 8px;
+  }
 }
 
 .resource-rail {
@@ -3293,11 +3672,47 @@ html.transitioning *::after {
   line-height: 1.3;
 }
 
-/* The tag's own page is the row's destination, so the link is quiet until the
-   pointer reaches it: the row's cards stay the loudest thing on the band. */
-.rail-see-more:hover:not(:disabled),.rail-see-more:active:not(:disabled) {
-  background: var(--hover);
-  color: var(--hover-foreground);
+.rail-see-more {
+  width: auto;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 8px;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Keep the label quiet until hover, and let the arrow point into the category
+   without adding a fill behind the action. */
+.rail-see-more:hover:not(:disabled),
+.rail-see-more:focus-visible,
+.rail-see-more:active:not(:disabled) {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-primary);
+}
+
+.rail-see-more svg {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rail-see-more:hover:not(:disabled) svg {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-see-more svg {
+    transition: none;
+  }
+
+  .rail-see-more:hover:not(:disabled) svg {
+    transform: none;
+  }
 }
 
 /* The row itself. A hidden scrollbar keeps the shelf from growing a second
@@ -3320,9 +3735,41 @@ html.transitioning *::after {
 }
 
 .rail-track > * {
-  flex: 0 0 clamp(188px, 21vw, 254px);
+  flex: 0 0 clamp(260px, 25vw, 320px);
   min-width: 0;
   scroll-snap-align: start;
+}
+
+/* -- Scroll edges ---------------------------------------------------------
+   A track that runs past its box fades the edge that still hides something,
+   so a card cut by the container reads as a continuation rather than a
+   clipped one. The side is measured from the scroll position (see
+   `use-scroll-fade`), so a track that fits keeps a clean left edge. */
+.rail-track,
+.resource-tags,
+.app-search-strip {
+  --edge-fade: 32px;
+}
+
+.rail-track[data-fade='end'],
+.resource-tags[data-fade='end'],
+.app-search-strip[data-fade='end'] {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade)), transparent);
+}
+
+.rail-track[data-fade='start'],
+.resource-tags[data-fade='start'],
+.app-search-strip[data-fade='start'] {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--edge-fade));
+  mask-image: linear-gradient(to right, transparent, #000 var(--edge-fade));
+}
+
+.rail-track[data-fade='both'],
+.resource-tags[data-fade='both'],
+.app-search-strip[data-fade='both'] {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), transparent 100%);
 }
 
 @media (max-width: 760px) {
@@ -3331,11 +3778,12 @@ html.transitioning *::after {
   }
 
   .rail-track > * {
-    flex-basis: clamp(168px, 44vw, 210px);
+    flex-basis: clamp(220px, 64vw, 260px);
   }
 
-  /* A thumb reaches the ring, not the word, so the link keeps a 44px lane. */
+  /* Keep the text action easy to tap on a phone. */
   .rail-see-more {
+    width: auto;
     min-height: 44px;
   }
 }
@@ -3371,9 +3819,9 @@ html.transitioning *::after {
 .auth-window {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  width: min(100%, 860px);
-  height: min(var(--auth-window-height, 652px), calc(100dvh - 2 * var(--auth-gutter-y)));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: min(100%, 760px);
+  height: min(var(--auth-window-height, 576px), calc(100dvh - 2 * var(--auth-gutter-y)));
   overflow: hidden;
   border-radius: var(--radius-surface);
   color: var(--text-primary);
@@ -3414,7 +3862,7 @@ html.transitioning *::after {
   align-items: center;
   justify-content: safe center;
   min-width: 0;
-  padding: var(--space-6);
+  padding: 20px;
   overflow: hidden;
 }
 
@@ -3433,7 +3881,7 @@ html.transitioning *::after {
   flex: none;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-6);
+  gap: 20px;
   width: 100%;
 }
 
@@ -3442,8 +3890,8 @@ html.transitioning *::after {
   flex: none;
   align-items: center;
   align-self: center;
-  gap: 8px;
-  padding: 6px 8px;
+  gap: 7px;
+  padding: 4px 6px;
   border-radius: var(--radius-control);
   color: var(--text-primary);
   text-decoration: none;
@@ -3453,7 +3901,7 @@ html.transitioning *::after {
    under the pointer. The card beneath this is the only thing that responds. */
 
 .auth-brand-name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
@@ -3461,8 +3909,8 @@ html.transitioning *::after {
 .auth-stage {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: min(360px, 100%);
+  gap: 16px;
+  width: min(320px, 100%);
 }
 
 .auth-card {
@@ -3526,24 +3974,24 @@ html.transitioning *::after {
 
 .auth-intro h1 {
   margin: 0;
-  font-size: var(--fs-display);
+  font-size: var(--fs-display-compact);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.1;
 }
 
 .auth-intro p {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   color: var(--text-secondary);
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-top: 26px;
+  gap: 14px;
+  margin-top: 20px;
 }
 
 /* Two providers read as one row of equal choices, the way the reference does;
@@ -3551,8 +3999,8 @@ html.transitioning *::after {
 .auth-social {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 26px;
+  gap: 8px;
+  margin-top: 20px;
 }
 
 .auth-social>button {
@@ -3564,7 +4012,7 @@ html.transitioning *::after {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 16px;
   color: var(--text-secondary);
   font-size: 12px;
 }
@@ -3622,7 +4070,7 @@ html.transitioning *::after {
 }
 
 .auth-aside {
-  margin-top: 18px;
+  margin-top: var(--space-3);
 }
 
 .auth-page a {
@@ -3714,12 +4162,11 @@ html.transitioning *::after {
   }
 }
 
-
 .auth-note {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 24px;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
 }
 
 .auth-note p {
@@ -3742,7 +4189,7 @@ html.transitioning *::after {
   }
 
   .auth-panel {
-    padding: var(--space-6) var(--space-4);
+    padding: var(--space-4) var(--space-3);
   }
 }
 
@@ -3750,16 +4197,63 @@ html.transitioning *::after {
    radius for one that still reads as a window on a narrow screen. */
 @media (max-width: 420px) {
   .auth-page {
-    --auth-gutter: 12px;
-    --auth-gutter-y: 12px;
+    --auth-gutter: 8px;
+    --auth-gutter-y: 8px;
   }
 
   .auth-window {
+    width: 100%;
     border-radius: var(--radius-card);
   }
 
   .auth-panel {
-    padding: var(--space-4);
+    padding: var(--space-3);
+  }
+
+  .auth-panel-body {
+    gap: var(--space-4);
+  }
+
+  .auth-stage {
+    gap: var(--space-4);
+  }
+
+  .auth-intro h1 {
+    font-size: var(--fs-display-compact);
+  }
+
+  .auth-intro p {
+    margin-top: var(--space-2);
+    font-size: var(--fs-body);
+  }
+
+  .auth-social {
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .auth-social > button {
+    padding-inline: var(--space-2);
+    font-size: var(--fs-body);
+  }
+
+  .auth-divider {
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .auth-form {
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .auth-aside {
+    margin-top: var(--space-3);
+  }
+
+  .auth-note {
+    gap: var(--space-3);
+    margin-top: var(--space-4);
   }
 }
 
@@ -3905,4 +4399,56 @@ html.transitioning *::after {
     scale: 1;
     transform: none;
   }
+}
+  html.transitioning *, html.transitioning *::before, html.transitioning *::after {
+    transition: border-radius 180ms ease-in-out, background-color 180ms ease-in-out, color 180ms ease-in-out, border-color 180ms ease-in-out, fill 180ms ease-in-out, stroke 180ms ease-in-out !important;
+}
+
+/* -- The action palette -----------------------------------------------------
+   Buttons are the one place a colour is spent: one filled action, one quiet
+   control, and nothing else in the app changes hue for them. The finish is
+   four layers (a white inner stroke, an inner glow, a drop shadow and a ring
+   on the fill), so the button reads as a physical object rather than a
+   rectangle, and both tiers share it. */
+:root {
+  --action-fill: #296ff0;
+  --action-fill-hover: #1f63dc;
+  --action-fill-press: #1a57c4;
+  --action-fill-disabled: #a9c3f7;
+  --action-label: #ffffff;
+  --action-inner-stroke: rgb(255 255 255 / .4);
+  --action-inner-glow: rgb(255 255 255 / .24);
+  --action-drop: rgb(0 0 0 / .2);
+  --action-quiet-top: #ffffff;
+  --action-quiet-bottom: #f7f7f7;
+  --action-quiet-top-hover: #fbfbfb;
+  --action-quiet-bottom-hover: #f1f1f1;
+  --action-quiet-press: #f2f2f2;
+  --action-quiet-ring: #ececec;
+  --action-quiet-ring-press: #e6e6e6;
+  --action-quiet-label: #1a1a1a;
+}
+
+/* The ring rides the same 160ms as the fill it sits on, so a hover or a press
+   moves one object rather than a fill and an outline that arrive separately. */
+@property --action-ring {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #296ff0;
+}
+
+/* Dark keeps the fill exactly as it is, so the white label still passes at
+   4.55:1; only the inner stroke drops, because a white line reads brighter on
+   a dark ground. The quiet control turns into a dark gradient with a hairline
+   ring, which is what a lifted control looks like here. */
+:root.dark {
+  --action-inner-stroke: rgb(255 255 255 / .28);
+  --action-quiet-top: #202020;
+  --action-quiet-bottom: #1a1a1a;
+  --action-quiet-top-hover: #262626;
+  --action-quiet-bottom-hover: #202020;
+  --action-quiet-press: #1e1e1e;
+  --action-quiet-ring: #2e2e2e;
+  --action-quiet-ring-press: #383838;
+  --action-quiet-label: #f2f2f2;
 }

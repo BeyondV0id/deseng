@@ -1,0 +1,620 @@
+/* The sponsor card uses the same neutral surface and hairline as the library. */
+
+.wrap {
+  position: relative;
+  display: block;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--card-surface);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card[href]:hover {
+    background: var(--hover);
+    color: var(--hover-foreground);
+  }
+
+  .card[href]:hover .title,
+  .card[href]:hover .name,
+  .card[href]:hover .description,
+  .card[href]:hover .tagline {
+    color: var(--hover-foreground);
+  }
+}
+
+/* -- The artwork ---------------------------------------------------------- */
+
+.media {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-muted);
+}
+
+.rail .media {
+  aspect-ratio: 16 / 10;
+}
+
+.wide .media {
+  aspect-ratio: 16 / 11;
+}
+
+.mediaImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+}
+
+.placeholderMedia {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.placeholderMedia svg {
+  color: var(--text-primary);
+}
+
+.placeholderMedia span {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* The Arc badge is positioned over the image; its own visual treatment stays
+   with Arc. */
+.sponsorBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+/* -- The headline, on the sizes that have room for one -------------------- */
+
+.copy {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px 0;
+}
+
+.title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+}
+
+/* -- The foot ------------------------------------------------------------- */
+
+.foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.mark {
+  display: grid;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--surface-muted);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.wide .mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: var(--text-base);
+}
+
+.markImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.name,
+.tagline {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name {
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.wide .name {
+  font-size: var(--text-base);
+}
+
+.tagline {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  line-height: 1.3;
+}
+
+.wide .tagline {
+  font-size: var(--text-sm);
+}
+
+/* The room's way out, on the same disc shape as the top bar's own controls. */
+.cta {
+  display: grid;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.wide .cta {
+  width: 40px;
+  height: 40px;
+}
+
+/* -- The Explore band ----------------------------------------------------- */
+
+.featuredTools {
+  min-width: 0;
+  margin-bottom: 36px;
+}
+
+.featuredHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+}
+
+.featuredHeading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.featuredGrid {
+  display: grid;
+  /* The card's foot needs room for its mark and the way out, so a slot never
+     narrows past 220px. Fewer columns on a smaller page rather than a card
+     whose name is cut off. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  align-items: start;
+  gap: 18px;
+}
+
+.featured {
+  border-radius: 12px;
+}
+
+.featured .media {
+  aspect-ratio: 3 / 2;
+}
+
+.featured .mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: var(--text-base);
+}
+
+.featured .name {
+  font-size: var(--text-base);
+}
+
+.featured .tagline {
+  font-size: var(--text-sm);
+}
+
+.featured .cta {
+  width: 40px;
+  height: 40px;
+}
+
+.featured .foot {
+  padding: 12px;
+}
+
+/* An empty slot holds the exact room a campaign takes, so booking one never
+   reflows the band. The dotted edge is the reservation, not a card style: the
+   media band and the foot mirror a booked card's own two rows. */
+.featuredPlaceholder {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface-muted) 45%, transparent);
+  color: var(--text-secondary);
+}
+
+.featuredPlaceholderMedia {
+  display: grid;
+  aspect-ratio: 3 / 2;
+  place-items: center;
+}
+
+.featuredPlus {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--card-surface);
+  color: var(--text-primary);
+}
+
+.featuredPlaceholderFoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
+}
+
+.featuredPlaceholderBrand {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.featuredPlaceholderTitle,
+.featuredPlaceholderNote {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.featuredPlaceholderTitle {
+  color: var(--text-primary);
+  font-size: var(--text-base);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.featuredPlaceholderNote {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.3;
+}
+
+/* A phone gets the band two-up at a card the size of a rail card, not one
+   full-width reservation per row: four stacked slots push the catalogue three
+   screens down before it starts. The foot tightens with the card so a name and
+   its line still fit inside a column this narrow. */
+@media (max-width: 560px) {
+  .featuredTools {
+    margin-bottom: 24px;
+  }
+
+  .featuredHeader {
+    margin-bottom: 10px;
+  }
+
+  .featuredGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .featured .media,
+  .featuredPlaceholderMedia {
+    aspect-ratio: 16 / 10;
+  }
+
+  .featured .mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    font-size: var(--text-sm);
+  }
+
+  .featured .name {
+    font-size: var(--text-sm);
+  }
+
+  .featured .tagline {
+    font-size: var(--text-xs);
+  }
+
+  .featured .cta {
+    width: 28px;
+    height: 28px;
+  }
+
+  .featured .foot {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .featuredPlaceholderFoot {
+    padding: 8px;
+  }
+
+  .featuredPlus {
+    width: 32px;
+    height: 32px;
+  }
+
+  .featuredPlaceholderTitle {
+    font-size: var(--text-sm);
+  }
+
+  .featuredPlaceholderNote {
+    font-size: var(--text-xs);
+  }
+}
+
+/* -- Dismissing a card that interrupted ---------------------------------- */
+
+.dismiss {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: grid;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+}
+
+/* -- The three places ----------------------------------------------------- */
+
+/* The column's slot is the one placement that sits under a list rather than
+   beside one. The column's width is fixed, so the only thing the card can spend
+   is height, and the moodboards above it need that height more than the artwork
+   does: the same card frame, on a shorter band and a tighter foot. Its top
+   margin lifts it off the list's last row, so it reads as the column's foot
+   rather than as one more row. */
+.sidebarAd {
+  margin: 14px 0 12px;
+}
+
+.sidebarAd .media {
+  aspect-ratio: 16 / 7;
+}
+
+.sidebarAd .sponsorBadge {
+  top: 8px;
+  left: 8px;
+}
+
+.sidebarAd .placeholderMedia {
+  gap: 4px;
+}
+
+.sidebarAd .placeholderMedia svg {
+  width: 14px;
+  height: 14px;
+}
+
+.sidebarAd .placeholderMedia span {
+  font-size: var(--text-xs);
+}
+
+.sidebarAd .foot {
+  gap: 8px;
+  padding: 8px;
+}
+
+.sidebarAd .mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.sidebarAd .name {
+  font-size: var(--text-xs);
+}
+
+.sidebarAd .tagline {
+  font-size: 11px;
+}
+
+.sidebarAd .cta {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebarAd .cta svg {
+  width: 13px;
+  height: 13px;
+}
+
+.houseToast {
+  position: fixed;
+  right: var(--space-6);
+  bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  width: min(320px, calc(100vw - var(--space-8)));
+  animation: house-toast-enter var(--duration-standard) var(--ease-standard);
+}
+
+.toastCard {
+  display: block;
+  padding: var(--space-2);
+  border-radius: var(--radius-panel);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-floating);
+}
+
+.toastBody {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.toastMark {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--radius-control);
+  background: var(--surface-muted);
+  color: var(--foreground);
+  font-size: var(--text-lg);
+  font-weight: 500;
+}
+
+.toastMark .markImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.toastCopy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 0;
+}
+
+.toastHeading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-right: 30px;
+}
+
+.toastName {
+  overflow: hidden;
+  color: var(--foreground);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toastDescription {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  line-height: 1.45;
+}
+
+.toastCard:hover {
+  background: var(--hover);
+  color: var(--hover-foreground);
+}
+
+.toastCard:hover .toastName,
+.toastCard:hover .toastDescription {
+  color: var(--hover-foreground);
+}
+
+@keyframes house-toast-enter {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+@media (max-width: 560px) {
+  .houseToast {
+    right: var(--space-4);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    left: var(--space-4);
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .houseToast { animation: none; }
+}
+
+/* The corner card is an interruption, so it enters once and leaves for good.
+   It sits above the page and below the bar, and clears the phone's home bar. */
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 35;
+  width: 340px;
+  max-width: calc(100vw - 40px);
+  animation: ad-enter 260ms var(--ease-standard);
+}
+
+@keyframes ad-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (max-width: 560px) {
+  .toast {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* The top bar's slot. It borrows the bar's own 40px circle, so the cluster
+   still reads as one row, and the advertiser's mark fills the disc. */
+.discMark {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}

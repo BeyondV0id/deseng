@@ -48,7 +48,7 @@ export default function ResetPasswordPage() {
   if (done) {
     return <AuthShell
       title="Password updated"
-      description="Your account has a new password. Sign in with it on this device and anywhere else you use desgnix."
+      description="Your account has a new password. Sign in with it on this device and anywhere else you use Reference."
       footer={<Link to="/sign-in">Back to sign in</Link>}
     >
       <Button type="button" variant="primary" size="md" className="auth-submit" onClick={() => navigate('/sign-in')}>

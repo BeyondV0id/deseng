@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="presentation">
+  <title>Reference background diagram, 240px tile</title>
+  <defs>
+    <pattern id="dg-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#808080" stroke-opacity="0.2" stroke-width="1"/>
+    </pattern>
+    <pattern id="dg-rule" width="240" height="240" patternUnits="userSpaceOnUse">
+      <path d="M-24 264L264 -24" fill="none" stroke="#808080" stroke-opacity="0.3" stroke-width="1"/>
+      <path d="M18 132H34M26 124V140" fill="none" stroke="#808080" stroke-opacity="0.3" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="240" height="240" fill="url(#dg-grid)"/>
+  <rect width="240" height="240" fill="url(#dg-rule)"/>
+</svg>

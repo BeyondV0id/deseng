@@ -16,6 +16,7 @@ export const trustedOrigins = [
   'http://localhost:5180',
   'http://127.0.0.1:5180',
   process.env.BETTER_AUTH_URL,
+  'http://127.0.0.1:3001',
 ].filter((origin): origin is string => Boolean(origin))
 
 /**
@@ -55,7 +56,7 @@ const socialProviders = {
 export const enabledSocialProviders = Object.keys(socialProviders) as Array<'google' | 'github'>
 
 export const auth = betterAuth({
-  appName: 'desgnix',
+  appName: 'Reference',
   baseURL: process.env.BETTER_AUTH_URL ?? 'http://localhost:3001',
   secret: process.env.BETTER_AUTH_SECRET,
   database: drizzleAdapter(db, {
@@ -73,6 +74,10 @@ export const auth = betterAuth({
     sendResetPassword: async ({ user: account, url }) => {
       await sendPasswordResetEmail({ to: account.email, name: account.name, url })
     },
+    // A reset is a credential change: the old password (and therefore every
+    // session minted with it) goes away with it, so a stolen reset link cannot
+    // leave a live session behind on another device.
+    revokeSessionsOnPasswordReset: true,
   },
   emailVerification: {
     // Off on purpose: no message is sent at sign-up or on demand, so no
@@ -81,6 +86,13 @@ export const auth = betterAuth({
     autoSignInAfterVerification: false,
   },
   socialProviders,
+  user: {
+    // The account settings surface offers deletion with an in-place confirmation.
+    // Better Auth enforces session freshness on the server.
+    deleteUser: {
+      enabled: true,
+    },
+  },
   session: {
     expiresIn: 60 * 60 * 24 * 30,
     updateAge: 60 * 60 * 24,

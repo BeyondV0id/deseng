@@ -31,6 +31,13 @@ export const resource = pgTable('resource', {
   imageHeight: integer('image_height'),
   imageCheckedAt: timestamp('image_checked_at'),
   submittedById: text('submitted_by_id').references(() => user.id, { onDelete: 'set null' }),
+  /**
+   * Where an entry stands in the editorial review, as its author sees it:
+   * `pending`, `approved` or `declined`. A row that nobody submitted is
+   * `pending` too, since the column only reads on the submitter's own surface.
+   * The API narrows anything else to `pending`.
+   */
+  reviewStatus: text('review_status').notNull().default('pending'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 

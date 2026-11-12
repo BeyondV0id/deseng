@@ -1,0 +1,147 @@
+/* The sponsor view lives inside the shell's content column, so it has no
+   ground, masthead or footer of its own. The reading column is capped to match
+   the info page, and the plans are the only filled surfaces here. */
+
+.sponsor {
+  max-width: 920px;
+  min-width: 0;
+  /* The top bar is sticky and 60px tall, so an anchor jump lands below it. */
+  scroll-margin-top: 76px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 6vw, 64px);
+}
+
+/* -- Block headings -------------------------------------------------------
+   Plans and questions are two beats on one page, so each gets the same small
+   heading and one supporting line rather than a rule between them. */
+
+.blockHead {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.sponsor h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(19px, 1.8vw, 22px);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+}
+
+.blockNote {
+  max-width: 60ch;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: clamp(13.5px, 1.1vw, 14.5px);
+  line-height: 1.55;
+}
+
+/* -- The two plans --------------------------------------------------------
+   Two resting tiles, not buttons: the fill is one step off the page and the
+   book action is the only thing in the card that answers the pointer. The
+   tiles stretch to the same height and the button is pushed to the foot, so
+   the two cards read as one row however the feature lines fall. */
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
+}
+
+.plan {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 13px;
+  border-radius: var(--radius-card);
+  padding: 20px;
+  background: var(--surface-muted);
+}
+
+.planHead {
+  display: flex;
+  min-height: 22px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.planName {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.4;
+}
+
+.planBadge {
+  flex: none;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(30px, 3vw, 36px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.period {
+  color: var(--text-tertiary);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+
+.features {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.features li {
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+/* The card foot. Arc owns the hover, press and focus behaviour; the tile only
+   gives it the full width and the free space above it. */
+.book {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* -- The questions a sponsor asks before booking --------------------------- */
+
+.faq {
+  max-width: 68ch;
+}
+
+.submissionTerms {
+  margin: 24px 0 0;
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+@media (max-width: 639px) {
+  .plans {
+    grid-template-columns: 1fr;
+  }
+}

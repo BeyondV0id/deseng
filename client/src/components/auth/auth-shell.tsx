@@ -107,7 +107,7 @@ export function AuthShell({ title, description, children, footer, overlay = fals
   const { windowRef, panelRef, bodyRef, sized } = useWindowHeight()
   const brand = <>
     <BrandMark />
-    <span className="auth-brand-name">desgnix</span>
+    <span className="auth-brand-name">Reference</span>
   </>
 
   return <div className={overlay ? 'auth-page auth-page-overlay' : 'auth-page'}>
@@ -121,7 +121,7 @@ export function AuthShell({ title, description, children, footer, overlay = fals
         <div className="auth-panel-body" ref={bodyRef}>
           {overlay
             ? <span className="auth-brand">{brand}</span>
-            : <Link to="/" className="auth-brand" aria-label="desgnix home">{brand}</Link>}
+            : <Link to="/" className="auth-brand" aria-label="Reference home">{brand}</Link>}
           <div className="auth-stage">
             <main className="auth-card">
               <header className="auth-intro">

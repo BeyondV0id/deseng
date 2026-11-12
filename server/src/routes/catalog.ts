@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { asc, eq, sql } from 'drizzle-orm'
+import { asc, desc, eq, sql } from 'drizzle-orm'
 import { db } from '../db/index.js'
 import { resource, userResource } from '../db/schema.js'
-import { serializeResource } from '../lib/serialize.js'
+import { serializeResource, serializeSubmission } from '../lib/serialize.js'
 import { resolveImages } from '../lib/metadata.js'
-import { readOptionalString, readString, readUrl } from '../lib/parse.js'
+import { readString, readUrl } from '../lib/parse.js'
 import { loadSession, requireSession, sessionUser } from '../middleware/session.js'
 
 export const catalogRouter = Router()
@@ -31,8 +31,25 @@ catalogRouter.get('/catalog', loadSession, async (_request, response) => {
   })
 })
 
+/**
+ * This account's own submissions, newest first. The catalogue itself is shared
+ * and public; this is the one read that is not, so it sits behind the session
+ * and filters on the submitter rather than on a view the client names.
+ */
+catalogRouter.get('/submissions', loadSession, requireSession, async (_request, response) => {
+  const user = sessionUser(response)
+  const rows = await db
+    .select()
+    .from(resource)
+    .where(eq(resource.submittedById, user.id))
+    .orderBy(desc(resource.createdAt), asc(resource.name))
+
+  response.json({ submissions: rows.map(serializeSubmission) })
+})
+
 const maxName = 120
-const maxDescription = 280
+const maxDescription = 500
+const minDescription = 30
 const maxCategory = 60
 
 /**
@@ -45,7 +62,7 @@ catalogRouter.post('/catalog', loadSession, requireSession, async (request, resp
   const name = readString(request.body?.name, maxName)
   const url = readUrl(request.body?.url)
   const category = readString(request.body?.category, maxCategory)
-  const description = readOptionalString(request.body?.description, maxDescription) ?? ''
+  const description = readString(request.body?.description, maxDescription)
 
   if (!name) {
     response.status(400).json({ error: 'Give the resource a name.' })
@@ -57,6 +74,10 @@ catalogRouter.post('/catalog', loadSession, requireSession, async (request, resp
   }
   if (!category) {
     response.status(400).json({ error: 'Choose a category.' })
+    return
+  }
+  if (!description || description.length < minDescription) {
+    response.status(400).json({ error: `Describe the listing in at least ${minDescription} characters.` })
     return
   }
 

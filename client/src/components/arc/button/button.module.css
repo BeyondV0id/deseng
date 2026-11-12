@@ -10,23 +10,59 @@
 .labelContent { display: inline-flex; flex: none; align-items: center; }
 .labelPhase { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); white-space: nowrap; }
 .labelPhase svg { flex: none; }
-.primary { color: var(--background); background: var(--foreground); border-color: var(--foreground); }
-.secondary { color: var(--foreground); background: var(--surface); border-color: var(--border); }
+/* -- The two tiers ---------------------------------------------------------
+   One filled action and one quiet control. Both are the same object with the
+   same four-layer finish: a drop shadow, a 1px ring on the fill, a white inner
+   stroke and a white inner glow. The heights stay on the app's own control
+   tokens and the radius stays on --radius-control, because a button drawn
+   inside a card has to keep the concentric relationship the card sets. */
+.primary {
+  --action-ring: var(--action-fill);
+  color: var(--action-label);
+  background: var(--action-fill);
+  border-color: transparent;
+  box-shadow:
+    0 3px 6px var(--action-drop),
+    0 0 0 1px var(--action-ring),
+    inset 0 0 0 1px var(--action-inner-stroke),
+    inset 0 0 6px 2px var(--action-inner-glow);
+}
+.secondary {
+  --action-ring: var(--action-quiet-ring);
+  color: var(--action-quiet-label);
+  background: linear-gradient(180deg, var(--action-quiet-top) 0%, var(--action-quiet-bottom) 100%);
+  border-color: transparent;
+  box-shadow:
+    0 1px 2px rgb(40 40 40 / .08),
+    0 0 0 1px var(--action-ring);
+}
 .ghost { color: var(--text-secondary); background: transparent; border-color: transparent; }
 .danger { color: var(--danger); background: var(--surface); border-color: var(--border); }
 /* A disabled outlined button keeps its shape and fades only its label, so it still reads as a button that is off, not as plain text. */
 .secondary:disabled, .danger:disabled { opacity: 1; color: var(--text-muted); background: var(--surface-muted); border-color: var(--border); }
+.secondary:disabled { box-shadow: 0 0 0 1px var(--border); }
+/* A disabled action drops the finish and lightens the fill. It never fades to
+   an unreadable label. */
+.primary:disabled { opacity: 1; color: var(--action-label); background: var(--action-fill-disabled); box-shadow: none; }
 .danger:disabled { color: color-mix(in oklab, var(--danger) 55%, var(--surface-muted)); }
 .ghost:disabled { opacity: 1; color: var(--text-muted); }
 @media (hover: hover) and (pointer: fine) {
-  .primary:hover:not(:disabled) { opacity: .91; box-shadow: var(--shadow-resting); }
-  .secondary:hover:not(:disabled) { background: var(--surface-muted); box-shadow: var(--shadow-resting); }
+  /* Hover is a change of fill and nothing else: no lift, no scale, no second
+     shadow, so the press below still reads as the only motion. */
+  .primary:hover:not(:disabled) { opacity: 1; --action-ring: var(--action-fill-hover); background: var(--action-fill-hover); }
+  .secondary:hover:not(:disabled) { background: linear-gradient(180deg, var(--action-quiet-top-hover) 0%, var(--action-quiet-bottom-hover) 100%); }
   .ghost:hover:not(:disabled) { color: var(--foreground); background: var(--surface-muted); }
   .danger:hover:not(:disabled) { border-color: var(--danger); background: var(--surface-muted); }
 }
 /* Color feedback on press, so touch and menu triggers (which never scale) still answer the finger. */
-.primary:active:not(:disabled) { opacity: .84; }
-.secondary:active:not(:disabled), .ghost:active:not(:disabled) { color: var(--foreground); background: var(--surface-muted); }
+.primary:active:not(:disabled) { opacity: 1; --action-ring: var(--action-fill-press); background: var(--action-fill-press); }
+.secondary:active:not(:disabled) {
+  --action-ring: var(--action-quiet-ring-press);
+  color: var(--action-quiet-label);
+  background: var(--action-quiet-press);
+  box-shadow: 0 0 0 1px var(--action-ring), inset 0 1px 2px rgb(0 0 0 / .06);
+}
+.ghost:active:not(:disabled) { color: var(--foreground); background: var(--surface-muted); }
 .danger:active:not(:disabled) { border-color: var(--danger); background: var(--surface-muted); }
 .sm { min-height: var(--control-height-sm); padding-inline: var(--space-3); font-size: var(--text-sm); }
 .md { min-height: var(--control-height-md); }

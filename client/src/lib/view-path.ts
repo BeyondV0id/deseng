@@ -8,13 +8,24 @@ import { categories, categoryFromView, categoryView, collectionForCategory, coll
  * linked, reloaded or opened in a second tab. Each view now has a path, and the
  * path is the state. `/` is the whole catalogue, `/build` a shelf (its slug is
  * the shelf's own name), one category of a shelf is the same path with
- * `?tag=<tag>`, and the account's own work is `/favorites` and `/moodboards`,
- * with one board under `/moodboards/<id>`. `/info` is the library's own page.
+ * `?tag=<tag>`, and the account's own work is `/favorites`, `/moodboards` (with
+ * one board under `/moodboards/<id>`) and `/submissions`, the listings the
+ * account has sent. `/info` and the legal paths are public content pages in the
+ * same shell.
  */
 export const allResources = 'All resources'
 export const favorites = 'Favorites'
 export const moodboardShelf = 'Moodboard'
+export const submissionsView = 'My submissions'
 export const infoView = 'Info'
+export const sponsorView = 'Sponsor'
+export const privacyView = 'Privacy'
+export const termsView = 'Terms'
+export const licenceView = 'Licence'
+export const refundsView = 'Refunds'
+export const cookiesView = 'Cookies'
+
+export const legalViews = [privacyView, termsView, licenceView, refundsView, cookiesView] as const
 
 /** The path segment for a name: lower case, words joined by one hyphen. */
 export function slug(value: string) {
@@ -29,7 +40,14 @@ export function pathForView(view: string): string {
   if (view === allResources) return '/'
   if (view === favorites) return '/favorites'
   if (view === moodboardShelf) return '/moodboards'
+  if (view === submissionsView) return '/submissions'
   if (view === infoView) return '/info'
+  if (view === sponsorView) return '/sponsor'
+  if (view === privacyView) return '/privacy'
+  if (view === termsView) return '/terms'
+  if (view === licenceView) return '/licence'
+  if (view === refundsView) return '/refunds'
+  if (view === cookiesView) return '/cookies'
 
   const tag = categoryFromView(view)
   if (tag !== null) {
@@ -55,7 +73,14 @@ export function viewForPath(pathname: string, search = ''): string | null {
   if (path === '/') return tag ? categoryView(tag) : allResources
   if (path === '/favorites') return favorites
   if (path === '/moodboards') return moodboardShelf
+  if (path === '/submissions') return submissionsView
   if (path === '/info') return infoView
+  if (path === '/sponsor') return sponsorView
+  if (path === '/privacy') return privacyView
+  if (path === '/terms') return termsView
+  if (path === '/licence') return licenceView
+  if (path === '/refunds') return refundsView
+  if (path === '/cookies') return cookiesView
 
   const moodboard = /^\/moodboards\/([^/]+)$/.exec(path)
   if (moodboard?.[1]) return decodeURIComponent(moodboard[1])

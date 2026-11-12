@@ -1,6 +1,6 @@
 {
-  "name": "desgnix",
-  "short_name": "desgnix",
+  "name": "Reference",
+  "short_name": "Reference",
   "description": "A working shelf of interface references: component libraries, motion tools, typefaces, assets and the details in between.",
   "start_url": "/",
   "scope": "/",

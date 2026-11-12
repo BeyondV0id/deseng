@@ -1,10 +1,14 @@
+import type { ReactNode } from 'react'
 import { TextMorph } from 'torph/react'
 import { ArrowLeft } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
+import { useScrollFade } from '@/hooks/use-scroll-fade'
 
 type ResourceSectionHeaderProps = {
   heading: string
   subheading: string
+  /** The page's own controls, kept on the title's line rather than in chrome. */
+  actions?: ReactNode
   /** A quieter second line under the description, for counts and other metadata. */
   meta?: string
   /**
@@ -29,6 +33,7 @@ type ResourceSectionHeaderProps = {
 export function ResourceSectionHeader({
   heading,
   subheading,
+  actions,
   meta,
   back,
   loading = false,
@@ -37,6 +42,7 @@ export function ResourceSectionHeader({
   onCategoryChange,
 }: ResourceSectionHeaderProps) {
   const tagged = categories.length > 1 && onCategoryChange !== undefined
+  const tags = useScrollFade<HTMLDivElement>()
 
   return <header className="resource-section-header">
     {back && <Button
@@ -48,20 +54,23 @@ export function ResourceSectionHeader({
     >
       <ArrowLeft size={17} aria-hidden="true" />
     </Button>}
-    <div className="resource-section-title">
-      <h1><TextMorph as="span" className="heading-morph" duration={240} ease="cubic-bezier(0.19, 1, 0.22, 1)">{heading}</TextMorph></h1>
-      {subheading && <p className="page-description">{subheading}</p>}
-      {loading
-        ? <p className="page-description-meta is-loading" role="status">
-          <span className="catalog-skeleton-meta-line" aria-hidden="true" />
-          <span className="sr-only">{meta}</span>
-        </p>
-        : meta && <p className="page-description-meta">{meta}</p>}
+    <div className="resource-section-heading-row">
+      <div className="resource-section-title">
+        <h1><TextMorph as="span" className="heading-morph" duration={240} ease="cubic-bezier(0.19, 1, 0.22, 1)">{heading}</TextMorph></h1>
+        {subheading && <p className="page-description">{subheading}</p>}
+        {loading
+          ? <p className="page-description-meta is-loading" role="status">
+            <span className="catalog-skeleton-meta-line" aria-hidden="true" />
+            <span className="sr-only">{meta}</span>
+          </p>
+          : meta && <p className="page-description-meta">{meta}</p>}
+      </div>
+      {actions && <div className="resource-section-actions">{actions}</div>}
     </div>
     {/* The shelf's own split, as Arc buttons: one pill per category, with the
         whole shelf always one tap away. The strip scrolls sideways on a phone
         rather than wrapping into a second row of chrome. */}
-    {tagged && <div className="resource-tags" role="group" aria-label="Filter by category">
+    {tagged && <div className="resource-tags" ref={tags.ref} data-fade={tags.fade} role="group" aria-label="Filter by category">
       <Button
         variant={activeCategory === null ? 'primary' : 'secondary'}
         size="sm"

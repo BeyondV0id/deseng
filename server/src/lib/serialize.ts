@@ -46,6 +46,40 @@ export function serializeResource(row: ResourceRow, state?: UserResourceRow): Ap
   }
 }
 
+/** Where a submission stands. Anything else on the row is read as pending. */
+export type SubmissionState = 'pending' | 'approved' | 'declined'
+
+/** One listing as the account that sent it sees it: the entry, when it
+ *  arrived, and where the review stands. */
+export type ApiSubmission = {
+  id: string
+  name: string
+  url: string
+  description: string
+  category: string
+  faviconUrl: string | null
+  /** The moment it was added, as an ISO string, so the client formats it. */
+  submittedAt: string
+  state: SubmissionState
+}
+
+function readReviewState(value: string): SubmissionState {
+  return value === 'approved' || value === 'declined' ? value : 'pending'
+}
+
+export function serializeSubmission(row: ResourceRow): ApiSubmission {
+  return {
+    id: row.id,
+    name: row.name,
+    url: row.url,
+    description: row.description,
+    category: row.category,
+    faviconUrl: row.faviconUrl,
+    submittedAt: row.createdAt.toISOString(),
+    state: readReviewState(row.reviewStatus),
+  }
+}
+
 export function serializeMoodboard(row: MoodboardRow) {
   return {
     id: row.id,

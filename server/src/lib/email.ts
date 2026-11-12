@@ -17,7 +17,7 @@ const resendEndpoint = 'https://api.resend.com/emails'
 
 export async function sendMail({ to, subject, html, text }: Mail) {
   const apiKey = process.env.RESEND_API_KEY
-  const from = process.env.EMAIL_FROM ?? 'desgnix <no-reply@desgnix.app>'
+  const from = process.env.EMAIL_FROM ?? 'Reference <no-reply@desgnix.app>'
 
   if (!apiKey) {
     console.info(`\n[email] ${subject} -> ${to}\n${text}\n`)
@@ -49,11 +49,11 @@ function escapeHtml(value: string) {
  */
 export async function sendPasswordResetEmail({ to, name, url }: { to: string; name: string; url: string }) {
   const greeting = name ? `Hi ${name},` : 'Hi,'
-  const subject = 'Reset your desgnix password'
+  const subject = 'Reset your Reference password'
   const text = [
     greeting,
     '',
-    'Someone asked to reset the password for your desgnix account. Open the link below to choose a new one. It works once and expires in an hour.',
+    'Someone asked to reset the password for your Reference account. Open the link below to choose a new one. It works once and expires in an hour.',
     '',
     url,
     '',
@@ -67,7 +67,7 @@ export async function sendPasswordResetEmail({ to, name, url }: { to: string; na
       <tr>
         <td style="padding:28px 28px 8px;font-size:15px;line-height:1.6;">
           <p style="margin:0 0 16px;">${escapeHtml(greeting)}</p>
-          <p style="margin:0 0 20px;">Someone asked to reset the password for your desgnix account. Choose a new one with the button below. The link works once and expires in an hour.</p>
+          <p style="margin:0 0 20px;">Someone asked to reset the password for your Reference account. Choose a new one with the button below. The link works once and expires in an hour.</p>
           <p style="margin:0 0 24px;">
             <a href="${escapeHtml(url)}" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#151515;color:#ffffff;text-decoration:none;font-weight:500;">Choose a new password</a>
           </p>

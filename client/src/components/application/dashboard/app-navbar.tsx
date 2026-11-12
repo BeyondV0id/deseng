@@ -82,6 +82,7 @@ export function AppNavbar({
   account,
   authMode,
   onAuthModeChange,
+  onAuthDismiss,
   theme,
   onThemeChange,
   onSelectSettings,
@@ -108,6 +109,7 @@ export function AppNavbar({
   /** The sign-in panel's state: null while it is closed. */
   authMode: AuthMode | null
   onAuthModeChange: (mode: AuthMode | null) => void
+  onAuthDismiss: () => void
   theme: ThemePreference
   onThemeChange: (theme: ThemePreference) => void
   onSelectSettings: () => void
@@ -174,7 +176,7 @@ export function AppNavbar({
             aria-expanded={authMode !== null}
             onClick={() => onAuthModeChange('sign-in')}
           >Sign in</Button>
-          <AuthOverlay mode={authMode} onModeChange={onAuthModeChange} />
+          <AuthOverlay mode={authMode} onModeChange={onAuthModeChange} onDismiss={onAuthDismiss} />
         </>}
     </div>
   </div>
