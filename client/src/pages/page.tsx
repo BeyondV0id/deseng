@@ -588,6 +588,16 @@ export default function Page() {
     setAddOpen(true)
   }
 
+  useEffect(() => {
+    if (isPending || new URLSearchParams(location.search).get('submit') !== 'resource') return
+    navigate(location.pathname, { replace: true })
+    if (signedIn) setAddOpen(true)
+    else {
+      setAuthIntent({ kind: 'submit' })
+      setAuthMode('sign-in')
+    }
+  }, [isPending, location.pathname, location.search, navigate, signedIn])
+
   /** A card's moodboard menu, reached before the visitor has an account. */
   function requestMoodboardAccess() {
     requestAccount()

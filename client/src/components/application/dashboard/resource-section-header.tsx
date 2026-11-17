@@ -72,14 +72,14 @@ export function ResourceSectionHeader({
         rather than wrapping into a second row of chrome. */}
     {tagged && <div className="resource-tags" ref={tags.ref} data-fade={tags.fade} role="group" aria-label="Filter by category">
       <Button
-        variant={activeCategory === null ? 'primary' : 'secondary'}
+        variant="ghost"
         size="sm"
         aria-pressed={activeCategory === null}
         onClick={() => onCategoryChange(null)}
       >All</Button>
       {categories.map(category => <Button
         key={category}
-        variant={activeCategory === category ? 'primary' : 'secondary'}
+        variant="ghost"
         size="sm"
         aria-pressed={activeCategory === category}
         onClick={() => onCategoryChange(category)}

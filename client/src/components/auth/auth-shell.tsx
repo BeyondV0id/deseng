@@ -185,7 +185,7 @@ export function AuthSocial({ verb, disabled, onProvider }: {
       {socialProviders.map((provider) => <Button
         key={provider}
         type="button"
-        variant="secondary"
+        variant="ghost"
         size="md"
         disabled={disabled}
         aria-label={`${verb} with ${providerLabel[provider]}`}

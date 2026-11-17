@@ -58,6 +58,7 @@ export function CatalogStatus({ status, onRetry }: {
                 <div className="resource-card-caption">
                   <span className="resource-name catalog-skeleton-name" />
                 </div>
+                <span className="catalog-skeleton-description" />
               </div>)}
             </div>
           </div>)}

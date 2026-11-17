@@ -6,6 +6,7 @@ import type { LibraryMoodboard } from '@/lib/library-types'
 import type { Resource } from '@/catalog'
 import { Tooltip } from '@/components/arc/tooltip/tooltip'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/arc/popover/popover'
+import { Button } from '@/components/arc/button/button'
 
 /** The site's own mark, for entries the catalogue could not capture a preview of. */
 function LogoPreview({ siteName, src }: { siteName: string; src?: string | null }) {
@@ -73,13 +74,15 @@ export function ResourceCard({ resource, moodboards, signedIn, onRequireAccount,
           the picture belongs to the site, the caption to the library. */}
       <div className="resource-card-tools">
         <Tooltip content={resource.favorite ? 'Saved' : 'Save'}>
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             type="button"
             aria-pressed={resource.favorite}
             className={cn('resource-card-tool favorite-button', resource.favorite && 'is-favorite')}
             onClick={() => onFavorite(resource.id)}
             aria-label={resource.favorite ? `Remove ${title} from saved` : `Save ${title}`}
-          ><Bookmark size={15} weight={resource.favorite ? 'Filled' : 'Outline'} /></button>
+          ><Bookmark size={15} weight={resource.favorite ? 'Filled' : 'Outline'} /></Button>
         </Tooltip>
         <Popover open={filingOpen} onOpenChange={next => {
           if (next && !signedIn) {
@@ -113,5 +116,6 @@ export function ResourceCard({ resource, moodboards, signedIn, onRequireAccount,
         </Popover>
       </div>
     </div>
+    <p className="resource-card-description">{resource.description || 'Visit the source to explore this resource.'}</p>
   </Card>
 }

@@ -29,7 +29,7 @@ const columns: SiteFooterColumn[] = [
     title: 'Reference',
     links: [
       { label: 'Info', href: pathForView(infoView) },
-      { label: 'Submit', href: pathForView(infoView) },
+      { label: 'Submit', href: '/?submit=resource' },
       { label: 'Sponsor', href: pathForView(sponsorView) },
       { label: 'Contact', href: 'https://github.com/BeyondV0id/deseng/issues', external: true },
       { label: 'X', href: 'https://x.com', external: true },

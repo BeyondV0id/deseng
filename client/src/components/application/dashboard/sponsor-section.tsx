@@ -1,149 +1,97 @@
 import { Badge } from '@/components/arc/badge/badge'
-import { Button } from '@/components/arc/button/button'
-import {
-  AccordionContent,
-  AccordionGroup,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
-import { sponsorBooking } from '@/lib/ads'
+import { BrandMark } from '@/components/brand/brand-mark'
+import { ArrowUpRight, Box, Grid, Pen, Plus } from '@/components/icons'
+import { AccordionContent, AccordionGroup, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { featuredToolSlots, sponsorBooking } from '@/lib/ads'
 import styles from './sponsor-section.module.css'
 
-/**
- * The two placements a sponsor can buy, in the order the inventory uses them.
- * Each one is a plan card: the feed position, and that position plus the
- * sidebar. Both run for a month, both are labelled, and both are booked
- * through the same address.
- */
 const plans = [
-  {
-    name: 'Gold',
-    price: '$150',
-    recommended: false,
-    features: [
-      'A sponsored row in the feed',
-      'Your mark in the top strip',
-      'A Sponsored label on both',
-      'One month at a time',
-    ],
-  },
-  {
-    name: 'Sidebar',
-    price: '$250',
-    recommended: true,
-    features: [
-      'Everything in Gold',
-      'A card in the sidebar',
-      'One line about your product',
-      'A link to your site for the month',
-    ],
-  },
+  { name: 'Gold', price: '$150', features: ['A sponsored card in the feed', 'Your mark in the top strip', 'Both placements labelled Sponsored'] },
+  { name: 'Sidebar', price: '$250', features: ['Everything in Gold', 'A card in the sidebar', 'Your image, description and destination link'] },
 ]
 
 const sponsorFaqs = [
-  {
-    value: 'does-sponsorship-include-a-listing',
-    question: 'Does sponsorship include a catalogue listing?',
-    answer: 'No. Catalogue selection stays editorial. Sponsorship buys only the labelled placements on this page.',
-  },
-  {
-    value: 'how-are-placements-identified',
-    question: 'How are sponsored placements identified?',
-    answer: 'Every paid placement carries a Sponsored label, so it reads apart from the catalogue.',
-  },
-  {
-    value: 'what-assets-are-required',
-    question: 'What assets are required?',
-    answer: 'A square mark, your product name, one line about it and a destination URL. We review the copy and assets before launch.',
-  },
-  {
-    value: 'can-i-change-or-remove-a-placement',
-    question: 'Can I change or remove a placement?',
-    answer: 'Yes. Contact us to update or remove it. Refunds depend on the launch date and the reason.',
-  },
+  { value: 'listing', question: 'Does sponsorship include a catalogue listing?', answer: 'No. Catalogue selection stays editorial. Sponsorship buys only the labelled placements on this page.' },
+  { value: 'labels', question: 'How are sponsored placements identified?', answer: 'Every paid placement carries a Sponsored label. Your placement never changes the order of the catalogue or its search results.' },
+  { value: 'assets', question: 'What do I need to send?', answer: 'A square logo, a preview image, your product name, one line about it and a destination URL. We review the copy and assets with you before launch.' },
+  { value: 'updates', question: 'Can I change or remove a placement?', answer: 'Yes. Contact us to update or remove it. Placements run for one month, and refunds depend on the launch date and the reason.' },
 ]
 
-/**
- * The sponsor page, at `/sponsor`, which every `Your Brand Here` card links to.
- *
- * It reads like the rest of the library: a page heading, the argument in two
- * sentences, the two plans as cards, and the questions a sponsor asks before
- * booking. The cards are resting surfaces, not buttons: only the book action
- * answers the pointer.
- */
+function FeedPreview() {
+  return <div className={styles.feedPreview} aria-hidden="true">
+    {[false, true, false].map((sponsored, index) => <div key={index} className={sponsored ? styles.previewCardFeatured : styles.previewCard}>
+      <div className={styles.previewMedia}>{sponsored && <><Badge size="sm">Sponsored</Badge><span>Your card</span></>}</div>
+      <i /><i /><i />
+    </div>)}
+  </div>
+}
+
+function StripPreview() {
+  return <div className={styles.stripPreview} aria-hidden="true">
+    <div className={styles.previewBrand}><BrandMark /><span>Reference</span></div>
+    <p>Sponsors</p>
+    <div className={styles.previewMarks}>
+      <span><Grid size={16} /></span><span><Pen size={16} /></span><span><Box size={16} /></span>
+      <span className={styles.yourMark}>You</span><Plus size={16} />
+    </div>
+    <div className={styles.previewLines}><i /><i /><i /></div>
+  </div>
+}
+
 export function SponsorSection() {
-  const paymentLink = sponsorBooking.paymentLink
-  const href = paymentLink ?? sponsorBooking.enquiryHref
+  const href = sponsorBooking.paymentLink ?? sponsorBooking.enquiryHref
+  const available = featuredToolSlots.filter(slot => slot === null).length
 
   return <section id="sponsor" className={styles.sponsor} aria-labelledby="sponsor-title">
-    <header className="resource-section-header">
-      <div className="resource-section-title">
-        <h1 id="sponsor-title">Sponsor</h1>
-        <p className="page-description">
-          Reach designers and developers while they look for something to use.
-          Every placement is labelled and fixed in place, so it never moves the catalogue.
-        </p>
-      </div>
+    <header className={styles.intro}>
+      <h1 id="sponsor-title">Put your tool in the picture</h1>
+      <p>Reach designers and developers as they browse for their next useful find. A place in the feed, a mark in the top strip, and a clear Sponsored label.</p>
+      <a className={`${styles.primaryLink} app-action-primary`} href="#sponsor-plans">View sponsorship plans</a>
+      <span className={styles.availability}>{available > 0 ? `${available} feed ${available === 1 ? 'spot' : 'spots'} available` : 'Ask about the next available spot'} · One month at a time</span>
     </header>
 
     <div className={styles.body}>
-      <section className={styles.plansBlock} aria-labelledby="sponsor-plans-title">
+      <section aria-labelledby="sponsor-placements-title">
         <div className={styles.blockHead}>
-          <h2 id="sponsor-plans-title">Plans</h2>
-          <p className={styles.blockNote}>
-            One month each. The sidebar plan adds a card to everything Gold already buys.
-          </p>
+          <h2 id="sponsor-placements-title">Two places to be found</h2>
+          <p className={styles.blockNote}>Your card among the resources. Your mark above the catalogue. Both are included in Gold, with an optional sidebar placement for more room.</p>
         </div>
+        <div className={styles.placements}>
+          <figure className={styles.placement}>
+            <div className={styles.placementImage} role="img" aria-label="A sponsored resource card sits between two regular cards in the browse feed"><FeedPreview /></div>
+            <figcaption>A card in the browse feed, with the same shape as the resources around it</figcaption>
+          </figure>
+          <figure className={styles.placement}>
+            <div className={styles.placementImage} role="img" aria-label="Your logo appears alongside the other marks in the sponsors strip"><StripPreview /></div>
+            <figcaption>Your mark in the sponsor strip, visible as people browse the library</figcaption>
+          </figure>
+        </div>
+        <div className={styles.howItWorks}>
+          <div><h3>Bring your product</h3><p>A logo, a preview image, one line and a link. We check the details with you before your placement goes live.</p></div>
+          <div><h3>Book a month</h3><p>Every placement runs for one month. Choose the space that suits your product and confirm the dates with us.</p></div>
+          <div><h3>Keep it current</h3><p>New artwork, a new link or a different line. Contact us when your placement needs an update.</p></div>
+        </div>
+      </section>
 
+      <section id="sponsor-plans" className={styles.plansBlock} aria-labelledby="sponsor-plans-title">
+        <div className={styles.blockHead}><h2 id="sponsor-plans-title">Choose your placement</h2><p className={styles.blockNote}>A fixed place for a month. The catalogue keeps its own order.</p></div>
         <div className={styles.plans}>
-          {plans.map(plan => <article
-            key={plan.name}
-            className={styles.plan}
-            aria-labelledby={`sponsor-plan-${plan.name.toLowerCase()}`}
-          >
-            <div className={styles.planHead}>
-              <h3 id={`sponsor-plan-${plan.name.toLowerCase()}`} className={styles.planName}>{plan.name}</h3>
-              {plan.recommended ? <Badge size="sm" className={styles.planBadge}>Most reach</Badge> : null}
-            </div>
-
-            <p className={styles.price}>
-              {plan.price}
-              <span className={styles.period}>a month</span>
-            </p>
-
-            <ul className={styles.features}>
-              {plan.features.map(feature => <li key={feature}>{feature}</li>)}
-            </ul>
-
-            <Button
-              variant={plan.recommended ? 'primary' : 'secondary'}
-              className={styles.book}
-              onClick={() => { window.location.href = href }}
-            >
-              Book {plan.name}
-            </Button>
+          {plans.map(plan => <article key={plan.name} className={styles.plan} aria-labelledby={`sponsor-plan-${plan.name.toLowerCase()}`}>
+            <h3 id={`sponsor-plan-${plan.name.toLowerCase()}`} className={styles.planName}>{plan.name}</h3>
+            <p className={styles.price}>{plan.price}<span>a month</span></p>
+            <ul className={styles.features}>{plan.features.map(feature => <li key={feature}>{feature}</li>)}</ul>
+            <a className={`${styles.book} app-action-secondary`} href={href} target="_blank" rel="noreferrer">{sponsorBooking.paymentLink ? `Book ${plan.name}` : `Enquire about ${plan.name}`}<ArrowUpRight size={16} /></a>
           </article>)}
         </div>
+        {!sponsorBooking.paymentLink && <p className={styles.bookingNote}>Booking enquiries open our contact page. We confirm availability and payment details with you.</p>}
       </section>
 
       <section className={styles.faq} aria-labelledby="sponsor-faq-title">
-        <div className={styles.blockHead}>
-          <h2 id="sponsor-faq-title">Frequently asked questions</h2>
-        </div>
-
-        <AccordionGroup type="single" collapsible defaultValue={sponsorFaqs[0].value} className="w-full">
-          {sponsorFaqs.map((faq, index) => (
-            <AccordionItem key={faq.value} value={faq.value} index={index}>
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
+        <div className={styles.blockHead}><h2 id="sponsor-faq-title">Questions</h2></div>
+        <AccordionGroup type="single" collapsible defaultValue="listing" className="w-full">
+          {sponsorFaqs.map((faq, index) => <AccordionItem key={faq.value} value={faq.value} index={index}><AccordionTrigger>{faq.question}</AccordionTrigger><AccordionContent>{faq.answer}</AccordionContent></AccordionItem>)}
         </AccordionGroup>
       </section>
     </div>
-
-    <p className={styles.submissionTerms}>
-      By booking, you agree to our terms and privacy policy.
-    </p>
   </section>
 }
