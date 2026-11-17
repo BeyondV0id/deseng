@@ -18,7 +18,6 @@ export type Collection = { id: string; label: string; description: string; categ
 /** Every tag, in the order the shelves present them. */
 export const categories: string[] = [
   // Observe: what shipped, recorded and archived.
-  'Site showcases',
   'Product flows',
   'Interaction demos',
   'Identity systems',
@@ -78,8 +77,8 @@ export const collections: Collection[] = [
   {
     id: 'Observe',
     label: 'Observe',
-    description: 'Shipped sites, recorded flows and references to study before you open an editor.',
-    categories: ['Site showcases', 'Product flows', 'Interaction demos', 'Identity systems', 'Visual search'],
+    description: 'Recorded flows, interactions and visual references to study before you open an editor.',
+    categories: ['Product flows', 'Interaction demos', 'Identity systems', 'Visual search'],
   },
   {
     id: 'Read',

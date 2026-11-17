@@ -427,12 +427,6 @@
       "category": "Agent context"
     },
     {
-      "name": "Awwwards",
-      "url": "https://www.awwwards.com",
-      "description": "Juried awards for experimental web work. Read it for technique.",
-      "category": "Site showcases"
-    },
-    {
       "name": "Stitch",
       "url": "https://stitch.withgoogle.com",
       "description": "Google Labs tool that turns prompts and sketches into UI and code.",
@@ -739,12 +733,6 @@
       "category": "Illustrations"
     },
     {
-      "name": "Land-book",
-      "url": "https://land-book.com",
-      "description": "Landing pages sorted by industry, style and color.",
-      "category": "Site showcases"
-    },
-    {
       "name": "Skills",
       "url": "https://skills.sh",
       "description": "Reusable Agent Skills that teach an agent how to do a job.",
@@ -871,12 +859,6 @@
       "category": "Essays"
     },
     {
-      "name": "One Page Love",
-      "url": "https://onepagelove.com",
-      "description": "Single-page sites and portfolios, curated since 2008.",
-      "category": "Site showcases"
-    },
-    {
       "name": "AI Elements",
       "url": "https://ai-sdk.dev/elements",
       "description": "Vercel's components for chat, reasoning and sources.",
@@ -941,12 +923,6 @@
       "url": "https://ray.so",
       "description": "Beautiful images of code snippets.",
       "category": "Code tools"
-    },
-    {
-      "name": "SiteInspire",
-      "url": "https://www.siteinspire.com",
-      "description": "Long-running, hand-picked showcase of restrained, typographic sites.",
-      "category": "Site showcases"
     },
     {
       "name": "Material Design 3",
@@ -1111,12 +1087,6 @@
       "category": "Screen recording"
     },
     {
-      "name": "Lapa Ninja",
-      "url": "https://www.lapa.ninja",
-      "description": "Large landing page archive with a free design book section.",
-      "category": "Site showcases"
-    },
-    {
       "name": "React Bits",
       "url": "https://www.reactbits.dev",
       "description": "Animated text, backgrounds and components with prop playgrounds.",
@@ -1243,12 +1213,6 @@
       "category": "Illustrations"
     },
     {
-      "name": "Recent",
-      "url": "https://recent.design",
-      "description": "Motion-heavy web design, recorded as video so you see the interaction, not a still.",
-      "category": "Site showcases"
-    },
-    {
       "name": "The Book of Shaders",
       "url": "https://thebookofshaders.com",
       "description": "Step-by-step guide to fragment shaders.",
@@ -1303,12 +1267,6 @@
       "category": "3D scanning"
     },
     {
-      "name": "Minimal Gallery",
-      "url": "https://minimal.gallery",
-      "description": "Sites that do more with less: whitespace, type and one idea.",
-      "category": "Site showcases"
-    },
-    {
       "name": "assistant-ui",
       "url": "https://www.assistant-ui.com",
       "description": "Composable React primitives for chat interfaces.",
@@ -1325,12 +1283,6 @@
       "url": "https://rotato.app",
       "description": "Animated 3D device mockups from recordings.",
       "category": "Screen recording"
-    },
-    {
-      "name": "Saaspo",
-      "url": "https://saaspo.com",
-      "description": "Software landing pages, tagged by section and layout.",
-      "category": "Site showcases"
     },
     {
       "name": "KIRI Engine",
@@ -1477,12 +1429,6 @@
       "category": "Notes"
     },
     {
-      "name": "SaaS Landing Page",
-      "url": "https://saaslandingpage.com",
-      "description": "Marketing pages split into hero, pricing and proof sections.",
-      "category": "Site showcases"
-    },
-    {
       "name": "The Component Gallery",
       "url": "https://component.gallery",
       "description": "Components compared across public design systems.",
@@ -1553,66 +1499,6 @@
       "url": "https://viewer.needle.tools",
       "description": "Drop in a glTF to inspect it and check what it will cost.",
       "category": "Shaders"
-    },
-    {
-      "name": "Httpster",
-      "url": "https://httpster.net",
-      "description": "Opinionated picks of sites with a point of view.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "loadmo.re",
-      "url": "https://loadmo.re",
-      "description": "Archive of unusual mobile websites and mobile-first experiments.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "Inspora",
-      "url": "https://inspora.design",
-      "description": "Design inspiration refreshed hourly across web, branding, product, motion and print.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "Curated Design",
-      "url": "https://www.curated.design",
-      "description": "Web design filtered by style and category.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "SEESAW",
-      "url": "https://www.seesaw.website",
-      "description": "Inspiration sorted by page section rather than whole site.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "Supahero",
-      "url": "https://www.supahero.io",
-      "description": "Nothing but hero sections, for when the first screen is the problem.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "Dark Mode Design",
-      "url": "https://www.darkmodedesign.com",
-      "description": "Sites built dark-first, for when dark has to feel intentional.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "Layers",
-      "url": "https://layers.to",
-      "description": "Community where designers post work in progress and finished pieces.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "Godly",
-      "url": "https://godly.website",
-      "description": "Websites with remarkable typography and layout.",
-      "category": "Site showcases"
-    },
-    {
-      "name": "Minimum",
-      "url": "https://mnmm.xyz",
-      "description": "A gallery of carefully reduced interfaces.",
-      "category": "Site showcases"
     },
     {
       "name": "Screenlane",
