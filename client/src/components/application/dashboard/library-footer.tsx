@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { BrandMark } from '@/components/brand/brand-mark'
 import { SiteFooter, type SiteFooterColumn, type SiteFooterLink } from '@/components/arc/blocks/site-footer/site-footer'
 import { NAV_SECTIONS } from '@/components/sidebar-preset/nav-data'
-import { allResources, cookiesView, infoView, licenceView, pathForView, privacyView, refundsView, sponsorView, termsView } from '@/lib/view-path'
+import { allResources, cookiesView, infoView, licenceView, pathForView, privacyView, refundsView, sponsorView, submitView, termsView } from '@/lib/view-path'
 import styles from './library-footer.module.css'
 
 const browseLinks: SiteFooterLink[] = NAV_SECTIONS
@@ -29,7 +29,7 @@ const columns: SiteFooterColumn[] = [
     title: 'Reference',
     links: [
       { label: 'Info', href: pathForView(infoView) },
-      { label: 'Submit', href: pathForView(infoView) },
+      { label: 'Submit', href: pathForView(submitView) },
       { label: 'Sponsor', href: pathForView(sponsorView) },
       { label: 'Contact', href: 'https://github.com/BeyondV0id/deseng/issues', external: true },
       { label: 'X', href: 'https://x.com', external: true },

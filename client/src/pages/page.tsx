@@ -8,7 +8,6 @@ import { Dialog, DialogContent } from '@/components/arc/dialog/dialog'
 import { Input } from '@/components/arc/input/input'
 import { Textarea } from '@/components/arc/textarea/textarea'
 import { ColorPicker } from '@/components/arc/color-picker/color-picker'
-import { SubmitDialog } from '@/components/application/dashboard/submit-dialog'
 import { AppNavbar } from '@/components/application/dashboard/app-navbar'
 import { CatalogStatus } from '@/components/application/dashboard/catalog-status'
 import { Dashboard } from '@/components/application/dashboard/dashboard'
@@ -31,7 +30,7 @@ import { clearAuthIntent, setAuthIntent, takeAuthIntent, type AuthIntent } from 
 import { usePageMeta } from '@/hooks/use-page-meta'
 import { deleteUser, listAccounts, signOut, updateUser } from '@/lib/auth-client'
 import { categoryFromView, categoryView, comparePopularity, collectionById, type Resource } from '@/catalog'
-import { allResources, favorites, infoView, legalViews, moodboardShelf, pathForView, sponsorView, viewForPath } from '@/lib/view-path'
+import { allResources, favorites, infoView, legalViews, moodboardShelf, pathForView, sponsorView, submitView, viewForPath } from '@/lib/view-path'
 
 /** The view strings the app reasons in; their addresses live in `view-path`. */
 const views = { allResources, favorites, moodboardShelf, infoView }
@@ -384,7 +383,6 @@ export default function Page() {
   const [resources, setResources] = useState<Resource[]>([])
   const [moodboards, setMoodboards] = useState<LibraryMoodboard[]>([])
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
-  const [addOpen, setAddOpen] = useState(false)
   const [moodboardOpen, setMoodboardOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [moodboardToEdit, setMoodboardToEdit] = useState<LibraryMoodboard | null>(null)
@@ -450,7 +448,7 @@ export default function Page() {
 
     if (intent.kind === 'view') { setView(intent.view); return }
     if (intent.kind === 'new-moodboard') { setMoodboardOpen(true); return }
-    if (intent.kind === 'submit') { setAddOpen(true); return }
+    if (intent.kind === 'submit') { setView(submitView); return }
 
     void api.setResourceState(intent.resourceId, { favorite: true })
       .then(({ resource }) => {
@@ -581,11 +579,7 @@ export default function Page() {
   }
 
   function openSubmit() {
-    if (!signedIn) {
-      requestAccount({ kind: 'submit' })
-      return
-    }
-    setAddOpen(true)
+    setView(submitView)
   }
 
   /** A card's moodboard menu, reached before the visitor has an account. */
@@ -738,17 +732,12 @@ export default function Page() {
             onOpenShelf={selectView}
             onNewMoodboard={openNewMoodboard}
             onAddResource={openSubmit}
+            onSubmitResource={addResource}
             onEditMoodboard={setMoodboardToEdit}
             onDeleteMoodboard={id => setMoodboardForDeletion(moodboards.find(moodboard => moodboard.id === id) ?? null)}
           />
           : <CatalogStatus status={status} onRetry={() => { void loadLibrary() }} />}
       </SidebarInset>
-      <SubmitDialog
-        open={addOpen}
-        onClose={() => setAddOpen(false)}
-        onSubmit={addResource}
-        onFeatured={() => selectView(sponsorView)}
-      />
       <MoodboardDialog open={moodboardOpen} onClose={() => setMoodboardOpen(false)} onCreate={addMoodboard} />
       <EditMoodboardDialog moodboard={moodboardToEdit} onClose={() => setMoodboardToEdit(null)} onSave={editMoodboard} />
       <SettingsDialog open={settingsOpen} account={account} onClose={() => setSettingsOpen(false)} />

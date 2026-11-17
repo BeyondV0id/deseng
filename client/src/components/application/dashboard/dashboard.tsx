@@ -9,6 +9,7 @@ import { ExplorePage } from './explore-page'
 import { InfoContent } from './info-content'
 import { LegalContent, legalDocuments } from './legal-content'
 import { SponsorContent } from './sponsor-content'
+import { SubmitSection } from './submit-section'
 
 type DashboardProps = {
   view: string
@@ -28,6 +29,7 @@ type DashboardProps = {
   onOpenShelf: (view: string) => void
   onNewMoodboard: () => void
   onAddResource: () => void
+  onSubmitResource: (item: Pick<Resource, 'name' | 'url' | 'description' | 'category'>) => Promise<string | null>
   onEditMoodboard: (moodboard: LibraryMoodboard) => void
   onDeleteMoodboard: (moodboardId: string) => void
 }
@@ -77,7 +79,7 @@ function MoodboardLibrary({ moodboards, resources, onOpenMoodboard, onNewMoodboa
 export function Dashboard(props: DashboardProps) {
   const {
     view, heading, subheading, resources, allResources, moodboards, query,
-    signedIn, onRequireAccount, onFavorite, onFile, onOpenMoodboard, onOpenCategory, onOpenShelf, onNewMoodboard, onAddResource, onEditMoodboard, onDeleteMoodboard,
+    signedIn, onRequireAccount, onFavorite, onFile, onOpenMoodboard, onOpenCategory, onOpenShelf, onNewMoodboard, onAddResource, onSubmitResource, onEditMoodboard, onDeleteMoodboard,
   } = props
 
   return <div className="dashboard-main">
@@ -88,6 +90,8 @@ export function Dashboard(props: DashboardProps) {
           ? <InfoContent total={allResources.length} />
           : view === 'Sponsor'
             ? <SponsorContent />
+            : view === 'Submit'
+              ? <SubmitSection onSubmit={onSubmitResource} />
             : legalDocuments[view]
             ? <LegalContent page={legalDocuments[view]} />
           : view === 'All resources'

@@ -1,7 +1,7 @@
 /**
  * The one action a visitor asked for before signing in, kept across the trip
  * through the auth pages so the page can finish the job when they return:
- * a favourite, the favourites view, a new moodboard or a submission.
+ * a favourite, the favourites view, a new moodboard or the submit page.
  *
  * It lives in sessionStorage, not localStorage: it belongs to this tab and to
  * one trip through sign-in, and it is read and removed in the same breath.

@@ -95,7 +95,7 @@ export function AppNavbar({
   onOpenTag: (category: string) => void
   /** The whole catalogue, so the search reaches past the view on screen. */
   resources: Resource[]
-  /** Opens the submit dialog. */
+  /** Opens the submit page. */
   onSubmitResource: () => void
   /** The view on screen, so the favourites shortcut can mark itself. */
   selected: string
