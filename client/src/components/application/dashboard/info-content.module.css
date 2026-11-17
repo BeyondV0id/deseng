@@ -7,35 +7,38 @@
   min-width: 0;
 }
 
-/* -- At a glance ----------------------------------------------------------
-   One line, not a card: a large numeral with its label set small beside it.
-   8 shelves, 47 tags and 414 entries. The line wraps as a sentence on a
-   narrow screen, and the numbers keep the same step so the row stays even. */
-
 .stats {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 6px 26px;
-  margin: 14px 0 0;
-  color: var(--text-secondary);
-  font-size: clamp(13px, 1.1vw, 14.5px);
-  letter-spacing: -.01em;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 32px 0 0;
 }
 
 .stat {
-  display: inline-flex;
-  align-items: baseline;
+  display: flex;
+  min-width: 0;
+  min-height: 128px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
-  white-space: nowrap;
+  padding: 24px 16px;
+  border-radius: var(--radius-card);
+  background: var(--surface-muted);
+  text-align: center;
+}
+
+.statLabel {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.5;
 }
 
 .statValue {
+  order: -1;
+  margin: 0;
   color: var(--text-primary);
-  font-size: clamp(28px, 3vw, 34px);
-  font-weight: 500;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -.04em;
   line-height: 1;
 }
 
@@ -52,7 +55,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
 }
 
 .info h2 {
@@ -120,5 +123,22 @@
   .questions {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 22px;
+  }
+}
+
+@media (max-width: 479px) {
+  .stats {
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .stat {
+    min-height: 112px;
+    padding: 20px 8px;
+    border-radius: var(--radius-card-inset);
+  }
+
+  .statLabel {
+    font-size: var(--text-xs);
   }
 }

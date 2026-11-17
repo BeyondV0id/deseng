@@ -1,3 +1,4 @@
+import { AnimatedCounter } from '@/components/arc/animated-counter/animated-counter'
 import { categories, collections } from '@/catalog'
 import { LibraryFooter } from './library-footer'
 
@@ -56,22 +57,21 @@ export function InfoContent({ total }: { total: number }) {
   return <section className={styles.info} aria-labelledby="info-title">
     <header className="resource-section-header">
       <div className="resource-section-title">
-        <h1 id="info-title">Find What You Need.</h1>
+        <h1 id="info-title">Find what you need</h1>
         <p className="page-description">{infoDescription}</p>
       </div>
     </header>
 
-    <p className={styles.stats}>
-      <span className={styles.stat}>
-        <span className={styles.statValue}>{collections.length}</span> shelves,
-      </span>
-      <span className={styles.stat}>
-        <span className={styles.statValue}>{categories.length}</span> tags and
-      </span>
-      <span className={styles.stat}>
-        <span className={styles.statValue}>{total}</span> entries
-      </span>
-    </p>
+    <dl className={styles.stats} aria-label="The library in numbers">
+      {[
+        { value: total, label: 'Tools listed' },
+        { value: categories.length, label: 'Categories' },
+        { value: collections.length, label: 'Shelves to explore' },
+      ].map(stat => <div className={styles.stat} key={stat.label}>
+        <dt className={styles.statLabel}>{stat.label}</dt>
+        <dd className={styles.statValue}><AnimatedCounter value={stat.value} /></dd>
+      </div>)}
+    </dl>
 
     <div className={styles.body}>
       <section className={styles.intro} aria-labelledby="what-title">

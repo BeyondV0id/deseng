@@ -2222,12 +2222,22 @@ h2 {
   position: relative;
   z-index: 0;
   min-width: 0;
-  flex: 1;
+  min-height: 0;
+  height: 24px;
+  flex: 1 1 0;
+  align-self: center;
+  margin: 0;
+  padding: 0;
   border: 0;
+  border-radius: 0;
+  appearance: none;
   background: transparent;
+  box-shadow: none;
   color: var(--foreground);
+  caret-color: var(--foreground);
   font: inherit;
   font-size: 14px;
+  line-height: 24px;
   letter-spacing: var(--tracking-body);
   outline: 0;
   text-overflow: ellipsis;
@@ -2249,6 +2259,10 @@ h2 {
 
 .app-search-input::-webkit-search-cancel-button {
   display: none;
+}
+
+@media (pointer: coarse) {
+  .app-search-input { font-size: 16px; }
 }
 
 /* The hint is plain text at rest, as the reference draws it. */
@@ -3872,11 +3886,10 @@ html.transitioning *::after {
   margin-top: 20px;
 }
 
-/* Two providers read as one row of equal choices, the way the reference does;
-   a single provider takes the whole line. */
+/* Each provider has room for its full label at the form's narrowest width. */
 .auth-social {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
   margin-top: 20px;
 }
@@ -3884,6 +3897,8 @@ html.transitioning *::after {
 .auth-social>button {
   width: 100%;
   justify-content: center;
+  background: var(--surface-muted);
+  color: var(--text-primary);
 }
 
 .auth-divider {
@@ -4298,9 +4313,10 @@ html.transitioning *::after {
    Buttons are the one place a colour is spent: one filled action, one quiet
    control, and nothing else in the app changes hue for them. The filled action
    is the submit action: the catalogue's single coloured action, the submit
-   accent, not a generic action blue. The finish is four layers (a white inner
-   stroke, an inner glow, a drop shadow and a ring on the fill), so the button
-   reads as a physical object rather than a rectangle, and both tiers share it. */
+   accent, not a generic action blue. The finish is the layered one the
+   refreshed controls use: a sheen, a vertical fill, an edge and a drop, so the
+   button reads as a physical object rather than a rectangle. Every layer is
+   derived from the one accent below, so the finish never introduces a colour. */
 :root {
   --submit-accent: #a855f7;
   --submit-accent-hover: #b365ff;
@@ -4320,28 +4336,171 @@ html.transitioning *::after {
   --action-quiet-ring: #ececec;
   --action-quiet-ring-press: #e6e6e6;
   --action-quiet-label: #1a1a1a;
+
+  --action-fill-bottom: color-mix(in oklab, var(--action-fill) 78%, black);
+  --action-edge-top: color-mix(in srgb, var(--action-fill), white 34%);
+  --action-edge-bottom: color-mix(in srgb, var(--action-fill), black 22%);
+  --action-sheen: linear-gradient(rgb(255 255 255 / 12%), transparent 50%);
+  --action-shade: rgb(0 0 0 / 18%);
+  --action-drop-near: rgb(0 0 0 / 10%);
+  --action-glow: transparent;
+  --action-quiet-edge-top: transparent;
+  --action-quiet-edge-bottom: rgb(0 0 0 / 6%);
+  --action-quiet-drop-near: rgb(0 0 0 / 4%);
+  --action-quiet-drop: rgb(0 0 0 / 5%);
+  --action-ease: cubic-bezier(.215, .61, .355, 1);
 }
 
-/* The ring rides the same 160ms as the fill it sits on, so a hover or a press
-   moves one object rather than a fill and an outline that arrive separately. */
-@property --action-ring {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #296ff0;
-}
-
-/* Dark keeps the fill exactly as it is, so the white label still passes at
-   4.55:1; only the inner stroke drops, because a white line reads brighter on
-   a dark ground. The quiet control turns into a dark gradient with a hairline
-   ring, which is what a lifted control looks like here. */
 :root.dark {
-  --action-inner-stroke: rgb(255 255 255 / .28);
-  --action-quiet-top: #202020;
-  --action-quiet-bottom: #1a1a1a;
-  --action-quiet-top-hover: #262626;
-  --action-quiet-bottom-hover: #202020;
-  --action-quiet-press: #1e1e1e;
-  --action-quiet-ring: #2e2e2e;
-  --action-quiet-ring-press: #383838;
-  --action-quiet-label: #f2f2f2;
+  --action-sheen: linear-gradient(rgb(255 255 255 / 14%), transparent 45%);
+  --action-drop-near: rgb(0 0 0 / 25%);
+  --action-drop: rgb(0 0 0 / 38%);
+  --action-glow: color-mix(in srgb, var(--action-fill) 30%, transparent);
+  --action-quiet-top: #2c2c30;
+  --action-quiet-bottom: #38383c;
+  --action-quiet-edge-top: #56565b;
+  --action-quiet-edge-bottom: #36363a;
+  --action-quiet-drop-near: transparent;
+  --action-quiet-drop: rgb(0 0 0 / 40%);
+}
+
+/* Keep the finish in the application layer; Arc still owns loading and focus. */
+button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]),
+.app-action-primary,
+.app-action-secondary {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 4.875px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  box-shadow: none;
+  padding: 0 11.375px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 150ms var(--action-ease), opacity 150ms var(--action-ease), transform 150ms var(--action-ease);
+}
+
+button[class*="_button_"][class*="_primary_"], .app-action-primary { color: var(--action-label); }
+button[class*="_button_"][class*="_secondary_"], .app-action-secondary { color: var(--action-quiet-label); }
+button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"])[class*="_sm_"],
+.app-action-primary, .app-action-secondary { min-height: 32px; }
+
+button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"])::before,
+.app-action-primary::before, .app-action-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  --button-top: var(--button-base);
+  --button-bottom: var(--button-lit);
+  background:
+    var(--button-sheen, linear-gradient(transparent, transparent)) padding-box,
+    linear-gradient(var(--button-top), var(--button-bottom)) padding-box,
+    linear-gradient(var(--button-edge-top), color-mix(in srgb, var(--button-edge-top), var(--button-edge-bottom)), var(--button-edge-bottom)) border-box,
+    linear-gradient(var(--button-top), var(--button-bottom)) border-box;
+  box-shadow:
+    inset 0 -3px 6px -3px var(--button-shade, transparent),
+    0 1px 1px var(--button-drop-near),
+    0 2px 4px var(--button-drop),
+    0 8px 20px -8px var(--button-glow, transparent);
+  transition: --button-top 150ms var(--action-ease), --button-bottom 150ms var(--action-ease), box-shadow 150ms var(--action-ease);
+}
+
+button[class*="_primary_"]::before, .app-action-primary::before {
+  --button-base: var(--action-fill);
+  --button-lit: var(--action-fill-bottom);
+  --button-sheen: var(--action-sheen);
+  --button-edge-top: var(--action-edge-top);
+  --button-edge-bottom: var(--action-edge-bottom);
+  --button-shade: var(--action-shade);
+  --button-drop-near: var(--action-drop-near);
+  --button-drop: var(--action-drop);
+  --button-glow: var(--action-glow);
+}
+button[class*="_secondary_"]::before, .app-action-secondary::before {
+  --button-base: var(--action-quiet-top);
+  --button-lit: var(--action-quiet-bottom);
+  --button-edge-top: var(--action-quiet-edge-top);
+  --button-edge-bottom: var(--action-quiet-edge-bottom);
+  --button-drop-near: var(--action-quiet-drop-near);
+  --button-drop: var(--action-quiet-drop);
+}
+@property --button-top { syntax: "<color>"; inherits: false; initial-value: transparent; }
+@property --button-bottom { syntax: "<color>"; inherits: false; initial-value: transparent; }
+
+button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):is(:hover, :active):not(:disabled),
+.app-action-primary:is(:hover, :active), .app-action-secondary:is(:hover, :active) {
+  background: transparent;
+  box-shadow: none;
+}
+button[class*="_button_"][class*="_primary_"]:is(:hover, :active):not(:disabled), .app-action-primary:is(:hover, :active) { color: var(--action-label); }
+button[class*="_button_"][class*="_secondary_"]:is(:hover, :active):not(:disabled), .app-action-secondary:is(:hover, :active) { color: var(--action-quiet-label); }
+
+@media (hover: hover) and (pointer: fine) {
+  button[class*="_primary_"]:hover:not(:disabled)::before, .app-action-primary:hover::before {
+    --button-top: color-mix(in srgb, var(--button-base), white 4%);
+    --button-bottom: color-mix(in srgb, var(--button-lit), white 4%);
+  }
+  button[class*="_secondary_"]:hover:not(:disabled)::before, .app-action-secondary:hover::before {
+    --button-top: color-mix(in srgb, var(--button-base), black 2%);
+    --button-bottom: color-mix(in srgb, var(--button-lit), black 2%);
+  }
+  .dark button[class*="_secondary_"]:hover:not(:disabled)::before, .dark .app-action-secondary:hover::before {
+    --button-top: color-mix(in srgb, var(--button-base), white 4%);
+    --button-bottom: color-mix(in srgb, var(--button-lit), white 4%);
+  }
+  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):hover:not(:disabled)::before,
+  .app-action-primary:hover::before, .app-action-secondary:hover::before {
+    box-shadow: inset 0 1px 2px color-mix(in srgb, var(--foreground), transparent 96%), 0 2px 5px var(--button-drop);
+  }
+}
+
+button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):disabled { opacity: .5; background: transparent; box-shadow: none; }
+.app-action-primary:active, .app-action-secondary:active { transform: scale(.98); }
+
+@media (hover: hover) and (pointer: fine) {
+  button[class*="_ghost_"]:hover:not(:disabled) {
+    background: var(--hover);
+    color: var(--hover-foreground);
+  }
+}
+
+.app-navbar-actions button.app-navbar-submit[class] {
+  height: 40px;
+  min-height: 40px;
+  padding-inline: 20px;
+  border-radius: var(--radius-pill);
+}
+
+.catalog-skeleton-description { display: block; min-height: 2.9em; margin: 4px 2px 0; background: var(--surface-muted); border-radius: var(--radius-control); font-size: var(--text-sm); line-height: 1.45; }
+.resource-card-tool { border-radius: var(--radius-pill); }
+.resource-card-tool:hover, .resource-card-tool[data-state="open"] { background: var(--hover); color: var(--hover-foreground); }
+.resource-card-caption .resource-card-tool { width: 28px; min-width: 28px; height: 28px; min-height: 28px; padding: 0; }
+
+@media (max-width: 1023.98px) { .app-navbar-actions button.app-navbar-submit[class] { display: none; } }
+@media (pointer: coarse) {
+  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]),
+  .app-action-primary, .app-action-secondary { min-height: 44px; }
+  .resource-card-caption .resource-card-tool { width: 44px; min-width: 44px; height: 44px; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]),
+  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"])::before,
+  .app-action-primary, .app-action-primary::before,
+  .app-action-secondary, .app-action-secondary::before { transition: none; }
+  .app-action-primary:active, .app-action-secondary:active { transform: none; }
+  .resource-card-tools, .resource-card-tool { transition: none; transform: none; }
 }

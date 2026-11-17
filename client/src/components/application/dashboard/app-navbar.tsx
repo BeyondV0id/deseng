@@ -1,6 +1,5 @@
-import { Bookmark, Plus, Setting4 } from '@/components/icons'
+import { Bookmark, Setting4 } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
-import { Tooltip } from '@/components/arc/tooltip/tooltip'
 import { UserMenu } from '@/components/arc/user-menu/user-menu'
 import { AuthOverlay } from '@/components/auth/auth-overlay'
 import type { AuthMode } from '@/components/auth/auth-form'
@@ -56,6 +55,11 @@ function NavbarAccount({
 
 /**
  * The top bar carries navigation, search and account controls at every width.
+ *
+ * Above `lg` the bar carries the search, a favourites shortcut, a labelled
+ * Submit action and the account. Each control matches the height of the
+ * search pill.
+ *
  * Below `lg` the bar keeps three controls only, the
  * menu, the search and the account; favourites and submit move into the menu,
  * and the search takes the lane between them rather than a row of its own.
@@ -128,9 +132,7 @@ export function AppNavbar({
         onOpenTag={onOpenTag}
       />
     </div>}
-    {/* Favourites, submit and the account close the bar as three circles, so
-        the search owns the middle and the actions own the corner. Below `lg`
-        the first two live in the menu instead. */}
+    {/* Below lg, favourites and Submit live in the menu. */}
     <div className="app-navbar-actions">
       <Button
         variant="ghost"
@@ -142,17 +144,13 @@ export function AppNavbar({
       >
         <Bookmark size={18} />
       </Button>
-      <Tooltip content="Submit a resource">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="app-navbar-icon"
-          aria-label="Submit a resource"
-          onClick={onSubmitResource}
-        >
-          <Plus size={18} />
-        </Button>
-      </Tooltip>
+      <Button
+        variant="primary"
+        size="sm"
+        className="app-navbar-submit"
+        aria-label="Submit a resource"
+        onClick={onSubmitResource}
+      >Submit</Button>
       {account
         ? <NavbarAccount
           account={account}
