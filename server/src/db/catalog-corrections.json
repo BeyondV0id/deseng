@@ -1,0 +1,82 @@
+{
+  "checkedAt": "2026-11-15",
+  "updates": [
+    {
+      "previousUrl": "https://windsurf.com",
+      "url": "https://devin.ai/desktop",
+      "name": "Devin Desktop",
+      "description": "Formerly Windsurf: an AI code editor and command centre for local and cloud coding agents.",
+      "evidence": "https://devin.ai/blog/windsurf-is-now-devin-desktop"
+    },
+    {
+      "previousUrl": "https://notebooklm.google",
+      "url": "https://notebook.google",
+      "name": "Gemini Notebook",
+      "description": "Formerly NotebookLM: research your own sources with an assistant and audio overviews.",
+      "evidence": "https://notebook.google"
+    },
+    {
+      "previousUrl": "https://bennettfeely.com/clippy",
+      "url": "https://github.com/bennettfeely/clippy",
+      "name": "Clippy",
+      "description": "Source for Bennett Feely's visual CSS clip-path generator. The hosted demo currently has a certificate error.",
+      "evidence": "https://github.com/bennettfeely/clippy"
+    },
+    {
+      "previousUrl": "https://mnmm.xyz",
+      "url": "https://desengs.com/minimum",
+      "name": "Minimum",
+      "description": "A curated directory of minimal websites by Maze Heart, now hosted on DesEngs.",
+      "evidence": "https://desengs.com/minimum/"
+    },
+    {
+      "previousUrl": "https://bitspace.sh",
+      "url": "https://github.com/emilwidlund/bitspace",
+      "name": "Bitspace",
+      "description": "Open-source node-based creative canvas for generative experiments. Source code is available while the hosted demo is paused.",
+      "evidence": "https://github.com/emilwidlund/bitspace"
+    },
+    {
+      "previousUrl": "https://nodetoy.co",
+      "url": "https://github.com/NodeToy/react-nodetoy",
+      "name": "NodeToy",
+      "description": "React integration and examples for NodeToy shader graphs. The original browser editor is currently unavailable.",
+      "evidence": "https://github.com/NodeToy/react-nodetoy"
+    },
+    {
+      "previousUrl": "https://www.linctex.com",
+      "url": "https://www.style3d.com",
+      "name": "Style3D",
+      "description": "3D fashion design and digital sampling platform.",
+      "evidence": "https://www.style3d.com/"
+    },
+    {
+      "previousUrl": "https://museapp.com",
+      "url": "https://allume.com",
+      "name": "Allume",
+      "description": "Formerly Muse: a spatial canvas for thinking with notes, PDFs and images on nested boards.",
+      "evidence": "https://allume.com/"
+    },
+    {
+      "previousUrl": "https://originui.com",
+      "url": "https://coss.com/ui",
+      "name": "coss ui",
+      "description": "The successor to Origin UI: accessible React components built on Base UI and styled with Tailwind CSS.",
+      "evidence": "https://coss.com/ui/docs/roadmap"
+    },
+    {
+      "previousUrl": "https://runwayml.com",
+      "url": "https://runway.com",
+      "name": "Runway",
+      "description": "Generative video and image tools for creating and editing shots in a shared workspace.",
+      "evidence": "https://runway.com/"
+    }
+  ],
+  "removeFromSeed": [
+    {
+      "url": "https://godly.website",
+      "reason": "Redirects to Recent, which already has its own catalogue entry at https://recent.design.",
+      "evidence": "https://recent.design/"
+    }
+  ]
+}

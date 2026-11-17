@@ -457,9 +457,9 @@
       "category": "Sound"
     },
     {
-      "name": "Windsurf",
-      "url": "https://windsurf.com",
-      "description": "AI editor with a collaborative agent mode.",
+      "name": "Devin Desktop",
+      "url": "https://devin.ai/desktop",
+      "description": "Formerly Windsurf: an AI code editor and command centre for local and cloud coding agents.",
       "category": "Code agents"
     },
     {
@@ -541,9 +541,9 @@
       "category": "3D scanning"
     },
     {
-      "name": "NotebookLM",
-      "url": "https://notebooklm.google",
-      "description": "Ground an assistant in your own sources, with audio overviews.",
+      "name": "Gemini Notebook",
+      "url": "https://notebook.google",
+      "description": "Formerly NotebookLM: research your own sources with an assistant and audio overviews.",
       "category": "Assistants"
     },
     {
@@ -1184,8 +1184,8 @@
     },
     {
       "name": "Clippy",
-      "url": "https://bennettfeely.com/clippy",
-      "description": "Visual clip-path builder.",
+      "url": "https://github.com/bennettfeely/clippy",
+      "description": "Source for Bennett Feely's visual CSS clip-path generator. The hosted demo currently has a certificate error.",
       "category": "Easing"
     },
     {
@@ -1603,15 +1603,9 @@
       "category": "Site showcases"
     },
     {
-      "name": "Godly",
-      "url": "https://godly.website",
-      "description": "Websites with remarkable typography and layout.",
-      "category": "Site showcases"
-    },
-    {
       "name": "Minimum",
-      "url": "https://mnmm.xyz",
-      "description": "A gallery of carefully reduced interfaces.",
+      "url": "https://desengs.com/minimum",
+      "description": "A curated directory of minimal websites by Maze Heart, now hosted on DesEngs.",
       "category": "Site showcases"
     },
     {
@@ -1808,26 +1802,26 @@
     },
     {
       "name": "Bitspace",
-      "url": "https://bitspace.sh",
-      "description": "Node-based creative canvas for generative experiments.",
+      "url": "https://github.com/emilwidlund/bitspace",
+      "description": "Open-source node-based creative canvas for generative experiments. Source code is available while the hosted demo is paused.",
       "category": "Node graphs"
     },
     {
       "name": "NodeToy",
-      "url": "https://nodetoy.co",
-      "description": "A browser playground for shader and canvas work.",
+      "url": "https://github.com/NodeToy/react-nodetoy",
+      "description": "React integration and examples for NodeToy shader graphs. The original browser editor is currently unavailable.",
       "category": "Node graphs"
     },
     {
       "name": "Style3D",
-      "url": "https://www.linctex.com",
+      "url": "https://www.style3d.com",
       "description": "3D fashion design and digital sampling platform.",
       "category": "Garment design"
     },
     {
-      "name": "Muse",
-      "url": "https://museapp.com",
-      "description": "Spatial canvas for thinking with notes, PDFs and images.",
+      "name": "Allume",
+      "url": "https://allume.com",
+      "description": "Formerly Muse: a spatial canvas for thinking with notes, PDFs and images on nested boards.",
       "category": "Infinite canvas"
     },
     {
@@ -1891,9 +1885,9 @@
       "category": "Primitives"
     },
     {
-      "name": "Origin UI",
-      "url": "https://originui.com",
-      "description": "Hundreds of shadcn-compatible variants for inputs and tables.",
+      "name": "coss ui",
+      "url": "https://coss.com/ui",
+      "description": "The successor to Origin UI: accessible React components built on Base UI and styled with Tailwind CSS.",
       "category": "UI kits"
     },
     {
@@ -2330,8 +2324,8 @@
     },
     {
       "name": "Runway",
-      "url": "https://runwayml.com",
-      "description": "Generative video and image models for shots you could not film.",
+      "url": "https://runway.com",
+      "description": "Generative video and image tools for creating and editing shots in a shared workspace.",
       "category": "Motion editors"
     },
     {
