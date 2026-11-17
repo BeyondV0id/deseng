@@ -576,21 +576,30 @@ and a reset link from the server console.
 
 ## 10. Git workflow
 
-**A feature, a fix or a refactor lands on its own branch or worktree, never
-straight on `main`.** `main` is what ships, and it only takes work that has
-passed the checks above.
+**Every feature request gets its own worktree, branch and pull request.** No
+feature is worked in `D:\projects\design-library` and none lands straight on
+`main`. This is the standing workflow, asked for by the owner, and it applies
+without being restated each time. Only a one-line fix to something already in
+flight may skip it.
 
 ```bash
-git switch -c feature/<name>     # or `git worktree add` when the task wants one
-# ... work, then:
+git worktree add "D:/projects/.worktrees/deseng/<name>" -b feature/<name> main
+# ... work in that checkout, in reviewable commits:
 npm run typecheck && npm run build
-git switch main && git merge feature/<name>
-git branch -d feature/<name>     # once the work is on main
+git push -u origin feature/<name>
+gh pr create --base main --title "..." --body "..."
+gh pr merge --merge --delete-branch     # after the checks are green
+git worktree remove "D:/projects/.worktrees/deseng/<name>"
 ```
 
 - One branch per piece of work, named for it. Commit reviewable slices, not
   one commit per file or one commit for a week.
-- A worktree is the same rule with its own checkout, for work that must not
-  disturb the tree in `D:\projects\design-library`. Remove it once the branch
-  is merged.
+- Worktrees live outside the repo, under `D:/projects/.worktrees/deseng/`, so a
+  checkout never sits inside the workspace or inside another tool's tree.
+- The PR body says what changed, why, and which checks were run. Link the PR to
+  the asking thread when the harness offers it.
+- Merge with a merge commit, not a squash, so the slices survive. Delete the
+  branch on merge and remove the worktree.
+- If the checks fail or the PR needs a decision, stop and report rather than
+  merging anyway.
 - Never rewrite `main` history, and never force-push it.
