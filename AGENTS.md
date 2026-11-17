@@ -571,3 +571,26 @@ Then confirm, in both themes: hover fills are `--hover`, focus rings come
 from Arc, empty and loading states exist, and nothing overflows horizontally.
 For auth work, also walk sign-up, sign-out, a protected URL while signed out,
 and a reset link from the server console.
+
+---
+
+## 10. Git workflow
+
+**A feature, a fix or a refactor lands on its own branch or worktree, never
+straight on `main`.** `main` is what ships, and it only takes work that has
+passed the checks above.
+
+```bash
+git switch -c feature/<name>     # or `git worktree add` when the task wants one
+# ... work, then:
+npm run typecheck && npm run build
+git switch main && git merge feature/<name>
+git branch -d feature/<name>     # once the work is on main
+```
+
+- One branch per piece of work, named for it. Commit reviewable slices, not
+  one commit per file or one commit for a week.
+- A worktree is the same rule with its own checkout, for work that must not
+  disturb the tree in `D:\projects\design-library`. Remove it once the branch
+  is merged.
+- Never rewrite `main` history, and never force-push it.
