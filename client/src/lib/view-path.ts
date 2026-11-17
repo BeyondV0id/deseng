@@ -19,6 +19,7 @@ export const moodboardShelf = 'Moodboard'
 export const submissionsView = 'My submissions'
 export const infoView = 'Info'
 export const sponsorView = 'Sponsor'
+export const submitView = 'Submit'
 export const privacyView = 'Privacy'
 export const termsView = 'Terms'
 export const licenceView = 'Licence'
@@ -43,6 +44,7 @@ export function pathForView(view: string): string {
   if (view === submissionsView) return '/submissions'
   if (view === infoView) return '/info'
   if (view === sponsorView) return '/sponsor'
+  if (view === submitView) return '/submit'
   if (view === privacyView) return '/privacy'
   if (view === termsView) return '/terms'
   if (view === licenceView) return '/licence'
@@ -76,6 +78,7 @@ export function viewForPath(pathname: string, search = ''): string | null {
   if (path === '/submissions') return submissionsView
   if (path === '/info') return infoView
   if (path === '/sponsor') return sponsorView
+  if (path === '/submit') return submitView
   if (path === '/privacy') return privacyView
   if (path === '/terms') return termsView
   if (path === '/licence') return licenceView
