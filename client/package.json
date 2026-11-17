@@ -23,6 +23,7 @@
     "@radix-ui/react-slot": "^1.5.0",
     "@radix-ui/react-tabs": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.4.1",
+    "@solar-icons/react": "^2.6.0",
     "@tailwindcss/vite": "^4.3.3",
     "@web-kits/audio": "^0.2.0",
     "better-auth": "^1.7.14",
