@@ -112,6 +112,13 @@ export function ResourceCard({ resource, moodboards, signedIn, onRequireAccount,
           </PopoverContent>
         </Popover>
       </div>
+      <a
+        className="resource-description"
+        href={resource.url}
+        target="_blank"
+        rel="noreferrer"
+        title={resource.description}
+      >{resource.description}</a>
     </div>
   </Card>
 }

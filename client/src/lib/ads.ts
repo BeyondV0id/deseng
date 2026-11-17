@@ -9,7 +9,7 @@
  * The house card below is the place drawn at its real size. Replace the object
  * on a slot to go live, and give it an `href` so the card is a link.
  */
-export type AdSlotName = 'sidebar' | 'navbar' | 'toast'
+export type AdSlotName = 'navbar' | 'toast'
 
 export type AdCreative = {
   /** The headline. Only the sizes with room for one print it. */
@@ -43,7 +43,6 @@ const houseAd: AdCreative = {
 }
 
 export const adInventory: Record<AdSlotName, AdCreative | null> = {
-  sidebar: houseAd,
   toast: houseAd,
   navbar: houseAd,
 }

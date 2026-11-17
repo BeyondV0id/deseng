@@ -1,4 +1,3 @@
-import { AccordionContent, AccordionGroup, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { categories, collections } from '@/catalog'
 import { LibraryFooter } from './library-footer'
 
@@ -92,14 +91,14 @@ export function InfoContent({ total }: { total: number }) {
 
       <section className={styles.faq} aria-labelledby="faq-title">
         <h2 id="faq-title">Questions</h2>
-        <AccordionGroup type="single" collapsible defaultValue="what-is-reference" className="mx-auto w-full max-w-4xl">
-          {faqItems.map((item, index) => (
-            <AccordionItem key={item.value} value={item.value} index={index}>
-              <AccordionTrigger>{item.title}</AccordionTrigger>
-              <AccordionContent>{item.content}</AccordionContent>
-            </AccordionItem>
+        <div className={styles.questions}>
+          {faqItems.map(item => (
+            <article key={item.value} className={styles.question}>
+              <h3>{item.title}</h3>
+              <p>{item.content}</p>
+            </article>
           ))}
-        </AccordionGroup>
+        </div>
       </section>
 
     </div>

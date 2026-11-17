@@ -1,19 +1,10 @@
 import { Badge } from '@/components/arc/badge/badge'
 import { Button } from '@/components/arc/button/button'
-import {
-  AccordionContent,
-  AccordionGroup,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
 import { sponsorBooking } from '@/lib/ads'
 import styles from './sponsor-section.module.css'
 
 /**
- * The two placements a sponsor can buy, in the order the inventory uses them.
- * Each one is a plan card: the feed position, and that position plus the
- * sidebar. Both run for a month, both are labelled, and both are booked
- * through the same address.
+ * The remaining sponsor plan covers the feed and top strip for one month.
  */
 const plans = [
   {
@@ -25,17 +16,6 @@ const plans = [
       'Your mark in the top strip',
       'A Sponsored label on both',
       'One month at a time',
-    ],
-  },
-  {
-    name: 'Sidebar',
-    price: '$250',
-    recommended: true,
-    features: [
-      'Everything in Gold',
-      'A card in the sidebar',
-      'One line about your product',
-      'A link to your site for the month',
     ],
   },
 ]
@@ -67,7 +47,7 @@ const sponsorFaqs = [
  * The sponsor page, at `/sponsor`, which every `Your Brand Here` card links to.
  *
  * It reads like the rest of the library: a page heading, the argument in two
- * sentences, the two plans as cards, and the questions a sponsor asks before
+ * sentences, the plan card, and the questions a sponsor asks before
  * booking. The cards are resting surfaces, not buttons: only the book action
  * answers the pointer.
  */
@@ -91,7 +71,7 @@ export function SponsorSection() {
         <div className={styles.blockHead}>
           <h2 id="sponsor-plans-title">Plans</h2>
           <p className={styles.blockNote}>
-            One month each. The sidebar plan adds a card to everything Gold already buys.
+            The feed and top strip, booked for one month.
           </p>
         </div>
 
@@ -128,17 +108,17 @@ export function SponsorSection() {
 
       <section className={styles.faq} aria-labelledby="sponsor-faq-title">
         <div className={styles.blockHead}>
-          <h2 id="sponsor-faq-title">Frequently asked questions</h2>
+          <h2 id="sponsor-faq-title">Questions</h2>
         </div>
 
-        <AccordionGroup type="single" collapsible defaultValue={sponsorFaqs[0].value} className="w-full">
-          {sponsorFaqs.map((faq, index) => (
-            <AccordionItem key={faq.value} value={faq.value} index={index}>
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
+        <div className={styles.questions}>
+          {sponsorFaqs.map(faq => (
+            <article key={faq.value} className={styles.question}>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
           ))}
-        </AccordionGroup>
+        </div>
       </section>
     </div>
 

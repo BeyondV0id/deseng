@@ -46,7 +46,7 @@ export function CatalogStatus({ status, onRetry }: {
         {/* One band per row, with a title line and a track of card-shaped
             placeholders. The band is a `resource-rail` and the card is a
             `resource-card`, so the header height, the track's gap, the card's
-            width and the caption's two lines all come from the loaded rules. */}
+            width and the caption's title and description use the loaded rules. */}
         <div className="resource-rows" aria-hidden="true">
           {Array.from({ length: LOADING_RAILS }, (_, rail) => <div className="resource-rail catalog-skeleton-rail" key={rail}>
             <div className="rail-header">
@@ -57,6 +57,7 @@ export function CatalogStatus({ status, onRetry }: {
                 <span className="resource-preview catalog-skeleton-preview" />
                 <div className="resource-card-caption">
                   <span className="resource-name catalog-skeleton-name" />
+                  <span className="resource-description catalog-skeleton-description"><span /><span /></span>
                 </div>
               </div>)}
             </div>

@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-// Inter is the app's only face: one variable family covers body, display and
-// the sidebar, which animates font weight as part of Fluid Functionalism.
+// Inter is the app's only face, shared by body and display text.
 import '@fontsource-variable/inter'
 import '@/components/arc/foundation.css'
 import { AuthProvider } from '@/components/auth/auth-provider'

@@ -23,12 +23,6 @@
   --radius-panel: 12px;
   --radius-card: 24px;
   --radius-card-inset: calc(var(--radius-card) - var(--space-2));
-  /* Sidebar geometry. A nested corner shares its parent's centre, so the inner
-     radius is the outer radius minus the gap between them. The panel is 16px
-     (the reference catalogue's sidebar card), every row sits 8px inside it,
-     so a row is 8px. Same rule as --radius-card-inset. */
-  --radius-sidebar: 16px;
-  --radius-sidebar-inset: calc(var(--radius-sidebar) - var(--space-2));
   --background: #ffffff;
   color-scheme: light;
   --surface: var(--card-surface);
@@ -215,7 +209,7 @@ html {
 
 /* The page texture and the frame around the app. The shell is capped and
    centred, so a wide screen keeps a patterned gutter either side of the whole
-   product, sidebar included. */
+   product. */
 .app-ground {
   position: relative;
   min-height: 100dvh;
@@ -275,9 +269,12 @@ html {
   padding: 16px;
 }
 
-/* The content side of the shell. SidebarInset is the main region; it takes the
-   rest of the row and keeps the page ground under the preset's card. */
+/* The content fills the shell without a navigation column. */
 .app-inset {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  min-height: 100dvh;
   background: var(--page-background);
 }
 
@@ -286,50 +283,6 @@ html {
   min-width: 0;
   flex: 1;
   flex-direction: column;
-}
-
-/* The column's right edge separates it from the page. Below `lg` the column
-   steps out of the layout entirely — the bar's menu carries the same
-   destinations — so the edge only exists where the column does. */
-@media (min-width: 1024px) {
-  .app-sidebar {
-    border-right: 1px solid var(--border);
-  }
-
-  /* The horizontal rule under the brand row meets the column's edge, so the
-     logo sits in the cell the two lines cut out of the top-left corner. */
-  .app-sidebar-header {
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-/* The brand row lines up with the inset's 60px top bar. The column is
-   navigation only, so the row is the mark and nothing else. */
-.app-sidebar-header {
-  height: 60px;
-  justify-content: center;
-  padding: 0 12px;
-}
-
-.app-sidebar-brand-row {
-  display: flex;
-  width: 100%;
-  min-width: 0;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.app-sidebar-brand {
-  padding: 4px 6px;
-  border-radius: var(--radius-control);
-}
-
-/* The brand is a label, not a control: it does not answer the pointer with a
-   fill, a lift or a zoom. The orb turns by itself; the link stays inert. */
-
-.dark .app-sidebar-brand {
-  color: var(--card-foreground);
 }
 
 .brand {
@@ -343,48 +296,6 @@ html {
   font-weight: 500;
   letter-spacing: -0.35px;
   text-decoration: none;
-}
-
-/* The foot of the column: one muted line, the year and what the library is.
-   The bottom inset is a hair, not a full step, so the ad and the copyright sit
-   on the column's bottom edge instead of floating above a strip of empty
-   column. The row's own 28px height already keeps the text off the edge. */
-.app-sidebar-footer {
-  padding: 8px 12px 4px;
-  border: 0;
-}
-
-.app-sidebar-footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.app-sidebar-copyright,
-.app-sidebar-info {
-  color: var(--text-tertiary);
-  font-size: 12px;
-  letter-spacing: -.01em;
-}
-
-/* Info is the column's one link out of the library. It is a label at rest and
-   takes a line under the text under the pointer, so it answers without
-   carrying a chip or a fill of its own. */
-.app-sidebar-info {
-  display: inline-flex;
-  min-height: 28px;
-  align-items: center;
-  text-decoration: none;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  transition: color var(--duration-fast) var(--ease-standard);
-}
-
-.app-sidebar-info:hover {
-  color: var(--hover-foreground);
-  text-decoration: underline;
-  text-decoration-color: var(--text-tertiary);
 }
 
 /* A keycap reads as a small chip on whatever surface holds it, so it takes the
@@ -1281,11 +1192,6 @@ h2 {
   --color-muted-foreground: var(--text-secondary);
   --color-popover: var(--card-surface);
   --color-popover-foreground: var(--card-foreground);
-  --color-sidebar: var(--page-background);
-  --color-sidebar-foreground: var(--card-foreground);
-  --color-sidebar-border: var(--border);
-  --color-sidebar-accent: var(--surface-muted);
-  --color-sidebar-accent-foreground: var(--card-foreground);
   --color-ring: var(--focus-ring);
   --color-border: var(--border);
   --overlay: var(--overlay);
@@ -1711,7 +1617,10 @@ h2 {
 /* The shelf's split, as Arc buttons. The strip sets the pill radius on Arc's
    own control token, so the chips keep the library's hover, press and focus
    behaviour instead of a local rule. It scrolls sideways on a phone rather
-   than wrapping into a second line of chrome. */
+   than wrapping into a second line of chrome. The black and white treatment
+   below is the catalogue's own toggle rather than one of the page's actions, so
+   it lives here, a class deeper than Arc's tiers: the main buttons keep the
+   coloured action finish, and only this strip goes black and white. */
 .resource-tags {
   --radius-control: var(--radius-pill);
   display: flex;
@@ -1728,6 +1637,55 @@ h2 {
 
 .resource-tags::-webkit-scrollbar {
   display: none;
+}
+
+/* The quiet tier: a white pill with a hairline, the foreground label on it. */
+.resource-tags .resource-tag {
+  background: var(--surface);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+.resource-tags .resource-tag:hover:not(:disabled) {
+  background: var(--surface-muted);
+  box-shadow: none;
+}
+.resource-tags .resource-tag:active:not(:disabled) {
+  color: var(--foreground);
+  background: var(--surface-muted);
+}
+.resource-tags .resource-tag:disabled {
+  opacity: 1;
+  color: var(--text-muted);
+  background: var(--surface-muted);
+  border-color: var(--border);
+}
+
+/* The active tier: a filled black pill, the background label on it. The old
+   toggle's hover and press ride opacity, so those states are restated here
+   rather than swapped for the action fill. */
+.resource-tags .resource-tag-active {
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
+}
+.resource-tags .resource-tag-active:hover:not(:disabled) {
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
+  opacity: .91;
+}
+.resource-tags .resource-tag-active:active:not(:disabled) {
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
+  opacity: .84;
+}
+.resource-tags .resource-tag-active:disabled {
+  opacity: 1;
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
 }
 
 .resource-grid {
@@ -1801,99 +1759,6 @@ h2 {
     font-size: 13px;
   }
 }
-
-/* The sidebar reads the app's own state tokens: the view you are on takes the
-   selected fill, the pointer takes --hover. Fluid Functionalism animates font
-   weight, so the column takes the variable face the whole app is set in. */
-[data-sidebar="sidebar"] {
-  --active: var(--selected);
-  font-family: var(--font-sans);
-  /* Every resting row, glyph and label in the column takes the muted nav step;
-     the row that is lit (isActive, hover, focus) overrides it with the
-     foreground. Group labels go a step lighter again. */
-  --color-muted-foreground: var(--nav-item);
-}
-
-[data-sidebar="sidebar"] [data-sidebar="group-label"] {
-  color: var(--nav-label);
-}
-
-/* The column carries no rules: no edge hairline against the content, and no
-   scroll dividers inside it. Region separation comes from spacing, not lines. */
-[data-sidebar="sidebar"] .scroll-divider::before,
-[data-sidebar="sidebar"] .scroll-divider::after {
-  content: none;
-}
-
-/* Sidebar rhythm. The label is the app's body step, not the display step: at
-   14px the row reads as navigation, and the 34px height keeps a 14px label
-   from touching the fill above and below it. Glyphs stay 18px and sit 10px
-   from the label, so the pair read as one shape. Rows keep their 8px inset off
-   the column edge. Groups carry no vertical padding, so the column's 20px
-   row-gap is the whole space between them; the 8px block padding here is only
-   the breathing room at the top and foot of the list. */
-[data-sidebar="sidebar"] [data-sidebar="menu-button"] {
-  height: 34px;
-  column-gap: 10px;
-  font-size: 14px;
-  letter-spacing: -.01em;
-}
-
-[data-sidebar="sidebar"] [data-sidebar="menu"] {
-  row-gap: 1px;
-}
-
-[data-sidebar="sidebar"] [data-sidebar="menu-button"] > svg {
-  width: 18px;
-  height: 18px;
-}
-
-[data-sidebar="sidebar"] [data-sidebar="content"] {
-  row-gap: 20px;
-  padding-block: 8px;
-}
-
-[data-sidebar="sidebar"] [data-sidebar="group"] {
-  padding-block: 0;
-}
-
-[data-sidebar="sidebar"] [data-sidebar="group-label"] {
-  font-size: 11.5px;
-  letter-spacing: 0;
-}
-
-/* The Library's heading is a row like any other, so it joins the shared hover
-   highlight and lines up with the labels above it: the icon column carries its
-   slot, and the word keeps one weight above the moodboards it introduces. */
-.app-sidebar-heading {
-  color: var(--foreground);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -.01em;
-}
-
-/* A row's count is set at the micro step, one size down from the label. It
-   keeps the label's colour: at 11.5px the size alone does the de-emphasising,
-   so a count stays readable instead of washing out. The digits are tabular, so
-   the numbers line up down the column. The selected row and the pointer lift it
-   with the label, so the row lights as one piece (the badge's own 80ms colour
-   transition carries the change). */
-.app-sidebar-count {
-  color: var(--nav-item);
-  font-size: 11.5px;
-  font-variant-numeric: tabular-nums;
-}
-
-[data-sidebar="menu-item"]:hover .app-sidebar-count,
-[data-sidebar="menu-item"]:focus-within .app-sidebar-count,
-[data-sidebar="menu-item"]:has([data-sidebar="menu-button"][data-active="true"]) .app-sidebar-count {
-  color: var(--foreground);
-}
-
-/* The top bar's controls. The bar itself is the preset's `SidebarInsetTopbar`;
-   it carries no brand and no rule, since the brand and the shelves live in the
-   column on the left. It sits on the page ground, so scrolled content passes
-   under it. */
 
 /* The bar's right cluster: favourites, submit and the account, three 40px
    circles that match the height of the search pill. They close the bar, so
@@ -2030,9 +1895,8 @@ h2 {
   }
 }
 
-/* -- The menu below the column's breakpoint --------------------------------
-   Above `lg` the sidebar is a column on the page. Below it the column leaves
-   the layout, and this sheet is the whole of the navigation: every shelf,
+/* -- Navigation menu -----------------------------------------------------
+   This sheet holds the navigation at every width: every shelf,
    every moodboard, favourites and submit, on the whole screen. Nothing sits
    behind it and there is no edge to tap outside of, so the close control is
    at the head, on the same 40px circle as the bar's own controls. */
@@ -3126,9 +2990,7 @@ html.transitioning *::after {
   }
 }
 
-/* --- Card content: image and name only ----------------------------------
-   The description and the site row moved into the drawer, which is where a
-   card is read in full. The card keeps the picture and the name. */
+/* --- Card content ------------------------------------------------------- */
 .resource-card-content {
   display: block;
   padding: 11px 13px 13px;
@@ -3157,6 +3019,9 @@ html.transitioning *::after {
 
 /* -- The top bar ---------------------------------------------------------- */
 .app-topbar {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
   position: sticky;
   top: 0;
   z-index: 40;
@@ -3255,7 +3120,7 @@ html.transitioning *::after {
 /* -- The grid -------------------------------------------------------------
    Every card is the same size, so the shelf reads as an even grid and the
    order runs left to right, row by row. The card carries a fixed 3:2 preview
-   and a caption box held to two lines, so no card is taller than its
+   and a caption with one title line and two description lines, so no card is taller than its
    neighbour and the popularity order never leaves a ragged edge. */
 .resource-grid {
   display: grid;
@@ -3305,9 +3170,11 @@ html.transitioning *::after {
    holds the filing action at the name's right; the action keeps its column
    whether or not it is showing, so a card never reflows under the pointer. */
 .resource-card-caption {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: flex-start;
-  gap: 6px;
+  column-gap: 6px;
+  row-gap: 4px;
   padding: 9px 2px 0;
 }
 
@@ -3376,12 +3243,12 @@ html.transitioning *::after {
 .resource-card .resource-name {
   display: -webkit-box;
   overflow: hidden;
-  min-height: 2.6em;
+  min-height: 1.3em;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  color: var(--text-secondary);
-  font-size: 12.5px;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  color: var(--card-foreground);
+  font-size: var(--text-sm);
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: -.005em;
@@ -3391,6 +3258,23 @@ html.transitioning *::after {
 .resource-card .resource-name:hover {
   color: var(--foreground);
   text-decoration: none;
+}
+
+.resource-card .resource-description {
+  grid-column: 1 / -1;
+  min-height: 2.9em;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.45;
+  line-clamp: 2;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.resource-card .resource-description:hover {
+  color: var(--foreground);
 }
 
 /* -- The drawer and the shelf pages read the same heading scale ----------- */
@@ -4281,7 +4165,7 @@ html.transitioning *::after {
    same header, the same band and the same card, so every measurement here is
    borrowed rather than guessed: `resource-rail` gives the band its gap,
    `rail-track` gives the card its width, `resource-preview` gives the picture
-   its 3:2 box and `resource-card-caption` keeps its two lines. The page does
+   its 3:2 box and `resource-card-caption` keeps its title and description. The page does
    not move when the catalogue arrives, it only fills in. */
 /* The count's line is a skeleton too, so the page has one kind of placeholder
    and no second line of copy to unlearn. It keeps the loaded line's box: the
@@ -4329,13 +4213,25 @@ html.transitioning *::after {
   display: block;
 }
 
-/* The name keeps the loaded caption's 2.6em box; only its fill is drawn. The
+/* The name keeps the loaded caption's one-line box; only its fill is drawn. The
    card's own rule paints this element transparent, so the fill needs to be one
    step more specific than `.resource-card .resource-name`. */
 .resource-card .resource-name.catalog-skeleton-name {
   width: 72%;
   border-radius: var(--radius-control);
   background: var(--surface-muted);
+}
+
+.catalog-skeleton-description > span {
+  display: block;
+  height: .7em;
+  margin-block: .375em;
+  border-radius: var(--radius-control);
+  background: var(--surface-muted);
+}
+
+.catalog-skeleton-description > span:last-child {
+  width: 85%;
 }
 
 @media (max-width: 760px) {
@@ -4406,15 +4302,18 @@ html.transitioning *::after {
 
 /* -- The action palette -----------------------------------------------------
    Buttons are the one place a colour is spent: one filled action, one quiet
-   control, and nothing else in the app changes hue for them. The finish is
-   four layers (a white inner stroke, an inner glow, a drop shadow and a ring
-   on the fill), so the button reads as a physical object rather than a
-   rectangle, and both tiers share it. */
+   control, and nothing else in the app changes hue for them. The filled action
+   is the submit action: the catalogue's single coloured action, the submit
+   accent, not a generic action blue. The finish is four layers (a white inner
+   stroke, an inner glow, a drop shadow and a ring on the fill), so the button
+   reads as a physical object rather than a rectangle, and both tiers share it. */
 :root {
-  --action-fill: #296ff0;
-  --action-fill-hover: #1f63dc;
-  --action-fill-press: #1a57c4;
-  --action-fill-disabled: #a9c3f7;
+  --submit-accent: #a855f7;
+  --submit-accent-hover: #b365ff;
+  --action-fill: var(--submit-accent);
+  --action-fill-hover: var(--submit-accent-hover);
+  --action-fill-press: color-mix(in oklab, var(--submit-accent) 78%, black);
+  --action-fill-disabled: color-mix(in oklab, var(--submit-accent) 38%, var(--surface));
   --action-label: #ffffff;
   --action-inner-stroke: rgb(255 255 255 / .4);
   --action-inner-glow: rgb(255 255 255 / .24);

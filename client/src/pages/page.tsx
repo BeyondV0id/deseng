@@ -19,10 +19,7 @@ import { legalDocuments } from '@/components/application/dashboard/legal-content
 import { useAuth } from '@/components/auth/auth-provider'
 import type { AuthMode } from '@/components/auth/auth-form'
 import { GitHubMark, GoogleMark } from '@/components/auth/provider-mark'
-import { AppSidebar } from '@/components/sidebar-preset/app-sidebar'
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { StripedPattern } from '@/components/ui/striped-pattern'
-import { SidebarInsetTopbar } from '@/components/sidebar-app/inset-topbar'
 import type { Theme, ThemeSwitchVariant } from '@/components/arc/theme-switch/theme-switch'
 import { prefersDark, readStoredTheme, themeStorageKey, type ThemePreference } from '@/lib/theme'
 import type { LibraryMoodboard } from '@/lib/library-types'
@@ -683,23 +680,12 @@ export default function Page() {
     }
   }
 
-  // The desktop sidebar is fixed: no rail, no trigger, no toggle shortcut.
-  // Below `lg` the column steps out entirely and the top bar's menu carries
-  // the same destinations, so the page keeps its full width for the cards.
-  // The ground holds the page texture; the shell sits on top of it, capped and
-  // centred, so a wide screen keeps a patterned gutter either side of the app.
+  // The catalogue fills the shell; navigation lives in the top bar's menu.
   return <div className="app-ground">
     <StripedPattern className="app-pattern" width={24} height={24} />
-    <SidebarProvider className="app-shell" mobileBreakpoint={1024} shortcut={null}>
-      <AppSidebar
-        selected={view}
-        onSelect={selectView}
-        onNewMoodboard={openNewMoodboard}
-        moodboards={moodboards}
-        resources={resources}
-      />
-      <SidebarInset className="app-inset">
-        <SidebarInsetTopbar className="app-topbar">
+    <div className="app-shell">
+      <div className="app-inset">
+        <header className="app-topbar">
           <AppNavbar
             query={searchQuery}
             onQueryChange={setSearchQuery}
@@ -719,7 +705,7 @@ export default function Page() {
             onSelectSettings={() => setSettingsOpen(true)}
             onSignOut={handleSignOut}
           />
-        </SidebarInsetTopbar>
+        </header>
         {status === 'ready'
           ? <Dashboard
             view={view}
@@ -742,7 +728,7 @@ export default function Page() {
             onDeleteMoodboard={id => setMoodboardForDeletion(moodboards.find(moodboard => moodboard.id === id) ?? null)}
           />
           : <CatalogStatus status={status} onRetry={() => { void loadLibrary() }} />}
-      </SidebarInset>
+      </div>
       <SubmitDialog
         open={addOpen}
         onClose={() => setAddOpen(false)}
@@ -753,6 +739,6 @@ export default function Page() {
       <EditMoodboardDialog moodboard={moodboardToEdit} onClose={() => setMoodboardToEdit(null)} onSave={editMoodboard} />
       <SettingsDialog open={settingsOpen} account={account} onClose={() => setSettingsOpen(false)} />
       <DeleteMoodboardDialog moodboard={moodboardForDeletion} onClose={() => setMoodboardForDeletion(null)} onDelete={deleteMoodboard} />
-    </SidebarProvider>
+    </div>
   </div>
 }

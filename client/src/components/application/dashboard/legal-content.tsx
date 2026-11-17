@@ -98,7 +98,6 @@ export const legalDocuments: Record<string, LegalDocument> = {
     sections: [
       { heading: 'Essential cookies', paragraphs: [
         'When you sign in, an authentication session cookie keeps your session available across requests. It is needed for account features such as favourites, moodboards, and submissions. In production, the authentication cookie is configured for secure transport.',
-        'The sidebar may store its open or closed state in a cookie so it remembers your layout preference.',
       ] },
       { heading: 'Other browser storage', paragraphs: [
         'The theme preference and sound setting are stored in your browser storage so the site can remember your choices. They are not cookies and are not used to track you across other sites.',
