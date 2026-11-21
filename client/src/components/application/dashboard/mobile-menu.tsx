@@ -7,7 +7,8 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Bookmark, ChevronRight, Plus, X } from '@/components/icons'
 import { BrandMark } from '@/components/brand/brand-mark'
 import { IconMorph } from '@/components/arc/icon-morph/icon-morph'
-import { NAV_SECTIONS } from '@/lib/navigation'
+import { useSidebar } from '@/components/ui/sidebar'
+import { NAV_SECTIONS } from '@/components/sidebar-preset/nav-data'
 import { countLabel, countResources } from '@/lib/library-counts'
 import { useIcons, type IconComponent } from '@/lib/icon-context'
 import type { LibraryMoodboard } from '@/lib/library-types'
@@ -15,7 +16,12 @@ import { navViewFor, type Resource } from '@/catalog'
 import { favorites, moodboardShelf, pathForView } from '@/lib/view-path'
 
 /**
- * The full-screen navigation menu, shared by desktop and mobile.
+ * The navigation below the column's breakpoint.
+ *
+ * Above `lg` the sidebar is a column on the page. Below it the column steps
+ * out of the layout entirely and this sheet takes its place: the whole screen,
+ * the same destinations in the same order, the same counts. There is no drawer
+ * beside the content and no second copy of the page behind it.
  *
  * The surface is the page, not a card, so it is built on Radix's dialog
  * primitive directly, the way the preset builds its own sheets: Arc's
@@ -24,7 +30,7 @@ import { favorites, moodboardShelf, pathForView } from '@/lib/view-path'
  * into a cross as the sheet opens. The sheet carries its own close control at
  * the head, because a full-screen surface has no edge to tap outside of.
  */
-export function NavigationMenu({
+export function MobileMenu({
   selected,
   onSelect,
   onSubmitResource,
@@ -39,10 +45,13 @@ export function NavigationMenu({
   onNewMoodboard: () => void
   resources: Resource[]
 }) {
+  const { isMobile } = useSidebar()
   const reduced = useReducedMotion() ?? false
   const [open, setOpen] = useState(false)
   const icons = useIcons()
   const counts = useMemo(() => countResources(resources, moodboards), [resources, moodboards])
+
+  if (!isMobile) return null
 
   const row = (
     view: string,
@@ -112,7 +121,7 @@ export function NavigationMenu({
             <div className="app-menu-head">
               <span className="brand app-menu-brand">
                 <BrandMark />
-                <span>Reference</span>
+                <span className="app-sidebar-wordmark">Reference</span>
               </span>
               <DialogPrimitive.Close className="app-menu-close" aria-label="Close menu">
                 <X size={18} />

@@ -7,7 +7,7 @@ import { setSoundMuted, useSoundMuted } from '@/components/ui/sound'
 import type { LibraryMoodboard } from '@/lib/library-types'
 import type { ThemePreference } from '@/lib/theme'
 import type { Resource } from '@/catalog'
-import { NavigationMenu } from './navigation-menu'
+import { MobileMenu } from './mobile-menu'
 import { SearchPalette } from './search-palette'
 
 /** The plan line under the account's name. */
@@ -54,13 +54,13 @@ function NavbarAccount({
 }
 
 /**
- * The top bar carries navigation, search and account controls at every width.
+ * The content of the inset's top bar.
  *
- * Above `lg` the bar carries the search, a favourites shortcut, a labelled
- * Submit action and the account. Each control matches the height of the
- * search pill.
+ * Above `lg` the sidebar is the column on the page and the bar carries the
+ * search and the actions beside it: favourites, submit and the account, each
+ * matching the height of the search pill so the bar reads as one row.
  *
- * Below `lg` the bar keeps three controls only, the
+ * Below `lg` the column steps out. The bar keeps three controls only, the
  * menu, the search and the account; favourites and submit move into the menu,
  * and the search takes the lane between them rather than a row of its own.
  *
@@ -116,7 +116,7 @@ export function AppNavbar({
   showSearch?: boolean
 }) {
   return <div className="app-topbar-content">
-    <NavigationMenu
+    <MobileMenu
       selected={selected}
       onSelect={onSelect}
       onSubmitResource={onSubmitResource}
