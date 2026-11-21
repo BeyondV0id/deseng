@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Bookmark, Check, Folder, Plus } from '@/components/icons'
+import { Bookmark, BookmarkFilled, Check, Folder, Plus } from '@/components/icons'
 import { Card } from '@/components/card'
 import { cn } from '@/lib/utils'
 import type { LibraryMoodboard } from '@/lib/library-types'
@@ -82,7 +82,7 @@ export function ResourceCard({ resource, moodboards, signedIn, onRequireAccount,
             className={cn('resource-card-tool favorite-button', resource.favorite && 'is-favorite')}
             onClick={() => onFavorite(resource.id)}
             aria-label={resource.favorite ? `Remove ${title} from saved` : `Save ${title}`}
-          ><Bookmark size={15} weight={resource.favorite ? 'Filled' : 'Outline'} /></Button>
+          >{resource.favorite ? <BookmarkFilled size={15} /> : <Bookmark size={15} />}</Button>
         </Tooltip>
         <Popover open={filingOpen} onOpenChange={next => {
           if (next && !signedIn) {
