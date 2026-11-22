@@ -1878,14 +1878,14 @@ h2 {
 }
 
 /* Sidebar rhythm. The label is the app's body step, not the display step: at
-   14px the row reads as navigation, and the 44px height keeps a 14px label
+   14px the row reads as navigation, and the 34px height keeps a 14px label
    from touching the fill above and below it. Glyphs stay 18px and sit 10px
    from the label, so the pair read as one shape. Rows keep their 8px inset off
    the column edge. Groups carry no vertical padding, so the column's 20px
    row-gap is the whole space between them; the 8px block padding here is only
    the breathing room at the top and foot of the list. */
 [data-sidebar="sidebar"] [data-sidebar="menu-button"] {
-  height: 44px;
+  height: 34px;
   column-gap: 10px;
   font-size: 14px;
   letter-spacing: -.01em;
