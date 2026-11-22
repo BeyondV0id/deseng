@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from '@/components/arc/dialog/dialog'
 import { Card, CardGroup, CardContent } from '@/components/ui/card'
 import { ShapeProvider } from '@/lib/shape-context'
 import { useMediaQuery } from '@/hooks/use-media-query'
-import { ArrowUpRight } from '@/components/icons'
+import { DitherArt } from '@/components/ui/dither-art'
 import collectionData from '@/lib/discovery-collections.json'
 import { ResourceCard } from './resource-card'
 import styles from './discovery-collections.module.css'
@@ -36,12 +36,14 @@ export function DiscoveryCollections({ resources, ...handlers }: Props) {
       <h2 className="discovery-section-title" id="collections-title">Collections</h2>
     </header>
     <ShapeProvider defaultShape="rounded">
-      <CardGroup columns={narrow ? 1 : medium ? 2 : 3}>
-        {groups.map(collection => <Card key={collection.slug} label={`Open ${collection.name}, ${collection.resources.length} tools`} onClick={() => {
+      <CardGroup columns={narrow ? 1 : medium ? 2 : 3} separated border="outlined">
+        {groups.map((collection, index) => <Card key={collection.slug} label={`Open ${collection.name}, ${collection.resources.length} tools`} onClick={() => {
           if (document.activeElement instanceof HTMLElement) trigger.current = document.activeElement
           setSelected(collection.slug)
         }}>
+          <div className={styles.art}><DitherArt phase={index * 0.8} /></div>
           <CardContent>
+            <div className={styles.face}>
             <div className={styles.top}>
               <span className={styles.marks} aria-hidden="true">
                 {collection.resources.slice(0, 5).map(resource => <Avatar key={resource.id} name={resource.name} src={resource.faviconUrl ?? undefined} size="sm" />)}
@@ -50,7 +52,8 @@ export function DiscoveryCollections({ resources, ...handlers }: Props) {
             </div>
             <div className={styles.bottom}>
               <h3 className={styles.title}>{collection.name}</h3>
-              <ArrowUpRight size={16} aria-hidden="true" />
+
+            </div>
             </div>
           </CardContent>
         </Card>)}
