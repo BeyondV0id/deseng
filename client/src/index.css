@@ -23,6 +23,12 @@
   --radius-panel: 12px;
   --radius-card: 24px;
   --radius-card-inset: calc(var(--radius-card) - var(--space-2));
+  /* Sidebar geometry. A nested corner shares its parent's centre, so the inner
+     radius is the outer radius minus the gap between them. The panel is 16px
+     (the reference catalogue's sidebar card), every row sits 8px inside it,
+     so a row is 8px. Same rule as --radius-card-inset. */
+  --radius-sidebar: 16px;
+  --radius-sidebar-inset: calc(var(--radius-sidebar) - var(--space-2));
   --background: #ffffff;
   color-scheme: light;
   --surface: var(--card-surface);
@@ -209,7 +215,7 @@ html {
 
 /* The page texture and the frame around the app. The shell is capped and
    centred, so a wide screen keeps a patterned gutter either side of the whole
-   product. */
+   product, sidebar included. */
 .app-ground {
   position: relative;
   min-height: 100dvh;
@@ -269,12 +275,9 @@ html {
   padding: 16px;
 }
 
-/* The content fills the shell without a navigation column. */
+/* The content side of the shell. SidebarInset is the main region; it takes the
+   rest of the row and keeps the page ground under the preset's card. */
 .app-inset {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  min-height: 100dvh;
   background: var(--page-background);
 }
 
@@ -283,6 +286,50 @@ html {
   min-width: 0;
   flex: 1;
   flex-direction: column;
+}
+
+/* The column's right edge separates it from the page. Below `lg` the column
+   steps out of the layout entirely — the bar's menu carries the same
+   destinations — so the edge only exists where the column does. */
+@media (min-width: 1024px) {
+  .app-sidebar {
+    border-right: 1px solid var(--border);
+  }
+
+  /* The horizontal rule under the brand row meets the column's edge, so the
+     logo sits in the cell the two lines cut out of the top-left corner. */
+  .app-sidebar-header {
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+/* The brand row lines up with the inset's 60px top bar. The column is
+   navigation only, so the row is the mark and nothing else. */
+.app-sidebar-header {
+  height: 60px;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.app-sidebar-brand-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.app-sidebar-brand {
+  padding: 4px 6px;
+  border-radius: var(--radius-control);
+}
+
+/* The brand is a label, not a control: it does not answer the pointer with a
+   fill, a lift or a zoom. The orb turns by itself; the link stays inert. */
+
+.dark .app-sidebar-brand {
+  color: var(--card-foreground);
 }
 
 .brand {
@@ -296,6 +343,48 @@ html {
   font-weight: 500;
   letter-spacing: -0.35px;
   text-decoration: none;
+}
+
+/* The foot of the column: one muted line, the year and what the library is.
+   The bottom inset is a hair, not a full step, so the ad and the copyright sit
+   on the column's bottom edge instead of floating above a strip of empty
+   column. The row's own 28px height already keeps the text off the edge. */
+.app-sidebar-footer {
+  padding: 8px 12px 4px;
+  border: 0;
+}
+
+.app-sidebar-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.app-sidebar-copyright,
+.app-sidebar-info {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  letter-spacing: -.01em;
+}
+
+/* Info is the column's one link out of the library. It is a label at rest and
+   takes a line under the text under the pointer, so it answers without
+   carrying a chip or a fill of its own. */
+.app-sidebar-info {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.app-sidebar-info:hover {
+  color: var(--hover-foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--text-tertiary);
 }
 
 /* A keycap reads as a small chip on whatever surface holds it, so it takes the
@@ -1192,6 +1281,11 @@ h2 {
   --color-muted-foreground: var(--text-secondary);
   --color-popover: var(--card-surface);
   --color-popover-foreground: var(--card-foreground);
+  --color-sidebar: var(--page-background);
+  --color-sidebar-foreground: var(--card-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-accent: var(--surface-muted);
+  --color-sidebar-accent-foreground: var(--card-foreground);
   --color-ring: var(--focus-ring);
   --color-border: var(--border);
   --overlay: var(--overlay);
@@ -1760,6 +1854,99 @@ h2 {
   }
 }
 
+/* The sidebar reads the app's own state tokens: the view you are on takes the
+   selected fill, the pointer takes --hover. Fluid Functionalism animates font
+   weight, so the column takes the variable face the whole app is set in. */
+[data-sidebar="sidebar"] {
+  --active: var(--selected);
+  font-family: var(--font-sans);
+  /* Every resting row, glyph and label in the column takes the muted nav step;
+     the row that is lit (isActive, hover, focus) overrides it with the
+     foreground. Group labels go a step lighter again. */
+  --color-muted-foreground: var(--nav-item);
+}
+
+[data-sidebar="sidebar"] [data-sidebar="group-label"] {
+  color: var(--nav-label);
+}
+
+/* The column carries no rules: no edge hairline against the content, and no
+   scroll dividers inside it. Region separation comes from spacing, not lines. */
+[data-sidebar="sidebar"] .scroll-divider::before,
+[data-sidebar="sidebar"] .scroll-divider::after {
+  content: none;
+}
+
+/* Sidebar rhythm. The label is the app's body step, not the display step: at
+   14px the row reads as navigation, and the 44px height keeps a 14px label
+   from touching the fill above and below it. Glyphs stay 18px and sit 10px
+   from the label, so the pair read as one shape. Rows keep their 8px inset off
+   the column edge. Groups carry no vertical padding, so the column's 20px
+   row-gap is the whole space between them; the 8px block padding here is only
+   the breathing room at the top and foot of the list. */
+[data-sidebar="sidebar"] [data-sidebar="menu-button"] {
+  height: 44px;
+  column-gap: 10px;
+  font-size: 14px;
+  letter-spacing: -.01em;
+}
+
+[data-sidebar="sidebar"] [data-sidebar="menu"] {
+  row-gap: 1px;
+}
+
+[data-sidebar="sidebar"] [data-sidebar="menu-button"] > svg {
+  width: 18px;
+  height: 18px;
+}
+
+[data-sidebar="sidebar"] [data-sidebar="content"] {
+  row-gap: 20px;
+  padding-block: 8px;
+}
+
+[data-sidebar="sidebar"] [data-sidebar="group"] {
+  padding-block: 0;
+}
+
+[data-sidebar="sidebar"] [data-sidebar="group-label"] {
+  font-size: 11.5px;
+  letter-spacing: 0;
+}
+
+/* The Library's heading is a row like any other, so it joins the shared hover
+   highlight and lines up with the labels above it: the icon column carries its
+   slot, and the word keeps one weight above the moodboards it introduces. */
+.app-sidebar-heading {
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+
+/* A row's count is set at the micro step, one size down from the label. It
+   keeps the label's colour: at 11.5px the size alone does the de-emphasising,
+   so a count stays readable instead of washing out. The digits are tabular, so
+   the numbers line up down the column. The selected row and the pointer lift it
+   with the label, so the row lights as one piece (the badge's own 80ms colour
+   transition carries the change). */
+.app-sidebar-count {
+  color: var(--nav-item);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-sidebar="menu-item"]:hover .app-sidebar-count,
+[data-sidebar="menu-item"]:focus-within .app-sidebar-count,
+[data-sidebar="menu-item"]:has([data-sidebar="menu-button"][data-active="true"]) .app-sidebar-count {
+  color: var(--foreground);
+}
+
+/* The top bar's controls. The bar itself is the preset's `SidebarInsetTopbar`;
+   it carries no brand and no rule, since the brand and the shelves live in the
+   column on the left. It sits on the page ground, so scrolled content passes
+   under it. */
+
 /* The bar's right cluster: favourites, submit and the account, three 40px
    circles that match the height of the search pill. They close the bar, so
    the search owns the middle and the actions own the corner. */
@@ -1895,8 +2082,9 @@ h2 {
   }
 }
 
-/* -- Navigation menu -----------------------------------------------------
-   This sheet holds the navigation at every width: every shelf,
+/* -- The menu below the column's breakpoint --------------------------------
+   Above `lg` the sidebar is a column on the page. Below it the column leaves
+   the layout, and this sheet is the whole of the navigation: every shelf,
    every moodboard, favourites and submit, on the whole screen. Nothing sits
    behind it and there is no edge to tap outside of, so the close control is
    at the head, on the same 40px circle as the bar's own controls. */
@@ -3033,9 +3221,6 @@ html.transitioning *::after {
 
 /* -- The top bar ---------------------------------------------------------- */
 .app-topbar {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
   position: sticky;
   top: 0;
   z-index: 40;

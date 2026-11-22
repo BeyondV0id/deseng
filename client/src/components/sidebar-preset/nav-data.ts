@@ -23,7 +23,7 @@ export interface NavSection {
  * components, assets, tools and the desk they run on.
  *
  * The Library group is not here: its rows are the moodboards this account has
- * created, so it is built from state in the navigation menu.
+ * created, so it is built from state in the sidebar itself.
  */
 const collectionIcons: Record<string, IconName> = {
   Observe: "eye",
