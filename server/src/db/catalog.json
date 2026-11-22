@@ -2398,49 +2398,49 @@
       "name": "ForgeGUI",
       "url": "https://forgegui.com/",
       "description": "AI Game Assets",
-      "category": "3D assets"
+      "category": "Image tools"
     },
     {
       "name": "Pixelarticons",
       "url": "https://pixelarticons.com/",
       "description": "Pixel Art Icons",
-      "category": "3D assets"
+      "category": "Icons"
     },
     {
       "name": "Modelfy 3D",
       "url": "https://modelfy.art/",
       "description": "3D Generator",
-      "category": "3D assets"
+      "category": "3D modeling"
     },
     {
       "name": "Orior AI",
       "url": "https://oriorai.com/",
       "description": "AI Characters",
-      "category": "3D assets"
+      "category": "Image tools"
     },
     {
       "name": "Stability AI",
       "url": "https://stability.ai/",
       "description": "Creative Platform",
-      "category": "3D assets"
+      "category": "Image tools"
     },
     {
       "name": "Bean Heads",
       "url": "https://beanheads.robertbroersma.com/",
       "description": "Character Generator",
-      "category": "3D assets"
+      "category": "Illustrations"
     },
     {
       "name": "Vecto3d",
       "url": "https://vecto3d.xyz/",
       "description": "Design Tool",
-      "category": "3D assets"
+      "category": "3D modeling"
     },
     {
       "name": "Funnn.it",
       "url": "https://funnn.it/",
       "description": "Asset Library",
-      "category": "3D assets"
+      "category": "Illustrations"
     },
     {
       "name": "Shapefest",
@@ -2452,13 +2452,13 @@
       "name": "Endless Tools",
       "url": "https://endlesstools.io/",
       "description": "3D Design",
-      "category": "3D assets"
+      "category": "3D modeling"
     },
     {
       "name": "Noise Texture",
       "url": "https://figma.com/community/plugin/1138854718618193875/noise-texture",
       "description": "Texture Tool",
-      "category": "3D assets"
+      "category": "Image tools"
     },
     {
       "name": "Dimensiva",
@@ -2470,7 +2470,7 @@
       "name": "3DAI Studio",
       "url": "https://3daistudio.com/",
       "description": "3D Modeling",
-      "category": "3D assets"
+      "category": "3D modeling"
     },
     {
       "name": "Need3D",
@@ -2482,31 +2482,31 @@
       "name": "Doppio",
       "url": "https://doppio.design/",
       "description": "Doppio",
-      "category": "Animation libraries"
+      "category": "Motion editors"
     },
     {
       "name": "Pryzm",
       "url": "https://pryzm.design/",
       "description": "Pryzm",
-      "category": "Animation libraries"
+      "category": "Shaders"
     },
     {
       "name": "Generative Loaders",
       "url": "https://generativeloaders.com/",
       "description": "React Loaders",
-      "category": "Animation libraries"
+      "category": "Micro-motion"
     },
     {
       "name": "Originkit",
       "url": "https://www.originkit.dev/",
       "description": "Interactive Web Components",
-      "category": "Animation libraries"
+      "category": "UI kits"
     },
     {
       "name": "Epic Easing",
       "url": "https://epiceasing.com/",
       "description": "Web Animations",
-      "category": "Animation libraries"
+      "category": "Easing"
     },
     {
       "name": "Fluid Motion",
@@ -2518,7 +2518,7 @@
       "name": "SVGator",
       "url": "https://svgator.com/",
       "description": "Animation Tool",
-      "category": "Animation libraries"
+      "category": "Motion editors"
     },
     {
       "name": "Details",
@@ -2536,67 +2536,67 @@
       "name": "Before Click",
       "url": "https://before.click/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Landingfolio",
       "url": "https://landingfolio.com/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Commerce Cream",
       "url": "https://commercecream.com/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "CTA.gallery",
       "url": "https://cta.gallery/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Lapa Ninja",
       "url": "https://lapa.ninja/",
       "description": "Design Gallery",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "One Page Love",
       "url": "https://onepagelove.com/",
       "description": "Web Design Gallery",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Dark.Design",
       "url": "https://dark.design/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Calltoinspiration",
       "url": "https://calltoinspiration.com/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "404s.Design",
       "url": "https://404s.design/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Curated Design",
       "url": "https://curated.design/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Navbar Gallery",
       "url": "https://navbar.gallery/",
       "description": "Design Inspiration",
-      "category": "Product flows"
+      "category": "Visual search"
     },
     {
       "name": "Ogfolio",
@@ -2608,7 +2608,7 @@
       "name": "Dynamic Mockups",
       "url": "https://dynamicmockups.com/",
       "description": "Dynamic Mockups",
-      "category": "Imagery"
+      "category": "Image tools"
     },
     {
       "name": "Arqé",
@@ -2620,19 +2620,19 @@
       "name": "Javii Tools",
       "url": "https://javii.tools/",
       "description": "Social Media Mockups",
-      "category": "Imagery"
+      "category": "Image tools"
     },
     {
       "name": "Browser Mockups",
       "url": "https://figma.com/community/file/1413516575544121422",
       "description": "Design Resource",
-      "category": "Imagery"
+      "category": "Image tools"
     },
     {
       "name": "BrandBird",
       "url": "https://brandbird.app/",
       "description": "Screenshot Editor",
-      "category": "Imagery"
+      "category": "Image tools"
     },
     {
       "name": "Anthony Boyd Graphics",
@@ -2644,13 +2644,13 @@
       "name": "ClickPilot",
       "url": "https://clickpilot.app/",
       "description": "Thumbnail Tool",
-      "category": "Imagery"
+      "category": "Image tools"
     },
     {
       "name": "Artboard Studio",
       "url": "https://artboard.studio/",
       "description": "Motion Design Editor",
-      "category": "Imagery"
+      "category": "Image tools"
     },
     {
       "name": "Canva",
@@ -2752,85 +2752,85 @@
       "name": "Macfolio",
       "url": "https://macfolio.com/",
       "description": "Macfolio",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "TinyFolder",
       "url": "https://tinyfolder.app/",
       "description": "TinyFolder",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "DiskBuddy",
       "url": "https://diskbuddy.com/",
       "description": "Disk Space Analyzer",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Cooldock",
       "url": "https://www.dock.cool/",
       "description": "macOS Dock Widgets",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Looq",
       "url": "https://parcse.com/looq",
       "description": "Quick Look Previews",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Loop",
       "url": "https://github.com/MrKai77/Loop",
       "description": "Window Manager",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Ebb",
       "url": "https://ebb.cool/",
       "description": "Focus App",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Paste",
       "url": "https://pasteapp.io/",
       "description": "Clipboard Manager",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Shortcat",
       "url": "https://shortcat.app/",
       "description": "Mac Productivity",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Notch Nook",
       "url": "https://getnotchnook.com/",
       "description": "Productivity",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Setapp",
       "url": "https://setapp.sjv.io/21mvz0",
       "description": "App Library",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "TabTab",
       "url": "https://tabtabapp.net/",
       "description": "Productivity",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Alfred",
       "url": "https://alfredapp.com/",
       "description": "Productivity Tool",
-      "category": "Launchers"
+      "category": "Mac utilities"
     },
     {
       "name": "Bartender",
       "url": "https://macbartender.com/",
       "description": "Utility",
-      "category": "Launchers"
+      "category": "Mac utilities"
     }
   ]
 }

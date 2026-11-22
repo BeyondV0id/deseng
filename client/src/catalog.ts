@@ -67,6 +67,7 @@ export const categories: string[] = [
   'Accessibility',
   // Desk: the apps that stay open all day.
   'Launchers',
+  'Mac utilities',
   'Screen recording',
   'Notes',
   'Assistants',
@@ -120,7 +121,7 @@ export const collections: Collection[] = [
     id: 'Desk',
     label: 'Desk',
     description: 'The native apps that stay open all day.',
-    categories: ['Launchers', 'Screen recording', 'Notes', 'Assistants', 'Browsers'],
+    categories: ['Mac utilities', 'Launchers', 'Screen recording', 'Notes', 'Assistants', 'Browsers'],
   },
 ]
 

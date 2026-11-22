@@ -1,4 +1,5 @@
 import React from 'react'
+import { MotionConfig } from 'motion/react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 // Inter is the app's only face, shared by body and display text.
@@ -15,6 +16,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <MotionConfig reducedMotion="user">
     <BrowserRouter>
       <SurfaceProvider value={1}>
         <ShapeProvider defaultShape="pill">
@@ -28,5 +30,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </ShapeProvider>
       </SurfaceProvider>
     </BrowserRouter>
+    </MotionConfig>
   </React.StrictMode>,
 )
