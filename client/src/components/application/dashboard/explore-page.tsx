@@ -5,6 +5,7 @@ import { FeaturedTools } from '@/components/ads/featured-tools'
 import { categories, type Resource } from '@/catalog'
 import type { LibraryMoodboard } from '@/lib/library-types'
 import { LIBRARY_HEADING, LIBRARY_SUBHEADING } from './library-copy'
+import { DiscoveryCollections } from './discovery-collections'
 import { LatestAdditions } from './latest-additions'
 import { ResourceRail } from './resource-rail'
 import { ResourceSectionHeader } from './resource-section-header'
@@ -60,6 +61,8 @@ export function ExplorePage({
     {groups.length > 0
       ? <>
         {!searching && <FeaturedTools />}
+
+        {!searching && <DiscoveryCollections resources={resources} {...handlers} />}
 
         <LatestAdditions resources={resources} />
 
