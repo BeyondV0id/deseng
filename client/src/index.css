@@ -4108,6 +4108,58 @@ html.transitioning *::after {
   justify-content: center;
 }
 
+/* The email action uses the pill surface from Designeer's sign-in window. */
+.auth-form .auth-submit {
+  isolation: isolate;
+  min-height: 44px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+}
+
+.auth-form .auth-submit::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  background:
+    linear-gradient(rgb(255 255 255 / 14%), transparent 45%) padding-box,
+    linear-gradient(#1f78ff, #0058e6) padding-box,
+    linear-gradient(#6aa8ff, #3577df, #0045c0) border-box;
+  box-shadow:
+    inset 0 -3px 6px -3px rgb(0 34 107 / 18%),
+    0 1px 1px rgb(0 0 0 / 25%),
+    0 2px 4px rgb(0 0 0 / 38%),
+    0 8px 20px -8px rgb(31 120 255 / 30%);
+  transition: background var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .auth-form .auth-submit:hover:not(:disabled) {
+    background: transparent;
+    color: #fff;
+    box-shadow: none;
+  }
+
+  .auth-form .auth-submit:hover:not(:disabled)::before {
+    background:
+      linear-gradient(rgb(255 255 255 / 14%), transparent 45%) padding-box,
+      linear-gradient(#287dff, #0a5fe7) padding-box,
+      linear-gradient(#6aa8ff, #3577df, #0045c0) border-box;
+    box-shadow: inset 0 1px 2px rgb(250 250 250 / 4%), 0 2px 5px rgb(0 0 0 / 38%);
+  }
+}
+
+.auth-form .auth-submit:active:not(:disabled) { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-form .auth-submit::before { transition: none; }
+}
+
 /* An error is a line that opens under the field it is about. It grows from
    nothing so the submit button below slides instead of jumping: this is the one
    place the app animates a height, because no transform can move what sits
