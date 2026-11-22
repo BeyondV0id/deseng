@@ -29,7 +29,8 @@ export function FeaturedTools() {
           </div>
           <div className={styles.featuredPlaceholderFoot}>
             <span className={styles.featuredPlaceholderBrand}>
-              <span className={styles.featuredPlaceholderTitle}>Your Brand Here</span>
+              <span className={styles.featuredPlaceholderTitle}>Your tool here</span>
+              <span className={styles.featuredPlaceholderNote}>Featured placement</span>
             </span>
           </div>
         </div>)}
