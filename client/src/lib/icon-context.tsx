@@ -4,8 +4,7 @@
 // Components never import an icon directly: they look one up by the role it
 // plays (`useIcons()["chevron-down"]`). That keeps the icon set swappable in
 // one place, so an app on another library wraps its tree in IconProvider and
-// every component follows. Lucide is the default and the only icon library
-// this file depends on.
+// every component follows. The app supplies the default Solar glyphs.
 //
 // Components read from the map rather than calling `useIcon(name)`: React
 // Compiler's lint (`react-hooks/static-components`, on in a fresh Next app)
@@ -16,71 +15,7 @@
 
 import { createContext, useContext, useMemo, type ComponentType, type ReactNode } from "react";
 
-import {
-  ChevronRight,
-  ChevronDown,
-  X,
-  Copy,
-  Menu,
-  Dot,
-  Monitor,
-  Sun,
-  Moon,
-  RectangleHorizontal,
-  Circle,
-  SquareLibrary,
-  Clock,
-  Star,
-  Settings,
-  Plus,
-  ArrowLeft,
-  ArrowRight,
-  ArrowUp,
-  ArrowDown,
-  Search,
-  Loader,
-  Users,
-  Lock,
-  Mail,
-  Bell,
-  Shield,
-  Palette,
-  Lightbulb,
-  Rocket,
-  Heart,
-  Paintbrush,
-  Brain,
-  Globe,
-  User,
-  ImageIcon,
-  Link,
-  Check,
-  RotateCcw,
-  Play,
-  Pause,
-  Pipette,
-  Home,
-  MessageCircle,
-  Inbox,
-  Pencil,
-  Scaling,
-  SkipForward,
-  CornerDownRight,
-  CornerDownLeft,
-  PanelLeft,
-  PanelRight,
-  ChevronsUpDown,
-  Ellipsis,
-  EllipsisVertical,
-  Calendar,
-  Folder,
-  FolderOpen,
-  Eye,
-  BookOpen,
-  SlidersHorizontal,
-  Info,
-  List,
-} from "lucide-react";
+import { fluidIcons } from "@/components/icons";
 
 // The whole contract an icon has to meet. Components pass `strokeWidth` and
 // also animate stroke width through `className` (1.5 → 2 on hover is a
@@ -95,8 +30,8 @@ export interface IconComponentProps {
 export type IconComponent = ComponentType<IconComponentProps>;
 
 // Names describe the role, not the glyph, so a library whose icon is called
-// something else still fills the same slot (`more-horizontal` is Lucide's
-// Ellipsis).
+// something else still fills the same slot (`more-horizontal` uses Solar's
+// horizontal menu dots).
 export type IconName =
   | "chevron-right" | "chevron-down" | "x" | "copy" | "menu" | "dot"
   | "monitor" | "sun" | "moon" | "rectangle-horizontal" | "circle"
@@ -113,77 +48,13 @@ export type IconName =
   | "panel-left" | "panel-right" | "chevrons-up-down" | "more-horizontal" | "more-vertical" | "calendar" | "folder" | "folder-open"
   | "sliders-horizontal" | "info" | "eye" | "book" | "list";
 
-export const defaultIcons: Record<IconName, IconComponent> = {
-  "chevron-right": ChevronRight,
-  "chevron-down": ChevronDown,
-  "pipette": Pipette,
-  "x": X,
-  "copy": Copy,
-  "menu": Menu,
-  "dot": Dot,
-  "monitor": Monitor,
-  "sun": Sun,
-  "moon": Moon,
-  "rectangle-horizontal": RectangleHorizontal,
-  "circle": Circle,
-  "square-library": SquareLibrary,
-  "clock": Clock,
-  "star": Star,
-  "settings": Settings,
-  "plus": Plus,
-  "arrow-left": ArrowLeft,
-  "arrow-right": ArrowRight,
-  "arrow-up": ArrowUp,
-  "arrow-down": ArrowDown,
-  "search": Search,
-  "loader": Loader,
-  "users": Users,
-  "lock": Lock,
-  "mail": Mail,
-  "bell": Bell,
-  "shield": Shield,
-  "palette": Palette,
-  "lightbulb": Lightbulb,
-  "rocket": Rocket,
-  "heart": Heart,
-  "paintbrush": Paintbrush,
-  "brain": Brain,
-  "globe": Globe,
-  "user": User,
-  "image": ImageIcon,
-  "link": Link,
-  "check": Check,
-  "rotate-ccw": RotateCcw,
-  "play": Play,
-  "pause": Pause,
-  "home": Home,
-  "message-circle": MessageCircle,
-  "inbox": Inbox,
-  "pencil": Pencil,
-  "scaling": Scaling,
-  "skip-forward": SkipForward,
-  "corner-down-right": CornerDownRight,
-  "corner-down-left": CornerDownLeft,
-  "panel-left": PanelLeft,
-  "panel-right": PanelRight,
-  "chevrons-up-down": ChevronsUpDown,
-  "more-horizontal": Ellipsis,
-  "more-vertical": EllipsisVertical,
-  "calendar": Calendar,
-  "folder": Folder,
-  "folder-open": FolderOpen,
-  "sliders-horizontal": SlidersHorizontal,
-  "info": Info,
-  "eye": Eye,
-  "book": BookOpen,
-  "list": List,
-};
+export const defaultIcons = fluidIcons;
 
 const IconContext = createContext<Record<IconName, IconComponent> | null>(null);
 
 /**
  * Returns a single icon component for the given name.
- * Falls back to the default (Lucide) set if no provider is present, so a
+ * Falls back to the default (Solar) set if no provider is present, so a
  * component works on its own before any IconProvider is set up.
  *
  * Fine for passing an icon on as a prop. To render it as `<Icon />`, take it
@@ -196,7 +67,7 @@ function useIcon(name: IconName): IconComponent {
 
 /**
  * Returns the full icon map.
- * Falls back to the default (Lucide) set if no provider is present.
+ * Falls back to the default (Solar) set if no provider is present.
  */
 function useIcons(): Record<IconName, IconComponent> {
   const icons = useContext(IconContext);
@@ -205,7 +76,7 @@ function useIcons(): Record<IconName, IconComponent> {
 
 /**
  * Swap some or all icons for components from another library.
- * Names left out of `icons` keep their default (Lucide) component, so a
+ * Names left out of `icons` keep their default (Solar) component, so a
  * partial map never leaves a component without an icon.
  *
  * Pass a stable `icons` object (module scope or memoized): an inline object

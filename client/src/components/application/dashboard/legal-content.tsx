@@ -130,6 +130,10 @@ export function LegalContent({ page }: { page: LegalDocument }) {
           {section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
         </section>
       })}
+      {page === legalDocuments.Licence && <section aria-labelledby="icon-credits">
+        <h2 id="icon-credits">Icon credits</h2>
+        <p><a href="https://www.figma.com/community/file/1166831539721848736">Solar icons by 480 Design</a> are licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+      </section>}
     </article>
     <LibraryFooter />
   </section>

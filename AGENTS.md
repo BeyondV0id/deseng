@@ -17,7 +17,7 @@ system, and the two reference sites the product is modelled on.
 | Styles | Tailwind CSS v4 (`@tailwindcss/vite`), CSS Modules for components | `client/src/index.css` |
 | Router | `react-router-dom` 7, `BrowserRouter` | `client/src/App.tsx` |
 | Component library | **Arc** (uiarc.dev), vendored | `client/src/components/arc/` |
-| Icons (app) | **Reicon** (`reicon-react`), glyph by glyph | `client/src/components/icons.ts` |
+| Icons (app) | **Solar** (`@solar-icons/react`), glyph by glyph | `client/src/components/icons.ts` |
 | Icons (inside Arc) | `lucide-react`, `strokeWidth={1.75}` | `client/src/components/arc/**` |
 | Motion | `motion` (Motion for React) | `motion/react` |
 | Audio | `@web-kits/audio` | `client/src/components/ui/sound.tsx` |
@@ -43,12 +43,12 @@ npx shadcn@latest add @uiarc/button @uiarc/dialog
 
 ## 2. Icon rule (two libraries, one boundary)
 
-**The app uses Reicon. Arc uses Lucide. Never mix inside one file.**
+**The app uses Solar. Arc uses Lucide. Never mix inside one file.**
 
 - Application code (`client/src/components/application/**`, `client/src/components/ui/**`,
   `client/src/pages/**`) imports icons **only** from `@/components/icons`.
-- `@/components/icons` is a barrel of individual Reicon glyph imports. Add a
-  glyph there; never import `reicon-react` directly in a component.
+- `@/components/icons` is a barrel of individual Solar glyph imports. Add a
+  glyph there; never import `@solar-icons/react` directly in a component.
 - `lucide-react` is allowed **only** inside `client/src/components/arc/**`, because
   Arc's own components are authored against it at `strokeWidth={1.75}`.
   Do not edit vendored Arc internals.
@@ -58,11 +58,10 @@ npx shadcn@latest add @uiarc/button @uiarc/dialog
 import { ArrowUpRight, Folder, Heart } from '@/components/icons'
 // bad
 import { Heart } from 'lucide-react'          // app layer
-import { Heart } from 'reicon-react/icons/Heart' // bypasses the barrel
+import { HeartIcon } from '@solar-icons/react/outline/heart' // bypasses the barrel
 ```
 
-Reicon glyphs are filled paths, not strokes. They take `size` and
-`weight={'Outline' | 'Filled'}`. Sizes used in the app: 14, 15, 16, 17, 18, 20.
+Use Solar outline glyphs for controls and the bold bookmark for a saved resource. Sizes used in the app: 14, 15, 16, 17, 18, 20.
 
 ---
 

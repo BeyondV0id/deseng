@@ -97,12 +97,12 @@ centre, so derive the inner radius, never eyeball it:
 
 | Context | Library | Size |
 | --- | --- | --- |
-| App code | Reicon via `@/components/icons` | 14, 15, 16, 17, 18, 20 |
-| Sidebar rows | Reicon, via the barrel | **18** |
+| App code | Solar via `@/components/icons` | 14, 15, 16, 17, 18, 20 |
+| Sidebar rows | Solar, via the barrel | **18** |
 | Inside Arc | `lucide-react`, `strokeWidth={1.75}` | Arc's own |
 
 The boundary is strict: app files import from `@/components/icons` only. Add a
-glyph to the barrel; never import `reicon-react` in a component.
+glyph to the barrel; never import `@solar-icons/react` in a component.
 
 ### 2.5 Elevation
 
@@ -436,7 +436,7 @@ them.
 **Rules**
 
 1. App code imports from `@/components/icons` only.
-2. Add the glyph to the barrel, never import `reicon-react` in a component.
+2. Add the glyph to the barrel, never import `@solar-icons/react` in a component.
 3. `lucide-react` stays inside `src/components/arc/**` at `strokeWidth={1.75}`.
 4. Sidebar rows: 18px. Toolbar and controls: 16px. Inline metadata: 14px.
 

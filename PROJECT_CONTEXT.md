@@ -9,9 +9,9 @@ One-file summary. Read this instead of re-reading AGENTS.md + exploring the code
 - Build: `npm run build` = `tsc -b && vite build`.
 
 ## Icon rule (boundary is strict)
-- App code (`src/components/application/**`, `src/components/ui/**`, `src/pages/**`) imports icons **only** from `@/components/icons` (Reicon barrel). Add glyphs there; never import `reicon-react` directly in a component.
+- App code (`src/components/application/**`, `src/components/ui/**`, `src/pages/**`) imports icons **only** from `@/components/icons` (Solar barrel). Add glyphs there; never import `@solar-icons/react` directly in a component.
 - `lucide-react` allowed **only** inside `src/components/arc/**` at `strokeWidth={1.75}`.
-- Reicon glyphs take `size` and `weight={'Outline'|'Filled'}`. Sizes used: 14, 15, 16, 17, 18, 20.
+- Sizes used: 14, 15, 16, 17, 18, 20.
 
 ## Arc first
 Compose Arc; don't restyle internals. Use catalog item for every job it covers:

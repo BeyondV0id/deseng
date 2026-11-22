@@ -54,7 +54,7 @@ Commands run from the root:
 - Favourites, filed resources and moodboards kept against the account, so they follow it between devices.
 - Add your own link and choose a category; it joins the shared catalogue.
 - Fluid Hover on the compact sidebar navigation, using the [Fluid Functionalism component](https://www.fluidfunctionalism.com/docs/fluid-hover).
-- Reicon React icons, imported by glyph to keep the icon set consistent.
+- Solar icons by 480 Design, imported by glyph to keep the icon set consistent.
 - Built on the [Arc](https://uiarc.dev) component library, vendored under `client/src/components/arc`.
 - Locally bundled Inter, used for both display and body text.
 - Responsive sidebar and native, keyboard-accessible dialogs.

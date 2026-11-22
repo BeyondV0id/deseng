@@ -5,7 +5,6 @@ import type { FocusEvent, ReactNode, UIEvent } from "react";
 import * as DropdownPrimitive from "@radix-ui/react-dropdown-menu";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion, type Transition, type Variants } from "motion/react";
-import type { IconComponent } from "reicon-react";
 import { Folder, FolderOpen, Notification, Mute, Notification2, Timer, Check, ChevronRight, Status, Warning, CheckCircle, CircleHalfDottedCheck, MoreHorizontal, File, FileText, Film, Link, Speaker, PenTool, Plus, Presentation } from "@/components/icons";
 import { AnimatedCounter } from "../../animated-counter/animated-counter";
 import { Avatar } from "../../avatar/avatar";
@@ -62,7 +61,7 @@ const startingUpdates: Update[] = [
 ];
 const draftUpdates = ["The review step is in staging behind a flag. If error rates hold through Friday, we open it to 10% of traffic on Monday.", "Declined card copy is final and with support for review. No change to the October 14 rollout."];
 
-const files: { name: string; kind: string; size: string; owner: PersonId; date: string; icon: IconComponent }[] = [
+const files: { name: string; kind: string; size: string; owner: PersonId; date: string; icon: typeof File }[] = [
   { name: "Checkout flows v3", kind: "Design file", size: "18.4 MB", owner: "emma", date: "Sep 20", icon: PenTool },
   { name: "Review step walkthrough", kind: "Video", size: "46 MB", owner: "emma", date: "Sep 18", icon: Film },
   { name: "Payments API notes", kind: "Document", size: "96 KB", owner: "marcus", date: "Sep 16", icon: FileText },

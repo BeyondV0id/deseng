@@ -1,159 +1,206 @@
-// The app's one icon library. Reicon only, imported glyph by glyph so the
-// bundle carries just what is used. Arc's own components import from here too,
-// so the whole product speaks in one set of shapes.
 import type { IconComponent, IconName } from '@/lib/icon-context'
-import { ArrowLeft } from 'reicon-react/icons/ArrowLeft'
-import { ArrowRight } from 'reicon-react/icons/ArrowRight'
-import { BookOpen } from 'reicon-react/icons/BookOpen'
-import { Check } from 'reicon-react/icons/Check'
-import { ChevronDown } from 'reicon-react/icons/ChevronDown'
-import { ChevronRight } from 'reicon-react/icons/ChevronRight'
-import { Copy } from 'reicon-react/icons/Copy'
-import { Cpu } from 'reicon-react/icons/Cpu'
-import { Eye } from 'reicon-react/icons/Eye'
-import { Folder } from 'reicon-react/icons/Folder'
-import { FolderOpen } from 'reicon-react/icons/FolderOpen'
-import { Grid } from 'reicon-react/icons/Grid'
-import { Heart } from 'reicon-react/icons/Heart'
-import { Home } from 'reicon-react/icons/Home'
-import { Image as ReiconImage } from 'reicon-react/icons/Image'
-import { Inbox } from 'reicon-react/icons/Inbox'
-import { Lightbulb } from 'reicon-react/icons/Lightbulb'
-import { Link } from 'reicon-react/icons/Link'
-import { Menu } from 'reicon-react/icons/Menu'
-import { Monitor } from 'reicon-react/icons/Monitor'
-import { Moon } from 'reicon-react/icons/Moon'
-import { More } from 'reicon-react/icons/More'
-import { MoreH } from 'reicon-react/icons/MoreH'
-import { Paintbrush } from 'reicon-react/icons/Paintbrush'
-import { Palette } from 'reicon-react/icons/Palette'
-import { Pen } from 'reicon-react/icons/Pen'
-import { Pipette } from 'reicon-react/icons/Pipette'
-import { Plus } from 'reicon-react/icons/Plus'
-import { Rocket } from 'reicon-react/icons/Rocket'
-import { Search } from 'reicon-react/icons/Search'
-import { Settings } from 'reicon-react/icons/Settings'
-import { SidebarLeft } from 'reicon-react/icons/SidebarLeft'
-import { SidebarRight } from 'reicon-react/icons/SidebarRight'
-import { Star } from 'reicon-react/icons/Star'
-import { User } from 'reicon-react/icons/User'
-import { Users } from 'reicon-react/icons/Users'
-import { X } from 'reicon-react/icons/X'
-export { ArrowLeft } from 'reicon-react/icons/ArrowLeft'
-export { ArrowRight } from 'reicon-react/icons/ArrowRight'
-export { ArrowUpRight } from 'reicon-react/icons/ArrowUpRight'
-export { Bookmark } from 'reicon-react/icons/Bookmark'
-export { BookOpen } from 'reicon-react/icons/BookOpen'
-export { Box } from 'reicon-react/icons/Box'
-export { Check } from 'reicon-react/icons/Check'
-export { CheckCircle } from 'reicon-react/icons/CheckCircle'
-export { ChevronDown } from 'reicon-react/icons/ChevronDown'
-export { ChevronRight } from 'reicon-react/icons/ChevronRight'
-export { ChevronUp } from 'reicon-react/icons/ChevronUp'
-export { CircleHalfDottedCheck } from 'reicon-react/icons/CircleHalfDottedCheck'
-export { Copy } from 'reicon-react/icons/Copy'
-export { Cpu } from 'reicon-react/icons/Cpu'
-export { DarkLight } from 'reicon-react/icons/DarkLight'
-export { Eye } from 'reicon-react/icons/Eye'
-export { Feather } from 'reicon-react/icons/Feather'
-export { File } from 'reicon-react/icons/File'
-export { FileText } from 'reicon-react/icons/FileText'
-export { Film } from 'reicon-react/icons/Film'
-export { Folder } from 'reicon-react/icons/Folder'
-export { FolderOpen } from 'reicon-react/icons/FolderOpen'
-export { Gear } from 'reicon-react/icons/Gear'
-export { Grid } from 'reicon-react/icons/Grid'
-export { Heart } from 'reicon-react/icons/Heart'
-export { Home } from 'reicon-react/icons/Home'
-export { Image } from 'reicon-react/icons/Image'
-export { Images } from 'reicon-react/icons/Images'
-export { Inbox } from 'reicon-react/icons/Inbox'
-export { Iphone } from 'reicon-react/icons/Iphone'
-export { Key } from 'reicon-react/icons/Key'
-export { Link } from 'reicon-react/icons/Link'
-export { List } from 'reicon-react/icons/List'
-export { Loader } from 'reicon-react/icons/Loader'
-export { Logout } from 'reicon-react/icons/Logout'
-export { Menu } from 'reicon-react/icons/Menu'
-export { Monitor } from 'reicon-react/icons/Monitor'
-export { Moon } from 'reicon-react/icons/Moon'
-export { More } from 'reicon-react/icons/More'
-export { MoreH as MoreHorizontal } from 'reicon-react/icons/MoreH'
-export { Mute } from 'reicon-react/icons/Mute'
-export { Notification } from 'reicon-react/icons/Notification'
-export { Notification2 } from 'reicon-react/icons/Notification2'
-export { Paintbrush } from 'reicon-react/icons/Paintbrush'
-export { Palette } from 'reicon-react/icons/Palette'
-export { Palette3 } from 'reicon-react/icons/Palette3'
-export { Pen } from 'reicon-react/icons/Pen'
-export { PenTool } from 'reicon-react/icons/PenTool'
-export { Pipette } from 'reicon-react/icons/Pipette'
-export { Plane3 } from 'reicon-react/icons/Plane3'
-export { Plus } from 'reicon-react/icons/Plus'
-export { Presentation } from 'reicon-react/icons/Presentation'
-export { Search } from 'reicon-react/icons/Search'
-export { Setting4 } from 'reicon-react/icons/Setting4'
-export { Settings } from 'reicon-react/icons/Settings'
-export { Shapes } from 'reicon-react/icons/Shapes'
-export { Share } from 'reicon-react/icons/Share'
-export { Speaker } from 'reicon-react/icons/Speaker'
-export { Sparkles } from 'reicon-react/icons/Sparkles'
-export { Star } from 'reicon-react/icons/Star'
-export { Status } from 'reicon-react/icons/Status'
-export { Sun } from 'reicon-react/icons/Sun'
-export { Text } from 'reicon-react/icons/Text'
-export { Timer } from 'reicon-react/icons/Timer'
-export { Trash } from 'reicon-react/icons/Trash'
-export { Users } from 'reicon-react/icons/Users'
-export { VolumeMute } from 'reicon-react/icons/VolumeMute'
-export { VolumeUp } from 'reicon-react/icons/VolumeUp'
-export { Warning } from 'reicon-react/icons/Warning'
-export { Widget } from 'reicon-react/icons/Widget'
-export { X } from 'reicon-react/icons/X'
+import { ArrowDownIcon as ArrowDown } from '@solar-icons/react/outline/arrow-down'
+import { ArrowLeftIcon as ArrowLeft } from '@solar-icons/react/outline/arrow-left'
+import { ArrowRightIcon as ArrowRight } from '@solar-icons/react/outline/arrow-right'
+import { ArrowUpIcon as ArrowUp } from '@solar-icons/react/outline/arrow-up'
+import { Book2Icon as BookOpen } from '@solar-icons/react/outline/book-2'
+import { CalendarIcon as Calendar } from '@solar-icons/react/outline/calendar'
+import { CheckIcon as Check } from '@solar-icons/react/outline/check'
+import { AltArrowDownIcon as ChevronDown } from '@solar-icons/react/outline/alt-arrow-down'
+import { AltArrowRightIcon as ChevronRight } from '@solar-icons/react/outline/alt-arrow-right'
+import { SortVerticalIcon as ChevronsUpDown } from '@solar-icons/react/outline/sort-vertical'
+import { CircleIcon as Circle } from '@solar-icons/react/outline/circle'
+import { ClockCircleIcon as Clock } from '@solar-icons/react/outline/clock-circle'
+import { CopyIcon as Copy } from '@solar-icons/react/outline/copy'
+import { ArrowToDownLeftIcon as CornerDownLeft } from '@solar-icons/react/outline/arrow-to-down-left'
+import { ArrowToDownRightIcon as CornerDownRight } from '@solar-icons/react/outline/arrow-to-down-right'
+import { CpuIcon as Cpu } from '@solar-icons/react/outline/cpu'
+import { RecordIcon as Dot } from '@solar-icons/react/outline/record'
+import { EyeIcon as Eye } from '@solar-icons/react/outline/eye'
+import { FolderIcon as Folder } from '@solar-icons/react/outline/folder'
+import { FolderOpenIcon as FolderOpen } from '@solar-icons/react/outline/folder-open'
+import { GlobeIcon as Globe } from '@solar-icons/react/outline/globe'
+import { Grid2x2Icon as Grid } from '@solar-icons/react/outline/grid-2x2'
+import { HeartIcon as Heart } from '@solar-icons/react/outline/heart'
+import { HomeIcon as Home } from '@solar-icons/react/outline/home'
+import { GalleryIcon as Image } from '@solar-icons/react/outline/gallery'
+import { InboxIcon as Inbox } from '@solar-icons/react/outline/inbox'
+import { InfoCircleIcon as Info } from '@solar-icons/react/outline/info-circle'
+import { LightbulbIcon as Lightbulb } from '@solar-icons/react/outline/lightbulb'
+import { LinkIcon as Link } from '@solar-icons/react/outline/link'
+import { ListIcon as List } from '@solar-icons/react/outline/list'
+import { LoaderIcon as Loader } from '@solar-icons/react/outline/loader'
+import { LockIcon as Lock } from '@solar-icons/react/outline/lock'
+import { LetterIcon as Mail } from '@solar-icons/react/outline/letter'
+import { HamburgerMenuIcon as Menu } from '@solar-icons/react/outline/hamburger-menu'
+import { ChatRoundIcon as MessageCircle } from '@solar-icons/react/outline/chat-round'
+import { MonitorIcon as Monitor } from '@solar-icons/react/outline/monitor'
+import { MoonIcon as Moon } from '@solar-icons/react/outline/moon'
+import { MenuDotsVerticalIcon as More } from '@solar-icons/react/outline/menu-dots-vertical'
+import { MenuDotsIcon as MoreHorizontal } from '@solar-icons/react/outline/menu-dots'
+import { BellIcon as Notification } from '@solar-icons/react/outline/bell'
+import { PaintBrushIcon as Paintbrush } from '@solar-icons/react/outline/paint-brush'
+import { PaletteIcon as Palette } from '@solar-icons/react/outline/palette'
+import { PauseIcon as Pause } from '@solar-icons/react/outline/pause'
+import { PenIcon as Pen } from '@solar-icons/react/outline/pen'
+import { PipetteIcon as Pipette } from '@solar-icons/react/outline/pipette'
+import { PlayIcon as Play } from '@solar-icons/react/outline/play'
+import { AddIcon as Plus } from '@solar-icons/react/outline/add'
+import { FullScreenIcon as RectangleHorizontal } from '@solar-icons/react/outline/full-screen'
+import { RocketIcon as Rocket } from '@solar-icons/react/outline/rocket'
+import { RestartIcon as RotateCcw } from '@solar-icons/react/outline/restart'
+import { MaximizeIcon as Scaling } from '@solar-icons/react/outline/maximize'
+import { MagnifierIcon as Search } from '@solar-icons/react/outline/magnifier'
+import { SettingsIcon as Settings } from '@solar-icons/react/outline/settings'
+import { ShieldIcon as Shield } from '@solar-icons/react/outline/shield'
+import { PanelLeftOpenIcon as SidebarLeft } from '@solar-icons/react/outline/panel-left-open'
+import { PanelRightOpenIcon as SidebarRight } from '@solar-icons/react/outline/panel-right-open'
+import { SkipNextIcon as SkipForward } from '@solar-icons/react/outline/skip-next'
+import { Tuning2Icon as SlidersHorizontal } from '@solar-icons/react/outline/tuning-2'
+import { StarIcon as Star } from '@solar-icons/react/outline/star'
+import { SunIcon as Sun } from '@solar-icons/react/outline/sun'
+import { UserIcon as User } from '@solar-icons/react/outline/user'
+import { UsersGroupRoundedIcon as Users } from '@solar-icons/react/outline/users-group-rounded'
+import { CloseIcon as X } from '@solar-icons/react/outline/close'
 
-/**
- * The role map the vendored Fluid Functionalism components read through
- * `useIcons()`. Only the roles those components actually ask for are listed;
- * anything missing keeps the default set rather than leaving a hole. Keeping
- * this here, in the app's one icon barrel, is what stops a third library
- * reaching into the shell.
- */
-export const fluidIcons: Partial<Record<IconName, IconComponent>> = {
-  'panel-left': SidebarLeft,
-  'panel-right': SidebarRight,
-  'chevron-right': ChevronRight,
-  'chevron-down': ChevronDown,
-  'arrow-left': ArrowLeft,
-  'arrow-right': ArrowRight,
-  'brain': Cpu,
-  'book': BookOpen,
-  'eye': Eye,
-  'lightbulb': Lightbulb,
-  'rocket': Rocket,
-  'more-horizontal': MoreH,
-  'more-vertical': More,
-  'check': Check,
-  'copy': Copy,
-  'folder': Folder,
-  'folder-open': FolderOpen,
-  'heart': Heart,
-  'home': Home,
-  'image': ReiconImage,
-  'inbox': Inbox,
-  'link': Link,
-  'menu': Menu,
-  'monitor': Monitor,
-  'moon': Moon,
-  'paintbrush': Paintbrush,
-  'palette': Palette,
-  'pencil': Pen,
-  'pipette': Pipette,
-  'plus': Plus,
-  'search': Search,
-  'settings': Settings,
-  'square-library': Grid,
-  'star': Star,
-  'user': User,
-  'users': Users,
-  'x': X,
+export { ArrowRightUpIcon as ArrowUpRight } from '@solar-icons/react/outline/arrow-right-up'
+export { BookmarkIcon as Bookmark } from '@solar-icons/react/outline/bookmark'
+export { BoxIcon as Box } from '@solar-icons/react/outline/box'
+export { CheckCircleIcon as CheckCircle } from '@solar-icons/react/outline/check-circle'
+export { AltArrowUpIcon as ChevronUp } from '@solar-icons/react/outline/alt-arrow-up'
+export { ChecklistMinimalisticIcon as CircleHalfDottedCheck } from '@solar-icons/react/outline/checklist-minimalistic'
+export { ContrastIcon as DarkLight } from '@solar-icons/react/outline/contrast'
+export { LeafIcon as Feather } from '@solar-icons/react/outline/leaf'
+export { FileIcon as File } from '@solar-icons/react/outline/file'
+export { DocumentTextIcon as FileText } from '@solar-icons/react/outline/document-text'
+export { ClapperboardIcon as Film } from '@solar-icons/react/outline/clapperboard'
+export { SettingsIcon as Gear } from '@solar-icons/react/outline/settings'
+export { GalleryWideIcon as Images } from '@solar-icons/react/outline/gallery-wide'
+export { SmartphoneIcon as Iphone } from '@solar-icons/react/outline/smartphone'
+export { KeyIcon as Key } from '@solar-icons/react/outline/key'
+export { LogoutIcon as Logout } from '@solar-icons/react/outline/logout'
+export { BellOffIcon as Mute } from '@solar-icons/react/outline/bell-off'
+export { BellRingIcon as Notification2 } from '@solar-icons/react/outline/bell-ring'
+export { PaletteRoundIcon as Palette3 } from '@solar-icons/react/outline/palette-round'
+export { PenToolIcon as PenTool } from '@solar-icons/react/outline/pen-tool'
+export { AirplaneIcon as Plane3 } from '@solar-icons/react/outline/airplane'
+export { PresentationGraphIcon as Presentation } from '@solar-icons/react/outline/presentation-graph'
+export { Tuning2Icon as Setting4 } from '@solar-icons/react/outline/tuning-2'
+export { ThreeSquaresIcon as Shapes } from '@solar-icons/react/outline/three-squares'
+export { ShareIcon as Share } from '@solar-icons/react/outline/share'
+export { VolumeLoudIcon as Speaker } from '@solar-icons/react/outline/volume-loud'
+export { StarsIcon as Sparkles } from '@solar-icons/react/outline/stars'
+export { RecordCircleIcon as Status } from '@solar-icons/react/outline/record-circle'
+export { TextFieldIcon as Text } from '@solar-icons/react/outline/text-field'
+export { StopwatchIcon as Timer } from '@solar-icons/react/outline/stopwatch'
+export { TrashBinTrashIcon as Trash } from '@solar-icons/react/outline/trash-bin-trash'
+export { VolumeCrossIcon as VolumeMute } from '@solar-icons/react/outline/volume-cross'
+export { VolumeLoudIcon as VolumeUp } from '@solar-icons/react/outline/volume-loud'
+export { DangerTriangleIcon as Warning } from '@solar-icons/react/outline/danger-triangle'
+export { WidgetIcon as Widget } from '@solar-icons/react/outline/widget'
+export { BookmarkIcon as BookmarkFilled } from '@solar-icons/react/bold/bookmark'
+
+export {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Copy,
+  Cpu,
+  Eye,
+  Folder,
+  FolderOpen,
+  Grid,
+  Heart,
+  Home,
+  Image,
+  Inbox,
+  Link,
+  List,
+  Loader,
+  Menu,
+  Monitor,
+  Moon,
+  More,
+  MoreHorizontal,
+  Notification,
+  Paintbrush,
+  Palette,
+  Pen,
+  Pipette,
+  Plus,
+  Search,
+  Settings,
+  Star,
+  Sun,
+  Users,
+  X,
+}
+
+export const fluidIcons: Record<IconName, IconComponent> = {
+  "chevron-right": ChevronRight,
+  "chevron-down": ChevronDown,
+  "pipette": Pipette,
+  "x": X,
+  "copy": Copy,
+  "menu": Menu,
+  "dot": Dot,
+  "monitor": Monitor,
+  "sun": Sun,
+  "moon": Moon,
+  "rectangle-horizontal": RectangleHorizontal,
+  "circle": Circle,
+  "square-library": Grid,
+  "clock": Clock,
+  "star": Star,
+  "settings": Settings,
+  "plus": Plus,
+  "arrow-left": ArrowLeft,
+  "arrow-right": ArrowRight,
+  "arrow-up": ArrowUp,
+  "arrow-down": ArrowDown,
+  "search": Search,
+  "loader": Loader,
+  "users": Users,
+  "lock": Lock,
+  "mail": Mail,
+  "bell": Notification,
+  "shield": Shield,
+  "palette": Palette,
+  "lightbulb": Lightbulb,
+  "rocket": Rocket,
+  "heart": Heart,
+  "paintbrush": Paintbrush,
+  "brain": Cpu,
+  "globe": Globe,
+  "user": User,
+  "image": Image,
+  "link": Link,
+  "check": Check,
+  "rotate-ccw": RotateCcw,
+  "play": Play,
+  "pause": Pause,
+  "home": Home,
+  "message-circle": MessageCircle,
+  "inbox": Inbox,
+  "pencil": Pen,
+  "scaling": Scaling,
+  "skip-forward": SkipForward,
+  "corner-down-right": CornerDownRight,
+  "corner-down-left": CornerDownLeft,
+  "panel-left": SidebarLeft,
+  "panel-right": SidebarRight,
+  "chevrons-up-down": ChevronsUpDown,
+  "more-horizontal": MoreHorizontal,
+  "more-vertical": More,
+  "calendar": Calendar,
+  "folder": Folder,
+  "folder-open": FolderOpen,
+  "sliders-horizontal": SlidersHorizontal,
+  "info": Info,
+  "eye": Eye,
+  "book": BookOpen,
+  "list": List,
 }
