@@ -4,6 +4,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { useMemo, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { motionTokens } from '@/components/arc/lib/motion-tokens'
 import { Bookmark, ChevronRight, Plus, X } from '@/components/icons'
 import { BrandMark } from '@/components/brand/brand-mark'
 import { IconMorph } from '@/components/arc/icon-morph/icon-morph'
@@ -50,10 +51,22 @@ export function MobileMenu({
   const [open, setOpen] = useState(false)
   const icons = useIcons()
   const counts = useMemo(() => countResources(resources, moodboards), [resources, moodboards])
+  const browseCount = NAV_SECTIONS.reduce((n, section) => n + section.items.length, 0)
 
   if (!isMobile) return null
 
+  // Rows arrive in a short downward wave: the head is already there, so the
+  // list reads as filling in rather than as one block dropping. Capped so the
+  // last row starts by 240ms and the whole surface is usable within 400ms.
+  const step = motionTokens.stagger.item / 2 // 0.0175s
+  const wave = (order: number) => Math.min(0.04 + order * step, 0.24)
+  const enterEase = [...motionTokens.ease.enter] as [number, number, number, number]
+  const rowEnter = { duration: motionTokens.duration.fast, ease: enterEase }
+  const rowStagger = (order: number) =>
+    reduced ? {} : { initial: { opacity: 0, y: 6 }, animate: { opacity: 1, y: 0 }, transition: { ...rowEnter, delay: wave(order) } }
+
   const row = (
+    order: number,
     view: string,
     label: string,
     Icon: IconComponent,
@@ -75,17 +88,19 @@ export function MobileMenu({
     // An action closes over the sheet; a destination is a link to the address
     // its view lives at, so the row can be opened in a second tab.
     const action = options.onSelect
+    const enter = rowStagger(order)
     if (action) {
-      return <button
+      return <motion.button
         key={view}
         type="button"
         className="app-menu-row"
         data-active={active}
         onClick={() => { action(); setOpen(false) }}
-      >{content}</button>
+        {...enter}
+      >{content}</motion.button>
     }
 
-    return <a
+    return <motion.a
       key={view}
       className="app-menu-row"
       href={pathForView(view)}
@@ -96,7 +111,8 @@ export function MobileMenu({
         onSelect(view)
         setOpen(false)
       }}
-    >{content}</a>
+      {...enter}
+    >{content}</motion.a>
   }
 
   return <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
@@ -131,29 +147,29 @@ export function MobileMenu({
             <nav className="app-menu-body">
               <div className="app-menu-group">
                 <p className="app-menu-label">Browse</p>
-                {NAV_SECTIONS.flatMap(section => section.items.map(item =>
-                  row(item.view, item.label, icons[item.icon], {
+                {NAV_SECTIONS.flatMap(section => section.items).map((item, index) =>
+                  row(index, item.view, item.label, icons[item.icon], {
                     count: counts.get(item.view) ?? 0,
                     active: item.view === navViewFor(selected),
                   }),
-                ))}
+                )}
               </div>
 
               <div className="app-menu-group">
                 {/* The heading row opens the shelf, so its trailing slot is the
                     chevron rather than a count, the way the column does it. */}
-                {row(moodboardShelf, 'Moodboards', icons['folder-open'], {
+                {row(browseCount, moodboardShelf, 'Moodboards', icons['folder-open'], {
                   trailing: <ChevronRight size={16} aria-hidden="true" className="app-menu-chevron" />,
                 })}
-                {moodboards.map(moodboard =>
-                  row(moodboard.id, moodboard.name, icons.folder, { count: counts.get(moodboard.id) ?? 0 }),
+                {moodboards.map((moodboard, i) =>
+                  row(browseCount + 1 + i, moodboard.id, moodboard.name, icons.folder, { count: counts.get(moodboard.id) ?? 0 }),
                 )}
-                {row('new-moodboard', 'Create moodboard', icons.plus, { onSelect: onNewMoodboard })}
+                {row(browseCount + 1 + moodboards.length, 'new-moodboard', 'Create moodboard', icons.plus, { onSelect: onNewMoodboard })}
               </div>
 
               <div className="app-menu-group">
-                {row(favorites, 'Favourites', Bookmark)}
-                {row('submit', 'Submit a resource', Plus, { onSelect: onSubmitResource })}
+                {row(browseCount + moodboards.length + 2, favorites, 'Favourites', Bookmark)}
+                {row(browseCount + moodboards.length + 3, 'submit', 'Submit a resource', Plus, { onSelect: onSubmitResource })}
               </div>
             </nav>
 
