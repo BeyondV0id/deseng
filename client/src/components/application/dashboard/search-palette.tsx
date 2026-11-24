@@ -341,7 +341,7 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag, vari
     // bar's own height above and below it instead of touching its rules. The
     // hero pill keeps one height in both states: it grows along the hero's
     // axis, not across it.
-    animate={{ height: hero ? 40 : open ? (laneLayout ? 48 : 56) : 40 }}
+    animate={{ height: hero ? 44 : open ? (laneLayout ? 48 : 56) : 40 }}
     transition={reduced ? { duration: 0 } : motionTokens.spring.smooth}
     onBlur={onBlur}
   >
