@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import type { IconComponent } from "@/lib/icon-context";
+import { Check } from "@/components/icons";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { fontWeights } from "@/lib/font-weight";
@@ -240,34 +241,23 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
             animate on page load. */}
         <AnimatePresence initial={false}>
           {checked && (
-            <motion.svg
+            <motion.span
               key="check"
-              width={sizeClasses.icon}
-              height={sizeClasses.icon}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-foreground shrink-0"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 1 }}
+              className="text-foreground inline-flex shrink-0"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                transition: { duration: 0.08, ease: "easeOut" },
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.8,
+                transition: { duration: 0.04, ease: "easeIn" },
+              }}
             >
-              <motion.path
-                d="M4 12L9 17L20 6"
-                initial={{ pathLength: 0 }}
-                animate={{
-                  pathLength: 1,
-                  transition: { duration: 0.08, ease: "easeOut" },
-                }}
-                exit={{
-                  pathLength: 0,
-                  transition: { duration: 0.04, ease: "easeIn" },
-                }}
-              />
-            </motion.svg>
+              <Check size={sizeClasses.icon} strokeWidth={2} />
+            </motion.span>
           )}
         </AnimatePresence>
       </>

@@ -23,6 +23,7 @@ export default defineConfig(() => {
 
   return {
     plugins: [react(), tailwindcss()],
+    root: import.meta.dirname,
     resolve: { alias: { '@': path.resolve(__dirname, './src') } },
     server: {
       // Listen on every interface, so the dev server answers on 127.0.0.1 and
