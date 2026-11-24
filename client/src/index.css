@@ -2702,39 +2702,56 @@ h2 {
 }
 
 .app-search-cards {
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-x: visible;
+  scroll-snap-type: none;
 }
 
 .app-search-card {
   display: flex;
-  width: 128px;
+  width: 100%;
   flex: 0 0 auto;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
   margin: 0;
   border: 0;
   border-radius: var(--radius-control);
-  padding: 0;
+  padding: 6px 8px;
   background: transparent;
   color: inherit;
   font: inherit;
   text-align: left;
   cursor: pointer;
-  scroll-snap-align: start;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .app-search-card:hover {
+    background: var(--hover);
+  }
+}
+
+.app-search-card[data-active],
+.app-search-card:focus-visible {
+  background: var(--hover);
 }
 
 .app-search-thumb {
   position: relative;
   display: grid;
-  width: 100%;
-  aspect-ratio: 1;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
   place-items: center;
   overflow: hidden;
-  border-radius: calc(var(--radius-card) - var(--space-3));
+  border-radius: var(--radius-control);
   background: var(--surface-muted);
   box-shadow: inset 0 0 0 1px var(--border);
-  transition: scale .26s cubic-bezier(.3, 1.12, .4, 1), box-shadow var(--duration-fast) var(--ease-standard);
 }
 
 .app-search-thumb img {
@@ -2744,14 +2761,14 @@ h2 {
 }
 
 .app-search-thumb.is-mark img {
-  width: 34px;
-  height: 34px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
 .app-search-thumb-letter {
-  color: var(--text-tertiary);
-  font-size: 28px;
+  color: var(--text-secondary);
+  font-size: 12px;
   font-weight: 500;
   line-height: 1;
 }
@@ -2775,33 +2792,38 @@ h2 {
   box-shadow: inset 0 0 0 1px var(--border), 0 0 0 2px var(--focus-ring);
 }
 
-.app-search-card-name,
-.app-search-card-meta {
-  overflow: hidden;
-  padding: 0 2px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.app-search-card-text {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 1px;
 }
 
 .app-search-card-name {
-  color: var(--text-secondary);
-  font-size: 12.5px;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 13.5px;
   font-weight: 500;
-  line-height: 1.25;
-  transition: color var(--duration-fast) var(--ease-standard);
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .app-search-card-meta {
-  margin-top: -6px;
+  min-width: 0;
+  overflow: hidden;
   color: var(--text-tertiary);
-  font-size: 11px;
-  line-height: 1.25;
+  font-size: 11.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .app-search-card:hover .app-search-card-name,
   .app-search-card[data-active] .app-search-card-name {
-    color: var(--text-primary);
+    color: var(--hover-foreground);
   }
 }
 

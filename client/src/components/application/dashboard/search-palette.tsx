@@ -59,14 +59,13 @@ function searchResources(resources: Resource[], query: string) {
 
 /** The entry's preview, then its mark, then its initial. Never a retry loop. */
 function ResultThumb({ resource }: { resource: Resource }) {
-  const [stage, setStage] = useState<'image' | 'favicon' | 'letter'>(() =>
-    resource.imageUrl ? 'image' : resource.faviconUrl ? 'favicon' : 'letter')
-  const image = stage === 'image' ? resource.imageUrl : stage === 'favicon' ? resource.faviconUrl : null
+  const [stage, setStage] = useState<'favicon' | 'letter'>(() =>
+    resource.faviconUrl ? 'favicon' : 'letter')
+  const image = stage === 'favicon' ? resource.faviconUrl : null
   const isMark = stage === 'favicon'
   const initial = resource.name.replace(/[^a-z0-9]/gi, '').slice(0, 1).toUpperCase() || '•'
 
-  const fail = () => setStage(current =>
-    current === 'image' ? (resource.faviconUrl ? 'favicon' : 'letter') : 'letter')
+  const fail = () => setStage('letter')
 
   return <span className={['app-search-thumb', isMark ? 'is-mark' : ''].filter(Boolean).join(' ')}>
     {image ? <img
@@ -472,8 +471,10 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag, vari
                         onClick={() => choose(resource)}
                       >
                         <ResultThumb resource={resource} />
-                        <span className="app-search-card-name">{resource.name}</span>
-                        <span className="app-search-card-meta">{resource.category}</span>
+                        <span className="app-search-card-text">
+                          <span className="app-search-card-name">{resource.name}</span>
+                          <span className="app-search-card-meta">{resource.category}</span>
+                        </span>
                       </button>)}
                     </div>}
                   </div>
@@ -511,8 +512,10 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag, vari
                       onClick={() => choose(resource)}
                     >
                       <ResultThumb resource={resource} />
-                      <span className="app-search-card-name">{resource.name}</span>
-                      <span className="app-search-card-meta">{resource.category}</span>
+                      <span className="app-search-card-text">
+                        <span className="app-search-card-name">{resource.name}</span>
+                        <span className="app-search-card-meta">{resource.category}</span>
+                      </span>
                     </button>)}
                   </div>
                 </>}
