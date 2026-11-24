@@ -19,6 +19,8 @@ type DashboardProps = {
   allResources: Resource[]
   moodboards: LibraryMoodboard[]
   query: string
+  /** The hero owns the search on the catalogue's own page, so it writes here. */
+  onQueryChange: (query: string) => void
   signedIn: boolean
   onRequireAccount: () => void
   onFavorite: (id: string) => void
@@ -78,7 +80,7 @@ function MoodboardLibrary({ moodboards, resources, onOpenMoodboard, onNewMoodboa
 
 export function Dashboard(props: DashboardProps) {
   const {
-    view, heading, subheading, resources, allResources, moodboards, query,
+    view, heading, subheading, resources, allResources, moodboards, query, onQueryChange,
     signedIn, onRequireAccount, onFavorite, onFile, onOpenMoodboard, onOpenCategory, onOpenShelf, onNewMoodboard, onAddResource, onSubmitResource, onEditMoodboard, onDeleteMoodboard,
   } = props
 
@@ -97,7 +99,9 @@ export function Dashboard(props: DashboardProps) {
           : view === 'All resources'
           ? <ExplorePage
             resources={resources}
+            allResources={allResources}
             query={query}
+            onQueryChange={onQueryChange}
             moodboards={moodboards}
             signedIn={signedIn}
             onRequireAccount={onRequireAccount}
