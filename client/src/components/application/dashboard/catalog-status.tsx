@@ -2,7 +2,7 @@ import { Button } from '@/components/arc/button/button'
 import { EmptyState } from '@/components/arc/empty-state/empty-state'
 import { Warning } from '@/components/icons'
 import { LIBRARY_HEADING, LIBRARY_SUBHEADING } from './library-copy'
-import { ResourceSectionHeader } from './resource-section-header'
+import { ExploreHero } from './explore-hero'
 
 /** Bands drawn while the catalogue is in flight: enough to fill a tall screen. */
 const LOADING_RAILS = 3
@@ -37,11 +37,10 @@ export function CatalogStatus({ status, onRetry }: {
   return <div className="dashboard-main" aria-busy="true">
     <div className="page-content">
       <section className="resource-library" aria-label="Resources">
-        <ResourceSectionHeader
+        <ExploreHero
           heading={LIBRARY_HEADING}
           subheading={LIBRARY_SUBHEADING}
-          meta="Loading the library"
-          loading
+          search={<div className="explore-hero-search-skeleton" aria-hidden="true" />}
         />
         {/* One band per row, with a title line and a track of card-shaped
             placeholders. The band is a `resource-rail` and the card is a
