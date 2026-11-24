@@ -1,5 +1,6 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowRight } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
 import { Input } from '@/components/arc/input/input'
 import { Select } from '@/components/arc/select/select'
@@ -162,7 +163,7 @@ export function SubmitSection({ onSubmit }: {
 
         <aside className={styles.notice} aria-label="Submission review information">
           <p><strong>Submitting is free.</strong> We read every submission against our guidelines, so listing is not guaranteed and there is no fixed turnaround. Looking for a sponsored placement instead?</p>
-          <Link to={pathForView(sponsorView)}>See sponsorship <span aria-hidden="true">→</span></Link>
+          <Link to={pathForView(sponsorView)}>See sponsorship <ArrowRight size={14} aria-hidden="true" /></Link>
         </aside>
 
         {success && <p className={styles.success} role="status">Thanks. Your resource is in for review.</p>}
