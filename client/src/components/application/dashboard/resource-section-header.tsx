@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { TextMorph } from 'torph/react'
-import { ArrowLeft } from '@/components/icons'
 import { Button } from '@/components/arc/button/button'
+import { Breadcrumb } from '@/components/arc/breadcrumb/breadcrumb'
 import { useScrollFade } from '@/hooks/use-scroll-fade'
 
 type ResourceSectionHeaderProps = {
@@ -45,15 +45,12 @@ export function ResourceSectionHeader({
   const tags = useScrollFade<HTMLDivElement>()
 
   return <header className="resource-section-header">
-    {back && <Button
-      variant="ghost"
-      size="sm"
-      className="resource-back"
-      aria-label={`Back to ${back.label}`}
-      onClick={back.onClick}
-    >
-      <ArrowLeft size={17} aria-hidden="true" />
-    </Button>}
+    {back && <Breadcrumb
+      items={[
+        { label: back.label, onClick: back.onClick },
+        { label: heading },
+      ]}
+    />}
     <div className="resource-section-heading-row">
       <div className="resource-section-title">
         <h1><TextMorph as="span" className="heading-morph" duration={240} ease="cubic-bezier(0.19, 1, 0.22, 1)">{heading}</TextMorph></h1>

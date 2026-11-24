@@ -2393,6 +2393,276 @@
       "url": "https://amicro.dev",
       "description": "160+ copy-paste micro-interaction components built with React and Motion: animated buttons, tilt cards, text reveals and loaders.",
       "category": "Micro-motion"
+    },
+    {
+      "name": "Hazeglow",
+      "url": "https://hazeglow.dev/generator?ref=designminis.com",
+      "description": "Every AI-built site ships the same gradient. Yours doesn't have to. Animated, grainy gradient backgrounds and mesh gradients for React.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Waylume",
+      "url": "https://www.sirolius.com/playground/waylume/?ref=designminis.com",
+      "description": "A studio for flowing veils of light, made for hero backgrounds. Pick one of 50 looks, tune the colours, shape, motion and grain, then copy it as Next.js, React or HTML code, or export a PNG, JPG, MP4 or WebM.",
+      "category": "Image tools"
+    },
+    {
+      "name": "MeltKit",
+      "url": "https://meltkit.com/",
+      "description": "MeltKit background tool.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Sky Studyo",
+      "url": "https://skystudyo.pro/?ref=designminis.com",
+      "description": "Paint any sky, anywhere, at any hour: pick the clouds, the weather, the sun and moon, even an aurora or a rainbow, and export it as an image, layered SVG or video.",
+      "category": "Image tools"
+    },
+    {
+      "name": "mmeshy",
+      "url": "https://mmeshy.com/?ref=designminis.com",
+      "description": "Create beautiful mesh gradients, and export to JPG or PNG at any size. Free forever.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Background Studio",
+      "url": "https://www.designminis.com/?category=Backgrounds",
+      "description": "Background studio tool.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Mockupreel",
+      "url": "https://mockupreel.studio/editor?ref=designminis.com",
+      "description": "Create app mockups with up to 4k export for free for your app demos, prototype showcase or portfolio presentations no watermarks.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Cutout",
+      "url": "https://www.designminis.com/cutout",
+      "description": "Remove the background from any image in your browser. The AI runs on your device, so nothing is uploaded. Touch up the edge by hand, then export a transparent PNG. Free, no signup.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Caustic",
+      "url": "https://caustic.wtf/?ref=designminis.com",
+      "description": "Generative shader effects you tune live, roll into variants and export as a PNG or a video.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Dithr",
+      "url": "https://www.dithr.app/?ref=designminis.com",
+      "description": "Dithr is a browser-based tool for creating dithered and ASCII visuals and animations. Generate dynamic effects from procedural noise, or transform your own photos and videos into dithered and ASCII artwork—all in real time.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Plinth",
+      "url": "https://www.designminis.com/plinth",
+      "description": "Free screenshot mockup tool. Drop an image, stand it on a backdrop with padding, rounded corners, a perspective tilt and a shadow cast from a real light, then export a PNG or JPEG up to 4096 px. No signup.",
+      "category": "Image tools"
+    },
+    {
+      "name": "FUIbar",
+      "url": "https://fuibar.xo.je/?ref=designminis.com",
+      "description": "Create FUI and HUD shapes and assets. Export SVG and PNG. Node based generative shape and pattern generation. Come for the assets, stay for the animations.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Sfumato",
+      "url": "https://sfumato.cloud/?ref=designminis.com",
+      "description": "Sfumato is a generative design studio for creating glowing patterns, glass effects and animated backgrounds. Add photos and typography, save designs privately, and export images, animations or ready-to-use website code.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Pixel animator",
+      "url": "https://loom-mauve-ten.vercel.app/?ref=designminis.com",
+      "description": "You can create a generated pixel animation or import a image, pixelate it and animate it",
+      "category": "Image tools"
+    },
+    {
+      "name": "Mirrors",
+      "url": "https://www.designminis.com/mirrors",
+      "description": "Turn any image into a kaleidoscope or a seamless wallpaper: rosettes and the mirror groups that tile the plane. Free online, exports PNG, no signup.",
+      "category": "Image tools"
+    },
+    {
+      "name": "DotForge",
+      "url": "https://dotforge.vercel.app/?ref=designminis.com",
+      "description": "Make dithered animation in the browser. Around fifty effects, from swirls and plasma to matrix rain, with your own palette over the top and a Bayer pattern you can tune. Comes out as a PNG, a video, or code.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Shatter",
+      "url": "https://www.designminis.com/shatter",
+      "description": "Break a sheet of glass over any image: real 3D shards with chamfered edges catching a studio light. Free broken glass effect, exports PNG, no signup.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Refract",
+      "url": "https://www.designminis.com/refract",
+      "description": "Put any image behind textured glass online: fluted, cross, block, ripple and rain glass with real refraction and colour splitting. Free, no signup.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Gradlab",
+      "url": "http://www.gradlab.app/?ref=designminis.com",
+      "description": "Free, browser-native WebGL gradient generator — animated mesh gradients with OKLab color science, halftone effects, and an interactive ASCII character matrix. No install, no account, no export limits.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Merucav",
+      "url": "https://merucav.netlify.app/?ref=designminis.com",
+      "description": "A modern digital design tool with a comprehensive shader playground.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Hatchery",
+      "url": "https://www.designminis.com/hatchery",
+      "description": "Compose patterns from overlapping textured shapes whose ink inverts where they meet. Free online pattern maker, no signup.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Gradient studio",
+      "url": "https://balsa-ui.com/tools/gradient-studio?ref=designminis.com",
+      "description": "Generate deterministic gradient shaders, with multiple patterns, effects and presets.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Marbler",
+      "url": "https://phileasdg.github.io/marbler/?ref=designminis.com",
+      "description": "Drop ink on water and rake it into ribbons, then save the marbled sheet.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Weaver",
+      "url": "https://phileasdg.github.io/weaver/?ref=designminis.com",
+      "description": "Generate textile renders",
+      "category": "Image tools"
+    },
+    {
+      "name": "bookofshapes",
+      "url": "https://www.bookofshapes.com/?ref=designminis.com",
+      "description": "Generate generative Shapes/Patterns and Poster-Designs",
+      "category": "Image tools"
+    },
+    {
+      "name": "Dot Grid Builder",
+      "url": "https://playground.willnewton.dev/p/dot-grid-background?ref=designminis.com",
+      "description": "Generated, manipulated dot grid background as code. Copy and export.",
+      "category": "Image tools"
+    },
+    {
+      "name": "ColorFlow",
+      "url": "https://colorflow.ls.graphics/?ref=designminis.com",
+      "description": "Build a mesh gradient, animate it, then embed or export it.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Durves",
+      "url": "https://www.durves.com/?ref=designminis.com",
+      "description": "Bend a grid of dots into a wave, then export SVG or PNG.",
+      "category": "Image tools"
+    },
+    {
+      "name": "ShaderGradient",
+      "url": "https://shadergradient.co/customize?ref=designminis.com",
+      "description": "Tune a moving shader gradient and take it to Framer, Figma or React.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Shape Divider App",
+      "url": "https://www.shapedivider.app/?ref=designminis.com",
+      "description": "Pick an SVG section divider and copy the CSS to place it.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Sinwaver",
+      "url": "https://www.sinwaver.com/?ref=designminis.com",
+      "description": "Set the amplitude and frequency, export the sine wave as SVG.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Tabbied",
+      "url": "https://tabbied.com/patterns/?ref=designminis.com",
+      "description": "Generate a print-ready pattern from 295 designs and a palette.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Alembic Shader Lab",
+      "url": "https://lab.alembic.space/?ref=designminis.com",
+      "description": "Layer 120+ shaders over an image, a video or a blank canvas.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Generative Graphics",
+      "url": "https://generate.generativnagrafika.com/?ref=designminis.com",
+      "description": "Tool for generating graphics based on Perlin noise.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Gradient Lab",
+      "url": "https://backgrounds.supply/gradient-lab?ref=designminis.com",
+      "description": "Tune animated gradient shaders, then export a PNG or 4K video.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Tokokino",
+      "url": "https://tokokino.com/app?ref=designminis.com",
+      "description": "Design stunning screenshots, mockups, and product demos in your browser",
+      "category": "Image tools"
+    },
+    {
+      "name": "Colir",
+      "url": "https://colir.space/app/?ref=designminis.com",
+      "description": "Create gradients that don't look like defaults",
+      "category": "Image tools"
+    },
+    {
+      "name": "Cutting Mat Generator",
+      "url": "https://cutting-mat-generator.vercel.app/?ref=designminis.com",
+      "description": "Build a customisable cutting mat and download it as SVG.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Gradientool",
+      "url": "https://www.gradientool.com/?ref=designminis.com",
+      "description": "Design and animate gradients, then export PNG, MP4 or code.",
+      "category": "Image tools"
+    },
+    {
+      "name": "HeroKit",
+      "url": "https://herokit.app/?app=&ref=designminis.com",
+      "description": "Build an animated hero visual and embed it in your site.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Pryzm",
+      "url": "https://pryzm.design/?ref=designminis.com",
+      "description": "Blend gradients, photos and patterns into animated backgrounds.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Zoxilsi Studio",
+      "url": "https://studio.zoxilsi.cc/?ref=designminis.com",
+      "description": "Build and export mesh gradients, rendered with WebGL.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Hero Patterns",
+      "url": "https://heropatterns.com/?ref=designminis.com",
+      "description": "Repeatable SVG background patterns, recoloured and copied in two clicks.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Get Waves",
+      "url": "https://getwaves.io/?ref=designminis.com",
+      "description": "Randomised SVG wave dividers with adjustable amplitude and complexity.",
+      "category": "Image tools"
+    },
+    {
+      "name": "Blobmaker",
+      "url": "https://www.blobmaker.app/?ref=designminis.com",
+      "description": "Organic blob shapes as SVG, with growth and edge-count controls.",
+      "category": "Image tools"
     }
   ]
 }
