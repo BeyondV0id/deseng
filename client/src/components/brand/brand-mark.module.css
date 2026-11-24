@@ -1,11 +1,21 @@
-/* The brand mark: the dotted sphere as a still image.
-   The artwork carries its own transparency, so there is no plate, rim or
-   hairline to draw. This box only sets its size and keeps it off the text
-   baseline. Nothing here animates: the wordmark beside it is the label. */
+/* The 20px ordered dither uses the Explore hero's navy-to-orange palette. */
 .mark {
   display: block;
   width: 28px;
   height: 28px;
   flex: none;
-  object-fit: contain;
+  background: currentColor url('/brand/reference-dither-light.png') center / 20px 20px no-repeat;
+  mask: url('/brand/reference-mark.svg') center / 20px 20px no-repeat;
+  image-rendering: pixelated;
+}
+
+:global(.dark) .mark {
+  background-image: url('/brand/reference-dither-dark.png');
+}
+
+@media (forced-colors: active) {
+  .mark {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
 }
