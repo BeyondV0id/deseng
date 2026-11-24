@@ -12,7 +12,8 @@ export type AuthIntent =
   | { kind: 'new-moodboard' }
   | { kind: 'submit' }
 
-const storageKey = 'desgnix-auth-intent'
+const storageKey = 'reference-auth-intent'
+const legacyStorageKey = 'desgnix-auth-intent'
 
 export function setAuthIntent(intent: AuthIntent) {
   try {
@@ -23,15 +24,17 @@ export function setAuthIntent(intent: AuthIntent) {
 export function clearAuthIntent() {
   try {
     sessionStorage.removeItem(storageKey)
+    sessionStorage.removeItem(legacyStorageKey)
   } catch {}
 }
 
 /** Reads the intent and removes it, so it is applied at most once. */
 export function takeAuthIntent(): AuthIntent | null {
   try {
-    const raw = sessionStorage.getItem(storageKey)
-    if (!raw) return null
+    const raw = sessionStorage.getItem(storageKey) ?? sessionStorage.getItem(legacyStorageKey)
+    if (raw === null) return null
     sessionStorage.removeItem(storageKey)
+    sessionStorage.removeItem(legacyStorageKey)
     const value = JSON.parse(raw) as Partial<AuthIntent> | null
     if (!value || typeof value.kind !== 'string') return null
     switch (value.kind) {

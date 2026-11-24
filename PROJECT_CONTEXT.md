@@ -1,4 +1,4 @@
-# DesEng (design-library) — session context
+# Reference (design-library) session context
 
 One-file summary. Read this instead of re-reading AGENTS.md + exploring the codebase each session.
 
@@ -59,11 +59,10 @@ Rule: every hover fill resolves to `--hover`; everything on it resolves to `--ho
 Nav rows, search field, favourites link are pills (`--radius-pill`). Filter tabs are Arc `Button`s (`variant="secondary"` inactive, `"primary"` active). Tab strip sets `--radius-control` to pill radius.
 
 ## State & data
-- Resources, moodboards, theme persist in `localStorage` under `desgnix-*` keys; read via `store.read` helper in `src/pages/page.tsx`.
+- Resources, favourites, and moodboards live in Postgres. The browser stores the theme and sound preferences.
 - `src/components/card.tsx` renders `.ui-card` (owns border, radius, fill, shadow in both themes). Pass `href` to `Card` -> renders a link.
 - Concept = **moodboard** (`LibraryMoodboard`, `moodboardId`). Not "folder".
 - Seed catalogue: `src/catalog.ts`. Tags are plain tool nouns and no longer mirror stealth.pm; `collections` groups them into the eight shelves the sidebar shows (Observe, Read, Create, Build, Components, Assets, Tools, Desk). A shelf may hold several tags -> tag strip under heading. No People shelf or people list.
-- Catalogue versioned: bump `catalogVersion` in `src/pages/page.tsx` when shape changes (stale `localStorage` replaced, not mixed).
 - Catalogue entry: `{ name, url, description }`. Search matches name, url, description, category.
 - Explore page (`src/components/application/dashboard/explore-page.tsx`) = landing surface; big search hero, shelves under it as rows of six. Only view with big search (top bar field steps aside while open).
 - Submitted resource tagged `submitted`; there is no Submissions view. The sidebar's second group is the account's moodboards: a hoverable `Moodboards` heading row (chevron) that opens the all-moodboards shelf, each moodboard by name, then a `Create moodboard` row.
@@ -86,7 +85,7 @@ Nav rows, search field, favourites link are pills (`--radius-pill`). Filter tabs
 `npm run build` then confirm in both themes: hover fills are `--hover`, focus rings from Arc, empty/loading states exist, nothing overflows horizontally.
 
 ## Key files
-`src/pages/page.tsx` — root page, catalogVersion, store.read, theme.
+`src/pages/page.tsx` — root page, catalogue, theme.
 `src/catalog.ts` — seed catalogue + collections.
 `src/index.css` — tokens (light/dark).
 `src/main.tsx` — SurfaceProvider, foundation.css, fonts.

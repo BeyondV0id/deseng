@@ -4,7 +4,7 @@ import { SponsoredCard } from './sponsored-card'
 import styles from './ads.module.css'
 
 /** A dismissal lasts the visit, not the account: the next visit may ask again. */
-const dismissedKey = 'desgnix-ad-toast'
+const dismissedKey = 'reference-ad-toast'
 
 /**
  * The corner ad. It is the one sponsored card that arrives on its own, so it
@@ -17,7 +17,7 @@ export function ToastAd() {
   const creative = adInventory.toast
   const [dismissed, setDismissed] = useState(() => {
     try {
-      return sessionStorage.getItem(dismissedKey) === '1'
+      return (sessionStorage.getItem(dismissedKey) ?? sessionStorage.getItem('desgnix-ad-toast')) === '1'
     } catch {
       // Storage can be blocked. The card is then allowed once per render tree.
       return false

@@ -1,4 +1,5 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv, type HtmlTagDescriptor, type Plugin } from 'vite'
+import { readFileSync } from 'node:fs'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
@@ -18,11 +19,68 @@ function portFromArgs(argv: string[]): number {
   return DEFAULT_DEV_PORT
 }
 
-export default defineConfig(() => {
+function siteOrigin(value: string | undefined): string | undefined {
+  if (!value) return undefined
+  const url = new URL(value)
+  if (
+    !['https:', 'http:'].includes(url.protocol) ||
+    url.username || url.password || url.pathname !== '/' || url.search || url.hash
+  ) {
+    throw new Error('VITE_SITE_ORIGIN must be an HTTP or HTTPS origin.')
+  }
+  return url.origin
+}
+
+function publicMetadata(origin: string | undefined): Plugin {
+  return {
+    name: 'reference-public-metadata',
+    transformIndexHtml() {
+      const tags: HtmlTagDescriptor[] = [{
+        tag: 'script',
+        attrs: { type: 'application/ld+json' },
+        children: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'Reference',
+          url: origin && origin + '/',
+          inLanguage: 'en',
+        }),
+      }]
+      if (origin) {
+        tags.push(
+          { tag: 'link', attrs: { rel: 'canonical', href: origin + '/' } },
+          { tag: 'meta', attrs: { property: 'og:url', content: origin + '/' } },
+          { tag: 'meta', attrs: { property: 'og:image', content: origin + '/preview.png' } },
+        )
+      }
+      return tags
+    },
+    generateBundle() {
+      if (!origin) return
+
+      const robots = readFileSync(path.join(import.meta.dirname, 'public/robots.txt'), 'utf8')
+      const sitemap = readFileSync(path.join(import.meta.dirname, 'sitemap.xml'), 'utf8')
+      this.emitFile({
+        type: 'asset',
+        fileName: 'robots.txt',
+        source: robots.trimEnd() + '\n\nSitemap: ' + origin + '/sitemap.xml\n',
+      })
+      this.emitFile({
+        type: 'asset',
+        fileName: 'sitemap.xml',
+        source: sitemap.replaceAll('%SITE_ORIGIN%', origin),
+      })
+    },
+  }
+}
+
+export default defineConfig(({ mode }) => {
+  const origin = siteOrigin(loadEnv(mode, import.meta.dirname).VITE_SITE_ORIGIN)
   const port = portFromArgs(process.argv)
 
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), publicMetadata(origin)],
+    define: { 'import.meta.env.VITE_SITE_ORIGIN': JSON.stringify(origin ?? '') },
     root: import.meta.dirname,
     resolve: { alias: { '@': path.resolve(__dirname, './src') } },
     server: {

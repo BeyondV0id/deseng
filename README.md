@@ -1,4 +1,4 @@
-# desgnix
+# Reference
 
 A catalogue of design references: interfaces, interactions and the tools that
 build them. React 19 + TypeScript in the browser, Express + Better Auth + Drizzle
@@ -26,6 +26,15 @@ The API and the client are separate processes. Vite proxies `/api` to the API
 server, so the app, the API and the session cookie share one origin. The first
 account is created at `/sign-up`; Google and GitHub appear there once their
 client ids and secrets are in `server/.env`.
+
+## Production metadata and email
+
+Set `VITE_SITE_ORIGIN` to the public HTTPS origin before running `npm run build`.
+The build uses that origin for canonical URLs, social previews, and the
+sitemap. Local builds can omit it.
+
+When you enable Resend, set `EMAIL_FROM` to a verified sender, such as
+`Reference <no-reply@your-domain.example>`.
 
 ## Workspaces
 

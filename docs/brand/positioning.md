@@ -1,7 +1,6 @@
 # Positioning
 
 Status: working draft for review. Date: 2026-11-04.
-Assumption: copy below keeps `desgnix` as the working name until the rename decision in `docs/brand/naming.md` lands. Swap the name, keep the words.
 
 ## Audience
 
@@ -27,7 +26,7 @@ Meanwhile existing directories optimise for breadth and ad density, not for the 
 
 ## Positioning statement
 
-For interface makers who need the right tool fast, **desgnix is a hand-kept library of interface references**: every entry reviewed, every shelf organised by the job you are doing, open without an account, ordered so good things stay findable. Unlike evergreen listicles or bloated directories, it is a working catalogue, not a content farm.
+For interface makers who need the right tool fast, **Reference is a hand-kept library of interface references**: every entry reviewed, every shelf organised by the job you are doing, open without an account, ordered so good things stay findable. Unlike evergreen listicles or bloated directories, it is a working catalogue, not a content farm.
 
 One-line form, for the top of the Info page and about dialogs:
 
@@ -65,7 +64,7 @@ Tone by context:
 | Errors | Calm, specific, actionable | "Could not add the resource. Try again." |
 | Auth and account | Reassuring, minimal | "An account is only needed for favourites, moodboards, and submitting a resource." |
 | Submit flow | Exact, slightly formal | "We review every submission before it can appear in the shared catalogue." |
-| Legal | Plain, complete, unadorned | "What desgnix stores, why it is needed, and the choices you have." |
+| Legal | Plain, complete, unadorned | "What Reference stores, why it is needed, and the choices you have." |
 
 ## Do and don't, drawn from the real app
 
@@ -89,7 +88,7 @@ Tone by context:
 - "Welcome to your new home for inspiration." ("Inspiration" is mush; our noun is references, tools, examples. "Home" is a lie; it is a shelf.)
 - "Oops! Something went wrong." (We never oops. Say what failed and what to do.)
 - "Submissions are reviewed by our expert curation team." (We say "Every link is looked at before it is added." Fewer words, truer claim.)
-- "desgnix: where design meets excellence." (Slogan soup. No tagline-on-signoff; the last thing on the Info page is the wordmark, not a slogan.)
+- "Reference: where design meets excellence." (Slogan soup. No tagline-on-signoff; the last thing on the Info page is the wordmark, not a slogan.)
 - Exclamation points anywhere. If the copy is exciting, the exclamation point ruins it; if it is not, the exclamation point lies.
 - "Simply", "just", "easy" as minimisers. The work is not always simple; pretending is contempt.
 - Referring to moodboards as folders. The concept is a moodboard everywhere; consistency is respect.

@@ -45,7 +45,7 @@ export function ResourceRail({ label, heading, onSeeMore, resources, ...handlers
       </h3>
       <div className="rail-actions">
         {onSeeMore && <Button
-          variant="ghost"
+          variant="secondary"
           size="sm"
           className="rail-see-more"
           onClick={onSeeMore}

@@ -7,7 +7,7 @@ async (page) => {
   await page.waitForTimeout(1000);
 
   out.themeBefore = await page.evaluate(() => ({
-    stored: localStorage.getItem('desgnix-theme-v2'),
+    stored: localStorage.getItem('reference-theme-v2'),
     cls: document.documentElement.classList.contains('dark'),
     dataset: document.documentElement.dataset.theme,
     bodyBg: getComputedStyle(document.body).backgroundColor,
@@ -43,7 +43,7 @@ async (page) => {
   await page.getByRole('menuitemradio', { name: 'Dark' }).click();
   await page.waitForTimeout(900);
   out.afterDark = await page.evaluate(() => ({
-    stored: localStorage.getItem('desgnix-theme-v2'),
+    stored: localStorage.getItem('reference-theme-v2'),
     cls: document.documentElement.classList.contains('dark'),
     dataset: document.documentElement.dataset.theme,
     pageBg: getComputedStyle(document.documentElement).getPropertyValue('--page-background').trim(),
@@ -52,7 +52,7 @@ async (page) => {
   await page.getByRole('menuitemradio', { name: 'Light' }).click();
   await page.waitForTimeout(900);
   out.afterLight = await page.evaluate(() => ({
-    stored: localStorage.getItem('desgnix-theme-v2'),
+    stored: localStorage.getItem('reference-theme-v2'),
     cls: document.documentElement.classList.contains('dark'),
     pageBg: getComputedStyle(document.documentElement).getPropertyValue('--page-background').trim(),
     menuStillOpen: !!document.querySelector('[role=menu]'),

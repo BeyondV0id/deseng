@@ -145,7 +145,7 @@ export function AppNavbar({
         <Bookmark size={18} />
       </Button>
       <Button
-        variant="primary"
+        variant="secondary"
         size="sm"
         className="app-navbar-submit"
         aria-label="Submit a resource"

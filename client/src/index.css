@@ -1708,78 +1708,85 @@ h2 {
   }
 }
 
-/* The shelf's split, as Arc buttons. The strip sets the pill radius on Arc's
-   own control token, so the chips keep the library's hover, press and focus
-   behaviour instead of a local rule. It scrolls sideways on a phone rather
-   than wrapping into a second line of chrome. The black and white treatment
-   below is the catalogue's own toggle rather than one of the page's actions, so
-   it lives here, a class deeper than Arc's tiers: the main buttons keep the
-   coloured action finish, and only this strip goes black and white. */
+/* Shelf filters keep their own finish, independent of the page actions. */
 .resource-tags {
   --radius-control: var(--radius-pill);
+  --control-height-sm: 32px;
+  --focus-outline-offset: -3px;
+  --tag-resting-top: #fefefe;
+  --tag-resting-bottom: #fafafb;
+  --tag-resting-foreground: #5d5d66;
+  --tag-shadow: 0 2px 4px rgb(0 0 0 / 10%), inset 0 1px 0 rgb(255 255 255 / 70%);
+  --tag-selected-top: #3e8afe;
+  --tag-selected-middle: #0961ec;
+  --tag-selected-bottom: #0155dc;
+  --tag-selected-shadow:
+    0 2px 4px rgb(1 41 125 / 26%),
+    inset 0 1px 0 rgb(255 255 255 / 22%),
+    inset 0 -1px 0 rgb(0 32 100 / 28%);
   display: flex;
   flex: 0 0 auto;
   align-self: stretch;
-  gap: 8px;
+  gap: 7px;
   width: 100%;
-  padding: 2px 0 4px;
+  padding: 3px 2px 7px;
   margin: 24px 0 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
 }
 
-.resource-tags::-webkit-scrollbar {
-  display: none;
+.dark .resource-tags {
+  --tag-resting-top: #1b1b1e;
+  --tag-resting-bottom: #17171a;
+  --tag-resting-foreground: #a8a8ad;
+  --tag-shadow: 0 2px 4px rgb(0 0 0 / 40%), inset 0 -1px 0 rgb(0 0 0 / 20%);
 }
 
-/* The quiet tier: a white pill with a hairline, the foreground label on it. */
 .resource-tags .resource-tag {
-  background: var(--surface);
-  color: var(--foreground);
-  border: 1px solid var(--border);
-  box-shadow: none;
-}
-.resource-tags .resource-tag:hover:not(:disabled) {
-  background: var(--surface-muted);
-  box-shadow: none;
-}
-.resource-tags .resource-tag:active:not(:disabled) {
-  color: var(--foreground);
-  background: var(--surface-muted);
-}
-.resource-tags .resource-tag:disabled {
-  opacity: 1;
-  color: var(--text-muted);
-  background: var(--surface-muted);
-  border-color: var(--border);
+  --action-quiet-top: var(--tag-resting-top);
+  --action-quiet-bottom: var(--tag-resting-bottom);
+  --action-quiet-label: var(--tag-resting-foreground);
+  flex: none;
+  padding-inline: 13px;
+  font-size: var(--fs-title-compact);
+  line-height: var(--lh-body);
 }
 
-/* The active tier: a filled black pill, the background label on it. The old
-   toggle's hover and press ride opacity, so those states are restated here
-   rather than swapped for the action fill. */
-.resource-tags .resource-tag-active {
-  background: var(--foreground);
-  color: var(--background);
-  border-color: var(--foreground);
+.resource-tags .resource-tag:not(:disabled) {
+  box-shadow: var(--tag-shadow);
 }
-.resource-tags .resource-tag-active:hover:not(:disabled) {
-  background: var(--foreground);
-  color: var(--background);
-  border-color: var(--foreground);
-  opacity: .91;
+
+.resource-tags .resource-tag[aria-pressed="true"]:not(:disabled) {
+  --action-quiet-label: #fafafa;
+  --focus-outline: var(--action-quiet-label);
+  background: linear-gradient(
+    180deg,
+    var(--tag-selected-top),
+    var(--tag-selected-middle) 68%,
+    var(--tag-selected-bottom)
+  );
+  box-shadow: var(--tag-selected-shadow);
 }
-.resource-tags .resource-tag-active:active:not(:disabled) {
-  background: var(--foreground);
-  color: var(--background);
-  border-color: var(--foreground);
-  opacity: .84;
+
+@media (hover: hover) and (pointer: fine) {
+  .resource-tags .resource-tag[aria-pressed="false"]:hover:not(:disabled) {
+    --action-quiet-label: var(--hover-foreground);
+  }
+
+  .resource-tags .resource-tag[aria-pressed="true"]:hover:not(:disabled) {
+    --tag-selected-top: color-mix(in srgb, #3e8afe 94%, white);
+  }
 }
-.resource-tags .resource-tag-active:disabled {
-  opacity: 1;
-  background: var(--foreground);
-  color: var(--background);
-  border-color: var(--foreground);
+
+.resource-tags .resource-tag[aria-pressed="true"]:active:not(:disabled) {
+  --tag-selected-top: #2475f5;
+}
+
+@media (pointer: coarse) {
+  .resource-tags {
+    --control-height-sm: 44px;
+  }
 }
 
 .resource-grid {
@@ -1900,6 +1907,14 @@ h2 {
   height: 18px;
 }
 
+.app-sidebar [data-sidebar="menu-button"] > svg:first-child {
+  color: var(--hero-icon);
+}
+
+.app-sidebar [data-sidebar="menu-button"]:is(:hover, :focus-visible, [data-active="true"]) > svg:first-child {
+  color: var(--hero-icon-active);
+}
+
 [data-sidebar="sidebar"] [data-sidebar="content"] {
   row-gap: 20px;
   padding-block: 8px;
@@ -1960,41 +1975,99 @@ h2 {
   margin-left: auto;
 }
 
-/* The circles take the resting surface with no hairline, and the muted icon
-   step. The pointer moves the fill one step and lifts the glyph with it. */
-.app-navbar-actions .app-navbar-icon {
-  width: 40px;
-  min-width: 40px;
+/* The visible faces sit inside a larger hit area to keep the bar aligned. */
+.app-navbar-actions :is(.app-navbar-icon, .app-navbar-signin, .app-navbar-submit),
+.app-menu-trigger {
+  --navbar-control-face: var(--action-quiet-top);
+  --navbar-control-edge: var(--action-quiet-ring);
+  --navbar-control-size: 32px;
+  position: relative;
+  isolation: isolate;
   height: 40px;
   min-height: 40px;
-  padding: 0;
+  padding-inline: 14px;
   border: 0;
   border-radius: var(--radius-pill);
-  background: var(--surface-muted);
-  color: var(--text-secondary);
-  transition:
-    background-color var(--duration-fast) var(--ease-standard),
-    color var(--duration-fast) var(--ease-standard);
+  background: transparent;
+  color: var(--text-primary);
+  box-shadow: none;
+  font-size: var(--fs-body);
 }
 
-/* The favourites shortcut marks the view it opens the way an active tag does:
-   the foreground fill with the page colour on top. */
+.app-navbar-actions .app-navbar-icon,
+.app-menu-trigger {
+  --navbar-control-size: 28px;
+  width: 40px;
+  min-width: 40px;
+  padding: 0;
+  color: var(--hero-icon);
+}
+
+.app-navbar-actions .app-navbar-submit {
+  border-radius: var(--radius-control);
+}
+
+.app-navbar-actions :is(.app-navbar-icon, .app-navbar-signin, .app-navbar-submit)::before,
+.app-menu-trigger::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-block: 50% auto;
+  inset-inline: 0;
+  height: var(--navbar-control-size);
+  transform: translateY(-50%);
+  pointer-events: none;
+  border: 1px solid var(--navbar-control-edge);
+  border-radius: inherit;
+  background: var(--navbar-control-face);
+  box-shadow: var(--button-shadow);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.app-navbar-actions .app-navbar-icon::before,
+.app-menu-trigger::before {
+  inset-inline: calc((100% - var(--navbar-control-size)) / 2);
+}
+
+.app-navbar-actions .app-navbar-submit::before {
+  box-shadow: inset 0 1px 0 var(--action-edge-highlight), var(--button-shadow);
+}
+
 .app-navbar-actions .app-navbar-icon[aria-current="page"] {
-  background: var(--foreground);
-  color: var(--background);
+  --navbar-control-face: var(--action-fill);
+  --navbar-control-edge: var(--action-fill);
+  color: var(--action-label);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .app-navbar-actions .app-navbar-icon:hover:not(:disabled) {
-    background: var(--hover);
+  .app-navbar-actions :is(.app-navbar-icon, .app-navbar-signin, .app-navbar-submit):hover:not(:disabled),
+  .app-menu-trigger:hover {
+    --navbar-control-face: var(--hover);
+    background: transparent;
     color: var(--hover-foreground);
+    box-shadow: none;
   }
 
-  .app-navbar-actions .app-navbar-icon[aria-current="page"]:hover:not(:disabled) {
-    background: var(--foreground);
-    color: var(--background);
-    opacity: .9;
+  .app-navbar-actions .app-navbar-icon[aria-current="page"]:hover {
+    --navbar-control-face: var(--action-fill-hover);
+    color: var(--action-label);
   }
+
+  .app-navbar-actions .app-navbar-icon:not([aria-current]):hover,
+  .app-menu-trigger:hover {
+    color: var(--hero-icon-active);
+  }
+}
+
+.app-navbar-actions :is(.app-navbar-icon, .app-navbar-signin, .app-navbar-submit):active:not(:disabled),
+.app-menu-trigger:active {
+  --navbar-control-face: var(--selected);
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-navbar-actions .app-navbar-icon[aria-current="page"]:active {
+  --navbar-control-face: var(--action-fill-press);
 }
 
 /* The account is the one filled colour in the bar: a 40px disc carrying the
@@ -2037,28 +2110,9 @@ h2 {
   }
 }
 
-/* Without an account there is no disc and no menu: the slot carries a single
-   pill that opens sign-in. It keeps the circles' 40px height, so the bar still
-   reads as one row. */
-.app-navbar-actions .app-navbar-signin {
-  height: 40px;
-  min-height: 40px;
-  padding-inline: 18px;
-  border-radius: var(--radius-pill);
-  background: var(--surface-muted);
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .app-navbar-actions .app-navbar-signin:hover:not(:disabled) {
-    background: var(--hover);
-    color: var(--hover-foreground);
-  }
-}
-
 @media (pointer: coarse) {
-  .app-navbar-actions .app-navbar-signin {
+  .app-navbar-actions :is(.app-navbar-icon, .app-navbar-signin, .app-navbar-submit),
+  .app-menu-trigger {
     height: 44px;
     min-height: 44px;
   }
@@ -2091,29 +2145,15 @@ h2 {
 .app-menu-trigger {
   display: grid;
   flex: none;
-  width: 40px;
-  height: 40px;
   place-items: center;
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--surface-muted);
-  color: var(--text-secondary);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard),
     transform var(--duration-fast) var(--ease-standard);
 }
 
 .app-menu-trigger:active {
-  transform: scale(.94);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .app-menu-trigger:hover {
-    background: var(--hover);
-    color: var(--hover-foreground);
-  }
+  transform: scale(.96);
 }
 
 .app-menu {
@@ -2241,14 +2281,14 @@ h2 {
   color: var(--foreground);
 }
 
-.app-menu-row>svg:first-child {
+.app-menu-row > svg:first-child,
+.app-menu-close > svg {
   flex: none;
-  color: var(--text-tertiary);
+  color: var(--hero-icon);
 }
 
-.app-menu-row:hover>svg:first-child,
-.app-menu-row[data-active]>svg:first-child {
-  color: inherit;
+.app-menu-row:is(:hover, :focus-visible, [data-active]) > svg:first-child {
+  color: var(--hero-icon-active);
 }
 
 .app-menu-name {
@@ -2398,12 +2438,12 @@ h2 {
 
 .app-search-icon {
   flex: 0 0 auto;
-  color: var(--text-secondary);
+  color: var(--hero-icon);
   transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .app-search-bar[data-open] .app-search-icon {
-  color: var(--text-muted);
+  color: var(--hero-icon-active);
 }
 
 .app-search-input {
@@ -3382,26 +3422,40 @@ html.transitioning *::after {
   transform: translateY(0);
 }
 
-.resource-card-tool {
+.resource-card-caption .resource-card-tool {
   display: grid;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
   place-items: center;
   padding: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--text-tertiary);
+  color: var(--hero-icon);
   cursor: pointer;
   transition:
     background-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard);
 }
 
-.resource-card-tool:hover,
-.resource-card-tool[data-state="open"] {
-  background: transparent;
-  color: var(--text-primary);
+.resource-card-caption .resource-card-tool:is(:hover, [data-state="open"]) {
+  background: var(--hover);
+  color: var(--hero-icon-active);
+}
+
+.resource-card-caption .resource-card-tool.is-favorite {
+  color: var(--hero-icon-active);
+}
+
+@media (pointer: coarse) {
+  .resource-card-caption .resource-card-tool {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
 }
 
 /* A finger has no hover, so the controls are simply there. */
@@ -3724,35 +3778,25 @@ html.transitioning *::after {
 }
 
 .rail-see-more {
-  width: auto;
-  min-width: 44px;
-  height: 44px;
-  min-height: 44px;
-  padding: 0 8px;
-  gap: 4px;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1;
-}
-
-/* Keep the label quiet until hover, and let the arrow point into the category
-   without adding a fill behind the action. */
-.rail-see-more:hover:not(:disabled),
-.rail-see-more:focus-visible,
-.rail-see-more:active:not(:disabled) {
-  background: transparent;
-  border-color: transparent;
-  color: var(--text-primary);
+  --control-height-sm: 32px;
+  --radius-control: var(--radius-pill);
+  font-size: var(--fs-body);
 }
 
 .rail-see-more svg {
+  color: var(--hero-icon);
   transition: transform var(--duration-fast) var(--ease-standard);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .rail-see-more:hover:not(:disabled) svg {
     transform: translate(2px, -2px);
+  }
+}
+
+@media (pointer: coarse) {
+  .rail-see-more {
+    --control-height-sm: 44px;
   }
 }
 
@@ -4520,207 +4564,139 @@ html.transitioning *::after {
     transition: border-radius 180ms ease-in-out, background-color 180ms ease-in-out, color 180ms ease-in-out, border-color 180ms ease-in-out, fill 180ms ease-in-out, stroke 180ms ease-in-out !important;
 }
 
-/* -- The action palette -----------------------------------------------------
-   Buttons are the one place a colour is spent: one filled action, one quiet
-   control, and nothing else in the app changes hue for them. The filled action
-   is the submit action: the catalogue's single coloured action, the submit
-   accent, not a generic action blue. The finish is the layered one the
-   refreshed controls use: a sheen, a vertical fill, an edge and a drop, so the
-   button reads as a physical object rather than a rectangle. Every layer is
-   derived from the one accent below, so the finish never introduces a colour. */
-:root {
-  --submit-accent: #a855f7;
-  --submit-accent-hover: #b365ff;
-  --action-fill: var(--submit-accent);
-  --action-fill-hover: var(--submit-accent-hover);
-  --action-fill-press: color-mix(in oklab, var(--submit-accent) 78%, black);
-  --action-fill-disabled: color-mix(in oklab, var(--submit-accent) 38%, var(--surface));
-  --action-label: #ffffff;
-  --action-inner-stroke: rgb(255 255 255 / .4);
-  --action-inner-glow: rgb(255 255 255 / .24);
-  --action-drop: rgb(0 0 0 / .2);
-  --action-quiet-top: #ffffff;
-  --action-quiet-bottom: #f7f7f7;
-  --action-quiet-top-hover: #fbfbfb;
-  --action-quiet-bottom-hover: #f1f1f1;
-  --action-quiet-press: #f2f2f2;
-  --action-quiet-ring: #ececec;
-  --action-quiet-ring-press: #e6e6e6;
-  --action-quiet-label: #1a1a1a;
-
-  --action-fill-bottom: color-mix(in oklab, var(--action-fill) 78%, black);
-  --action-edge-top: color-mix(in srgb, var(--action-fill), white 34%);
-  --action-edge-bottom: color-mix(in srgb, var(--action-fill), black 22%);
-  --action-sheen: linear-gradient(rgb(255 255 255 / 12%), transparent 50%);
-  --action-shade: rgb(0 0 0 / 18%);
-  --action-drop-near: rgb(0 0 0 / 10%);
-  --action-glow: transparent;
-  --action-quiet-edge-top: transparent;
-  --action-quiet-edge-bottom: rgb(0 0 0 / 6%);
-  --action-quiet-drop-near: rgb(0 0 0 / 4%);
-  --action-quiet-drop: rgb(0 0 0 / 5%);
-  --action-ease: cubic-bezier(.215, .61, .355, 1);
-}
-
-:root.dark {
-  --action-sheen: linear-gradient(rgb(255 255 255 / 14%), transparent 45%);
-  --action-drop-near: rgb(0 0 0 / 25%);
-  --action-drop: rgb(0 0 0 / 38%);
-  --action-glow: color-mix(in srgb, var(--action-fill) 30%, transparent);
-  --action-quiet-top: #2c2c30;
-  --action-quiet-bottom: #38383c;
-  --action-quiet-edge-top: #56565b;
-  --action-quiet-edge-bottom: #36363a;
-  --action-quiet-drop-near: transparent;
-  --action-quiet-drop: rgb(0 0 0 / 40%);
-}
-
-/* Keep the finish in the application layer; Arc still owns loading and focus. */
-button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]),
-.app-action-primary,
-.app-action-secondary {
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  gap: 4.875px;
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: transparent;
-  box-shadow: none;
-  padding: 0 11.375px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 21px;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 150ms var(--action-ease), opacity 150ms var(--action-ease), transform 150ms var(--action-ease);
-}
-
-button[class*="_button_"][class*="_primary_"], .app-action-primary { color: var(--action-label); }
-button[class*="_button_"][class*="_secondary_"], .app-action-secondary { color: var(--action-quiet-label); }
-button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"])[class*="_sm_"],
-.app-action-primary, .app-action-secondary { min-height: 32px; }
-
-button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"])::before,
-.app-action-primary::before, .app-action-secondary::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  border: 1px solid transparent;
-  border-radius: inherit;
-  --button-top: var(--button-base);
-  --button-bottom: var(--button-lit);
-  background:
-    var(--button-sheen, linear-gradient(transparent, transparent)) padding-box,
-    linear-gradient(var(--button-top), var(--button-bottom)) padding-box,
-    linear-gradient(var(--button-edge-top), color-mix(in srgb, var(--button-edge-top), var(--button-edge-bottom)), var(--button-edge-bottom)) border-box,
-    linear-gradient(var(--button-top), var(--button-bottom)) border-box;
-  box-shadow:
-    inset 0 -3px 6px -3px var(--button-shade, transparent),
-    0 1px 1px var(--button-drop-near),
-    0 2px 4px var(--button-drop),
-    0 8px 20px -8px var(--button-glow, transparent);
-  transition: --button-top 150ms var(--action-ease), --button-bottom 150ms var(--action-ease), box-shadow 150ms var(--action-ease);
-}
-
-button[class*="_primary_"]::before, .app-action-primary::before {
-  --button-base: var(--action-fill);
-  --button-lit: var(--action-fill-bottom);
-  --button-sheen: var(--action-sheen);
-  --button-edge-top: var(--action-edge-top);
-  --button-edge-bottom: var(--action-edge-bottom);
-  --button-shade: var(--action-shade);
-  --button-drop-near: var(--action-drop-near);
-  --button-drop: var(--action-drop);
-  --button-glow: var(--action-glow);
-}
-button[class*="_secondary_"]::before, .app-action-secondary::before {
-  --button-base: var(--action-quiet-top);
-  --button-lit: var(--action-quiet-bottom);
-  --button-edge-top: var(--action-quiet-edge-top);
-  --button-edge-bottom: var(--action-quiet-edge-bottom);
-  --button-drop-near: var(--action-quiet-drop-near);
-  --button-drop: var(--action-quiet-drop);
-}
-@property --button-top { syntax: "<color>"; inherits: false; initial-value: transparent; }
-@property --button-bottom { syntax: "<color>"; inherits: false; initial-value: transparent; }
-
-button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):is(:hover, :active):not(:disabled),
-.app-action-primary:is(:hover, :active), .app-action-secondary:is(:hover, :active) {
-  background: transparent;
-  box-shadow: none;
-}
-button[class*="_button_"][class*="_primary_"]:is(:hover, :active):not(:disabled), .app-action-primary:is(:hover, :active) { color: var(--action-label); }
-button[class*="_button_"][class*="_secondary_"]:is(:hover, :active):not(:disabled), .app-action-secondary:is(:hover, :active) { color: var(--action-quiet-label); }
-
-@media (hover: hover) and (pointer: fine) {
-  button[class*="_primary_"]:hover:not(:disabled)::before, .app-action-primary:hover::before {
-    --button-top: color-mix(in srgb, var(--button-base), white 4%);
-    --button-bottom: color-mix(in srgb, var(--button-lit), white 4%);
-  }
-  button[class*="_secondary_"]:hover:not(:disabled)::before, .app-action-secondary:hover::before {
-    --button-top: color-mix(in srgb, var(--button-base), black 2%);
-    --button-bottom: color-mix(in srgb, var(--button-lit), black 2%);
-  }
-  .dark button[class*="_secondary_"]:hover:not(:disabled)::before, .dark .app-action-secondary:hover::before {
-    --button-top: color-mix(in srgb, var(--button-base), white 4%);
-    --button-bottom: color-mix(in srgb, var(--button-lit), white 4%);
-  }
-  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):hover:not(:disabled)::before,
-  .app-action-primary:hover::before, .app-action-secondary:hover::before {
-    box-shadow: inset 0 1px 2px color-mix(in srgb, var(--foreground), transparent 96%), 0 2px 5px var(--button-drop);
-  }
-}
-
-button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):disabled { opacity: .5; background: transparent; box-shadow: none; }
-.app-action-primary:active, .app-action-secondary:active { transform: scale(.98); }
-
-@media (hover: hover) and (pointer: fine) {
-  button[class*="_ghost_"]:hover:not(:disabled) {
-    background: var(--hover);
-    color: var(--hover-foreground);
-  }
-}
-
-.app-navbar-actions button.app-navbar-submit[class] {
-  height: 40px;
-  min-height: 40px;
-  padding-inline: 20px;
-  border-radius: var(--radius-pill);
-}
-
-.catalog-skeleton-description { display: block; min-height: 2.9em; margin: 4px 2px 0; background: var(--surface-muted); border-radius: var(--radius-control); font-size: var(--text-sm); line-height: 1.45; }
-.resource-card-tool { border-radius: var(--radius-pill); }
-.resource-card-tool:hover, .resource-card-tool[data-state="open"] { background: var(--hover); color: var(--hover-foreground); }
-.resource-card-caption .resource-card-tool { width: 28px; min-width: 28px; height: 28px; min-height: 28px; padding: 0; }
-
-@media (max-width: 1023.98px) { .app-navbar-actions button.app-navbar-submit[class] { display: none; } }
-@media (pointer: coarse) {
-  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]),
-  .app-action-primary, .app-action-secondary { min-height: 44px; }
-  .resource-card-caption .resource-card-tool { width: 44px; min-width: 44px; height: 44px; min-height: 44px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]),
-  button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"])::before,
-  .app-action-primary, .app-action-primary::before,
-  .app-action-secondary, .app-action-secondary::before { transition: none; }
-  .app-action-primary:active, .app-action-secondary:active { transform: none; }
-  .resource-card-tools, .resource-card-tool { transition: none; transform: none; }
-}
-
-/* Explore's dithered artwork uses cobalt ink and ice, separate from UI state. */
+/* The Explore hero palette also supplies the action and icon colors. */
 :root {
   --discovery-shader-ink: 0.025 0.05 0.16;
   --discovery-shader-pigment: 0.16 0.33 0.83;
   --discovery-shader-light: 0.78 0.87 1;
   --discovery-art-ground: #152450;
   --discovery-art-foreground: #ffffff;
+  --hero-navy: #1d2c44;
+  --hero-steel: #5b6f8a;
+  --hero-stone: #a9a39c;
+  --hero-ember: #f58220;
+  --hero-icon: var(--hero-steel);
+  --hero-icon-active: var(--hero-navy);
+
+  --action-fill: var(--hero-navy);
+  --action-fill-hover: color-mix(in srgb, var(--action-fill) 81%, var(--hero-steel));
+  --action-fill-press: color-mix(in srgb, var(--action-fill) 85%, black);
+  --action-fill-disabled: color-mix(in srgb, var(--action-fill) 73%, var(--hero-steel));
+  --action-label: var(--discovery-art-foreground);
+  --action-edge-highlight: color-mix(in srgb, var(--action-label) 68%, transparent);
+  --action-inner-stroke: color-mix(in srgb, var(--action-label) 20%, transparent);
+  --action-inner-glow: transparent;
+  --action-drop: color-mix(in srgb, var(--hero-navy) 12%, transparent);
+
+  --action-quiet-top: var(--surface);
+  --action-quiet-bottom: var(--surface-muted);
+  --action-quiet-top-hover: var(--hover);
+  --action-quiet-bottom-hover: var(--hover);
+  --action-quiet-press: var(--selected);
+  --action-quiet-ring: var(--border);
+  --action-quiet-ring-press: var(--border-strong);
+  --action-quiet-label: var(--text-primary);
+  --button-shadow: 0 1px 2px var(--shadow-color);
+}
+
+:root.dark {
+  --hero-icon: color-mix(in srgb, var(--hero-steel) 30%, var(--hero-stone));
+  --hero-icon-active: var(--hero-ember);
+  --action-fill: color-mix(in srgb, var(--hero-steel) 79%, var(--hero-navy));
+  --action-edge-highlight: color-mix(in srgb, var(--action-label) 14%, transparent);
+  --action-quiet-top: var(--selected);
+}
+
+/* Sponsor links retain anchor semantics and the same surface as Arc actions. */
+.app-action-primary,
+.app-action-secondary {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-inline: var(--space-3);
+  border: 1px solid var(--action-quiet-ring);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-subtitle);
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.app-action-primary {
+  border-color: var(--action-fill);
+  background: var(--action-fill);
+  color: var(--action-label);
+}
+
+.app-action-secondary {
+  background: var(--action-quiet-top);
+  color: var(--action-quiet-label);
+  box-shadow: var(--button-shadow);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .app-action-primary:hover {
+    background: var(--action-fill-hover);
+  }
+
+  .app-action-secondary:hover {
+    background: var(--hover);
+    color: var(--hover-foreground);
+  }
+}
+
+.app-action-primary:active {
+  background: var(--action-fill-press);
+  transform: scale(.98);
+}
+
+.app-action-secondary:active {
+  background: var(--selected);
+  transform: scale(.98);
+}
+
+.catalog-skeleton-description {
+  display: block;
+  min-height: 2.9em;
+  margin: 4px 2px 0;
+  border-radius: var(--radius-control);
+  background: var(--surface-muted);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+@media (max-width: 1023.98px) {
+  .app-navbar-actions .app-navbar-submit {
+    display: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .app-action-primary,
+  .app-action-secondary {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-navbar-actions :is(.app-navbar-icon, .app-navbar-signin, .app-navbar-submit)::before,
+  .app-menu-trigger,
+  .app-menu-trigger::before,
+  .app-action-primary,
+  .app-action-secondary,
+  .resource-card-tools,
+  .resource-card-caption .resource-card-tool {
+    transition: none;
+    transform: none;
+  }
+
+  .app-navbar-actions :is(.app-navbar-icon, .app-navbar-signin, .app-navbar-submit)::before,
+  .app-menu-trigger::before {
+    transform: translateY(-50%);
+  }
 }

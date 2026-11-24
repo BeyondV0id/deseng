@@ -59,30 +59,6 @@ function getSystemTheme(): Theme {
   return prefersDark() ? 'dark' : 'light'
 }
 
-/**
- * The app shipped as Fieldnotes, then as DesEng. Copy anything saved under an
- * older prefix to its desgnix key once, so a rename does not lose a preference.
- * The library itself is server data now; the theme is the last local key.
- */
-function migrateLegacyStorage() {
-  try {
-    const prefixes = ['fieldnotes-', 'deseng-']
-    const copies: Array<[string, string]> = []
-    for (let index = 0; index < localStorage.length; index += 1) {
-      const key = localStorage.key(index)
-      if (!key) continue
-      const prefix = prefixes.find(candidate => key.startsWith(candidate))
-      if (!prefix) continue
-      const nextKey = `desgnix-${key.slice(prefix.length)}`
-      const value = localStorage.getItem(key)
-      if (value !== null && localStorage.getItem(nextKey) === null) copies.push([nextKey, value])
-    }
-    for (const [key, value] of copies) localStorage.setItem(key, value)
-  } catch {}
-}
-
-migrateLegacyStorage()
-
 /** The API's message for a failed write, or a sentence that at least names the step. */
 function failureMessage(error: unknown, fallback: string) {
   return error instanceof ApiError ? error.message : fallback
