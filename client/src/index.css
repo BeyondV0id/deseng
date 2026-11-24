@@ -2864,10 +2864,10 @@ h2 {
    step rather than a control in the chrome. The column is capped so a wide
    screen still reads as one sentence. */
 .explore-hero {
-  --explore-hero-background: black;
-  --explore-hero-foreground: white;
+  --explore-hero-background: var(--page-background);
+  --explore-hero-foreground: var(--foreground);
   --explore-hero-description: color-mix(in srgb, var(--explore-hero-foreground) 92%, var(--explore-hero-background));
-  --explore-hero-scrim: color-mix(in srgb, var(--explore-hero-background) 59%, transparent);
+  --explore-hero-scrim: color-mix(in srgb, var(--explore-hero-background) 55%, transparent);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -2876,6 +2876,7 @@ h2 {
   min-block-size: clamp(360px, 38vw, 480px);
   padding: clamp(48px, 6vw, 88px) clamp(24px, 4vw, 48px);
   margin: 0 calc(-1 * var(--page-content-gutter)) 40px;
+  border-bottom: 1px solid var(--border);
   text-align: center;
 }
 
@@ -2883,7 +2884,11 @@ h2 {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: var(--explore-hero-background) url('./assets/explore-dither.webp') center / cover no-repeat;
+  background: var(--explore-hero-background) url('./assets/explore-dither-light.webp') center / cover no-repeat;
+}
+
+.dark .explore-hero-backdrop {
+  background-image: url('./assets/explore-dither.webp');
 }
 
 .explore-hero-backdrop::after {
@@ -2943,8 +2948,8 @@ h2 {
    the tighter padding, and it carries no shortcut hint, so the placeholder is
    the whole line. */
 .app-search[data-variant='hero'] .app-search-bar {
-  border-radius: var(--radius-control);
   height: 100%;
+  border-radius: var(--radius-control);
   padding: 0 14px;
 }
 
