@@ -1,7 +1,7 @@
 # SEO
 
 Status: working plan. Date: 2026-11-04.
-**Assumption at the top:** all canonicals, the sitemap, robots.txt and the manifest keep the existing origin `https://desgnix.app` until the rename call in `docs/brand/naming.md` lands. Note: `desgnix.app` appears unregistered today (Google DoH, NS lookup, 2026-11-04, NXDOMAIN). Register the chosen domain before launch or every absolute URL in this document points at nothing. If the rename is approved, re-key `client/src/lib/seo.ts` (`siteUrl`) and the static copies in `client/index.html`, `sitemap.xml`, `robots.txt` and `site.webmanifest`; everything else on this page survives unchanged.
+The product is called Reference. Set `VITE_SITE_ORIGIN` to the deployed origin before building. The URLs below use `reference.example` as a placeholder.
 
 Scope notes:
 
@@ -13,11 +13,11 @@ Scope notes:
 
 ## How this catalogue can win search
 
-desgnix cannot beat Dribbble or Awwwards for head terms, and should not try. It can own:
+Reference cannot beat Dribbble or Awwwards for head terms, and should not try. It can own:
 
 1. **Intent-complete long tail**: "css easing generator", "variable fonts library", "react primitives" (unstyled, accessible). One maintained page per tag, each page a working answer, ranked by the grid's own quality and by outbound links.
 2. **Name + job queries**: "where to find x" patterns from practitioners. The FAQ and Info page carry this.
-3. **Brand + shelf**: "desgnix build", "desgnix fonts": cheap, owned, grows with awareness.
+3. **Brand + shelf**: "Reference build", "Reference fonts": cheap, owned, grows with awareness.
 
 Ranking levers we actually control: unique curated content per page (real entries, real descriptions), internal linking depth, Core Web Vitals (the app is light), and structured data. Levers we do not control: domain authority from day one.
 
@@ -27,15 +27,15 @@ Implementation: `usePageSeo` in `client/src/lib/seo.ts` today; this document ren
 
 | Surface | document.title | meta description (sentence case, 50 to 160 chars) |
 | --- | --- | --- |
-| Home `/` | `desgnix · your design library` | `A working shelf of interface references: component libraries, motion tools, typefaces, assets and the details in between.` |
-| Shelf `/<slug>` | `<Shelf> · desgnix` (e.g. `Build · desgnix`) | `<Shelf promise> Hand-kept entries, in a fixed, traffic-aware order.` |
-| Tag `/<slug>?tag=<slug>` | `<Tag> · <Shelf> · desgnix` | `Every entry filed under <Tag>, on the <Shelf> shelf. Reviewed, linked straight to the source.` |
-| Info `/info` | `Info · desgnix` | `Design resources, tools, and references, all in one place.` |
-| Legal `/<page>` | `<Page> · desgnix` | first sentence of the document summary |
-| Moodboards `/moodboards*` | `Moodboards · desgnix` | noindex; description irrelevant |
-| Favorites `/favorites` | `Favourites · desgnix` | noindex |
+| Home `/` | `Reference · your design library` | `A working shelf of interface references: component libraries, motion tools, typefaces, assets and the details in between.` |
+| Shelf `/<slug>` | `<Shelf> · Reference` (e.g. `Build · Reference`) | `<Shelf promise> Hand-kept entries, in a fixed, traffic-aware order.` |
+| Tag `/<slug>?tag=<slug>` | `<Tag> · <Shelf> · Reference` | `Every entry filed under <Tag>, on the <Shelf> shelf. Reviewed, linked straight to the source.` |
+| Info `/info` | `Info · Reference` | `Design resources, tools, and references, all in one place.` |
+| Legal `/<page>` | `<Page> · Reference` | first sentence of the document summary |
+| Moodboards `/moodboards*` | `Moodboards · Reference` | noindex; description irrelevant |
+| Favorites `/favorites` | `Favourites · Reference` | noindex |
 
-Note: current build emits `<Title> · desgnix` for non-home routes and does not include the shelf in tag titles. That is acceptable; the two-part title above is the ceiling, not a requirement. Consistency beats cleverness.
+Note: current build emits `<Title> · Reference` for non-home routes and does not include the shelf in tag titles. That is acceptable; the two-part title above is the ceiling, not a requirement. Consistency beats cleverness.
 
 Rules:
 
@@ -178,15 +178,14 @@ Plan, in order of effort:
 ## Content gaps
 
 1. **Tag URLs are query strings** (`/build?tag=shaders`). Indexable but split link equity, harder to share, and excluded from any future clean sitemap. Recommend: path-based tags (`/build/shaders`) with redirects from the query form, implemented in `view-path.ts` + host redirects. Decision needed before any SEO push; flagged, not executed.
-2. **Client-rendered catalogue.** Google executes JS but queues rendering; crawl budget is real at 418 URLs plus legal pages. If indexed pages matter commercially, prerender at least `/`, `/info`, the 8 shelves and the tag URLs (vite-plugin-prerender or static export of just those routes), or serve a prerendered shell with `react-snap`-style tooling. Measure first: check `site:desgnix.app` after a month; act only then.
+2. **Client-rendered catalogue.** Google executes JS but queues rendering; crawl budget is real at 418 URLs plus legal pages. If indexed pages matter commercially, prerender at least `/`, `/info`, the 8 shelves and the tag URLs (vite-plugin-prerender or static export of just those routes), or serve a prerendered shell with `react-snap`-style tooling. Measure first: check `site:reference.example` after a month; act only then.
 3. **No editorial layer.** The catalogue wins on curation, not copy. Gaps to close with small, permanent pages (Info-sized, not a blog): "What hand-kept means" (selection criteria, already half-written on Info), "How the order works" (rank from GitHub stars and Tranco, one page, honest), and one FAQ rich result. These three pages carry every head-term internal link.
 4. **Per-shelf OG images.** One shared `preview.png`; shelves deserve distinct link previews for social CTR. Design task; listed here because it is SEO-adjacent (social CTR feeds sessions, which feed nothing but morale; do it for clicks, not for rank).
 5. **Search Console + Bing Webmaster** verification tags are absent. Add `google-site-verification` via env-injected meta when the owner has a property. Not added here (no secrets in repo).
-6. **Backlink surface.** The libraries linked from here will not link back; the Info page and the "submit" flow are the natural backlink magnets ("add your tool to desgnix"). One line of copy on Info: "Closed shelves? Submit it." No outreach automation; owner decides.
+6. **Backlink surface.** The libraries linked from here will not link back; the Info page and the "submit" flow are the natural backlink magnets ("add your tool to Reference"). One line of copy on Info: "Closed shelves? Submit it." No outreach automation; owner decides.
 7. **Legal pages indexed** but excluded from sitemap; either fine as-is, or add `noindex` if the owner prefers them out of the index. Recommendation: leave indexable, they are trust signals for the "hand-kept" claim.
 8. **Missing structured data** (next section); add once, static, no build dependency.
 9. **Thin tag pages risk** being seen as infinite-scroll duplicates; the fixed rank order and stable URLs mitigate; never paginate the grid infinitely without rel=next/prev or unique canonicals.
-10. **desgnix.app is not registered** (see top). Every absolute URL, OG image and sitemap entry is currently theoretical. Register before launch; this is the single most urgent item in this document.
 
 ## Schema.org plan
 
@@ -198,13 +197,13 @@ Static JSON-LD in `client/index.html` covers the home page; per-route JSON-LD is
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "desgnix",
-  "url": "https://desgnix.app/",
+  "name": "Reference",
+  "url": "https://reference.example/",
   "description": "A working shelf of interface references: component libraries, motion tools, typefaces, assets and the details in between.",
   "inLanguage": "en",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://desgnix.app/?q={search_term_string}",
+    "target": "https://reference.example/?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
@@ -218,13 +217,13 @@ The `SearchAction` ships only when the query is URL-driven (`/?q=`). The current
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Shaders · Build · desgnix",
-  "url": "https://desgnix.app/build?tag=shaders",
-  "isPartOf": { "@type": "WebSite", "name": "desgnix", "url": "https://desgnix.app/" },
+  "name": "Shaders · Build · Reference",
+  "url": "https://reference.example/build?tag=shaders",
+  "isPartOf": { "@type": "WebSite", "name": "Reference", "url": "https://reference.example/" },
   "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://desgnix.app/" },
-    { "@type": "ListItem", "position": 2, "name": "Build", "item": "https://desgnix.app/build" },
-    { "@type": "ListItem", "position": 3, "name": "Shaders", "item": "https://desgnix.app/build?tag=shaders" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://reference.example/" },
+    { "@type": "ListItem", "position": 2, "name": "Build", "item": "https://reference.example/build" },
+    { "@type": "ListItem", "position": 3, "name": "Shaders", "item": "https://reference.example/build?tag=shaders" }
   ] },
   "mainEntity": { "@type": "ItemList", "numberOfItems": 12,
     "itemListOrder": "https://schema.org/ItemListOrderAscending",
@@ -244,7 +243,7 @@ The `SearchAction` ships only when the query is URL-driven (`/?q=`). The current
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [ { "@type": "Question", "name": "What is desgnix?", "acceptedAnswer": { "@type": "Answer", "text": "Desgnix is a small, hand-kept library ..." } } ]
+  "mainEntity": [ { "@type": "Question", "name": "What is Reference?", "acceptedAnswer": { "@type": "Answer", "text": "Reference is a small, hand-kept library ..." } } ]
 }
 ```
 

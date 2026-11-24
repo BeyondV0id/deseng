@@ -13,7 +13,7 @@ async function inspect(entry) {
   try {
     const response = await fetch(entry.url, {
       signal: AbortSignal.timeout(12000),
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; desgnix-link-audit/1.0)', Accept: 'text/html,application/xhtml+xml' },
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; reference-link-audit/1.0)', Accept: 'text/html,application/xhtml+xml' },
     })
     const reader = response.body?.getReader()
     const chunks = []

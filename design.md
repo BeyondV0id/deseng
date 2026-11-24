@@ -1,4 +1,4 @@
-# desgnix design.md
+# Reference design
 
 The visual contract for this frontend: the token schema, the sidebar's
 geometry, the two themes, the motion rules, and the skills that govern all of

@@ -5,9 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
 
-  <!-- Brand values below are duplicated on purpose: a static file cannot read
-       client/src/hooks/use-page-meta.ts. The origin lives in siteUrl there; if you change
-       one, change both. Everything else derives from them. -->
   <title>Reference · your design library</title>
   <meta name="description" content="Reference is a working shelf of interface references: component libraries, motion tools, typefaces, assets and the details in between." />
   <meta name="application-name" content="Reference" />
@@ -16,7 +13,6 @@
   <meta name="theme-color" content="#fafafa" />
   <meta name="color-scheme" content="light dark" />
 
-  <link rel="canonical" href="https://desgnix.app/" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -29,25 +25,13 @@
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Reference · your design library" />
   <meta property="og:description" content="A working shelf of interface references: component libraries, motion tools, typefaces, assets and the details in between." />
-  <meta property="og:url" content="https://desgnix.app/" />
-  <meta property="og:image" content="https://desgnix.app/preview.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="A blue dithered field with a pale wave of light, the Reference link preview." />
+  <meta property="og:image:alt" content="Reference, resources for design engineers." />
 
   <!-- X / Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Reference",
-      "url": "https://desgnix.app/",
-      "inLanguage": "en"
-    }
-  </script>
 
   <script>
     // The theme is known before the first paint, so the page never renders in
@@ -55,7 +39,13 @@
     // React mounts, and every surface that transitions its fill fades from
     // the light value into the dark one: a near-white pill on a dark bar.
     try {
-      var stored = localStorage.getItem('desgnix-theme-v2')
+      // Match the preference keys in src/lib/theme.ts.
+      var keys = ['reference-theme-v2', 'desgnix-theme-v2', 'deseng-theme-v2', 'fieldnotes-theme-v2']
+      var stored
+      for (var key of keys) {
+        stored = localStorage.getItem(key)
+        if (stored === 'light' || stored === 'dark' || stored === 'system') break
+      }
       var theme = stored === 'light' || stored === 'dark'
         ? stored
         : stored === 'system'

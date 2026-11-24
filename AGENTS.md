@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Project rules for **desgnix** (`design-library`), a curated catalogue of design references.
+Project rules for **Reference** (`design-library`), a curated catalogue of design references.
 
 Read this before changing UI. It records the stack, the icon rule, the token
 system, and the two reference sites the product is modelled on.
@@ -391,10 +391,8 @@ Replacement: the `+` icon, at both the media band and the foot's mark.
 ## 7. State and data
 
 - **The library is server data.** Resources, favourites, filings and
-  moodboards live in Postgres and arrive through `client/src/lib/api.ts`. There
-  is no `desgnix-resources`, `desgnix-moodboards` or `desgnix-account` key any
-  more; do not reintroduce one.
-- `localStorage` keeps only preferences: the theme (`desgnix-theme-v2`) and the
+  moodboards live in Postgres and arrive through `client/src/lib/api.ts`.
+- `localStorage` keeps only preferences: the theme (`reference-theme-v2`) and the
   sound switch through `@web-kits/audio`.
 - **Previews are remote URLs, not files.** `resource.imageUrl` and
   `resource.faviconUrl` are resolved from the site itself (`server/src/lib/metadata.ts`)

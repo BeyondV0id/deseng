@@ -10,5 +10,3 @@ Disallow: /sign-up
 Disallow: /forgot-password
 Disallow: /reset-password
 Disallow: /api/
-
-Sitemap: https://desgnix.app/sitemap.xml

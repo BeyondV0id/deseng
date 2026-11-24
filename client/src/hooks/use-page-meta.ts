@@ -1,11 +1,5 @@
 import { useEffect } from 'react'
 
-/** The one origin the public metadata is written against. */
-export const siteUrl = 'https://desgnix.app'
-
-/** The image every page shares unless it passes its own. */
-export const socialImage = `${siteUrl}/preview.png`
-
 type PageMeta = {
   title: string
   description: string
@@ -105,21 +99,23 @@ function restoreCanonical(href: string | null) {
  * change, one tick later) the values the static page shipped with are handed
  * back, so nothing leaks across routes.
  */
-export function usePageMeta({ title, description, path = '/', image = socialImage, noindex = false }: PageMeta) {
+export function usePageMeta({ title, description, path = '/', image = '/preview.png', noindex = false }: PageMeta) {
   useEffect(() => {
     if (typeof document === 'undefined') return
     const fallback = captureDefaults()
-    const url = `${siteUrl}${path === '/' ? '/' : path}`
+    const siteOrigin = import.meta.env.VITE_SITE_ORIGIN || window.location.origin
+    const url = new URL(path, siteOrigin).href
+    const imageUrl = new URL(image, siteOrigin).href
 
     document.title = title
     upsertMeta('name', 'description', description)
     upsertMeta('property', 'og:title', title)
     upsertMeta('property', 'og:description', description)
     upsertMeta('property', 'og:url', url)
-    upsertMeta('property', 'og:image', image)
+    upsertMeta('property', 'og:image', imageUrl)
     upsertMeta('name', 'twitter:title', title)
     upsertMeta('name', 'twitter:description', description)
-    upsertMeta('name', 'twitter:image', image)
+    upsertMeta('name', 'twitter:image', imageUrl)
     upsertMeta('name', 'robots', noindex ? 'noindex, nofollow' : (fallback.robots ?? 'index, follow'))
     upsertCanonical(url)
 

@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://desgnix.app/</loc>
+    <loc>%SITE_ORIGIN%/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/info</loc>
+    <loc>%SITE_ORIGIN%/info</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/observe</loc>
+    <loc>%SITE_ORIGIN%/observe</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/read</loc>
+    <loc>%SITE_ORIGIN%/read</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/create</loc>
+    <loc>%SITE_ORIGIN%/create</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/build</loc>
+    <loc>%SITE_ORIGIN%/build</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/components</loc>
+    <loc>%SITE_ORIGIN%/components</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/assets</loc>
+    <loc>%SITE_ORIGIN%/assets</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/tools</loc>
+    <loc>%SITE_ORIGIN%/tools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/desk</loc>
+    <loc>%SITE_ORIGIN%/desk</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/privacy</loc>
+    <loc>%SITE_ORIGIN%/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/terms</loc>
+    <loc>%SITE_ORIGIN%/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/licence</loc>
+    <loc>%SITE_ORIGIN%/licence</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/refunds</loc>
+    <loc>%SITE_ORIGIN%/refunds</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://desgnix.app/cookies</loc>
+    <loc>%SITE_ORIGIN%/cookies</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>

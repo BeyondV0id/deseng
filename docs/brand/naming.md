@@ -1,6 +1,6 @@
 # Naming: the desgnix question
 
-Status: proposal. Nothing in this document has been applied to the codebase.
+Archived proposal. The product is now called Reference. The analysis below records the options considered in November 2026.
 Date: 2026-11-04.
 Assumption at the top: the product currently ships under the string `desgnix` and the canonical origin `https://desgnix.app` (see `client/src/hooks/use-page-meta.ts`, `client/index.html`, `client/public/sitemap.xml`). That origin **appears unregistered today** (Google DoH, NS lookup, 2026-11-04, Status 3 NXDOMAIN with the `.app` TLD SOA in the Authority section; `desgnix.com`, `desgnix.design`, `desgnix.studio` and `desgnix.so` behave the same). Either the domain lapsed, was never registered, or is being withheld. Verify and register before any public launch, whichever name wins.
 

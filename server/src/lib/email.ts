@@ -17,12 +17,14 @@ const resendEndpoint = 'https://api.resend.com/emails'
 
 export async function sendMail({ to, subject, html, text }: Mail) {
   const apiKey = process.env.RESEND_API_KEY
-  const from = process.env.EMAIL_FROM ?? 'Reference <no-reply@desgnix.app>'
 
   if (!apiKey) {
     console.info(`\n[email] ${subject} -> ${to}\n${text}\n`)
     return
   }
+
+  const from = process.env.EMAIL_FROM
+  if (!from) throw new Error('Set EMAIL_FROM to a verified Resend sender.')
 
   const response = await fetch(resendEndpoint, {
     method: 'POST',
