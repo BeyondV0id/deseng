@@ -1708,24 +1708,28 @@ h2 {
   }
 }
 
-/* Category filters use a transparent face and a neutral outline. */
+/* Shelf filters keep their own finish, independent of the page actions. */
 .resource-tags {
-  --radius-control: 999px;
-  --control-height-sm: 26px;
+  --radius-control: var(--radius-pill);
+  --control-height-sm: 32px;
   --focus-outline-offset: -3px;
-  --tag-selected-foreground: var(--text-primary);
-  --action-quiet-top: transparent;
-  --action-quiet-bottom: transparent;
-  --action-quiet-top-hover: transparent;
-  --action-quiet-bottom-hover: transparent;
-  --action-quiet-press: transparent;
-  --action-quiet-label: var(--text-secondary);
+  --tag-resting-top: #fefefe;
+  --tag-resting-bottom: #fafafb;
+  --tag-resting-foreground: #5d5d66;
+  --tag-shadow: 0 2px 4px rgb(0 0 0 / 10%), inset 0 1px 0 rgb(255 255 255 / 70%);
+  --tag-selected-top: #3e8afe;
+  --tag-selected-middle: #0961ec;
+  --tag-selected-bottom: #0155dc;
+  --tag-selected-shadow:
+    0 2px 4px rgb(1 41 125 / 26%),
+    inset 0 1px 0 rgb(255 255 255 / 22%),
+    inset 0 -1px 0 rgb(0 32 100 / 28%);
   display: flex;
   flex: 0 0 auto;
   align-self: stretch;
-  gap: 6px;
+  gap: 7px;
   width: 100%;
-  padding: 2px 1px 4px;
+  padding: 3px 2px 7px;
   margin: 24px 0 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -1733,26 +1737,50 @@ h2 {
 }
 
 .dark .resource-tags {
-  --tag-selected-foreground: #fafafa;
+  --tag-resting-top: #1b1b1e;
+  --tag-resting-bottom: #17171a;
+  --tag-resting-foreground: #a8a8ad;
+  --tag-shadow: 0 2px 4px rgb(0 0 0 / 40%), inset 0 -1px 0 rgb(0 0 0 / 20%);
 }
 
 .resource-tags .resource-tag {
+  --action-quiet-top: var(--tag-resting-top);
+  --action-quiet-bottom: var(--tag-resting-bottom);
+  --action-quiet-label: var(--tag-resting-foreground);
   flex: none;
-  gap: 4.875px;
-  padding-inline: 11.375px;
-  font-size: var(--fs-body);
+  padding-inline: 13px;
+  font-size: var(--fs-title-compact);
   line-height: var(--lh-body);
 }
 
-.resource-tags .resource-tag[aria-pressed="true"] {
-  --action-quiet-label: var(--tag-selected-foreground);
-  --action-quiet-ring: var(--border-strong);
+.resource-tags .resource-tag:not(:disabled) {
+  box-shadow: var(--tag-shadow);
+}
+
+.resource-tags .resource-tag[aria-pressed="true"]:not(:disabled) {
+  --action-quiet-label: #fafafa;
+  --focus-outline: var(--action-quiet-label);
+  background: linear-gradient(
+    180deg,
+    var(--tag-selected-top),
+    var(--tag-selected-middle) 68%,
+    var(--tag-selected-bottom)
+  );
+  box-shadow: var(--tag-selected-shadow);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .resource-tags .resource-tag:hover:not(:disabled) {
-    --action-quiet-label: var(--tag-selected-foreground);
+  .resource-tags .resource-tag[aria-pressed="false"]:hover:not(:disabled) {
+    --action-quiet-label: var(--hover-foreground);
   }
+
+  .resource-tags .resource-tag[aria-pressed="true"]:hover:not(:disabled) {
+    --tag-selected-top: color-mix(in srgb, #3e8afe 94%, white);
+  }
+}
+
+.resource-tags .resource-tag[aria-pressed="true"]:active:not(:disabled) {
+  --tag-selected-top: #2475f5;
 }
 
 @media (pointer: coarse) {

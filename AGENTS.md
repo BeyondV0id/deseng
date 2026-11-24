@@ -364,9 +364,9 @@ popover inside a dialog climbs the ladder on its own.
 ### Pills
 
 The nav rows, search field, and favourites link use the pill radius. Category
-filters use Arc secondary buttons with a transparent face and a neutral
-outline. The selected filter uses brighter text and a stronger outline.
-The strip sets the control radius and preserves Arc's press and focus states.
+filters use Arc buttons with a raised neutral face and a blue gradient for the
+selected pill. The strip owns this finish and preserves Arc's press and focus
+states.
 
 ---
 
