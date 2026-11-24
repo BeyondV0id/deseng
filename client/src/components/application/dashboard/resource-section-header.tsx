@@ -69,7 +69,7 @@ export function ResourceSectionHeader({
         rather than wrapping into a second row of chrome. */}
     {tagged && <div className="resource-tags" ref={tags.ref} data-fade={tags.fade} role="group" aria-label="Filter by category">
       <Button
-        className={activeCategory === null ? 'resource-tag resource-tag-active' : 'resource-tag resource-tag-inactive'}
+        className="resource-tag"
         variant={activeCategory === null ? 'primary' : 'secondary'}
         size="sm"
         aria-pressed={activeCategory === null}
@@ -77,7 +77,7 @@ export function ResourceSectionHeader({
       >All</Button>
       {categories.map(category => <Button
         key={category}
-        className={activeCategory === category ? 'resource-tag resource-tag-active' : 'resource-tag resource-tag-inactive'}
+        className="resource-tag"
         variant={activeCategory === category ? 'primary' : 'secondary'}
         size="sm"
         aria-pressed={activeCategory === category}
