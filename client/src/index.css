@@ -4722,7 +4722,5 @@ button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):disab
   --discovery-shader-pigment: 0.16 0.33 0.83;
   --discovery-shader-light: 0.78 0.87 1;
   --discovery-art-ground: #152450;
-  --discovery-card-surface: #eef1f8;
   --discovery-art-foreground: #ffffff;
 }
-:root.dark { --discovery-card-surface: #111724; }
