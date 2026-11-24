@@ -1,4 +1,4 @@
-/* The 20px ordered dither uses the Explore hero's navy-to-orange palette. */
+/* The 40px dither texture renders at 20px in both themes. */
 .mark {
   display: block;
   width: 28px;
@@ -6,11 +6,6 @@
   flex: none;
   background: currentColor url('/brand/reference-dither-light.png') center / 20px 20px no-repeat;
   mask: url('/brand/reference-mark.svg') center / 20px 20px no-repeat;
-  image-rendering: pixelated;
-}
-
-:global(.dark) .mark {
-  background-image: url('/brand/reference-dither-dark.png');
 }
 
 @media (forced-colors: active) {
