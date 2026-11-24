@@ -70,7 +70,7 @@ export function ResourceSectionHeader({
     {tagged && <div className="resource-tags" ref={tags.ref} data-fade={tags.fade} role="group" aria-label="Filter by category">
       <Button
         className="resource-tag"
-        variant={activeCategory === null ? 'primary' : 'secondary'}
+        variant="secondary"
         size="sm"
         aria-pressed={activeCategory === null}
         onClick={() => onCategoryChange(null)}
@@ -78,7 +78,7 @@ export function ResourceSectionHeader({
       {categories.map(category => <Button
         key={category}
         className="resource-tag"
-        variant={activeCategory === category ? 'primary' : 'secondary'}
+        variant="secondary"
         size="sm"
         aria-pressed={activeCategory === category}
         onClick={() => onCategoryChange(category)}

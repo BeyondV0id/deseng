@@ -363,12 +363,10 @@ popover inside a dialog climbs the ladder on its own.
 
 ### Pills
 
-The nav rows, the search field, and the favourites link are all pills
-(`--radius-pill`). The filter tabs are Arc `Button`s, not hand-rolled chips:
-pick `variant="secondary"` for an inactive tab and `variant="primary"` for the
-active one, and let Arc own the hover, press, and focus behaviour. Do not add
-a `.resource-tag` style back. The tab strip sets `--radius-control` to the
-pill radius, so the rounded shape comes from the token, not from a rule.
+The nav rows, search field, and favourites link use the pill radius. Category
+filters use Arc secondary buttons with a transparent face and a neutral
+outline. The selected filter uses brighter text and a stronger outline.
+The strip sets the control radius and preserves Arc's press and focus states.
 
 ---
 

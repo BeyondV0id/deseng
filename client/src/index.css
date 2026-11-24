@@ -1708,11 +1708,18 @@ h2 {
   }
 }
 
-/* Compact category pills share the Arc button's selected and disabled styles. */
+/* Category filters use a transparent face and a neutral outline. */
 .resource-tags {
-  --radius-control: var(--radius-pill);
+  --radius-control: 999px;
   --control-height-sm: 26px;
   --focus-outline-offset: -3px;
+  --tag-selected-foreground: var(--text-primary);
+  --action-quiet-top: transparent;
+  --action-quiet-bottom: transparent;
+  --action-quiet-top-hover: transparent;
+  --action-quiet-bottom-hover: transparent;
+  --action-quiet-press: transparent;
+  --action-quiet-label: var(--text-secondary);
   display: flex;
   flex: 0 0 auto;
   align-self: stretch;
@@ -1725,14 +1732,27 @@ h2 {
   scrollbar-width: none;
 }
 
+.dark .resource-tags {
+  --tag-selected-foreground: #fafafa;
+}
+
 .resource-tags .resource-tag {
   flex: none;
+  gap: 4.875px;
+  padding-inline: 11.375px;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
 }
 
 .resource-tags .resource-tag[aria-pressed="true"] {
-  --focus-outline: var(--action-label);
+  --action-quiet-label: var(--tag-selected-foreground);
+  --action-quiet-ring: var(--border-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .resource-tags .resource-tag:hover:not(:disabled) {
+    --action-quiet-label: var(--tag-selected-foreground);
+  }
 }
 
 @media (pointer: coarse) {
