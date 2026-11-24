@@ -2663,6 +2663,444 @@
       "url": "https://www.blobmaker.app/?ref=designminis.com",
       "description": "Organic blob shapes as SVG, with growth and edge-count controls.",
       "category": "Image tools"
+    },
+    {
+      "name": "ForgeGUI",
+      "url": "https://forgegui.com/",
+      "description": "AI Game Assets",
+      "category": "Image tools"
+    },
+    {
+      "name": "Pixelarticons",
+      "url": "https://pixelarticons.com/",
+      "description": "Pixel Art Icons",
+      "category": "Icons"
+    },
+    {
+      "name": "Modelfy 3D",
+      "url": "https://modelfy.art/",
+      "description": "3D Generator",
+      "category": "3D modeling"
+    },
+    {
+      "name": "Orior AI",
+      "url": "https://oriorai.com/",
+      "description": "AI Characters",
+      "category": "Image tools"
+    },
+    {
+      "name": "Stability AI",
+      "url": "https://stability.ai/",
+      "description": "Creative Platform",
+      "category": "Image tools"
+    },
+    {
+      "name": "Bean Heads",
+      "url": "https://beanheads.robertbroersma.com/",
+      "description": "Character Generator",
+      "category": "Illustrations"
+    },
+    {
+      "name": "Vecto3d",
+      "url": "https://vecto3d.xyz/",
+      "description": "Design Tool",
+      "category": "3D modeling"
+    },
+    {
+      "name": "Funnn.it",
+      "url": "https://funnn.it/",
+      "description": "Asset Library",
+      "category": "Illustrations"
+    },
+    {
+      "name": "Shapefest",
+      "url": "https://shapefest.com/",
+      "description": "3D Design Assets",
+      "category": "3D assets"
+    },
+    {
+      "name": "Endless Tools",
+      "url": "https://endlesstools.io/",
+      "description": "3D Design",
+      "category": "3D modeling"
+    },
+    {
+      "name": "Noise Texture",
+      "url": "https://figma.com/community/plugin/1138854718618193875/noise-texture",
+      "description": "Texture Tool",
+      "category": "Image tools"
+    },
+    {
+      "name": "Dimensiva",
+      "url": "https://dimensiva.com/",
+      "description": "3D Models",
+      "category": "3D assets"
+    },
+    {
+      "name": "3DAI Studio",
+      "url": "https://3daistudio.com/",
+      "description": "3D Modeling",
+      "category": "3D modeling"
+    },
+    {
+      "name": "Need3D",
+      "url": "https://need3d.ru/en",
+      "description": "3D Asset Library",
+      "category": "3D assets"
+    },
+    {
+      "name": "Doppio",
+      "url": "https://doppio.design/",
+      "description": "Doppio",
+      "category": "Motion editors"
+    },
+    {
+      "name": "Pryzm",
+      "url": "https://pryzm.design/",
+      "description": "Pryzm",
+      "category": "Shaders"
+    },
+    {
+      "name": "Generative Loaders",
+      "url": "https://generativeloaders.com/",
+      "description": "React Loaders",
+      "category": "Micro-motion"
+    },
+    {
+      "name": "Originkit",
+      "url": "https://www.originkit.dev/",
+      "description": "Interactive Web Components",
+      "category": "UI kits"
+    },
+    {
+      "name": "Epic Easing",
+      "url": "https://epiceasing.com/",
+      "description": "Web Animations",
+      "category": "Easing"
+    },
+    {
+      "name": "Fluid Motion",
+      "url": "https://fluidmotion.app/",
+      "description": "Design Tools",
+      "category": "Animation libraries"
+    },
+    {
+      "name": "SVGator",
+      "url": "https://svgator.com/",
+      "description": "Animation Tool",
+      "category": "Motion editors"
+    },
+    {
+      "name": "Details",
+      "url": "https://details.so/",
+      "description": "Details",
+      "category": "Product flows"
+    },
+    {
+      "name": "Name That UI",
+      "url": "https://namethatui.com/",
+      "description": "UI Visual Dictionary",
+      "category": "Product flows"
+    },
+    {
+      "name": "Before Click",
+      "url": "https://before.click/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "Landingfolio",
+      "url": "https://landingfolio.com/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "Commerce Cream",
+      "url": "https://commercecream.com/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "CTA.gallery",
+      "url": "https://cta.gallery/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "Lapa Ninja",
+      "url": "https://lapa.ninja/",
+      "description": "Design Gallery",
+      "category": "Visual search"
+    },
+    {
+      "name": "One Page Love",
+      "url": "https://onepagelove.com/",
+      "description": "Web Design Gallery",
+      "category": "Visual search"
+    },
+    {
+      "name": "Dark.Design",
+      "url": "https://dark.design/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "Calltoinspiration",
+      "url": "https://calltoinspiration.com/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "404s.Design",
+      "url": "https://404s.design/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "Curated Design",
+      "url": "https://curated.design/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "Navbar Gallery",
+      "url": "https://navbar.gallery/",
+      "description": "Design Inspiration",
+      "category": "Visual search"
+    },
+    {
+      "name": "Ogfolio",
+      "url": "https://ogfolio.com/",
+      "description": "Ogfolio",
+      "category": "Imagery"
+    },
+    {
+      "name": "Dynamic Mockups",
+      "url": "https://dynamicmockups.com/",
+      "description": "Dynamic Mockups",
+      "category": "Image tools"
+    },
+    {
+      "name": "Arqé",
+      "url": "https://arqe.ai/",
+      "description": "Motion Templates",
+      "category": "Imagery"
+    },
+    {
+      "name": "Javii Tools",
+      "url": "https://javii.tools/",
+      "description": "Social Media Mockups",
+      "category": "Image tools"
+    },
+    {
+      "name": "Browser Mockups",
+      "url": "https://figma.com/community/file/1413516575544121422",
+      "description": "Design Resource",
+      "category": "Image tools"
+    },
+    {
+      "name": "BrandBird",
+      "url": "https://brandbird.app/",
+      "description": "Screenshot Editor",
+      "category": "Image tools"
+    },
+    {
+      "name": "Anthony Boyd Graphics",
+      "url": "https://anthonyboyd.graphics/",
+      "description": "Mockup Library",
+      "category": "Imagery"
+    },
+    {
+      "name": "ClickPilot",
+      "url": "https://clickpilot.app/",
+      "description": "Thumbnail Tool",
+      "category": "Image tools"
+    },
+    {
+      "name": "Artboard Studio",
+      "url": "https://artboard.studio/",
+      "description": "Motion Design Editor",
+      "category": "Image tools"
+    },
+    {
+      "name": "Canva",
+      "url": "https://canva.com/",
+      "description": "Design Tool",
+      "category": "Imagery"
+    },
+    {
+      "name": "CleanShot X",
+      "url": "https://cleanshot.sjv.io/9goaeE",
+      "description": "Screenshots",
+      "category": "Imagery"
+    },
+    {
+      "name": "Mockup Cloud",
+      "url": "https://mockupcloud.com/",
+      "description": "Design Assets",
+      "category": "Imagery"
+    },
+    {
+      "name": "Creatoom",
+      "url": "https://creatoom.com/",
+      "description": "Mockups",
+      "category": "Imagery"
+    },
+    {
+      "name": "Mockup World",
+      "url": "https://mockupworld.co/",
+      "description": "Design Resources",
+      "category": "Imagery"
+    },
+    {
+      "name": "Fontalog",
+      "url": "https://fontalog.xyz/",
+      "description": "Fontalog",
+      "category": "Fonts"
+    },
+    {
+      "name": "FontBase",
+      "url": "https://fontba.se/",
+      "description": "FontBase",
+      "category": "Fonts"
+    },
+    {
+      "name": "Dafont",
+      "url": "https://dafont.com/",
+      "description": "Font Library",
+      "category": "Fonts"
+    },
+    {
+      "name": "Open Foundry",
+      "url": "https://open-foundry.com/",
+      "description": "Font Library",
+      "category": "Fonts"
+    },
+    {
+      "name": "Font Mojo",
+      "url": "https://fontmojo.com/",
+      "description": "Font Manager",
+      "category": "Fonts"
+    },
+    {
+      "name": "FontPair",
+      "url": "https://fontpair.co/",
+      "description": "Design Tools",
+      "category": "Fonts"
+    },
+    {
+      "name": "Font Joy",
+      "url": "https://fontjoy.com/",
+      "description": "Typography",
+      "category": "Fonts"
+    },
+    {
+      "name": "Velvetyne",
+      "url": "https://velvetyne.fr/",
+      "description": "Font Library",
+      "category": "Fonts"
+    },
+    {
+      "name": "FontBrief",
+      "url": "https://fontbrief.com/fontbrief",
+      "description": "Fonts Gallery",
+      "category": "Fonts"
+    },
+    {
+      "name": "Typescale",
+      "url": "https://typescale.io/",
+      "description": "Typography",
+      "category": "Fonts"
+    },
+    {
+      "name": "WhatFont?",
+      "url": "https://chromewebstore.google.com/detail/whatfont/jabopobgcpjmedljpbcaablpmlmfcogm",
+      "description": "Typography",
+      "category": "Fonts"
+    },
+    {
+      "name": "Macfolio",
+      "url": "https://macfolio.com/",
+      "description": "Macfolio",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "TinyFolder",
+      "url": "https://tinyfolder.app/",
+      "description": "TinyFolder",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "DiskBuddy",
+      "url": "https://diskbuddy.com/",
+      "description": "Disk Space Analyzer",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Cooldock",
+      "url": "https://www.dock.cool/",
+      "description": "macOS Dock Widgets",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Looq",
+      "url": "https://parcse.com/looq",
+      "description": "Quick Look Previews",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Loop",
+      "url": "https://github.com/MrKai77/Loop",
+      "description": "Window Manager",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Ebb",
+      "url": "https://ebb.cool/",
+      "description": "Focus App",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Paste",
+      "url": "https://pasteapp.io/",
+      "description": "Clipboard Manager",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Shortcat",
+      "url": "https://shortcat.app/",
+      "description": "Mac Productivity",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Notch Nook",
+      "url": "https://getnotchnook.com/",
+      "description": "Productivity",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Setapp",
+      "url": "https://setapp.sjv.io/21mvz0",
+      "description": "App Library",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "TabTab",
+      "url": "https://tabtabapp.net/",
+      "description": "Productivity",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Alfred",
+      "url": "https://alfredapp.com/",
+      "description": "Productivity Tool",
+      "category": "Mac utilities"
+    },
+    {
+      "name": "Bartender",
+      "url": "https://macbartender.com/",
+      "description": "Utility",
+      "category": "Mac utilities"
     }
   ]
 }

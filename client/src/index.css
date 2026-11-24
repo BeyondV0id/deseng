@@ -4715,3 +4715,14 @@ button[class*="_button_"]:is([class*="_primary_"], [class*="_secondary_"]):disab
   .app-action-primary:active, .app-action-secondary:active { transform: none; }
   .resource-card-tools, .resource-card-tool { transition: none; transform: none; }
 }
+
+/* Explore's dithered artwork uses cobalt ink and ice, separate from UI state. */
+:root {
+  --discovery-shader-ink: 0.025 0.05 0.16;
+  --discovery-shader-pigment: 0.16 0.33 0.83;
+  --discovery-shader-light: 0.78 0.87 1;
+  --discovery-art-ground: #152450;
+  --discovery-card-surface: #eef1f8;
+  --discovery-art-foreground: #ffffff;
+}
+:root.dark { --discovery-card-surface: #111724; }
