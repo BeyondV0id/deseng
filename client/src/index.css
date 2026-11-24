@@ -2867,7 +2867,7 @@ h2 {
   --explore-hero-background: var(--page-background);
   --explore-hero-foreground: var(--foreground);
   --explore-hero-description: color-mix(in srgb, var(--explore-hero-foreground) 92%, var(--explore-hero-background));
-  --explore-hero-scrim: color-mix(in srgb, var(--explore-hero-background) 55%, transparent);
+  --explore-hero-scrim-opacity: 55%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -2878,6 +2878,10 @@ h2 {
   margin: 0 calc(-1 * var(--page-content-gutter)) 40px;
   border-bottom: 1px solid var(--border);
   text-align: center;
+}
+
+.dark .explore-hero {
+  --explore-hero-scrim-opacity: 51%;
 }
 
 .explore-hero-backdrop {
@@ -2894,9 +2898,13 @@ h2 {
 .explore-hero-backdrop::after {
   position: absolute;
   inset: 0;
-  background: var(--explore-hero-scrim);
+  background: color-mix(in srgb, var(--explore-hero-background) var(--explore-hero-scrim-opacity), transparent);
   content: '';
   pointer-events: none;
+}
+
+.dark .explore-hero-backdrop::after {
+  mask-image: radial-gradient(ellipse, black 58%, rgb(0 0 0 / .84));
 }
 
 .explore-hero-title,
