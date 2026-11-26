@@ -40,7 +40,6 @@ export function CatalogStatus({ status, onRetry }: {
         <ExploreHero
           heading={LIBRARY_HEADING}
           subheading={LIBRARY_SUBHEADING}
-          search={<div className="explore-hero-search-skeleton" aria-hidden="true" />}
         />
         {/* One band per row, with a title line and a track of card-shaped
             placeholders. The band is a `resource-rail` and the card is a

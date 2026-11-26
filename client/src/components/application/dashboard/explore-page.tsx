@@ -8,14 +8,10 @@ import { LIBRARY_HEADING, LIBRARY_SUBHEADING } from './library-copy'
 import { ExploreHero } from './explore-hero'
 import { LatestAdditions } from './latest-additions'
 import { ResourceRail } from './resource-rail'
-import { SearchPalette } from './search-palette'
 
 type ExplorePageProps = {
   resources: Resource[]
-  /** The whole catalogue, so the hero's search reaches past the view on screen. */
-  allResources: Resource[]
   query: string
-  onQueryChange: (query: string) => void
   moodboards: LibraryMoodboard[]
   signedIn: boolean
   onRequireAccount: () => void
@@ -28,15 +24,10 @@ type ExplorePageProps = {
 /**
  * The catalogue, in its fixed tag order. Each tag gets one sideways band, and
  * the band's See more action opens the full grid for that tag.
- *
- * The page opens on the hero, which owns the search: this is the only view
- * where the field sits in the page rather than in the top bar.
  */
 export function ExplorePage({
   resources,
-  allResources,
   query,
-  onQueryChange,
   moodboards,
   signedIn,
   onRequireAccount,
@@ -67,13 +58,6 @@ export function ExplorePage({
     <ExploreHero
       heading={LIBRARY_HEADING}
       subheading={LIBRARY_SUBHEADING}
-      search={<SearchPalette
-        variant="hero"
-        resources={allResources}
-        query={query}
-        onQueryChange={onQueryChange}
-        onOpenTag={onOpenCategory}
-      />}
     />
 
     {groups.length > 0

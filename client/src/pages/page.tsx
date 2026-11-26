@@ -688,7 +688,6 @@ export default function Page() {
             onThemeChange={next => changeTheme(next, 'rise')}
             onSelectSettings={() => setSettingsOpen(true)}
             onSignOut={handleSignOut}
-            showSearch={view !== allResources}
           />
         </SidebarInsetTopbar>
         {status === 'ready'
@@ -700,7 +699,6 @@ export default function Page() {
             allResources={resources}
             moodboards={moodboards}
             query={searchQuery}
-            onQueryChange={setSearchQuery}
             signedIn={signedIn}
             onRequireAccount={requestMoodboardAccess}
             onFavorite={toggleFavorite}
