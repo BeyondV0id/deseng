@@ -1,0 +1,41 @@
+.stage {
+  position: relative;
+  align-self: stretch;
+  min-inline-size: 0;
+  margin-block-start: clamp(20px, 4vw, 44px);
+  padding-block-end: 46px;
+}
+
+.globe {
+  display: block;
+  inline-size: 100%;
+  block-size: clamp(218px, 29vw, 314px);
+  touch-action: pan-y;
+}
+
+@media (pointer: fine) {
+  .globe[data-interactive] { cursor: grab; }
+  .globe[data-dragging] { cursor: grabbing; }
+}
+
+.label,
+.playback {
+  position: absolute;
+  inset-block-end: 8px;
+}
+
+.label {
+  inset-inline-start: 50%;
+  translate: -50%;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--page-background);
+  color: var(--foreground);
+  font-size: var(--text-xs);
+  pointer-events: none;
+}
+
+.playback {
+  inset-inline-end: 0;
+}
