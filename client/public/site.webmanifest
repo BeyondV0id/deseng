@@ -1,7 +1,7 @@
 {
   "name": "Reference",
   "short_name": "Reference",
-  "description": "A working shelf of interface references: component libraries, motion tools, typefaces, assets and the details in between.",
+  "description": "A curated design library for interface inspiration, interactions, UI components, fonts, assets and design engineering tools.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

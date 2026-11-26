@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { publicRobots, socialImage } from '@/lib/site-brand'
 
 type PageMeta = {
   title: string
@@ -99,7 +100,7 @@ function restoreCanonical(href: string | null) {
  * change, one tick later) the values the static page shipped with are handed
  * back, so nothing leaks across routes.
  */
-export function usePageMeta({ title, description, path = '/', image = '/preview.png', noindex = false }: PageMeta) {
+export function usePageMeta({ title, description, path = '/', image = socialImage, noindex = false }: PageMeta) {
   useEffect(() => {
     if (typeof document === 'undefined') return
     const fallback = captureDefaults()
@@ -116,8 +117,9 @@ export function usePageMeta({ title, description, path = '/', image = '/preview.
     upsertMeta('name', 'twitter:title', title)
     upsertMeta('name', 'twitter:description', description)
     upsertMeta('name', 'twitter:image', imageUrl)
-    upsertMeta('name', 'robots', noindex ? 'noindex, nofollow' : (fallback.robots ?? 'index, follow'))
-    upsertCanonical(url)
+    upsertMeta('name', 'robots', noindex ? 'noindex, nofollow' : publicRobots)
+    if (noindex) restoreCanonical(null)
+    else upsertCanonical(url)
 
     return () => {
       document.title = fallback.title

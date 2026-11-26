@@ -39,13 +39,14 @@ app.use('/api', libraryRouter)
  * and the session cookie share one origin and no CORS rule is needed.
  */
 if (existsSync(clientDist)) {
-  app.use(express.static(clientDist, { index: false }))
-  app.get('/*splat', (request, response, next) => {
+  app.use(express.static(clientDist, { extensions: ['html'] }))
+  app.get('/{*splat}', (request, response, next) => {
     if (request.path.startsWith('/api/')) {
       next()
       return
     }
-    response.sendFile(path.join(clientDist, 'index.html'))
+    const shell = request.path.startsWith('/moodboards/') ? 'moodboards.html' : 'index.html'
+    response.sendFile(path.join(clientDist, shell))
   })
 }
 

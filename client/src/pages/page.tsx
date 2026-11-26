@@ -28,6 +28,7 @@ import type { LibraryMoodboard } from '@/lib/library-types'
 import { api, ApiError, type SocialProvider } from '@/lib/api'
 import { clearAuthIntent, setAuthIntent, takeAuthIntent, type AuthIntent } from '@/lib/auth-intent'
 import { usePageMeta } from '@/hooks/use-page-meta'
+import { siteDescription, siteTitle } from '@/lib/site-brand'
 import { deleteUser, listAccounts, signOut, updateUser } from '@/lib/auth-client'
 import { categoryFromView, categoryView, comparePopularity, collectionById, type Resource } from '@/catalog'
 import { allResources, favorites, infoView, legalViews, moodboardShelf, pathForView, sponsorView, submitView, viewForPath } from '@/lib/view-path'
@@ -521,9 +522,9 @@ export default function Page() {
   // stay out of the index; the shelves and the info page do not.
   const pageName = view === 'Favorites' ? 'Favourites' : view === 'Moodboard' ? 'Moodboards' : heading
   usePageMeta({
-    title: view === 'All resources' ? 'Reference · your design library' : `${pageName} · Reference`,
-    description: view === 'Info' ? infoDescription : view === 'Sponsor' ? sponsorDescription : subheading || LIBRARY_SUBHEADING,
-    path: `${location.pathname}${location.search}`,
+    title: view === 'All resources' ? siteTitle : `${pageName} · Reference`,
+    description: view === views.allResources ? siteDescription : subheading || LIBRARY_SUBHEADING,
+    path: pathForView(view),
     noindex: needsAccount(view),
   })
 

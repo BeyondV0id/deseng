@@ -1,0 +1,22 @@
+# Reference
+
+> A curated design library for interface inspiration, interactions, UI components, fonts, assets and design engineering tools.
+
+Browse the public catalogue by shelf or search by name, URL, description or category. The library links to resources hosted on their own sites. An account is required to save favourites, create moodboards or submit a resource.
+
+## Catalogue
+
+- [All resources](/)
+- [Observe](/observe): Product flows, interaction demos and visual references.
+- [Read](/read): Essays, reading lists and guidelines.
+- [Create](/create): Design canvases, motion editors and 3D tools.
+- [Build](/build): Frameworks, editors, animation libraries and hosting.
+- [Components](/components): UI kits, primitives, micro-motion and data display.
+- [Assets](/assets): Fonts, icons, illustrations, imagery and sound.
+- [Tools](/tools): Utilities for easing, colour, CSS, SVG, images and accessibility.
+- [Desk](/desk): Launchers, Mac utilities, notes and browsers.
+
+## About
+
+- [Info](/info): About Reference and its catalogue.
+- [Sponsor](/sponsor): Sponsorship options.

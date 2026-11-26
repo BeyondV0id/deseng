@@ -1,10 +1,11 @@
-# Reference, a hand-kept index of interface craft.
-# The catalogue, its shelves and the info page are public.
+# Reference. The catalogue, shelves and information pages are public.
 
 User-agent: *
 Allow: /
 Disallow: /favorites
 Disallow: /moodboards
+Disallow: /submissions
+Disallow: /submit$
 Disallow: /sign-in
 Disallow: /sign-up
 Disallow: /forgot-password
