@@ -4,7 +4,6 @@ import { EmptyState } from '@/components/arc/empty-state/empty-state'
 import { FeaturedTools } from '@/components/ads/featured-tools'
 import { categories, type Resource } from '@/catalog'
 import type { LibraryMoodboard } from '@/lib/library-types'
-import { LIBRARY_HEADING, LIBRARY_SUBHEADING } from './library-copy'
 import { ExploreHero } from './explore-hero'
 import { LatestAdditions } from './latest-additions'
 import { ResourceRail } from './resource-rail'
@@ -65,8 +64,6 @@ export function ExplorePage({
 
   return <section className="resource-library" aria-label="Resources">
     <ExploreHero
-      heading={LIBRARY_HEADING}
-      subheading={LIBRARY_SUBHEADING}
       search={<SearchPalette
         variant="hero"
         resources={allResources}

@@ -11,7 +11,6 @@ import { ColorPicker } from '@/components/arc/color-picker/color-picker'
 import { AppNavbar } from '@/components/application/dashboard/app-navbar'
 import { CatalogStatus } from '@/components/application/dashboard/catalog-status'
 import { Dashboard } from '@/components/application/dashboard/dashboard'
-import { LIBRARY_SUBHEADING } from '@/components/application/dashboard/library-copy'
 import { infoDescription } from '@/components/application/dashboard/info-content'
 import { sponsorDescription } from '@/components/application/dashboard/sponsor-content'
 import { legalDocuments } from '@/components/application/dashboard/legal-content'
@@ -522,7 +521,7 @@ export default function Page() {
   const pageName = view === 'Favorites' ? 'Favourites' : view === 'Moodboard' ? 'Moodboards' : heading
   usePageMeta({
     title: view === 'All resources' ? 'Reference · your design library' : `${pageName} · Reference`,
-    description: view === 'Info' ? infoDescription : view === 'Sponsor' ? sponsorDescription : subheading || LIBRARY_SUBHEADING,
+    description: view === 'Info' ? infoDescription : view === 'Sponsor' ? sponsorDescription : subheading || 'Sites, flows, components, assets and the tools around them, filed by what you need when you open the editor.',
     path: `${location.pathname}${location.search}`,
     noindex: needsAccount(view),
   })

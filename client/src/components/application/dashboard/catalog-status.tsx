@@ -1,7 +1,6 @@
 import { Button } from '@/components/arc/button/button'
 import { EmptyState } from '@/components/arc/empty-state/empty-state'
 import { Warning } from '@/components/icons'
-import { LIBRARY_HEADING, LIBRARY_SUBHEADING } from './library-copy'
 import { ExploreHero } from './explore-hero'
 
 /** Bands drawn while the catalogue is in flight: enough to fill a tall screen. */
@@ -38,8 +37,6 @@ export function CatalogStatus({ status, onRetry }: {
     <div className="page-content">
       <section className="resource-library" aria-label="Resources">
         <ExploreHero
-          heading={LIBRARY_HEADING}
-          subheading={LIBRARY_SUBHEADING}
           search={<div className="explore-hero-search-skeleton" aria-hidden="true" />}
         />
         {/* One band per row, with a title line and a track of card-shaped
