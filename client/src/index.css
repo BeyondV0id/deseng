@@ -2906,7 +2906,6 @@ h2 {
 .explore-hero {
   --explore-hero-background: var(--page-background);
   --explore-hero-foreground: var(--foreground);
-  --explore-hero-description: color-mix(in srgb, var(--explore-hero-foreground) 92%, var(--explore-hero-background));
   --explore-hero-scrim-opacity: 55%;
   position: relative;
   display: flex;
@@ -2948,7 +2947,6 @@ h2 {
 }
 
 .explore-hero-title,
-.explore-hero-description,
 .explore-hero-search {
   position: relative;
 }
@@ -2966,16 +2964,6 @@ h2 {
   /* Balance the break, so two lines split evenly instead of leaving one
      orphaned word. */
   text-wrap: balance;
-}
-
-.explore-hero-description {
-  max-width: 52ch;
-  margin: 16px 0 0;
-  color: var(--explore-hero-description);
-  font-size: clamp(15px, 1.15vw, 17px);
-  line-height: 1.6;
-  text-align: center;
-  text-wrap: pretty;
 }
 
 /* The pill is the page's one control: it rests at a width that reads its
