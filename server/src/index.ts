@@ -39,14 +39,16 @@ app.use('/api', libraryRouter)
  * and the session cookie share one origin and no CORS rule is needed.
  */
 if (existsSync(clientDist)) {
-  app.use(express.static(clientDist, { extensions: ['html'] }))
+  app.use(express.static(clientDist, { redirect: false }))
   app.get('/{*splat}', (request, response, next) => {
     if (request.path.startsWith('/api/')) {
       next()
       return
     }
-    const shell = request.path.startsWith('/moodboards/') ? 'moodboards.html' : 'index.html'
-    response.sendFile(path.join(clientDist, shell))
+    // A shelf URL can also name an asset directory, as /assets does.
+    const route = /^\/([a-z-]+)\/?$/i.exec(request.path)?.[1]?.toLowerCase()
+    const shell = request.path.startsWith('/moodboards/') ? 'moodboards.html' : route && route + '.html'
+    response.sendFile(shell && existsSync(path.join(clientDist, shell)) ? shell : 'index.html', { root: clientDist })
   })
 }
 

@@ -8,6 +8,12 @@
   mask: url('/brand/reference-mark.svg') center / 20px 20px no-repeat;
 }
 
+@media (forced-colors: none) {
+  :global(.dark) .mark {
+    filter: invert(1);
+  }
+}
+
 @media (forced-colors: active) {
   .mark {
     forced-color-adjust: none;
