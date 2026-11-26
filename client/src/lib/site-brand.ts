@@ -1,0 +1,5 @@
+export const siteName = 'Reference'
+export const siteTitle = 'Reference · Your design library'
+export const siteDescription = 'A curated design library for interface inspiration, interactions, UI components, fonts, assets and design engineering tools.'
+export const socialImage = '/preview.png'
+export const publicRobots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
