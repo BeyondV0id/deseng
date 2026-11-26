@@ -14,13 +14,6 @@ type SearchPaletteProps = {
   onQueryChange: (query: string) => void
   /** Opens the page holding every entry filed under one tag. */
   onOpenTag: (category: string) => void
-  /**
-   * Where the pill stands. `bar` is the top bar's lane, which rests compact and
-   * grows into the lane when it opens. `hero` is the middle of the catalogue's
-   * hero, where the pill is the page's own search and rests at a readable
-   * width, centred under the words.
-   */
-  variant?: 'bar' | 'hero'
 }
 
 /** What Enter does next: open a tag page, or open an entry's site. */
@@ -35,10 +28,6 @@ function tagRank(name: string, query: string) {
 
 const PANEL_WIDTH = 600
 const COMPACT_WIDTH = 240
-/** The hero pill rests wide enough to read its placeholder in one line. */
-const HERO_REST_WIDTH = 340
-/** The hero pill grows into the hero's column, not the whole page. */
-const HERO_OPEN_WIDTH = 560
 
 /** Title starts beat word starts, which beat matches inside a word, which beat description and category hits. */
 function searchResources(resources: Resource[], query: string) {
@@ -125,9 +114,8 @@ function Panel({ width, reduced, children }: { width: number; reduced: boolean; 
   </motion.div>
 }
 
-export function SearchPalette({ resources, query, onQueryChange, onOpenTag, variant = 'bar' }: SearchPaletteProps) {
+export function SearchPalette({ resources, query, onQueryChange, onOpenTag }: SearchPaletteProps) {
   const reduced = useReducedMotion() ?? false
-  const hero = variant === 'hero'
   // Below `lg` the bar gives the search the lane between the menu and the
   // account, and the pill is that lane. Above it the pill rests at its compact
   // width in the middle of the bar and grows into the lane when it opens.
@@ -168,20 +156,10 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag, vari
     return () => observer.disconnect()
   }, [])
 
-  const expandedWidth = hero
-    ? Math.min(HERO_OPEN_WIDTH, laneWidth)
-    : laneLayout
-      ? Math.min(PANEL_WIDTH, laneWidth)
-      : Math.min(PANEL_WIDTH, Math.max(COMPACT_WIDTH, laneWidth))
-  // On a phone the field is the row, so the pill is already full width. On
-  // desktop it rests at 240 and grows to the lane when it opens, leaving the
-  // account and favourites cluster at the head of the bar in view. The hero
-  // pill has no cluster to leave room for, so it rests at its own width.
-  const collapsedWidth = hero
-    ? Math.min(HERO_REST_WIDTH, expandedWidth)
-    : laneLayout
-      ? expandedWidth
-      : Math.min(COMPACT_WIDTH, expandedWidth)
+  const expandedWidth = laneLayout
+    ? Math.min(PANEL_WIDTH, laneWidth)
+    : Math.min(PANEL_WIDTH, Math.max(COMPACT_WIDTH, laneWidth))
+  const collapsedWidth = laneLayout ? expandedWidth : Math.min(COMPACT_WIDTH, expandedWidth)
 
   const matches = useMemo(
     () => showingResults ? searchResources(resources, normalized) : [],
@@ -333,15 +311,12 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag, vari
   return <motion.div
     ref={laneRef}
     className="app-search"
-    data-variant={hero ? 'hero' : undefined}
     data-open={open || undefined}
     initial={false}
     // Below the column's breakpoint the bar is 56px tall, so the open field
     // takes a 48px step rather than the desktop 56 and keeps a little of the
-    // bar's own height above and below it instead of touching its rules. The
-    // hero pill keeps one height in both states: it grows along the hero's
-    // axis, not across it.
-    animate={{ height: hero ? 44 : open ? (laneLayout ? 48 : 56) : 40 }}
+    // bar's own height above and below it instead of touching its rules.
+    animate={{ height: open ? (laneLayout ? 48 : 56) : 40 }}
     transition={reduced ? { duration: 0 } : motionTokens.spring.smooth}
     onBlur={onBlur}
   >
@@ -374,7 +349,7 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag, vari
         tabIndex={open ? -1 : 0}
         onClick={expand}
       />
-      <Search className="app-search-icon" width={hero ? 20 : 18} height={hero ? 20 : 18} aria-hidden="true" />
+      <Search className="app-search-icon" width={18} height={18} aria-hidden="true" />
       <input
         ref={inputRef}
         className="app-search-input"
@@ -392,13 +367,11 @@ export function SearchPalette({ resources, query, onQueryChange, onOpenTag, vari
         inert={!open}
         tabIndex={open ? 0 : -1}
         value={query}
-        placeholder={hero
-          ? `Search ${resources.length} tools`
-          : open ? 'Search resources' : 'Search'}
+        placeholder={open ? 'Search resources' : 'Search'}
         onChange={event => { onQueryChange(event.target.value); setActiveIndex(-1) }}
         onKeyDown={onKeyDown}
       />
-      {!open && !hero && <kbd className="app-search-key" aria-hidden="true">{shortcut}</kbd>}
+      {!open && <kbd className="app-search-key" aria-hidden="true">{shortcut}</kbd>}
       <AnimatePresence initial={false}>
         {open && query && <motion.button
           key="clear"

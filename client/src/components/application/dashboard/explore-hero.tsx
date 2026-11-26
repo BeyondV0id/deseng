@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import { Hazeglow, parseConfig } from 'hazeglow'
 
 const backdrop = parseConfig({
@@ -28,16 +27,11 @@ const backdrop = parseConfig({
   effectAmount: 0.55,
 })
 
-type ExploreHeroProps = {
-  search: ReactNode
-}
-
-export function ExploreHero({ search }: ExploreHeroProps) {
+export function ExploreHero() {
   return <header className="explore-hero">
     <div className="explore-hero-backdrop" aria-hidden="true">
       <Hazeglow config={backdrop} />
     </div>
     <h1 className="explore-hero-title">Give your AI agents a taste</h1>
-    <div className="explore-hero-search">{search}</div>
   </header>
 }

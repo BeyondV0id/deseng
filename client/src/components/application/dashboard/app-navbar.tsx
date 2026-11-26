@@ -85,7 +85,6 @@ export function AppNavbar({
   onThemeChange,
   onSelectSettings,
   onSignOut,
-  showSearch = true,
 }: {
   query: string
   onQueryChange: (query: string) => void
@@ -112,8 +111,6 @@ export function AppNavbar({
   onThemeChange: (theme: ThemePreference) => void
   onSelectSettings: () => void
   onSignOut: () => void
-  /** The Explore page has its own search, so the bar can step aside. */
-  showSearch?: boolean
 }) {
   return <div className="app-topbar-content">
     <MobileMenu
@@ -124,14 +121,14 @@ export function AppNavbar({
       onNewMoodboard={onNewMoodboard}
       resources={resources}
     />
-    {showSearch && <div className="app-navbar-search">
+    <div className="app-navbar-search">
       <SearchPalette
         resources={resources}
         query={query}
         onQueryChange={onQueryChange}
         onOpenTag={onOpenTag}
       />
-    </div>}
+    </div>
     {/* Below lg, favourites and Submit live in the menu. */}
     <div className="app-navbar-actions">
       <Button
