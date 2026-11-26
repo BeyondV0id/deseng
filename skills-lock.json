@@ -55,6 +55,12 @@
       "skillPath": "skills/defaults/SKILL.md",
       "computedHash": "3cccff946f01e7ae22aee95a999b2cfa4b133fde450874e1413c457b22d2f65c"
     },
+    "design-to-code": {
+      "source": "Atharvsinh-codez/skills",
+      "sourceType": "github",
+      "skillPath": "design-to-code/SKILL.md",
+      "computedHash": "6288bdc18fc23c5881dc1651f42fd84a151661bcee6a3ba2025a0b9983ae0dc1"
+    },
     "fluid-functionalism": {
       "source": "mickadesign/fluid-functionalism",
       "sourceType": "github",

@@ -19,5 +19,8 @@
     "db:push": "npm run db:push --workspace server",
     "db:seed": "npm run db:seed --workspace server",
     "db:backfill-images": "npm run db:backfill-images --workspace server"
+  },
+  "dependencies": {
+    "@fontsource-variable/funnel-sans": "^5.3.0"
   }
 }
