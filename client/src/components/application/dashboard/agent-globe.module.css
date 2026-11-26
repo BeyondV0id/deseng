@@ -1,15 +1,15 @@
 .stage {
   position: relative;
-  align-self: stretch;
+  align-self: center;
+  inline-size: min(100%, 600px);
   min-inline-size: 0;
   margin-block-start: clamp(20px, 4vw, 44px);
-  padding-block-end: 46px;
 }
 
 .globe {
   display: block;
   inline-size: 100%;
-  block-size: clamp(218px, 29vw, 314px);
+  aspect-ratio: 2.7;
   touch-action: pan-y;
 }
 
@@ -38,4 +38,10 @@
 
 .playback {
   inset-inline-end: 0;
+}
+
+@media (hover: hover) {
+  .stage:not(:hover, :focus-within) .playback {
+    opacity: 0;
+  }
 }

@@ -81,7 +81,7 @@ export function AgentGlobe({ loading }: { loading: boolean }) {
       pointer.x = event.clientX - rect.left
       pointer.y = event.clientY - rect.top
       if (drag?.id === event.pointerId) {
-        const delta = (event.clientX - drag.x) / globeRadius(width, height)
+        const delta = (event.clientX - drag.x) / globeRadius(width)
         angle += delta
         velocity = Math.max(-6, Math.min(6, 1000 * delta / Math.max(1, event.timeStamp - drag.time)))
         drag = { id: event.pointerId, x: event.clientX, time: event.timeStamp }
@@ -92,9 +92,9 @@ export function AgentGlobe({ loading }: { loading: boolean }) {
     function onDown(event: PointerEvent) {
       if (loading || !canvas || !event.isPrimary || event.button !== 0) return
       const rect = canvas.getBoundingClientRect()
-      const radius = globeRadius(width, height)
+      const radius = globeRadius(width)
       const x = event.clientX - rect.left - width / 2
-      const y = event.clientY - rect.top - height / 2
+      const y = event.clientY - rect.top - radius - 4
       if (Math.hypot(x, y) > radius) return
       onMove(event)
       drag = { id: event.pointerId, x: event.clientX, time: event.timeStamp }

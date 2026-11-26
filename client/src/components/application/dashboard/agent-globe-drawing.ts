@@ -11,7 +11,7 @@ import t3code from '@/assets/agent-marks/t3code.png'
 
 const maskSize = 48
 const sampleSize = 144
-const badgeRadius = .245
+const badgeRadius = .205
 const markScale = .73
 
 function placeGlyph(name: string, asset: string, longitude: number, latitude: number) {
@@ -19,14 +19,14 @@ function placeGlyph(name: string, asset: string, longitude: number, latitude: nu
 }
 
 export const agentGlyphs = [
-  placeGlyph('Reference', '/brand/reference-mark.svg', -.30, .28),
-  placeGlyph('Grok Bots', grok, .33, -.25),
-  placeGlyph('T3 Code', t3code, -.76, -.36),
-  placeGlyph('OpenCode', opencode, .89, .35),
-  placeGlyph('Claude Code', claude, -1.58, .14),
-  placeGlyph('Codex', codex, 1.69, -.30),
-  placeGlyph('Hermes', hermes, -2.33, -.40),
-  placeGlyph('Antigravity', antigravity, 2.74, .24),
+  placeGlyph('Reference', '/brand/reference-mark.svg', -.14, -.54),
+  placeGlyph('Grok Bots', grok, .45, -.56),
+  placeGlyph('T3 Code', t3code, -.76, -.66),
+  placeGlyph('OpenCode', opencode, 1.12, -.61),
+  placeGlyph('Claude Code', claude, -1.58, -.59),
+  placeGlyph('Codex', codex, 1.69, -.63),
+  placeGlyph('Hermes', hermes, -2.33, -.59),
+  placeGlyph('Antigravity', antigravity, 2.74, -.62),
 ]
 
 export async function loadGlyph(asset: string) {
@@ -96,19 +96,19 @@ function fillDots(context: CanvasRenderingContext2D, paths: Path2D[], color: str
   context.globalAlpha = 1
 }
 
-export function globeRadius(width: number, height: number) {
-  return Math.min(width, height) / 2 - 5
+export function globeRadius(width: number) {
+  return width * .53
 }
 
 export function drawAgentGlobe(context: CanvasRenderingContext2D, frame: GlobeFrame) {
   const { width, height, angle, glyphs, pointer, dark } = frame
   context.clearRect(0, 0, width, height)
-  const radius = globeRadius(width, height)
+  const radius = globeRadius(width)
   if (radius <= 0) return ''
 
   const centerX = width / 2
-  const centerY = height / 2
-  const gap = Math.max(2.8, radius / 42)
+  const centerY = radius + 4
+  const gap = Math.max(3.3, radius / 47)
 
   // The badges travel with the sphere. Their artwork faces the viewer so a
   // narrow wordmark or the bot's eyes stay legible as they pass the edge.
@@ -132,9 +132,9 @@ export function drawAgentGlobe(context: CanvasRenderingContext2D, frame: GlobeFr
   const marks = Array.from({ length: 8 }, () => new Path2D())
   const hot = Array.from({ length: 8 }, () => new Path2D())
 
-  for (let py = centerY - radius + gap / 2; py < centerY + radius; py += gap) {
+  for (let py = centerY - radius + gap / 2; py < height; py += gap) {
     const y = (py - centerY) / radius
-    for (let px = centerX - radius + gap / 2; px < centerX + radius; px += gap) {
+    for (let px = centerX % gap; px < width; px += gap) {
       const x = (px - centerX) / radius
       const depth = 1 - x * x - y * y
       if (depth <= 0) continue
