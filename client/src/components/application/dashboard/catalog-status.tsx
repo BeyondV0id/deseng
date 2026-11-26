@@ -36,7 +36,7 @@ export function CatalogStatus({ status, onRetry }: {
   return <div className="dashboard-main" aria-busy="true">
     <div className="page-content">
       <section className="resource-library" aria-label="Resources">
-        <ExploreHero />
+        <ExploreHero loading />
         {/* One band per row, with a title line and a track of card-shaped
             placeholders. The band is a `resource-rail` and the card is a
             `resource-card`, so the header height, the track's gap, the card's
